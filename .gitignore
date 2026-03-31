@@ -1,11 +1,10 @@
 
 #!Do not change or add without the owner (Maximri2411) permission
 
-#JSON format fot the Project
 data.json 
 
-# An folder to store bytcode (.pyc files) 
 __pycache__/
 
-# The file that contains the bytcode
 *.pyc
+
+requirements.txt
