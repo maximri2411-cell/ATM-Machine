@@ -62,7 +62,7 @@ class Bank:
     # Function to find an account
     def find_account(self, account_id):
         
-        account_search = self.Accounts.get(int(account_id)) # The get() is to print None in case the ID hasent been found
+        account_search = self.Accounts.get(str(account_id)) # The get() is to print None in case the ID hasent been found
         
         if account_search:
             print(f"User found: {account_search.name}")
@@ -77,7 +77,7 @@ class Bank:
         account = self.find_account(account_id) # Uses the function we created in previos function
         
         if account:
-            if account.pin == int(pin):
+            if int(account.PIN) == int(pin):
                 print((f"Login successful. \nWelcome {account.name}."))
                 return account
             else:
@@ -99,7 +99,7 @@ class Bank:
         
     #Function of list all the accounts we created
     def list_accounts(self):
-        print("----- Bank Accounts List -----") # Nice title
+        print("----- Bank Accounts List ------") # Nice title
         
         for account in self.Accounts.values():
             
@@ -116,36 +116,23 @@ class Bank:
     
     
 #!Check to see if the create account works
+# 1. יצירת האובייקט של הבנק
 my_bank = Bank()
 
-print("")
-print("--- Testing Account Creation ---")
-print("")
-new_id = my_bank.create_account("Yossi Levi", "1234")
+print("New account")
+# ניצור חשבון לגרישה. הפונקציה מחזירה לנו את ה-ID שנוצר
+grisha_id = my_bank.create_account("Grisha", 1234)
 
-if new_id in my_bank.Accounts:
-    print(f"Success! Account {new_id} exists in the bank.")
-    
-    user_account = my_bank.Accounts[new_id]
-    print(f"Owner Name: {user_account.name}")
-    print(f"Current Balance: {user_account.Balance}")
-else:
-    print("Failure: Account was not saved in the dictionary.")
-    
-print("")
-    
+print("\nsearching for account")
+my_bank.find_account(grisha_id)
 
-#! Check if account has beem found
-my_bank = Bank()
+print("\nlogin")
+# ננסה להיכנס עם פרטים נכונים
+my_bank.login_account(grisha_id, 1234)
 
-new_id = my_bank.create_account("Grisha", "1234")
+print("\nmanager")
+# נשתמש בסיסמת המנהל שאלכס הגדיר
+my_bank.manager_login("admin123456123456")
 
-search_result = my_bank.find_account(new_id)
-
-if search_result:
-    print(f"The balance for {search_result.name} is: {search_result.Balance}")
-    
-print("")
-
-my_bank.login_account("123456", "0000") # אמור להצליח
-my_bank.login_account("123456", "9999") # אמור להיכשל (PIN טועה)
+print("\nlist all accounts")
+my_bank.list_accounts()
