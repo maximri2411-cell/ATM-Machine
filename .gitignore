@@ -1,23 +1,11 @@
-# Python virtual environment
-venv/
-env/
-ENV/
+#Initial project structure
+#!Do not change or add without the owner (Maximri2411) permission
 
-# Python bytecode and cache
+#JSON format fot the Project
+data.json 
+
+# An folder to store bytcode (.pyc files) 
 __pycache__/
-*.py[cod]
-*$py.class
 
-# macOS system files (Very important for you!)
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Code Editor settings
-.vscode/
-.idea/
-*.swp
-
-# Local environment variables
-.env
-
+# The file that contains the bytcode
+*.pyc
