@@ -3,7 +3,7 @@
 class Accounts:
     
     def __init__(self, account_id, name, PIN, Balance, Status, History):
-        self.account_id = id
+        self.account_id = account_id
         self.name = name
         self.PIN = PIN
         self.Balance = Balance
@@ -12,9 +12,9 @@ class Accounts:
         
         
     def get_info(self):
-        return(self.account_id, self.name, self.PIN, self.Balance, self.Status,  self.History)
+        print(self.account_id, self.name, self.PIN, self.Balance, self.Status,  self.History)
         
 
 account1 = Accounts(12345, "grisha", 1234, 50000, "Status", "History")
 
-account1.get_info
+account1.get_info()
