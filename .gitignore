@@ -1,1 +1,23 @@
-./venv
+# Python virtual environment
+venv/
+env/
+ENV/
+
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# macOS system files (Very important for you!)
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Code Editor settings
+.vscode/
+.idea/
+*.swp
+
+# Local environment variables
+.env
+
