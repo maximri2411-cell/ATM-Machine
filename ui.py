@@ -1,2 +1,1 @@
-
-#!This file made for all of our tkinter info/code 
+#This file made for all of our tkinter info/code 

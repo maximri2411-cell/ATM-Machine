@@ -14,5 +14,3 @@ Pay attention to the details:
 * models.py - Business Logic: Contains the 'Bank' and 'Account' classes.
 * ui.py - User Interface: Handles all 'tkinter' widgets, layouts, and GUI elements.
 * storage.py - Data Management: Handles reading from and writing data to the JSON storage
-
-last update
