@@ -2,28 +2,29 @@ import random
 import main
 from datetime import datetime
 
-class Accounts:
+class Accounts: # Creating a class of Accounts Part 2  
   
     def __init__(self, account_id, name, PIN, Balance, is_active , History):
-        self.account_id = account_id
+        self.account_id = str(account_id) # In dict, everthing in a string 
         self.name = name
         self.PIN = PIN
-        self.Balance = Balance
+        self.Balance = float(Balance) #! Line alignment that the money in the account will be a float
         self.is_active = is_active
         self.History = History
-
+        
+                
     def get_info(self):
-            print(f"ID:{self.account_id}, Dear {self.name}") 
-            if self.is_active == True:
-                print("Your account is Active")
-            else:
-                print("Your account is blocked")
-            if self.is_active == True:
-                print(f"Your PIN:{self.PIN} Your Balance:{self.Balance} NIS \n{self.History}")
-            else:
-                print("Can't continue the process, plaese call customer service")
+        print(f"ID:{self.account_id}, Dear {self.name}")
+             
+        if self.is_active:
+            print("Your account is Active")
+            print(f"Your PIN:{self.PIN} Your Balance:{self.Balance} NIS \n{self.History}")
+        else:
+            print("Your account is blocked!!!")
+            print("We can not continue the process. Plaese call customer service")
 
 
+    def wit
 #============= Maxim ============
 class Bank: # Creating a class of the Bank Part 3: it will manager all the accounts in the bank
     
@@ -33,22 +34,6 @@ class Bank: # Creating a class of the Bank Part 3: it will manager all the accou
         self.Accounts = {} # Some kind of dictionary to save all of the accounts
 
     
-
-    def get_info(self):
-            print(f"ID:{self.account_id}, Dear {self.name}")
-             
-            if self.is_active:
-                print("Your account is Active")
-                print(f"Your PIN:{self.PIN} Your Balance:{self.Balance} NIS \n{self.History}")
-            else:
-                print("Your account is blocked!!!")
-                print("We can not continue the process. Plaese call customer service")
-            
-
-
-
-
-
 # Creating a class of the Bank Part 3: it will manager all the accounts in the bank
 class Bank: 
     
@@ -91,15 +76,18 @@ class Bank:
     def login_account(self, account_id, pin):
         account = self.find_account(account_id) # Uses the function we created in previos function
         
-        
-        
+        # Alex have made a few off those accounts active and blocked
+        # We are goin to check if it is blocked, he cannot continue in the proccess
+        if account.is_active == False or account.is_active == "False": 
+            print(f"Error: Account {account_id} is BLOCKED. \nPlease contact your local bank for help.")
+            
         
         if account:
             if int(account.PIN) == int(pin):
                 print((f"Login successful. \nWelcome {account.name}."))
                 return account
             else:
-                print("Error: Incorerect PIN. \nPlease try again. \nIn case you forgot the PIN, Conntact your local Bank.")
+                print("Error: Incorerect PIN. \nPlease try again. \nIn case you forgot the PIN, Contact your local bank for help.")
                 return None
             
         return None 
@@ -111,7 +99,7 @@ class Bank:
             print(f"Manager access granted. \nWelcome {self.Manager_name}") # We determined in the beginning inside the "Father" 
             return True
         else:
-            print("Access Denied: Invalid manager password. \nPlease try again. \nIn case you forgot the Password, Contact your management.")
+            print("Access Denied: Invalid manager password. \nPlease try again. \nIn case you forgot the Password, Contact your local bank for help.")
     
     
     # #Function for transfer money between accounts
@@ -120,11 +108,11 @@ class Bank:
         the_receiver = self.find_account(receiver)
         
         if the_sender is None: # We want to check first if they even exist in order to countinue forward to sendng the money
-            print("Error: The Sender account does not exist. \nPlease try again. \nIn case you forgot the ID, contact your Bank.")
+            print("Error: The Sender account does not exist. \nPlease try again. \nIn case you forgot the ID, contact your local bank.")
             return False
         
         if the_receiver is None:
-            print("Error: The Receiver account does not exist. \nPlease try again. \nMake sure you put the right ID.")
+            print("Error: The Receiver account does not exist. \nPlease try again. \nMake sure you put the right ID. \nIn case you having a problem, Contact your local bank.")
             return False
         
         amount_transfer = float(amount) # Creating the value of the amount for the next part

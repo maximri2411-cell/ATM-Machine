@@ -19,8 +19,6 @@ def accounts_pool():
     account4 = Accounts(314265, "Michal", 2323, 37000, False, [])
     account5 = Accounts(556612, "Dana", 1123, 43000, True, [])
     account6 = Accounts(615243, "Shahar", 2121, 29000, False, [])
-    
-accounts_pool() # Calling for the function above
 
 # all_accounts = [account1, account2, account3, account4, account5, account6]
 # return accounts_pool
@@ -32,11 +30,6 @@ accounts_pool() # Calling for the function above
 #         acc.get_info()
 #     else:
 #         print("You are out of the system")
-        
-        
-        
-        
-        
         
         
 account1.get_info()
@@ -63,7 +56,7 @@ else:
 
 
 
-
+#our_bank = Bank() # The class Maxim have creted #! Critical to put all of the accounts into an dictionary
 
   # Merging the accounts into the Bank dic
     our_bank.Accounts[account1.account_id] = account1
