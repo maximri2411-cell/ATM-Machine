@@ -12,14 +12,16 @@ class Accounts:
 
     def get_info(self):
             print(f"ID:{self.account_id}, Dear {self.name}")
-             
-            if self.is_active:
-                print("Your account is Active")
-                print(f"Your PIN:{self.PIN} Your Balance:{self.Balance} NIS \n{self.History}")
-            else:
-                print("Your account is blocked!!!")
-                print("We can not continue the process. Plaese call customer service")
             
+            if input_pin == self.PIN: 
+                if self.is_active:
+                    print("Your account is Active")
+                    print(f"Your PIN:{self.PIN} Your Balance:{self.Balance} NIS \n{self.History}")
+                else:
+                    print("Your account is blocked!!!")
+                    print("We can not continue the process. Plaese call customer service")
+            else:
+                print("Incorredt PIN! Access denied")
 
 
 

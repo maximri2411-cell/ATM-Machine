@@ -18,8 +18,10 @@ user_id = int(input("please enter your id:"))
 
 for user in all_accounts: 
     if user.account_id == user_id:
-        user.get_info()
+        user_pin = int(input("Please enter your PIN: "))
+        user.get_info(user_pin)
         break
 else:
-    print("You don't have an account \n You are out of the system \n Please connect the bank")
+    print("You don't have an account \nYou are out of the system \nPlease connect the bank")
             
+
