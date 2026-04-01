@@ -1,8 +1,4 @@
-#=======================
-# Part 3: Bank manager #TODO find a way to make it a dic
-#=======================
 import random 
-
 
 # Creating a class of the Bank Part 3: it will manager all the accounts in the bank
 class Bank: 
@@ -12,7 +8,16 @@ class Bank:
         self.Manager_name = "King-Kong"
         self.Manager_pin = "admin123456123456" # Managers password
         self.Accounts = {} # Some kind of dictionary to save all of the accounts
-    
+
+class Accounts:
+  
+    def __init__(self, account_id, name, PIN, Balance, is_active , History):
+        self.account_id = account_id
+        self.name = name
+        self.PIN = PIN
+        self.Balance = Balance
+        self.is_active = is_active
+        self.History = History
     
     # Function to create new account 
     def create_account(self, name, pin):
@@ -104,3 +109,16 @@ my_bank.manager_login("admin123456123456")
 
 print("\nlist all accounts")
 my_bank.list_accounts()
+
+
+def get_info(self):
+        print(f"ID:{self.account_id}, Dear {self.name}") 
+        if self.is_active == True:
+            print("Your account is Active")
+        else:
+            print("Your account is blocked")
+        if self.is_active == True:
+            print(f"Your PIN:{self.PIN} Your Balance:{self.Balance} NIS \n{self.History}")
+        else:
+            print("Can't continue the process, plaese call customer service")
+
