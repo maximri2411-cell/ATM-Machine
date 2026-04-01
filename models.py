@@ -21,7 +21,7 @@ class Accounts:
                     print("Your account is blocked!!!")
                     print("We can not continue the process. Plaese call customer service")
             else:
-                print("Incorredt PIN! Access denied")
+                print("Incorrect PIN! Access denied")
 
 
 
