@@ -28,6 +28,7 @@ class Bank:
         print(f"Account has been created. Your ID is: {account_id}") # input of the creation
         return account_id
 
+
     # Function to find an account
     def find_account(self, account_id):
         
@@ -39,6 +40,7 @@ class Bank:
         else:
             print("Error: Account ID was not found.")
             return None
+        
         
     #  Function to log a user into the bank
     def login_account(self, account_id, pin):
@@ -55,6 +57,7 @@ class Bank:
             
         return None 
         
+        
     #Function of the manager
     def manager_login(self, password):
         if password == self.Manager_pin:
@@ -63,8 +66,10 @@ class Bank:
         else:
             print("Access Denied: Invalid manager password. \nPlease try again. \nIn case you forgot, Contact your management.")
     
+    
     # #Function for transfer money between accounts
     # def transfer(self, ):
+        
         
     #Function of list all the accounts we created
     def list_accounts(self):
