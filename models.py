@@ -65,6 +65,9 @@ class Bank: # Creating a class of the Bank Part 3: it will manager all the accou
     def login_account(self, account_id, pin):
         account = self.find_account(account_id) # Uses the function we created in previos function
         
+        
+        
+        
         if account:
             if int(account.PIN) == int(pin):
                 print((f"Login successful. \nWelcome {account.name}."))
@@ -103,23 +106,24 @@ class Bank: # Creating a class of the Bank Part 3: it will manager all the accou
         if the_sender.Balance < amount_transfer: # Now we goon to check if the sender has enough amount to even send the money
             print(f"Transfer Failed: The {the_sender.name} is lack of NIS.")
             print(f"Current Balance in your account: {the_sender.Balance} | Transfer request: {amount_transfer}")
+            return False
                 
             
-            #! Make sure everwhere the balanc/amount is goin with 'float' like in real life situation
-            # Finishing the proccess of the transfer 
-            the_sender.Balance -= float(amount)
-            the_receiver.Balance += float(amount)
+        #! Make sure everwhere the balanc/amount is goin with 'float' like in real life situation
+        # Finishing the proccess of the transfer
+        the_sender.Balance -= float(amount)
+        the_receiver.Balance += float(amount)
             
             
-            # Creating a date value for the history of the tansfer
-            date = datetime.date().strftime("%d/%m/%Y %H:%M")
+        # Creating a date value for the history of the tansfer
+        date = datetime.date().strftime("%d/%m/%Y %H:%M")
             
-            # adding to the history the transfer with the date
-            the_sender.History.append(f"{date}: Send: {amount_transfer} to {the_receiver.name}.")
-            the_receiver.History.append(f"{date}: Received: {amount_transfer} from {the_sender.name}.")
+        # adding to the history the transfer with the date
+        the_sender.History.append(f"{date}: Send: {amount_transfer} to {the_receiver.name}.")
+        the_receiver.History.append(f"{date}: Received: {amount_transfer} from {the_sender.name}.")
                     
-            print(f"The Transfer of: {amount} NIS has been completed. \nThank you.")
-            return True
+        print(f"The Transfer of: {amount} NIS has been completed. \nThank you.")
+        return True
         
     
     #Function of list all the accounts we created
