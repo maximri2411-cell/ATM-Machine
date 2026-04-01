@@ -22,10 +22,8 @@ class Accounts: # Creating a class of Accounts
             "history": self.history 
         }
     
-    
 #=============== Bank ==============
 class Bank: # Manage all accounts in our project
-    
     def __init__(self):
         
         self.manager_full_name = "Super Mario"
