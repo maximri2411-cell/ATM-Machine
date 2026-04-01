@@ -9,15 +9,6 @@ class Bank:
         self.Manager_pin = "admin123456123456" # Managers password
         self.Accounts = {} # Some kind of dictionary to save all of the accounts
 
-class Accounts:
-  
-    def __init__(self, account_id, name, PIN, Balance, is_active , History):
-        self.account_id = account_id
-        self.name = name
-        self.PIN = PIN
-        self.Balance = Balance
-        self.is_active = is_active
-        self.History = History
     
     # Function to create new account 
     def create_account(self, name, pin):
@@ -88,28 +79,38 @@ class Accounts:
     
     
     
-#!Check to see if the create account works
-# 1. יצירת האובייקט של הבנק
-my_bank = Bank()
+# #!Check to see if the create account works
+# # 1. יצירת האובייקט של הבנק
+# my_bank = Bank()
 
-print("New account")
-# ניצור חשבון לגרישה. הפונקציה מחזירה לנו את ה-ID שנוצר
-grisha_id = my_bank.create_account("Grisha", 1234)
+# print("New account")
+# # ניצור חשבון לגרישה. הפונקציה מחזירה לנו את ה-ID שנוצר
+# grisha_id = my_bank.create_account("Grisha", 1234)
 
-print("\nsearching for account")
-my_bank.find_account(grisha_id)
+# print("\nsearching for account")
+# my_bank.find_account(grisha_id)
 
-print("\nlogin")
-# ננסה להיכנס עם פרטים נכונים
-my_bank.login_account(grisha_id, 1234)
+# print("\nlogin")
+# # ננסה להיכנס עם פרטים נכונים
+# my_bank.login_account(grisha_id, 1234)
 
-print("\nmanager")
-# נשתמש בסיסמת המנהל שאלכס הגדיר
-my_bank.manager_login("admin123456123456")
+# print("\nmanager")
+# # נשתמש בסיסמת המנהל שאלכס הגדיר
+# my_bank.manager_login("admin123456123456")
 
-print("\nlist all accounts")
-my_bank.list_accounts()
+# print("\nlist all accounts")
+# my_bank.list_accounts()
 
+
+class Accounts:
+  
+    def __init__(self, account_id, name, PIN, Balance, is_active , History):
+        self.account_id = account_id
+        self.name = name
+        self.PIN = PIN
+        self.Balance = Balance
+        self.is_active = is_active
+        self.History = History
 
 def get_info(self):
         print(f"ID:{self.account_id}, Dear {self.name}") 
