@@ -1,14 +1,4 @@
 import random 
-
-# Creating a class of the Bank Part 3: it will manager all the accounts in the bank
-class Bank: 
-    
-    def __init__(self):
-        
-        self.Manager_name = "King-Kong"
-        self.Manager_pin = "admin123456123456" # Managers password
-        self.Accounts = {} # Some kind of dictionary to save all of the accounts
-
 class Accounts:
   
     def __init__(self, account_id, name, PIN, Balance, is_active , History):
@@ -19,6 +9,22 @@ class Accounts:
         self.is_active = is_active
         self.History = History
     
+
+
+
+
+
+
+# Creating a class of the Bank Part 3: it will manager all the accounts in the bank
+class Bank: 
+    
+    def __init__(self):
+        
+        self.Manager_name = "King-Kong"
+        self.Manager_pin = "admin123456123456" # Managers password
+        self.Accounts = {} # Some kind of dictionary to save all of the accounts
+
+
     # Function to create new account 
     def create_account(self, name, pin):
         account_id = str(random.randint(100000, 999999)) #!Alex created users ID using 6 digits
