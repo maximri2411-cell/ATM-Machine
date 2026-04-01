@@ -10,6 +10,16 @@ class Accounts:
         self.History = History
     
 
+    def get_info(self):
+            print(f"ID:{self.account_id}, Dear {self.name}")
+             
+            if self.is_active:
+                print("Your account is Active")
+                print(f"Your PIN:{self.PIN} Your Balance:{self.Balance} NIS \n{self.History}")
+            else:
+                print("Your account is blocked!!!")
+                print("We can not continue the process. Plaese call customer service")
+            
 
 
 
@@ -94,37 +104,27 @@ class Bank:
     
     
     
-#!Check to see if the create account works
-# 1. יצירת האובייקט של הבנק
-my_bank = Bank()
+# #!Check to see if the create account works
+# # 1. יצירת האובייקט של הבנק
+# my_bank = Bank()
 
-print("New account")
-# ניצור חשבון לגרישה. הפונקציה מחזירה לנו את ה-ID שנוצר
-grisha_id = my_bank.create_account("Grisha", 1234)
+# print("New account")
+# # ניצור חשבון לגרישה. הפונקציה מחזירה לנו את ה-ID שנוצר
+# grisha_id = my_bank.create_account("Grisha", 1234)
 
-print("\nsearching for account")
-my_bank.find_account(grisha_id)
+# print("\nsearching for account")
+# my_bank.find_account(grisha_id)
 
-print("\nlogin")
-# ננסה להיכנס עם פרטים נכונים
-my_bank.login_account(grisha_id, 1234)
+# print("\nlogin")
+# # ננסה להיכנס עם פרטים נכונים
+# my_bank.login_account(grisha_id, 1234)
 
-print("\nmanager")
-# נשתמש בסיסמת המנהל שאלכס הגדיר
-my_bank.manager_login("admin123456123456")
+# print("\nmanager")
+# # נשתמש בסיסמת המנהל שאלכס הגדיר
+# my_bank.manager_login("admin123456123456")
 
-print("\nlist all accounts")
-my_bank.list_accounts()
+# print("\nlist all accounts")
+# my_bank.list_accounts()
 
 
-def get_info(self):
-        print(f"ID:{self.account_id}, Dear {self.name}") 
-        if self.is_active == True:
-            print("Your account is Active")
-        else:
-            print("Your account is blocked")
-        if self.is_active == True:
-            print(f"Your PIN:{self.PIN} Your Balance:{self.Balance} NIS \n{self.History}")
-        else:
-            print("Can't continue the process, plaese call customer service")
 
