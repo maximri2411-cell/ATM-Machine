@@ -1,4 +1,6 @@
 import random 
+import main
+from datetime import datetime
 
 class Accounts:
   
@@ -10,24 +12,22 @@ class Accounts:
         self.is_active = is_active
         self.History = History
 
-def get_info(self):
-        print(f"ID:{self.account_id}, Dear {self.name}") 
-        if self.is_active == True:
-            print("Your account is Active")
-        else:
-            print("Your account is blocked")
-        if self.is_active == True:
-            print(f"Your PIN:{self.PIN} Your Balance:{self.Balance} NIS \n{self.History}")
-        else:
-            print("Can't continue the process, plaese call customer service")
+    def get_info(self):
+            print(f"ID:{self.account_id}, Dear {self.name}") 
+            if self.is_active == True:
+                print("Your account is Active")
+            else:
+                print("Your account is blocked")
+            if self.is_active == True:
+                print(f"Your PIN:{self.PIN} Your Balance:{self.Balance} NIS \n{self.History}")
+            else:
+                print("Can't continue the process, plaese call customer service")
 
 
 #============= Maxim ============
-# Creating a class of the Bank Part 3: it will manager all the accounts in the bank
-class Bank: 
+class Bank: # Creating a class of the Bank Part 3: it will manager all the accounts in the bank
     
     def __init__(self):
-        
         self.Manager_name = "King-Kong"
         self.Manager_pin = "admin123456123456" # Managers password
         self.Accounts = {} # Some kind of dictionary to save all of the accounts
@@ -63,7 +63,6 @@ class Bank:
         
     #  Function to log a user into the bank
     def login_account(self, account_id, pin):
-        
         account = self.find_account(account_id) # Uses the function we created in previos function
         
         if account:
@@ -83,13 +82,46 @@ class Bank:
             print(f"Manager access granted. \nWelcome {self.Manager_name}") # We determined in the beginning inside the "Father" 
             return True
         else:
-            print("Access Denied: Invalid manager password. \nPlease try again. \nIn case you forgot, Contact your management.")
+            print("Access Denied: Invalid manager password. \nPlease try again. \nIn case you forgot the Password, Contact your management.")
     
     
     # #Function for transfer money between accounts
-    # def transfer(self, ):
+    def transfer(self, sender, receiver, amount):
+        the_sender = self.find_account(sender)
+        the_receiver = self.find_account(receiver)
         
+        if the_sender is None: # We want to check first if they even exist in order to countinue forward to sendng the money
+            print("Error: The Sender account does not exist. \nPlease try again. \nIn case you forgot the ID, contact your Bank.")
+            return False
         
+        if the_receiver is None:
+            print("Error: The Receiver account does not exist. \nPlease try again. \nMake sure you put the right ID.")
+            return False
+        
+        amount_transfer = float(amount) # Creating the value of the amount for the next part
+        
+        if the_sender.Balance < amount_transfer: # Now we goon to check if the sender has enough amount to even send the money
+            print(f"Transfer Failed: The {the_sender.name} is lack of NIS.")
+            print(f"Current Balance in your account: {the_sender.Balance} | Transfer request: {amount_transfer}")
+                
+            
+            #! Make sure everwhere the balanc/amount is goin with 'float' like in real life situation
+            # Finishing the proccess of the transfer 
+            the_sender.Balance -= float(amount)
+            the_receiver.Balance += float(amount)
+            
+            
+            # Creating a date value for the history of the tansfer
+            date = datetime.date().strftime("%d/%m/%Y %H:%M")
+            
+            # adding to the history the transfer with the date
+            the_sender.History.append(f"{date}: Send: {amount_transfer} to {the_receiver.name}.")
+            the_receiver.History.append(f"{date}: Received: {amount_transfer} from {the_sender.name}.")
+                    
+            print(f"The Transfer of: {amount} NIS has been completed. \nThank you.")
+            return True
+        
+    
     #Function of list all the accounts we created
     def list_accounts(self):
         print("----- Bank Accounts List ------") # Nice title
@@ -99,29 +131,5 @@ class Bank:
             print(f"ID: {account.account_id} | Name: {account.name} | Balance: {account.Balance}")
         
         print("-------------------------------")
-    
-    
-    
-# #!Check to see if the create account works
-# # 1. יצירת האובייקט של הבנק
-# my_bank = Bank()
-
-# print("New account")
-# # ניצור חשבון לגרישה. הפונקציה מחזירה לנו את ה-ID שנוצר
-# grisha_id = my_bank.create_account("Grisha", 1234)
-
-# print("\nsearching for account")
-# my_bank.find_account(grisha_id)
-
-# print("\nlogin")
-# # ננסה להיכנס עם פרטים נכונים
-# my_bank.login_account(grisha_id, 1234)
-
-# print("\nmanager")
-# # נשתמש בסיסמת המנהל שאלכס הגדיר
-# my_bank.manager_login("admin123456123456")
-
-# print("\nlist all accounts")
-# my_bank.list_accounts()
 
 
