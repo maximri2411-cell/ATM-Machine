@@ -4,6 +4,8 @@ from datetime import datetime
 
 
 #============= Accounts ============
+# TODO Add the withdraw and so.. for this part of the code so the lab will work..
+# TODO after adding what is missing you need to test again 
 class Accounts: # Creating a class of Accounts
     def __init__(self, account_id, full_name, pin, balance, status , history):
         self.account_id = str(account_id) #! In dict, everthing in a string 
