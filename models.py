@@ -135,23 +135,3 @@ class Bank: # Manage all accounts in our project
             print(f"ID: {account.account_id} | Name: {account.full_name} | Balance: {account.balance}")
         
         print("-------------------------------")
-        
-        
-        
-        
-         # def account_info(self): #
-    #     print(f"ID: {self.account_id}, Dear {self.full_name},")
-        
-    #     if self.status == "Active" or self.status == True: # In case is True, it will print all the info about the account, if False, nothing
-    #         print(f"Your account status: Active. \nPIN: {self.PIN}. \nAccount Balance: {self.balance} NIS \nHistory of the Account: {self.history}.") # For True
-    #     else:
-    #         print(f"Your account is BLOCKED. \nWe can not continue the process. \nPlease call customer service or visit your local bank. \nThank you for understanding.") # For False
-            
-    # def accounts_pool():
-    #     account1 = Accounts(321321, "Grisha", 1234, 76241.31, True, [])
-    #     account2 = Accounts(653421, "Daniel", 4332, 21356.60, True, [])
-    #     account3 = Accounts(132456, "Moshe", 4343, 15010.90, False, [])
-    #     account4 = Accounts(314265, "Michal", 2323, -4562.0, False, [])
-    #     account5 = Accounts(556612, "Dana", 1123, 144222.30, True, [])
-    #     account6 = Accounts(615243, "Shahar", 2121, 2341.7, False, [])  
-  
