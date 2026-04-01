@@ -1,3 +1,4 @@
+# For use to this file
 import random 
 from datetime import datetime
 
