@@ -33,6 +33,32 @@ class Bank: # Creating a class of the Bank Part 3: it will manager all the accou
         self.Accounts = {} # Some kind of dictionary to save all of the accounts
 
     
+
+    def get_info(self):
+            print(f"ID:{self.account_id}, Dear {self.name}")
+             
+            if self.is_active:
+                print("Your account is Active")
+                print(f"Your PIN:{self.PIN} Your Balance:{self.Balance} NIS \n{self.History}")
+            else:
+                print("Your account is blocked!!!")
+                print("We can not continue the process. Plaese call customer service")
+            
+
+
+
+
+
+# Creating a class of the Bank Part 3: it will manager all the accounts in the bank
+class Bank: 
+    
+    def __init__(self):
+        
+        self.Manager_name = "King-Kong"
+        self.Manager_pin = "admin123456123456" # Managers password
+        self.Accounts = {} # Some kind of dictionary to save all of the accounts
+
+
     # Function to create new account 
     def create_account(self, name, pin):
         account_id = str(random.randint(100000, 999999)) #!Alex created users ID using 6 digits
@@ -135,5 +161,3 @@ class Bank: # Creating a class of the Bank Part 3: it will manager all the accou
             print(f"ID: {account.account_id} | Name: {account.name} | Balance: {account.Balance}")
         
         print("-------------------------------")
-
-
