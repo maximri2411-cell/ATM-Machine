@@ -3,7 +3,10 @@ import random
 from datetime import datetime
 
 
+
+#===================================
 #============= Accounts ============
+#===================================
 class Accounts: # Creating a class of Accounts
     def __init__(self, account_id, full_name, pin, balance, status , history):
         self.account_id = str(account_id) #! In dict, everthing in a string 
@@ -22,8 +25,13 @@ class Accounts: # Creating a class of Accounts
             "status": self.status,
             "history": self.history 
         }
-    
+        
+        
+        
+        
+#===================================
 #=============== Bank ==============
+#===================================
 class Bank: # Manage all accounts in our project
     def __init__(self):
         
@@ -55,7 +63,7 @@ class Bank: # Manage all accounts in our project
             return account_search
         else:
             print("Error: Account ID not found.")
-            return None
+            return None # Just for understanding, it returns an None in the terminal and sying like i havent found somthing
         
         
     def login_account(self, account_id, pin): # Function to log a user into the bank
