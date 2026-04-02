@@ -18,13 +18,16 @@ class Accounts: # Creating a class of Accounts
         self.balance = float(balance) #! Line alignment that the money in the accounts will be a float
         self.status = status
         self.history = history
+    
+#================================================================================================    
         
-    def add_history(self, message):
+    def add_history(self, message): # Insted of adding evertime by yourself the process, have build an function that doin it for me 
         from datetime import datetime
         date = datetime.now().strftime("%d/%m/%Y %H:%M")
+        self.history.append(f"{date} - {message}")
         
-        
-        
+#================================================================================================
+      
     def deposit(self, amount):
         amount = float(amount)
         if amount <= 0: # In case the account is trying to deposit an 0 or below, it will print an error
@@ -32,9 +35,10 @@ class Accounts: # Creating a class of Accounts
             return False
         
         self.balance += amount # if all good, the process will add to his history with the new balance
-        self.add_history(f"{date} - Deposited: {amount} NIS.")
+        self.add_history(f"Deposited: {amount} NIS.")
         return True
-        
+ 
+#================================================================================================       
         
     def withdraw(self, amount):
         amount = float(amount)
@@ -48,26 +52,30 @@ class Accounts: # Creating a class of Accounts
             return False
         
         self.balance -= amount # if all good, the process will add to his history with the new balance
-        self.add_history(f"{date} - Withdrawn: {amount} NIS.")
+        self.add_history(f"Withdrawn: {amount} NIS.")
         return True
-    
+ 
+#================================================================================================    
     
     def check_balance(self): # In case the owner wats to check his balane 
         print(f"Account Balance: {self.balance}")
-        
+
+#================================================================================================       
         
     def account_deatails(self): # In case the owner wants to make sure his details right
         print("   Account Deatails   ")
         print(f"Account ID: {self.account_id} \nOnwer: {self.full_name}")
-        
+
+#================================================================================================   
         
     def pin_change(self, new_pin):
         
         self.pin = str(new_pin) # Remember that every input is a str but we wanna to make sure it wont brake
         print(f"PIN change has been complete.")
         
-        self.add_history(f"{date} - PIN change.")
+        self.add_history(f"PIN change.")
         
+#================================================================================================ 
         
     def j_dict(self): # Creating a simple function-dictionary for json to understand
         return {
@@ -80,7 +88,6 @@ class Accounts: # Creating a class of Accounts
         }
         
         
-        
 #===================================
 #=============== Bank ==============
 #===================================
@@ -91,6 +98,7 @@ class Bank: # Manage all accounts in our project
         self.manager_pin = "admin123456123456" # Managers password
         self.Accounts = {} # Some kind of dictionary to save all of the accounts
 
+#================================================================================================
 
     def create_account(self, full_name, pin): # Function to create new account 
         account_id = str(random.randint(100000, 999999))
@@ -105,6 +113,7 @@ class Bank: # Manage all accounts in our project
         print(f"Account has been created. \nYour ID is: {account_id}") # output of the creation
         return account_id
 
+#================================================================================================
 
     def find_account(self, account_id): # Function to find an account
         
@@ -117,6 +126,7 @@ class Bank: # Manage all accounts in our project
             print("Error: Account ID not found.")
             return None # Just for understanding, it returns an None in the terminal and sying like i havent found somthing
         
+#================================================================================================        
         
     def login_account(self, account_id, pin): # Function to log a user into the bank
         account = self.find_account(account_id) # Uses the function we created in previos function
@@ -136,6 +146,7 @@ class Bank: # Manage all accounts in our project
                 return None
         return None 
         
+#================================================================================================ 
         
     def manager_login(self, password): # Function of the manager
         if password == self.manager_pin:
@@ -144,7 +155,9 @@ class Bank: # Manage all accounts in our project
         else:
             print(f"Access Denied: Invalid manager password. \nPlease try again. \nIn case you forgot the Password, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
     
-    
+#================================================================================================   
+#TODO come back later to check all of this function 
+
     def transfer(self, sender, receiver, amount): # Function for transfer money between accounts
         the_sender = self.find_account(sender)
         the_receiver = self.find_account(receiver)
@@ -174,16 +187,15 @@ class Bank: # Manage all accounts in our project
         the_sender.balance -= float(amount)
         the_receiver.balance += float(amount)
         
-         # Bank values for this file to use
-        date = datetime.now().strftime("%d/%m/%Y %H:%M")
             
         # Adding to the history the transfer with the date
-        the_sender.history.append(f"{date}: Send: {amount_transfer} to {the_receiver.full_name}.")
-        the_receiver.history.append(f"{date}: Received: {amount_transfer} from {the_sender.full_name}.")
+        the_sender.add_history(f"Send: {amount_transfer} to {the_receiver.full_name}.")
+        the_receiver.add_history(f"Received: {amount_transfer} from {the_sender.full_name}.")
                     
         print(f"The Transfer of: {amount} NIS has been completed. \nThank you, goodbye.")
         return True
         
+#================================================================================================
     
     def list_accounts(self): # Function of list all the accounts we created
         print("----- Bank Accounts List ------") # Nice title
