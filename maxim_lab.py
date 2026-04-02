@@ -6,12 +6,14 @@ test_bank = load_data()
 
 account_for_test = test_bank.find_account("321321") # Taking grisha for example
 
-if account_for_test:
+if account_for_test is not None:
     print(f"current balance: {account_for_test.balance}")
 
     print("test deposit")
-account_for_test.deposit(507.65)
-print(f"balance after the deposit: {account_for_test.balance}")
+    account_for_test.deposit(507.65)
+    print(f"balance after the deposit: {account_for_test.balance}")
+
+
 
 
 
