@@ -8,6 +8,8 @@ from datetime import datetime
 #============= Accounts ============
 #===================================
 
+# TODO check again the date issue
+
 class Accounts: # Creating a class of Accounts
     
     def __init__(self, account_id, full_name, pin, balance, status , history):
