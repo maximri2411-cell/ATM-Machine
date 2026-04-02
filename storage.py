@@ -16,7 +16,6 @@ def load_data():
         info = all_accounts[account_id]
 
         new_account = Accounts( #! Creating new account, do not change, its base on what we created in data.json
-
             info["account_id"],
             info["full_name"],
             info["pin"],        # It like taking the new account and puting all of the info we found in json
@@ -29,8 +28,9 @@ def load_data():
         
     return bank
 
+#================================================================================================
+
 def save_data(bank): 
-    
     data_to_save = {} # This is creating an empty dictionary to translet to json the python objects
     
     for account_id in bank.Accounts:
@@ -40,9 +40,23 @@ def save_data(bank):
 
     last_json = {"Accounts": data_to_save} #! All the accounts will be under the Accounts title, pay attention
     
-    json_dump(last_json, open('data.json', 'w'), indent=4) # Taking the dictionary into the file that has been created 
+    with open("data.json", "w") as f: # Added the with loop so it will "close" the open and make sure the info is saved
+        json.dump(last_json, f, indent=4)
+    
+    # json_dump(last_json, open('data.json', 'w'), indent=4) #! Old use that we took for example from google
     # The w is for write, over write the file to new one, like > in linux
     # indent is for beuty
+
+
+
+
+
+
+
+
+
+
+
 
 
 ##! Do not touch
