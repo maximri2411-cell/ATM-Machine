@@ -10,7 +10,7 @@ import json
 
 
 class Accounts: # Creating a class of Accounts
-    
+
     def __init__(self, account_id, full_name, pin, balance, status , history):
         self.account_id = str(account_id) #! In dict, everthing in a string 
         self.full_name = full_name
@@ -18,20 +18,19 @@ class Accounts: # Creating a class of Accounts
         self.balance = float(balance) #! Line alignment that the money in the accounts will be a float
         self.status = status
         self.history = history
-    
+
 #================================================================================================    
         
-    def add_history(self, message): # Insted of adding evertime by yourself the process, have build an function that doin it for me 
+    def add_history(self, operation, amount): # Insted of adding evertime by yourself the process, have build an function that doin it for me 
         from datetime import datetime
         date = datetime.now().strftime("%d/%m/%Y %H:%M")
-        self.history.append(f"{date} - {message}")
         
         new_entry = {
             "operation": operation,
             "amount": float(amount),
             "date": date,
             "amount_after": float(self.balance), # To make sure it will print the updated amount
-            "info": info
+            "info": "None"
         }
         self.history.append(new_entry) # Add the dictionary to the list
     
@@ -44,7 +43,7 @@ class Accounts: # Creating a class of Accounts
             return False
         
         self.balance += amount # if all good, the process will add to his history with the new balance
-        self.add_history(f"Deposite", amount)
+        self.add_history(f"Deposit", amount)
         return True
  
 #================================================================================================       
@@ -52,7 +51,7 @@ class Accounts: # Creating a class of Accounts
     def withdraw(self, amount):
         amount = float(amount)
         
-        if amount <= 0 # In case the account is trying to withdraw an 0 or below, it will print an error
+        if amount <= 0: # In case the account is trying to withdraw an 0 or below, it will print an error
             print("Error: Withdraw amount must be positive.")
             return False
         
@@ -61,7 +60,7 @@ class Accounts: # Creating a class of Accounts
             return False
         
         self.balance -= amount # if all good, the process will add to his history with the new balance
-        self.add_history(f"Withdraw", amount)
+        self.add_history(f"Withdrawn", amount)
         return True
  
 #================================================================================================    
