@@ -157,7 +157,7 @@ class Bank: # Manage all accounts in our project
         if str(account.pin) != str(pin):
             return None, f"ERROR: Wrong PIN. \nMake sure you put the right ID. \nIn case you having a problem, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye."
         
-        return account, f"Login to the account has successed. welcome {self.full_name}"
+        return account, f"Login to the account has successed. welcome {account.full_name}"
     
         #! Old version
         # if account.status == "Blocked":
@@ -190,10 +190,10 @@ class Bank: # Manage all accounts in our project
         
         # Again we gonna make sure the id is exists and if not it will stop him
         # The not loop will make the code run until the user exit him
-        if not sender:
+        if not the_sender:
             return False, "ERROR: ID of Render not found."
         
-        if not receiver:
+        if not the_receiver:
             return False, "ERROR: ID of Receiver not found"
         
         # Stay with me its important: 
