@@ -23,7 +23,7 @@ class Accounts: # Creating a class of Accounts
             print("Error: Deposit amount must be positive.")
             return False
         
-        self.balance += amount
+        self.balance += amount # if all good, the process will add to his history with the new balance
         self.add_history(f"Deposited: {amount} NIS. \nThank you, goodbye.")
         return True
         
@@ -34,17 +34,23 @@ class Accounts: # Creating a class of Accounts
             print("Error: Withdraw amount must be positive.")
             return False
         
-        if amount > self.balance:
+        if amount > self.balance: # If the owner will try to withdraw amount thats above his balance
             print(f"Error: Cannot withdraw above account balance. \nYour balance is {self.balance}.")
             return False
         
-        self.balance -= amount
+        self.balance -= amount # if all good, the process will add to his history with the new balance
         self.add-self.history(f"Withdrawn: {amount} NIS. \nThank you, goodbye.")
         return True
     
     
-    def check_balance(self):
+    def check_balance(self): # In case the owner wats to check his balane 
         print(f"Account Balance: {self.balance}")
+        
+        
+    def account_deatails(self): # In case the owner wants to make sure his details right
+        print("   Account Deatails   ")
+        print(f"Account ID: {self.account_id} \nOnwer: {self.full_name}")
+        
         
     def j_dict(self): # Creating a simple function-dictionary for json to understand
         return {
@@ -55,7 +61,6 @@ class Accounts: # Creating a class of Accounts
             "status": self.status,
             "history": self.history 
         }
-        
         
         
         
