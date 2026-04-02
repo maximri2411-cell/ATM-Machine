@@ -12,9 +12,13 @@ if account_for_test is not None:
 
     print("test deposit")
     account_for_test.deposit(507.65)
+    
     print(f"balance after the deposit: {account_for_test.balance}")
 
-
+    save_data(test_bank) # Pay attention to that part, it saves the operation in the data json file
+    print("saved in json")
+    
+    
 #! withdraw test
 
 
