@@ -4,8 +4,6 @@ from models import Bank, Accounts
 
 def load_data():
     bank = Bank() # Creating an empty bank
-    
-    data = json.load(open('data.json')) #! Important for the python to open the json info and data to translate for himself and work
 
     # Here we put all of the json we have in one value
     data = json.load(open("data.json")) #! Important for the python to open the json info and data to translate for himself and work, for example take id from some account

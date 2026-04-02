@@ -8,7 +8,6 @@ import json
 #============= Accounts ============
 #===================================
 
-# TODO check again the date issue
 
 class Accounts: # Creating a class of Accounts
     
@@ -26,6 +25,15 @@ class Accounts: # Creating a class of Accounts
         from datetime import datetime
         date = datetime.now().strftime("%d/%m/%Y %H:%M")
         self.history.append(f"{date} - {message}")
+        
+        new_entry = {
+            "operation": operation,
+            "amount": float(amount),
+            "date": date,
+            "amount_after": float(self.balance), # To make sure it will print the updated amount
+            "info": info
+        }
+        self.history.append(new_entry) # Add the dictionary to the list
     
 #================================================================================================
       
@@ -36,7 +44,7 @@ class Accounts: # Creating a class of Accounts
             return False
         
         self.balance += amount # if all good, the process will add to his history with the new balance
-        self.add_history(f"Deposited: {amount} NIS.")
+        self.add_history(f"Deposite", amount)
         return True
  
 #================================================================================================       
@@ -44,7 +52,7 @@ class Accounts: # Creating a class of Accounts
     def withdraw(self, amount):
         amount = float(amount)
         
-        if amount <= 0: # In case the account is trying to withdraw an 0 or below, it will print an error
+        if amount <= 0 # In case the account is trying to withdraw an 0 or below, it will print an error
             print("Error: Withdraw amount must be positive.")
             return False
         
@@ -53,7 +61,7 @@ class Accounts: # Creating a class of Accounts
             return False
         
         self.balance -= amount # if all good, the process will add to his history with the new balance
-        self.add_history(f"Withdrawn: {amount} NIS.")
+        self.add_history(f"Withdraw", amount)
         return True
  
 #================================================================================================    
