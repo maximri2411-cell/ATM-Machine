@@ -40,12 +40,11 @@ class Accounts: # Creating a class of Accounts
         try: # This and except is for allowing the process move forward without crash
             amount = float(amount)
             if amount <= 0: # In case the account is trying to deposit an 0 or below, it will print an error
-                print("Error: Deposit amount must be positive.")
-                return False
+                return False, "Error: Deposit amount must be positive."
 
             self.balance += amount # if all good, the process will add to his history with the new balance
             self.add_history(f"Deposit", amount)
-            return True
+            return True, f"Successful deposit with {amount} NIS."
         except ValueError: 
             return False, "Error: Invalid amount entered."
  
@@ -56,16 +55,14 @@ class Accounts: # Creating a class of Accounts
         
         try:
             if amount <= 0: # In case the account is trying to withdraw an 0 or below, it will print an error
-                print("Error: Withdraw amount must be positive.")
-                return False
+                return False, "ERROR: Withdraw amount must be positive."
             
             if amount > self.balance: # If the owner will try to withdraw amount thats above his balance
-                print(f"Error: Cannot withdraw above account balance. \nYour balance is {self.balance}.")
-                return False
+                return False, f"Error: Cannot withdraw above account balance. \nYour balance is {self.balance}."
             
             self.balance -= amount # if all good, the process will add to his history with the new balance
             self.add_history(f"Withdrawn", amount)
-            return True
+            return True, f"Successfully withdraw with {amount} NIS."
         except ValueError:
             return False, "Error: Invalid amount entered."
  
@@ -197,18 +194,18 @@ class Bank: # Manage all accounts in our project
             return False, "ERROR: ID of Receiver not found"
         
         # Stay with me its important: 
-        success, msg = sender.withdraw(amount)
+        success, msg = the_sender.withdraw(amount)
         
         if success:
             
-            receiver.balance += float(amount) # If the withdraw has succesed, the receiver gets it
+            the_receiver.balance += float(amount) # If the withdraw has succesed, the receiver gets it
             
-            receiver.add_history("Transfer In", amount, info=f"From {sender.full_name}")  # Updating for both in dict way
+            the_receiver.add_history("Transfer In", amount, info=f"From {the_sender.full_name}")  # Updating for both in dict way
             
-            sender.history[-1]["operation"] = "Transfer - Out" # Updating the user on this transfer and of coure to who
-            sender.history[-1]["info"] = f"To {receiver.full_name}"
+            the_sender.history[-1]["operation"] = "Transfer - Out" # Updating the user on this transfer and of coure to who
+            the_sender.history[-1]["info"] = f"To {the_receiver.full_name}"
             
-            return True, f"Transfer of {amount} NIS to {receiver.full_name} has completed. \nThank you. goodbye." 
+            return True, f"Transfer of {amount} NIS to {the_receiver.full_name} has completed. \nThank you. goodbye." 
             
         return False, msg # In case everthing has fall it will print an error
     
