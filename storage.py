@@ -4,6 +4,14 @@ from models import Bank, Accounts
 
 def load_data():
     bank = Bank() # Creating an empty bank
+    
+    try:
+        with open("data.json", "r") as f: 
+            data = json.load(f) 
+            
+    except (FileExistsError, json.JSONDecodeError): # This if in case the file dont exist
+        print("Start fresh databse")
+        return bank # Remainder that it will return an empty bank
 
     # Here we put all of the json we have in one value
     data = json.load(open("data.json")) #! Important for the python to open the json info and data to translate for himself and work, for example take id from some account
