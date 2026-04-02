@@ -33,14 +33,14 @@ from storage import load_data, save_data
 # save_data(test_bank)
 # print("saved in json")
 
-#! PIN Change
-test_bank = load_data()
-account_for_test = test_bank.find_account("615243") # Taking King for example
+# #! PIN Change
+# test_bank = load_data()
+# account_for_test = test_bank.find_account("615243") # Taking King for example
 
-new_pin = "8762"
-account_for_test.pin_change(new_pin)
+# new_pin = "8762"
+# account_for_test.pin_change(new_pin)
 
-print("New pin changed")
+# print("New pin changed")
 
-save_data(test_bank)
-print("PIN have been changed")
+# save_data(test_bank)
+# print("PIN have been changed")

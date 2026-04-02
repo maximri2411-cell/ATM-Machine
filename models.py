@@ -37,7 +37,7 @@ class Accounts: # Creating a class of Accounts
 #================================================================================================
       
     def deposit(self, amount):
-        try: # 
+        try: # This and except is for allowing the process move forward without crash
             amount = float(amount)
             if amount <= 0: # In case the account is trying to deposit an 0 or below, it will print an error
                 print("Error: Deposit amount must be positive.")
@@ -54,17 +54,20 @@ class Accounts: # Creating a class of Accounts
     def withdraw(self, amount):
         amount = float(amount)
         
-        if amount <= 0: # In case the account is trying to withdraw an 0 or below, it will print an error
-            print("Error: Withdraw amount must be positive.")
-            return False
-        
-        if amount > self.balance: # If the owner will try to withdraw amount thats above his balance
-            print(f"Error: Cannot withdraw above account balance. \nYour balance is {self.balance}.")
-            return False
-        
-        self.balance -= amount # if all good, the process will add to his history with the new balance
-        self.add_history(f"Withdrawn", amount)
-        return True
+        try:
+            if amount <= 0: # In case the account is trying to withdraw an 0 or below, it will print an error
+                print("Error: Withdraw amount must be positive.")
+                return False
+            
+            if amount > self.balance: # If the owner will try to withdraw amount thats above his balance
+                print(f"Error: Cannot withdraw above account balance. \nYour balance is {self.balance}.")
+                return False
+            
+            self.balance -= amount # if all good, the process will add to his history with the new balance
+            self.add_history(f"Withdrawn", amount)
+            return True
+        except ValueError:
+            return False, "Error: Invalid amount entered."
  
 #================================================================================================    
     
