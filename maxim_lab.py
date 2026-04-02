@@ -20,15 +20,27 @@ from storage import load_data, save_data
     
     
 #! withdraw test
-test_bank = load_data()
-account_for_test = test_bank.find_account("556612") # Taking Dana for example
+# test_bank = load_data()
+# account_for_test = test_bank.find_account("556612") # Taking Dana for example
 
-if account_for_test is not None:
-    print(f"current balance: {account_for_test.balance}")
+# if account_for_test is not None:
+#     print(f"current balance: {account_for_test.balance}")
     
-print("Test withdraw")
-if account_for_test.withdraw(1000):
-    print(f"balance after withdraw: {account_for_test.balance}")
+# print("Test withdraw")
+# if account_for_test.withdraw(1000):
+#     print(f"balance after withdraw: {account_for_test.balance}")
     
+# save_data(test_bank)
+# print("saved in json")
+
+#! PIN Change
+test_bank = load_data()
+account_for_test = test_bank.find_account("615243") # Taking King for example
+
+new_pin = "8762"
+account_for_test.pin_change(new_pin)
+
+print("New pin changed")
+
 save_data(test_bank)
-print("saved in json")
+print("PIN have been changed")

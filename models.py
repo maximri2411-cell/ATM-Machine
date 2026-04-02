@@ -79,9 +79,8 @@ class Accounts: # Creating a class of Accounts
     def pin_change(self, new_pin):
         
         self.pin = str(new_pin) # Remember that every input is a str but we wanna to make sure it wont brake
-        print(f"PIN change has been complete.")
         
-        self.add_history(f"PIN change.")
+        self.add_history(f"PIN change", 0, info=f"New PIN set.")
         
 #================================================================================================ 
         
@@ -210,4 +209,15 @@ class Bank: # Manage all accounts in our project
         
         for account in self.Accounts.values():    
             print(f"ID: {account.account_id} | Name: {account.full_name} | Balance: {account.balance}")
-        
+
+#================================================================================================
+
+    def change_pin(self, account_id, new_pin):
+        account = self.find_account(account_id)
+        if account:
+            account.pin_change(new_pin)
+            print(f"Success: PIN for {account.full_name} has been updated.")
+            return True
+        else:
+            print("Error: Could not change PIN. Account have noot found.")
+            return False
