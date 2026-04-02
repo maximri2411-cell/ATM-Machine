@@ -41,6 +41,10 @@ class Accounts: # Creating a class of Accounts
         self.balance -= amount
         self.add-self.history(f"Withdrawn: {amount} NIS. \nThank you, goodbye.")
         return True
+    
+    
+    def check_balance(self):
+        print(f"Account Balance: {self.balance}")
         
     def j_dict(self): # Creating a simple function-dictionary for json to understand
         return {
