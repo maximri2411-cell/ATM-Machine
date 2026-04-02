@@ -2,7 +2,7 @@ from models import Accounts, Bank
 
 # Maxims lab for accounts and bank
 
-account_for_test = Bank.find_account("321321") # Taking grisha for example
+account_for_test = Bank.find_account(321321") # Taking grisha for example
 if account_for_test:
     print(f"current balance: {account_for_test.balance}")
 
