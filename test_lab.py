@@ -1,3 +1,11 @@
+from models import Accounts, Bank
+
+# Maxims lab for accounts and bank
+#! do not change somthing without asking him first
+
+account_for_test = Bank.find_account("321321") # Taking grisha for example
+
+
 
 #! This is for maxim Checkes for the json and python 
 
