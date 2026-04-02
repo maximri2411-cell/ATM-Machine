@@ -20,13 +20,27 @@ class Accounts: # Creating a class of Accounts
     def deposit(self, amount):
         amount = float(amount)
         if amount <= 0: # In case the account is trying to deposit an 0 or below, it will print an error
-            print("Error: Deposit amount mudt be positive.")
+            print("Error: Deposit amount must be positive.")
             return False
         
         self.balance += amount
         self.add_history(f"Deposited: {amount} NIS. \nThank you, goodbye.")
+        return True
         
         
+    def withdraw(self, amount):
+        amount = float(amount)
+        if amount <= 0: # In case the account is trying to withdraw an 0 or below, it will print an error
+            print("Error: Withdraw amount must be positive.")
+            return False
+        
+        if amount > self.balance:
+            print(f"Error: Cannot withdraw above account balance. \nYour balance is {self.balance}.")
+            return False
+        
+        self.balance -= amount
+        self.add-self.history(f"Withdrawn: {amount} NIS. \nThank you, goodbye.")
+        return True
         
     def j_dict(self): # Creating a simple function-dictionary for json to understand
         return {
