@@ -102,14 +102,15 @@ class Accounts: # Creating a class of Accounts
         }
         
         
+        
 #===================================
 #=============== Bank ==============
 #===================================
 class Bank: # Manage all accounts in our project
     def __init__(self):
         
-        self.manager_full_name = "Administrator"
-        self.manager_pin = "admin123456123456" # Managers password
+        self.manager_full_name = "Cristiano Ronaldo"
+        self.manager_pin = "admin1234" # Managers password
         self.Accounts = {} # Some kind of dictionary to save all of the accounts
 
 #================================================================================================
@@ -145,20 +146,30 @@ class Bank: # Manage all accounts in our project
     def login_account(self, account_id, pin): # Function to log a user into the bank
         account = self.find_account(account_id) # Uses the function we created in previos function
         
-        # Alex have made a few off those accounts active and blocked
-        # We are goin to check if it is blocked, he cannot continue in the proccess
+        # Building a tree of checks to make sure it wont break here.
+        
+        if not account:
+            return None, "ERROR: Account was not found."
+        
         if account.status == "Blocked":
-            print(f"Error: Account {account_id} is BLOCKED. \nPlease call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
-            return None
+            return None, f"ERROR: Your Account is blocked. \nIn case you having a problem, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye."
+        
+        if str(account.pin) != str(pin):
+            return None, f"ERROR: Wrong PIN. \nMake sure you put the right ID. \nIn case you having a problem, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye."
+        
+        return account, f"Login to the account has successed. welcome {Accounts_full_name}"
+        # if account.status == "Blocked":
+        #     print(f"Error: Account {account_id} is BLOCKED. \nPlease call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
+        #     return None
             
-        if account:
-            if str(account.pin) == str(pin):
-                print((f"Login successful. \nWelcome {account.full_name}."))
-                return account
-            else:
-                print(f"Error: Incorerect PIN. \nPlease try again. \nIn case you forgot the PIN, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
-                return None
-        return None 
+        # if account:
+        #     if str(account.pin) == str(pin):
+        #         print((f"Login successful. \nWelcome {account.full_name}."))
+        #         return account
+        #     else:
+        #         print(f"Error: Incorerect PIN. \nPlease try again. \nIn case you forgot the PIN, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
+        #         return None
+        # return None 
         
 #================================================================================================ 
         
