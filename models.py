@@ -37,14 +37,17 @@ class Accounts: # Creating a class of Accounts
 #================================================================================================
       
     def deposit(self, amount):
-        amount = float(amount)
-        if amount <= 0: # In case the account is trying to deposit an 0 or below, it will print an error
-            print("Error: Deposit amount must be positive.")
-            return False
-        
-        self.balance += amount # if all good, the process will add to his history with the new balance
-        self.add_history(f"Deposit", amount)
-        return True
+        try: # 
+            amount = float(amount)
+            if amount <= 0: # In case the account is trying to deposit an 0 or below, it will print an error
+                print("Error: Deposit amount must be positive.")
+                return False
+
+            self.balance += amount # if all good, the process will add to his history with the new balance
+            self.add_history(f"Deposit", amount)
+            return True
+        except ValueError: 
+            return False, "Error: Invalid amount entered."
  
 #================================================================================================       
         
