@@ -21,7 +21,7 @@ class Accounts: # Creating a class of Accounts
 
 #================================================================================================    
         
-    def add_history(self, operation, amount): # Insted of adding evertime by yourself the process, have build an function that doin it for me 
+    def add_history(self, operation, amount, info="None"): # Insted of adding evertime by yourself the process, have build an function that doin it for me 
         from datetime import datetime
         date = datetime.now().strftime("%d/%m/%Y %H:%M")
         
@@ -29,8 +29,8 @@ class Accounts: # Creating a class of Accounts
             "operation": operation,
             "amount": float(amount),
             "date": date,
-            "amount_after": float(self.balance), # To make sure it will print the updated amount
-            "info": "None"
+            "amount_after": round(float(self.balance), 2), # To make sure it will print the updated amount and only 2 in the end
+            "info": info
         }
         self.history.append(new_entry) # Add the dictionary to the list
     
@@ -80,7 +80,8 @@ class Accounts: # Creating a class of Accounts
         
         self.pin = str(new_pin) # Remember that every input is a str but we wanna to make sure it wont brake
         
-        self.add_history(f"PIN change", 0, info=f"New PIN set.")
+        self.add_history(f"PIN change", 0, info="New PIN set.")
+        return True
         
 #================================================================================================ 
         
