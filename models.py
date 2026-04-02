@@ -157,7 +157,9 @@ class Bank: # Manage all accounts in our project
         if str(account.pin) != str(pin):
             return None, f"ERROR: Wrong PIN. \nMake sure you put the right ID. \nIn case you having a problem, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye."
         
-        return account, f"Login to the account has successed. welcome {Accounts_full_name}"
+        return account, f"Login to the account has successed. welcome {self.full_name}"
+    
+        #! Old version
         # if account.status == "Blocked":
         #     print(f"Error: Account {account_id} is BLOCKED. \nPlease call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
         #     return None
@@ -181,45 +183,56 @@ class Bank: # Manage all accounts in our project
             print(f"Access Denied: Invalid manager password. \nPlease try again. \nIn case you forgot the Password, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
     
 #================================================================================================   
-#TODO come back later to check all of this function 
 
     def transfer(self, sender, receiver, amount): # Function for transfer money between accounts
         the_sender = self.find_account(sender)
         the_receiver = self.find_account(receiver)
         
-        if the_sender is None: # We want to check first if they even exist in order to countinue forward to sendng the money
-            print(f"Error: The Sender account does not exist. \nPlease try again. \nIn case you forgot the ID, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
-            return False
+        # Again we gonna make sure the id is exists and if not it will stop him
+        # The not loop will make the code run until the user exit him
+        if not sender:
+            return False, "ERROR: ID of Render not found."
         
-        if the_receiver is None:
-            print(f"Error: The Receiver account does not exist \nPlease try again, Make sure you put the right ID. \nIn case you having a problem, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
-            return False
+        if not receiver:
+            return False, "ERROR: ID of Receiver not found"
         
-        amount_transfer = float(amount) # Creating the value of the amount for the next part
+        # Stay with me its important: 
+        success, msg = sender.withdraw(amount)
         
-        if amount_transfer <= 0: # In case the sender trys to put an 0 or low 
-            print("Error: Amount must be positive.")
-            return False
-        
-        if the_sender.balance < amount_transfer: # Now we are goin to check if the sender has enough amount to even send the money
-            print(f"Transfer Failed: The {the_sender.full_name} is lack of NIS.")
-            print(f"Current Balance in your account: {the_sender.balance} | Transfer request: {amount_transfer}")
-            return False
-                
+        if success:
             
-        #! Make sure everwhere the balance/amount is goin with 'float' like in real life situation
-        # Finishing the proccess of the transfer
-        the_sender.balance -= float(amount)
-        the_receiver.balance += float(amount)
-        
+            receiver.balance += float(amount) # If the withdraw has succesed, the receiver gets it
             
-        # Adding to the history the transfer with the date
-        the_sender.add_history(f"Send: {amount_transfer} to {the_receiver.full_name}.")
-        the_receiver.add_history(f"Received: {amount_transfer} from {the_sender.full_name}.")
-                    
-        print(f"The Transfer of: {amount} NIS has been completed. \nThank you, goodbye.")
-        return True
+            receiver.add_history("Transfer In", amount, info=f"From {sender.full_name}")  # Updating for both in dict way
+            
+            sender.history[-1]["operation"] = "Transfer - Out" # Updating the user on this transfer and of coure to who
+            sender.history[-1]["info"] = f"To {receiver.full_name}"
+            
+            return True, f"Transfer of {amount} NIS to {receiver.full_name} has completed. \nThank you. goodbye." 
+            
+        return False, msg # In case everthing has fall it will print an error
+    
+    
+        #! Old version
+        # if the_sender is None: # We want to check first if they even exist in order to countinue forward to sendng the money
+        #     print(f"Error: The Sender account does not exist. \nPlease try again. \nIn case you forgot the ID, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
+        #     return False
         
+        # if the_receiver is None:
+        #     print(f"Error: The Receiver account does not exist \nPlease try again, Make sure you put the right ID. \nIn case you having a problem, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
+        #     return False
+        
+        # amount_transfer = float(amount) # Creating the value of the amount for the next part
+        
+        # if amount_transfer <= 0: # In case the sender trys to put an 0 or low 
+        #     print("Error: Amount must be positive.")
+        #     return False
+        
+        # if the_sender.balance < amount_transfer: # Now we are goin to check if the sender has enough amount to even send the money
+        #     print(f"Transfer Failed: The {the_sender.full_name} is lack of NIS.")
+        #     print(f"Current Balance in your account: {the_sender.balance} | Transfer request: {amount_transfer}")
+        #     return False
+            
 #================================================================================================
     
     def list_accounts(self): # Function of list all the accounts we created
