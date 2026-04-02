@@ -11,7 +11,7 @@ if account_for_test is not None:
     print(f"current balance: {account_for_test.balance}")
 
     print("test deposit")
-    account_for_test.deposit(507.65)
+    account_for_test.deposit(500)
     
     print(f"balance after the deposit: {account_for_test.balance}")
 
@@ -20,5 +20,3 @@ if account_for_test is not None:
     
     
 #! withdraw test
-    
-    
