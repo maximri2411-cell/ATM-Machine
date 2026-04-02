@@ -7,7 +7,9 @@ from datetime import datetime
 #===================================
 #============= Accounts ============
 #===================================
+
 class Accounts: # Creating a class of Accounts
+    
     def __init__(self, account_id, full_name, pin, balance, status , history):
         self.account_id = str(account_id) #! In dict, everthing in a string 
         self.full_name = full_name
@@ -24,7 +26,7 @@ class Accounts: # Creating a class of Accounts
             return False
         
         self.balance += amount # if all good, the process will add to his history with the new balance
-        self.add_history(f"Deposited: {amount} NIS. \nThank you, goodbye.")
+        self.add_history(f"{date} - Deposited: {amount} NIS.")
         return True
         
         
@@ -39,7 +41,7 @@ class Accounts: # Creating a class of Accounts
             return False
         
         self.balance -= amount # if all good, the process will add to his history with the new balance
-        self.add-self.history(f"Withdrawn: {amount} NIS. \nThank you, goodbye.")
+        self.add_history(f"{date} - Withdrawn: {amount} NIS.")
         return True
     
     
@@ -50,6 +52,13 @@ class Accounts: # Creating a class of Accounts
     def account_deatails(self): # In case the owner wants to make sure his details right
         print("   Account Deatails   ")
         print(f"Account ID: {self.account_id} \nOnwer: {self.full_name}")
+        
+        
+    def pin_change(self, new_pin):
+        self.pin = str(new_pin) # Remember that every input is a str but we wanna to make sure it wont brake
+        print(f"PIN change has been complete.")
+        
+        self.add_history(f"{date} - PIN change.")
         
         
     def j_dict(self): # Creating a simple function-dictionary for json to understand
@@ -70,7 +79,7 @@ class Accounts: # Creating a class of Accounts
 class Bank: # Manage all accounts in our project
     def __init__(self):
         
-        self.manager_full_name = "Super Mario"
+        self.manager_full_name = "Administrator"
         self.manager_pin = "admin123456123456" # Managers password
         self.Accounts = {} # Some kind of dictionary to save all of the accounts
 
@@ -156,10 +165,9 @@ class Bank: # Manage all accounts in our project
         # Finishing the proccess of the transfer
         the_sender.balance -= float(amount)
         the_receiver.balance += float(amount)
-            
-            
-        # Creating a date value for the history of the tansfer
-        date = datetime.date().strftime("%d/%m/%Y %H:%M")
+        
+         # Bank values for this file to use
+        date = datetime.now().strftime("%d/%m/%Y %H:%M")
             
         # Adding to the history the transfer with the date
         the_sender.history.append(f"{date}: Send: {amount_transfer} to {the_receiver.full_name}.")
