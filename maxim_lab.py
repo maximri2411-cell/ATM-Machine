@@ -4,19 +4,31 @@ from storage import load_data, save_data
 # Maxims lab for accounts and bank
 
 #! deposit test
-test_bank = load_data()
-account_for_test = test_bank.find_account("321321") # Taking grisha for example
+# test_bank = load_data()
+# account_for_test = test_bank.find_account("321321") # Taking grisha for example
 
-if account_for_test is not None:
-    print(f"current balance: {account_for_test.balance}")
+# if account_for_test is not None:
+#     print(f"current balance: {account_for_test.balance}")
 
-    print("test deposit")
-    account_for_test.deposit(500)
+#     print("test deposit")
+#     account_for_test.deposit(500)
     
-    print(f"balance after the deposit: {account_for_test.balance}")
+#     print(f"balance after the deposit: {account_for_test.balance}")
 
-    save_data(test_bank) # Pay attention to that part, it saves the operation in the data json file
-    print("saved in json")
+#     save_data(test_bank) # Pay attention to that part, it saves the operation in the data json file
+#     print("saved in json")
     
     
 #! withdraw test
+test_bank = load_data()
+account_for_test = test_bank.find_account("556612") # Taking Dana for example
+
+if account_for_test is not None:
+    print(f"current balance: {account_for_test.balance}")
+    
+print("Test withdraw")
+if account_for_test.withdraw(1000):
+    print(f"balance after withdraw: {account_for_test.balance}")
+    
+save_data(test_bank)
+print("saved in json")
