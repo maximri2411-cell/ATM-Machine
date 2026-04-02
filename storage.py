@@ -5,21 +5,24 @@ from models import Bank, Accounts
 def load_data():
     bank = Bank() # Creating an empty bank
     
-    # TODO Here we put all of the json we have in one value
     data = json.load(open('data.json')) #! Important for the python to open the json info and data to translate for himself and work
+
+    # Here we put all of the json we have in one value
+    data = json.load(open("data.json")) #! Important for the python to open the json info and data to translate for himself and work, for example take id from some account
     
-    all_accounts = data["Accounts"] # Finding all of the accounts we created/have
+    all_accounts = data["Accounts"] # Finding all of the accounts we created/have from the data file
 
     for account_id in all_accounts: # Going through the entire list of accounts
         info = all_accounts[account_id]
 
         new_account = Accounts( #! Creating new account, do not change, its base on what we created in data.json
-            info['account_id'],
-            info['full_name'],
-            info['pin'],
-            info['balance'],
-            info['status'],
-            info['history']
+
+            info["account_id"],
+            info["full_name"],
+            info["pin"],        # It like taking the new account and puting all of the info we found in json
+            info["balance"],
+            info["status"],
+            info["history"]
         )
         
         bank.Accounts[account_id] = new_account # Saving the new account in our bank
@@ -34,20 +37,12 @@ def save_data(bank):
         account_js = bank.Accounts[account_id] # Withdrawing accounts from current list
         data_to_save[account_id] = account_js.j_dict() # Taking account and trsnslet from python to json
 
+
     last_json = {"Accounts": data_to_save} #! All the accounts will be under the Accounts title, pay attention
     
     json_dump(last_json, open('data.json', 'w'), indent=4) # Taking the dictionary into the file that has been created 
     # The w is for write, over write the file to new one, like > in linux
     # indent is for beuty
-
-
-
-
-
-
-
-
-
 
 
 ##! Do not touch

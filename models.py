@@ -3,9 +3,10 @@ import random
 from datetime import datetime
 
 
+
+#===================================
 #============= Accounts ============
-# TODO Add the withdraw and so.. for this part of the code so the lab will work..
-# TODO after adding what is missing you need to test again 
+#===================================
 class Accounts: # Creating a class of Accounts
     def __init__(self, account_id, full_name, pin, balance, status , history):
         self.account_id = str(account_id) #! In dict, everthing in a string 
@@ -14,6 +15,18 @@ class Accounts: # Creating a class of Accounts
         self.balance = float(balance) #! Line alignment that the money in the accounts will be a float
         self.status = status
         self.history = history
+        
+        
+    def deposit(self, amount):
+        amount = float(amount)
+        if amount <= 0: # In case the account is trying to deposit an 0 or below, it will print an error
+            print("Error: Deposit amount mudt be positive.")
+            return False
+        
+        self.balance += amount
+        self.add_history(f"Deposited: {amount} NIS. \nThank you, goodbye.")
+        
+        
         
     def j_dict(self): # Creating a simple function-dictionary for json to understand
         return {
@@ -24,8 +37,13 @@ class Accounts: # Creating a class of Accounts
             "status": self.status,
             "history": self.history 
         }
-    
+        
+        
+        
+        
+#===================================
 #=============== Bank ==============
+#===================================
 class Bank: # Manage all accounts in our project
     def __init__(self):
         
@@ -57,7 +75,7 @@ class Bank: # Manage all accounts in our project
             return account_search
         else:
             print("Error: Account ID not found.")
-            return None
+            return None # Just for understanding, it returns an None in the terminal and sying like i havent found somthing
         
         
     def login_account(self, account_id, pin): # Function to log a user into the bank
@@ -66,7 +84,7 @@ class Bank: # Manage all accounts in our project
         # Alex have made a few off those accounts active and blocked
         # We are goin to check if it is blocked, he cannot continue in the proccess
         if account.status == "Blocked":
-            print(f"Error: Account {account_id} is BLOCKED. \nPlease call customer service or visit your local bank. \nThank you for understanding.")
+            print(f"Error: Account {account_id} is BLOCKED. \nPlease call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
             return None
             
         if account:
@@ -74,7 +92,7 @@ class Bank: # Manage all accounts in our project
                 print((f"Login successful. \nWelcome {account.full_name}."))
                 return account
             else:
-                print(f"Error: Incorerect PIN. \nPlease try again. \nIn case you forgot the PIN, Please call customer service or visit your local bank. \nThank you for understanding.")
+                print(f"Error: Incorerect PIN. \nPlease try again. \nIn case you forgot the PIN, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
                 return None
         return None 
         
@@ -84,7 +102,7 @@ class Bank: # Manage all accounts in our project
             print(f"Manager access passed successfully. \nWelcome {self.manager_full_name}") # We determined in the beginning inside the "Father" 
             return True
         else:
-            print(f"Access Denied: Invalid manager password. \nPlease try again. \nIn case you forgot the Password, Contact your local bank for help.")
+            print(f"Access Denied: Invalid manager password. \nPlease try again. \nIn case you forgot the Password, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
     
     
     def transfer(self, sender, receiver, amount): # Function for transfer money between accounts
@@ -92,11 +110,11 @@ class Bank: # Manage all accounts in our project
         the_receiver = self.find_account(receiver)
         
         if the_sender is None: # We want to check first if they even exist in order to countinue forward to sendng the money
-            print(f"Error: The Sender account does not exist. \nPlease try again. \nIn case you forgot the ID, contact your local bank.")
+            print(f"Error: The Sender account does not exist. \nPlease try again. \nIn case you forgot the ID, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
             return False
         
         if the_receiver is None:
-            print(f"Error: The Receiver account does not exist. \nPlease try again. \nMake sure you put the right ID. \nIn case you having a problem, Contact your local bank.")
+            print(f"Error: The Receiver account does not exist \nPlease try again, Make sure you put the right ID. \nIn case you having a problem, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
             return False
         
         amount_transfer = float(amount) # Creating the value of the amount for the next part
@@ -111,7 +129,7 @@ class Bank: # Manage all accounts in our project
             return False
                 
             
-        #! Make sure everwhere the balanc/amount is goin with 'float' like in real life situation
+        #! Make sure everwhere the balance/amount is goin with 'float' like in real life situation
         # Finishing the proccess of the transfer
         the_sender.balance -= float(amount)
         the_receiver.balance += float(amount)
@@ -124,7 +142,7 @@ class Bank: # Manage all accounts in our project
         the_sender.history.append(f"{date}: Send: {amount_transfer} to {the_receiver.full_name}.")
         the_receiver.history.append(f"{date}: Received: {amount_transfer} from {the_sender.full_name}.")
                     
-        print(f"The Transfer of: {amount} NIS has been completed. \nThank you.")
+        print(f"The Transfer of: {amount} NIS has been completed. \nThank you, goodbye.")
         return True
         
     
