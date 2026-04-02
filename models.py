@@ -21,6 +21,7 @@ class Accounts: # Creating a class of Accounts
         
     def deposit(self, amount):
         amount = float(amount)
+        date = datetime.now().strftime("%d/%m/%Y %H:%M")
         if amount <= 0: # In case the account is trying to deposit an 0 or below, it will print an error
             print("Error: Deposit amount must be positive.")
             return False
@@ -32,6 +33,8 @@ class Accounts: # Creating a class of Accounts
         
     def withdraw(self, amount):
         amount = float(amount)
+        date = datetime.now().strftime("%d/%m/%Y %H:%M")
+        
         if amount <= 0: # In case the account is trying to withdraw an 0 or below, it will print an error
             print("Error: Withdraw amount must be positive.")
             return False
@@ -55,6 +58,8 @@ class Accounts: # Creating a class of Accounts
         
         
     def pin_change(self, new_pin):
+        date = datetime.now().strftime("%d/%m/%Y %H:%M")
+        
         self.pin = str(new_pin) # Remember that every input is a str but we wanna to make sure it wont brake
         print(f"PIN change has been complete.")
         
@@ -180,8 +185,6 @@ class Bank: # Manage all accounts in our project
     def list_accounts(self): # Function of list all the accounts we created
         print("----- Bank Accounts List ------") # Nice title
         
-        for account in self.Accounts.values():
-            
+        for account in self.Accounts.values():    
             print(f"ID: {account.account_id} | Name: {account.full_name} | Balance: {account.balance}")
         
-        print("-------------------------------")
