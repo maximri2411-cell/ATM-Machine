@@ -19,7 +19,7 @@ class ATM_app: # Creating the class for the app
         tk.Label(self.root, text="Bank", font=("Ariel", 18)).pack(pady=20)
         
         # Creating a button
-        tk.button(self.root, text="Check", command=self.test_data).pack()
+        tk.Button(self.root, text="Check", command=self.test_data).pack()
 
     def test_data(self):
         print("Another check")
