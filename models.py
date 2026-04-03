@@ -279,4 +279,12 @@ class Bank: # Manage all accounts in our project
             return True, f"The account {accound_id} was deleted by you. Thank you and goodbye."
         return False, "Accound ID not found."
     
-    
+#================================================================================================ 
+
+    def account_history(self, account_id): # The manager can now watch the accounts history
+        account = self.find_account(account_id)
+        
+        if account:
+            return account.account_history()
+        return None 
+            
