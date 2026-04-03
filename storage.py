@@ -8,9 +8,10 @@ def load_data():
     try:
         with open("data.json", "r") as f: 
             data = json.load(f) 
-            
+
+    # TODO pay attention we myte need to change the File Exists to NotFound
     except (FileExistsError, json.JSONDecodeError): # This if in case the file dont exist
-        print("Start fresh databse")
+        print("Start new databse")
         return bank # Remainder that it will return an empty bank
 
     # Here we put all of the json we have in one value
