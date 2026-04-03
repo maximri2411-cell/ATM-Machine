@@ -91,6 +91,6 @@ def test_manager_skills():
     
     save_data(bank)
     
-test_manager_skills
+test_manager_skills()
 
     
