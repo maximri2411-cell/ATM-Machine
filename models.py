@@ -75,7 +75,7 @@ class Accounts: # Creating a class of Accounts
         
     def account_deatails(self): # In case the owner wants to make sure his details right
         print("   Account Deatails   ")
-        print(f"Account ID: {self.account_id} \nOnwer: {self.full_name}")
+        print(f"Account ID: {self.account_id} \nOnwer: {self.full_name} ֿ\nPIN: {self.pin}.")
 
 #================================================================================================   
         
@@ -87,7 +87,13 @@ class Accounts: # Creating a class of Accounts
         return True
         
 #================================================================================================ 
+     
+    def see_history(self): # List all of the history the account have
+        if not self.history:
+            return []
+        return self.history
         
+#================================================================================================ 
     def j_dict(self): # Creating a simple function-dictionary for json to understand
         return {
             "account_id": self.account_id,
@@ -259,7 +265,7 @@ class Bank: # Manage all accounts in our project
             return False, f"Account ID not found. \nPlease try again."
         
         if account.status == "Active":
-            account.status == "Blocked" # This part is for to change ths status
+            account.status = "Blocked" # This part is for to change ths status # Pay attention that in pyrhon in order to change status for eample, you need to put only 1 = not ==
         else:
             account.status = "Active"
             
