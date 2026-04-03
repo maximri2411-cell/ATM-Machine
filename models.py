@@ -285,6 +285,7 @@ class Bank: # Manage all accounts in our project
         account = self.find_account(account_id)
         
         if account:
-            return account.account_history()
-        return None 
+            return account.history
+        else:
+            return None 
             

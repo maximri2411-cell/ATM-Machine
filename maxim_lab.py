@@ -102,5 +102,7 @@ def test_history():
     
     history = bank.account_history(account_for_test)
     
+    print(history)
+    
 test_history()
     
