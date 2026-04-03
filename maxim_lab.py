@@ -95,14 +95,14 @@ from storage import load_data, save_data
 # test_manager_skills()
 
 
-#! history check
-def test_history():
-    bank = load_data()
-    account_for_test = "321321"
+# #! history check
+# def manager_test_history():
+#     bank = load_data()
+#     account_for_test = "321321"
     
-    history = bank.account_history(account_for_test)
+#     history = bank.account_history(account_for_test)
     
-    print(history)
+#     print(history)
     
-test_history()
+# manager_test_history()
     
