@@ -6,7 +6,7 @@ import os
 from sys import platform
 import customtkinter
 
-
+# Creating our opening window
 width = 700 
 height = 400
 
@@ -17,8 +17,6 @@ x = (root.winfo_screenwidth() // 2) - (width // 2)
 y = (root.winfo_screenheight() // 3) - (width // 3)
 root.geometry("{}x{}+{}+{}".format(width, height, x, y))
 root.resizable(False, False)
-
-
 
 
 root.mainloop() # Activate the app 
