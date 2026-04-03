@@ -33,6 +33,15 @@ class ATM_app: # Creating the class for the app
         self.pin_entry = tk.Entry(self.root, show="*")
         self.pin_entry.pack(paddy=5)
         
+        # Normal user login button
+        tk.Button(self.root, text="Login", command=self.normal_login, bg="blue").pack(paddy=15)
+        
+        # Admin login button
+        tk.Button(self.root, text="Admin Access", command=self.admin_screen, bg="lightblue").pack(paddy=5)
+        
+    def normal_login(self):
+        accout_id = self.account_entry.get()
+        pin = self.pin_entry.get()
         
         # Creating a button
         tk.Button(self.root, text="Check", command=self.test_data).pack()
