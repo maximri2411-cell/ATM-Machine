@@ -69,7 +69,7 @@ from storage import load_data, save_data
 
 # test_bank_system()
 
-# #! block account test 
+# #! block and active account test 
 # def test_manager_skills():
 #     bank = load_data()
 #     account_for_test = "588300" # new account i created last time
@@ -81,16 +81,26 @@ from storage import load_data, save_data
     
 # test_manager_skills()
 
-#! delete test 
-def test_manager_skills():
-    bank = load_data()
-    account_for_test = "588300" # new account i created last time, now we delete
-    
-    success, msg = bank.delete_account(account_for_test)
-    print(msg)
-    
-    save_data(bank)
-    
-test_manager_skills()
 
+# #! delete test 
+# def test_manager_skills():
+#     bank = load_data()
+#     account_for_test = "588300" # new account i created last time, now we delete
+    
+#     success, msg = bank.delete_account(account_for_test)
+#     print(msg)
+    
+#     save_data(bank)
+    
+# test_manager_skills()
+
+
+#! history check
+def test_history():
+    bank = load_data()
+    account_for_test = "321321"
+    
+    history = bank.account_history(account_for_test)
+    
+test_history()
     
