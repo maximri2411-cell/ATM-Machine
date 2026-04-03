@@ -13,17 +13,26 @@ class ATM_app: # Creating the class for the app
         self.current_user = None 
         self.create_login_screen()
         
-    def cleaning_screen(self):
+    def cleaning_screen(self): # Its important to clean the text after the user use or press the button
         for widget in self.root.winfo_children():
             widget.destroy()
         
-    def create_login_xcreen(self):
+    def create_login_screen(self):
         self.cleaning_screen()
         
-        self.current_user = None # Here we save the Accounts after the log
-        
         # Simple window just to see if its work with some feature like the type of language
-        tk.Label(self.root, text="Welcome To X Bank", font=("Ariel", 23)).pack(pady=200)
+        tk.Label(self.root, text="Welcome To X ATM", font=("Ariel", 23, "bold")).pack(pady=200)
+        
+        # Adding fild to enter his ID number
+        tk.Label(self.root, text="Account ID: ").pack()
+        self.account_entry = tk.Entry(self.root)
+        self.account_entry.pack(pady=5)
+        
+        # Adding the pin fild
+        tk.Label(self.root, text="Enter PIN: ").pack()
+        self.pin_entry = tk.Entry(self.root, show="*")
+        self.pin_entry.pack(paddy=5)
+        
         
         # Creating a button
         tk.Button(self.root, text="Check", command=self.test_data).pack()
