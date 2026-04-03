@@ -265,4 +265,12 @@ class Bank: # Manage all accounts in our project
             
         return True, f"New status of the account {accound_id} is: {account.status}. Thank you and goodbye."
     
+#================================================================================================
+
+    def delete_account(self, accound_id):
+        if accound_id in self.Accounts:
+            del self.Accounts[accound_id]
+            return True, f"The account {accound_id} was deleted by you. Thank you and goodbye."
+        return False, "Accound ID not found."
+    
     
