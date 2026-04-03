@@ -188,10 +188,10 @@ class Bank: # Manage all accounts in our project
         # Again we gonna make sure the id is exists and if not it will stop him
         # The not loop will make the code run until the user exit him
         if not the_sender:
-            return False, "ERROR: ID of Render not found."
+            return False, "ERROR: ID of Sender, not found."
         
         if not the_receiver:
-            return False, "ERROR: ID of Receiver not found"
+            return False, "ERROR: ID of Receiver, not found."
         
         # Stay with me its important: 
         success, msg = the_sender.withdraw(amount)
@@ -240,7 +240,7 @@ class Bank: # Manage all accounts in our project
 
 #================================================================================================
 
-    def change_pin(self, account_id, new_pin):
+    def change_pin(self, account_id, new_pin): # Function to change PIN if the user wants
         account = self.find_account(account_id)
         if account:
             account.pin_change(new_pin)
@@ -249,3 +249,20 @@ class Bank: # Manage all accounts in our project
         else:
             print("Error: Could not change PIN. Account have noot found.")
             return False
+        
+#================================================================================================
+
+    def change_status(self, accound_id): # Function to block or delete account in the bank by the manager
+        account = self.find_account(accound_id)
+        
+        if not account:
+            return False, f"Account ID not found. \nPlease try again."
+        
+        if account.status == "Active":
+            account.status == "Blocked" # This part is for to change ths status
+        else:
+            account.status = "Active"
+            
+        return True, f"New status of the account {accound_id} is: {account.status}. Thank you and goodbye."
+    
+    
