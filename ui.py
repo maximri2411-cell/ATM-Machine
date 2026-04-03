@@ -39,15 +39,29 @@ class ATM_app: # Creating the class for the app
         # Admin login button
         tk.Button(self.root, text="Admin Access", command=self.admin_screen, bg="lightblue").pack(paddy=5)
         
-    def normal_login(self):
+    def normal_login(self): # Taking data from GUI fild
         accout_id = self.account_entry.get()
         pin = self.pin_entry.get()
         
-        # Creating a button
-        tk.Button(self.root, text="Check", command=self.test_data).pack()
+        user, message = self.bank.login_account(accout_id, pin)
+        
+    if user:
+        self.current_user = user
+        
+        
+    else:
+        messagebox.showerror("Login Failed", message)
+        messagebox.showinfo("Success", message)
+        self.show_menu_user()
 
-    def test_data(self):
-        print("Another check")
+    # Admin screet creation
+    def admin_screen(self):
+        messagebox.showinfo("Admin", "Loading... Please wait")
+        
+    # User screen creation
+    def user_screen(self):
+        self.cleaning_screen()
+        tk.Label(self.root, tex=f"Welcome back, \n{self.current_user.full_name}", font=("Ariel", 13)).pack(paddy=15)
         
 if __name__ == "__main__": #! This will run our app evertime we run the code
     root = tk.Tk()
