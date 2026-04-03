@@ -1,6 +1,7 @@
 #====================================
 # All of features we need to make our app great
 import tkinter as tk
+from tkinter import messagebox
 from storage import load_data, save_data #! Do not delete it, important for our function to use
 #====================================
 
@@ -31,13 +32,13 @@ class ATM_app: # Creating the class for the app
         # Adding the pin fild
         tk.Label(self.root, text="Enter PIN: ").pack()
         self.pin_entry = tk.Entry(self.root, show="*")
-        self.pin_entry.pack(paddy=5)
+        self.pin_entry.pack(pady=5)
         
         # Normal user login button
-        tk.Button(self.root, text="Login", command=self.normal_login, bg="blue").pack(paddy=15)
+        tk.Button(self.root, text="Login", command=self.normal_login, bg="blue").pack(pady=15)
         
         # Admin login button
-        tk.Button(self.root, text="Admin Access", command=self.admin_screen, bg="lightblue").pack(paddy=5)
+        tk.Button(self.root, text="Admin Access", command=self.admin_screen, bg="lightblue").pack(pady=5)
         
     def normal_login(self): # Taking data from GUI fild
         accout_id = self.account_entry.get()
@@ -45,14 +46,14 @@ class ATM_app: # Creating the class for the app
         
         user, message = self.bank.login_account(accout_id, pin)
         
-    if user:
-        self.current_user = user
+        if user:
+            self.current_user = user
         
         
-    else:
-        messagebox.showerror("Login Failed", message)
-        messagebox.showinfo("Success", message)
-        self.show_menu_user()
+        else:
+            messagebox.showerror("Login Failed", message)
+            messagebox.showinfo("Success", message)
+            self.show_menu_user()
 
     # Admin screet creation
     def admin_screen(self):
@@ -61,7 +62,7 @@ class ATM_app: # Creating the class for the app
     # User screen creation
     def user_screen(self):
         self.cleaning_screen()
-        tk.Label(self.root, tex=f"Welcome back, \n{self.current_user.full_name}", font=("Ariel", 13)).pack(paddy=15)
+        tk.Label(self.root, tex=f"Welcome back, \n{self.current_user.full_name}", font=("Ariel", 13)).pack(pady=15)
         
 if __name__ == "__main__": #! This will run our app evertime we run the code
     root = tk.Tk()
