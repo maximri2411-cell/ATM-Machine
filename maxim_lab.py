@@ -49,22 +49,35 @@ from storage import load_data, save_data
 
 #! combined test lab for my models and data
 
-def test_bank_system():
-    print("Test")
+# def test_bank_system():
+#     print("Test")
     
+#     bank = load_data()
+    
+#     account_id = bank.create_account("Test account", "0001")
+#     owner = bank.find_account(account_id)
+    
+#     owner.deposit(3020)
+#     owner.withdraw(300)
+    
+#     target_id = bank.create_account("Receiver ID", "0002")
+#     success, msg = bank.transfer(account_id, target_id, 700)
+#     print(f"Transfer ok: {success}, note: {msg}")
+    
+#     save_data(bank)
+#     print("Finish")
+
+# test_bank_system()
+
+#! block account test 
+def test_manager_skills():
     bank = load_data()
+    account_for_test = "588300" # new account i created last time
     
-    account_id = bank.create_account("Test account", "0001")
-    owner = bank.find_account(account_id)
-    
-    owner.deposit(3020)
-    owner.withdraw(300)
-    
-    target_id = bank.create_account("Receiver ID", "0002")
-    success, msg = bank.transfer(account_id, target_id, 700)
-    print(f"Transfer ok: {success} | note: {msg}")
+    success, msg = bank.change_status(account_for_test)
+    print(msg)
     
     save_data(bank)
-    print("Finish")
-
-test_bank_system()
+    
+    
+    
