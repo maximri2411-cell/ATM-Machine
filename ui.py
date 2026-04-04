@@ -103,15 +103,18 @@ class ATM_app: # Creating the class for the app
         pin_admin = self.admin_pin_entry.get()
         
         if self.bank.manager_login(pin_admin): # Checks if the pin is currect
-            messagebox.showinfo("Manager access passed successfully", f"Welcome, {self.manager_full_name}")
+            messagebox.showinfo("Manager access passed successfully", f"Welcome, {self.bank.manager_full_name}")
             # self.show
         else:
-            messagebox.showerror("Access Denied: Invalid manager password.", "Please try again.", "In case you forgot the Password," "Please call customer service or visit your local bank for help.", "Thank you for understanding, goodbye.")
+            long_error_message = ( # Apperently you can to a function to some long message
+                "Access Denied: Invalid manager password.\n"
+                "Please try again.\n"
+                "In case you forgot the Password," "Please call customer service.\n"
+                "or visit your local bank for help.\n"
+                "Thank you for understanding, goodbye."
+            )
+            messagebox.showerror("Access Denided", long_error_message)
             self.admin_pin_entry.delete(0, tk.END)
-        
-        
-        
-        #dasdasdasd
         
 #!=================================================================
 if __name__ == "__main__": #! This will run our app evertime we run the code
