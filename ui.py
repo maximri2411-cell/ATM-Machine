@@ -13,7 +13,7 @@ class ATM_app: # Creating the class for the app
         self.root = root
         self.root.title("ATM Machine") # The title
         self.root.geometry("800x600") # Size of ther title
-        self.root.configure(bg="#0b1e33") # bg color
+        self.root.configure(bg="black") # bg color
         self.bank = load_data() # Here we use all the function we created in the other files
         self.current_user = None 
         self.create_login_screen()
@@ -70,6 +70,7 @@ class ATM_app: # Creating the class for the app
     def user_screen(self): # User screen creation
         self.cleaning_screen()
         tk.Label(self.root, text=f"Welcome back, \n{self.current_user.full_name}", font=("Ariel", 13)).pack(pady=15)
+        tk.Button(self.root, text="Logout", command=self.create_login_screen, bg="black", fg="white").pack(pady=30)
 
 #=======================================================
 #================ Login and menu of manager ============
@@ -80,25 +81,25 @@ class ATM_app: # Creating the class for the app
         
         # This is our title for the next screen
         tk.Label(self.root, text="Manager Login", font=("Ariel", 25, "bold"), 
-                 bg="gold", fg="white").pack(pady=10)
+                 bg="black", fg="white").pack(pady=10)
         
         tk.Label(self.root, text="Enter Admin Password:", font=("Arial", 14), 
-                 bg="gold", fg="white").pack(pady=10)
+                 bg="black", fg="white").pack(pady=10)
         
         # Adding * for his password 
         self.admin_pin_entry = tk.Entry(self.root, show="*", width=25, 
-                                         font=("Arial", 14), bg="gold", fg="white")
+                                         font=("Arial", 14), bg="black", fg="white")
         self.admin_pin_entry.pack(pady=10)
         
         
         # The button for enter confirm
         tk.Button(self.root, text="Verify Access", command=self.check_pin_admin,
-                  font=("Arial", 14, "bold"), width=15, bg="gold", fg="white", 
+                  font=("Arial", 14, "bold"), width=15, bg="black", fg="white", 
                   cursor="hand2").pack(pady=15)
         
         # Buton to return back if he wants
         tk.Button(self.root, text="Back to home page", command=self.create_login_screen,
-                  font=("Arial", 10), bg="gold", fg="white", borderwidth=0).pack(pady=5)
+                  font=("Arial", 10), bg="black", fg="white", borderwidth=0).pack(pady=5)
         
         
     def check_pin_admin(self): # Check if the pin is currecct
@@ -124,15 +125,17 @@ class ATM_app: # Creating the class for the app
         
         def admin_menu(self): # Creatin the admin menu after the password
             self.cleaning_screen()
-            tk.Label(self.root, text="Admin Control Panel", font=("Arial", 28, "bold"), 
-                 bg="#0b1e33", fg="gold").pack(pady=40)
+            tk.Label(self.root, text="Admin control menu", font=("Arial", 25, "bold"), 
+                 bg="black", fg="white").pack(pady=40)
         
-        # כפתורים לדוגמה (נחבר אותם בהמשך)
-        tk.Button(self.root, text="View All Accounts", font=("Arial", 12), width=30, bg="#d4af37").pack(pady=10)
-        tk.Button(self.root, text="Create New Account", font=("Arial", 12), width=30, bg="#d4af37").pack(pady=10)
+        # Buttons for the menu
+        tk.Button(self.root, text="View all accounts", font=("Arial", 12), width=30, bg="black").pack(pady=10)
+        tk.Button(self.root, text="Create new account", font=("Arial", 12), width=30, bg="black").pack(pady=10)
         
-        # כפתור יציאה חזרה להתחלה
-        tk.Button(self.root, text="Logout", command=self.create_login_screen, bg="#2d3e50", fg="white").pack(pady=30)
+        # Button to exit if he want
+        tk.Button(self.root, text="Logout", command=self.create_login_screen, bg="black", fg="white").pack(pady=30)
+        
+        
 #!=================================================================
 if __name__ == "__main__": #! This will run our app evertime we run the code
     root = tk.Tk()
