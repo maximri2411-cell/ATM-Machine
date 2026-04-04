@@ -46,7 +46,7 @@ class Accounts: # Creating a class of Accounts
             self.add_history(f"Deposit", amount)
             return True, f"Successful deposit with {amount} NIS."
         except ValueError: 
-            return False, "Error: Invalid amount entered."
+            return False, "ERROR: Invalid amount entered."
  
 #================================================================================================       
         
@@ -112,7 +112,7 @@ class Accounts: # Creating a class of Accounts
 class Bank: # Manage all accounts in our project
     def __init__(self):
         
-        self.manager_full_name = "Cristiano Ronaldo"
+        self.manager_full_name = "Admin"
         self.manager_pin = "admin1234" # Managers password
         self.Accounts = {} # Some kind of dictionary to save all of the accounts
 
@@ -160,21 +160,7 @@ class Bank: # Manage all accounts in our project
         if str(account.pin) != str(pin):
             return None, f"ERROR: Wrong PIN. \nMake sure you put the right ID. \nIn case you having a problem, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye."
         
-        return account, f"Login to the account has successed. welcome {account.full_name}"
-    
-        #! Old version
-        # if account.status == "Blocked":
-        #     print(f"Error: Account {account_id} is BLOCKED. \nPlease call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
-        #     return None
-            
-        # if account:
-        #     if str(account.pin) == str(pin):
-        #         print((f"Login successful. \nWelcome {account.full_name}."))
-        #         return account
-        #     else:
-        #         print(f"Error: Incorerect PIN. \nPlease try again. \nIn case you forgot the PIN, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
-        #         return None
-        # return None 
+        return account, f"Login to the account has successed."
         
 #================================================================================================ 
         
@@ -213,27 +199,6 @@ class Bank: # Manage all accounts in our project
             return True, f"Transfer of {amount} NIS to {the_receiver.full_name} has completed. \nThank you. goodbye." 
             
         return False, msg # In case everthing has fall it will print an error
-    
-    
-        #! Old version
-        # if the_sender is None: # We want to check first if they even exist in order to countinue forward to sendng the money
-        #     print(f"Error: The Sender account does not exist. \nPlease try again. \nIn case you forgot the ID, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
-        #     return False
-        
-        # if the_receiver is None:
-        #     print(f"Error: The Receiver account does not exist \nPlease try again, Make sure you put the right ID. \nIn case you having a problem, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
-        #     return False
-        
-        # amount_transfer = float(amount) # Creating the value of the amount for the next part
-        
-        # if amount_transfer <= 0: # In case the sender trys to put an 0 or low 
-        #     print("Error: Amount must be positive.")
-        #     return False
-        
-        # if the_sender.balance < amount_transfer: # Now we are goin to check if the sender has enough amount to even send the money
-        #     print(f"Transfer Failed: The {the_sender.full_name} is lack of NIS.")
-        #     print(f"Current Balance in your account: {the_sender.balance} | Transfer request: {amount_transfer}")
-        #     return False
             
 #================================================================================================
     
