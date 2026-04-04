@@ -180,10 +180,9 @@ class Bank: # Manage all accounts in our project
         
     def manager_login(self, password): # Function of the manager
         if password == self.manager_pin:
-            print(f"Manager access passed successfully. \nWelcome {self.manager_full_name}") # We determined in the beginning inside the "Father" 
             return True
         else:
-            print(f"Access Denied: Invalid manager password. \nPlease try again. \nIn case you forgot the Password, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
+            return False
     
 #================================================================================================   
 

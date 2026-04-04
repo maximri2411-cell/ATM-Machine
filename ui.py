@@ -58,9 +58,13 @@ class ATM_app: # Creating the class for the app
         if user:
             self.current_user = user
             messagebox.showinfo("Success", message)# Line up that every success entry must be like this
+            self.user_id_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
+            self.user_pin_entry.delete(0, tk.END) 
+            
             self.user_screen() # Moving to the user screen
         else:
             messagebox.showerror("Login Failed", message) # Line up thst every fail entry must be like this
+            self.user_pin_entry.delete(0, tk.END)
             
     
     def user_screen(self): # User screen creation
@@ -88,7 +92,6 @@ class ATM_app: # Creating the class for the app
         self.admin_pin_entry.pack(pady=10)
         
         
-        
         # The button for enter confirm
         tk.Button(self.root, text="Verify Access", command=self.check_pin_admin,
                   font=("Arial", 14, "bold"), width=15, bg="gold", fg="white", 
@@ -104,6 +107,9 @@ class ATM_app: # Creating the class for the app
         
         if self.bank.manager_login(pin_admin): # Checks if the pin is currect
             messagebox.showinfo("Manager access passed successfully", f"Welcome, {self.bank.manager_full_name}")
+            
+            self.admin_pin_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
+            
             # self.show
         else:
             long_error_message = ( # Apperently you can to a function to some long message
@@ -114,17 +120,10 @@ class ATM_app: # Creating the class for the app
                 "Thank you for understanding, goodbye."
             )
             messagebox.showerror("Access Denided", long_error_message)
-            self.admin_pin_entry.delete(0, tk.END)
+            self.admin_pin_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
         
 #!=================================================================
 if __name__ == "__main__": #! This will run our app evertime we run the code
     root = tk.Tk()
     app = ATM_app(root)
     root.mainloop() 
-    
-    
-    
-    
-    
-    
-    
