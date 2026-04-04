@@ -1,7 +1,7 @@
 #===================================
 # All of features we need to make our app great
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, ttk
 from storage import load_data, save_data #! Do not delete it, important for our function to use
 
 # =======================================================
@@ -170,6 +170,21 @@ class ATM_app: # Creating the class for the app
         # Button to exit if he want
         tk.Button(self.root, text="LOGOUT", command=self.create_login_screen, bg="black", fg="white").pack(pady=30)
             
+#=======================================================    
+
+    def view_accounts(self):
+        self.cleaning_screen() # Very important, cleaning the window
+            
+        columns = ("id", "name", "balance", "status") # Creating a table 
+        tree = ttk.Treeview(self.root, columns=columns, show="headings", height=15)
+        
+        # Creating som titles for our tree 
+        tree.heading("id", text="Account ID: ")
+        tree.heading("name", text="User name: ")
+        tree.heading("balance", text="Balanse: ")
+        tree.heading("status", text="Status: ")
+        
+        
         
 #!======================================================
 if __name__ == "__main__": #! This will run our app evertime we run the code
