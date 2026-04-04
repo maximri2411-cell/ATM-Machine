@@ -1,0 +1,120 @@
+{
+    "Accounts": {
+        "321321": {
+            "account_id": "321321",
+            "full_name": "Grisha Borisov",
+            "pin": "1234",
+            "balance": 78064.25,
+            "status": "Active",
+            "history": [
+                {
+                    "operation": "Deposit",
+                    "amount": 507.65,
+                    "date": "02/04/2026 20:18",
+                    "amount_after": 77764.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Deposit",
+                    "amount": 500.0,
+                    "date": "02/04/2026 20:23",
+                    "amount_after": 78264.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 200.0,
+                    "date": "03/04/2026 17:17",
+                    "amount_after": 78064.25,
+                    "info": "None"
+                }
+            ]
+        },
+        "653421": {
+            "account_id": "653421",
+            "full_name": "Daniel Levi",
+            "pin": "4332",
+            "balance": 0.0,
+            "status": "Active",
+            "history": []
+        },
+        "132456": {
+            "account_id": "132456",
+            "full_name": "Moshe Tzadik",
+            "pin": "7979",
+            "balance": 15010.9,
+            "status": "Blocked",
+            "history": []
+        },
+        "314265": {
+            "account_id": "314265",
+            "full_name": "Michal Cohen",
+            "pin": "8931",
+            "balance": -4562.0,
+            "status": "Blocked",
+            "history": []
+        },
+        "556612": {
+            "account_id": "556612",
+            "full_name": "Dana Rosso",
+            "pin": "1123",
+            "balance": 143222.3,
+            "status": "Active",
+            "history": [
+                {
+                    "operation": "Withdrawn",
+                    "amount": 1000.0,
+                    "date": "02/04/2026 20:34",
+                    "amount_after": 143222.3,
+                    "info": "None"
+                }
+            ]
+        },
+        "615243": {
+            "account_id": "615243",
+            "full_name": "King Kong",
+            "pin": "8762",
+            "balance": 2341.7,
+            "status": "Active",
+            "history": [
+                {
+                    "operation": "PIN change",
+                    "amount": 0.0,
+                    "date": "02/04/2026 20:56",
+                    "amount_after": 2341.7,
+                    "info": "New PIN set."
+                }
+            ]
+        },
+        "260216": {
+            "account_id": "260216",
+            "full_name": "Super Mario",
+            "pin": "8765",
+            "balance": 2020.0,
+            "status": "Active",
+            "history": [
+                {
+                    "operation": "Deposit",
+                    "amount": 3020.0,
+                    "date": "02/04/2026 23:38",
+                    "amount_after": 3020.0,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 300.0,
+                    "date": "02/04/2026 23:38",
+                    "amount_after": 2720.0,
+                    "info": "None"
+                },
+                {
+                    "operation": "Transfer - Out",
+                    "amount": 700.0,
+                    "date": "02/04/2026 23:38",
+                    "amount_after": 2020.0,
+                    "info": "To Receiver ID"
+                }
+            ]
+        }
+    }
+}
