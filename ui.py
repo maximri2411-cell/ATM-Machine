@@ -85,7 +85,9 @@ class ATM_app: # Creating the class for the app
         # Adding * for his password 
         self.admin_pin_entry = tk.Entry(self.root, show="*", width=25, 
                                          font=("Arial", 14), bg="gold", fg="white")
-        self.admin_pin_entry.pack(pady=10, ipady=5)
+        self.admin_pin_entry.pack(pady=10)
+        
+        
         
         # The button for enter confirm
         tk.Button(self.root, text="Verify Access", command=self.check_pin_admin,
@@ -93,19 +95,19 @@ class ATM_app: # Creating the class for the app
                   cursor="hand2").pack(pady=15)
         
         # Buton to return back if he wants
-        tk.Button(self.roo, text="Back to home page", command=self.create_login_screen,
+        tk.Button(self.root, text="Back to home page", command=self.create_login_screen,
                   font=("Arial", 10), bg="gold", fg="white", borderwidth=0).pack(pady=5)
         
         
     def check_pin_admin(self): # Check if the pin is currecct
-        pin_admin = self.admin_entrey.get()
+        pin_admin = self.admin_pin_entry.get()
         
         if self.bank.manager_login(pin_admin): # Checks if the pin is currect
             messagebox.showinfo("Manager access passed successfully", f"Welcome, {self.manager_full_name}")
             # self.show
         else:
             messagebox.showerror("Access Denied: Invalid manager password.", "Please try again.", "In case you forgot the Password," "Please call customer service or visit your local bank for help.", "Thank you for understanding, goodbye.")
-        
+            self.admin_pin_entry.delete(0, tk.END)
         
         
         
