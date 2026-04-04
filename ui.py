@@ -27,12 +27,12 @@ class ATM_app: # Creating the class for the app
         
         # Adding fild to enter his ID number
         tk.Label(self.root, text="Account ID: ",font=("Arial", 16, "bold"), bg="#0b1e33", fg="#F5F5DC").pack()
-        self.account_entry = tk.Entry(self.root, width=25, font=("Arial",16), justify="center", bg="#1c2e4a", fg="white", insertbackground="white", borderwidth=0, highlightthickness=1, highlightbackground="#4a5a71" )
+        self.account_entry = tk.Entry(self.root, width=25, font=("Arial",16), justify="center", justify="center", bg="#1c2e4a", fg="white", insertbackground="white", borderwidth=0, highlightthickness=1, highlightbackground="#4a5a71" )
         self.account_entry.pack(pady=10, ipady=8)
 
         # Adding the pin fild
         tk.Label(self.root, text="Enter PIN: ", font=("Arial", 16, "bold"), bg="#0b1e33", fg="#F5F5DC").pack()
-        self.pin_entry = tk.Entry(self.root, show="*", width=25, font=("Arial",16), justify="center" ,bg="#1c2e4a",fg="white",insertbackground="white", borderwidth=0, highlightthickness=1, highlightbackground="#4a5a71")
+        self.pin_entry = tk.Entry(self.root, show="*", width=25, font=("Arial",16),bg="#1c2e4a",fg="white",insertbackground="white", borderwidth=0, highlightthickness=1, highlightbackground="#4a5a71")
         self.pin_entry.pack(pady=10, ipady=8)
         
         # Normal user login button
