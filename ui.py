@@ -62,12 +62,11 @@ class ATM_app: # Creating the class for the app
             self.user_screen() # Moving to the user screen
         else:
             messagebox.showerror("Login Failed", message) # Line up thst every fail entry must be like this
-            self.show_menu_user()
             
     
     def user_screen(self): # User screen creation
         self.cleaning_screen()
-        tk.Label(self.root, tex=f"Welcome back, \n{self.current_user.full_name}", font=("Ariel", 13)).pack(pady=15)
+        tk.Label(self.root, text=f"Welcome back, \n{self.current_user.full_name}", font=("Ariel", 13)).pack(pady=15)
 
 #=======================================================
 #================ Login and menu of manager ============
