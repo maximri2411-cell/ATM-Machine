@@ -184,6 +184,12 @@ class ATM_app: # Creating the class for the app
         tree.heading("balance", text="Balanse: ")
         tree.heading("status", text="Status: ")
         
+        for account_id, account in self.bank.Accounts.items(): # Taking all of the info we need to this part from our data.json"
+            tree.insert(" ", tk.END, values=(account_id, account.full_name, f"{account.balance:.2f}", account.status))
+            
+        tree.pack(pady=20, padx=20, fill="x")
+        
+        tk.Button(self.root, text="LOGOUT", command=self.admin_menu, bg="black", fg="white").pack() # Exit button of course
         
         
 #!======================================================
