@@ -75,14 +75,32 @@ class ATM_app: # Creating the class for the app
     def admin_screen(self): # Admin screet creation
         self.cleaning_screen()
         
+        # This is our title for the next screen
         tk.Label(self.root, text="Manager Login", font=("Ariel", 25, "bold"), 
-                 bg="gold", fg="blue").pack(pady=10)
+                 bg="gold", fg="white").pack(pady=10)
+        
+        tk.Label(self.root, text="Enter Admin Password:", font=("Arial", 14), 
+                 bg="gold", fg="white").pack(pady=10)
+        
+        # Adding * for his password 
+        self.admin_pin_entry = tk.Entry(self.root, show="*", width=25, 
+                                         font=("Arial", 14), bg="gold", fg="white")
+        self.admin_pin_entry.pack(pady=10, ipady=5)
+        
+        # The button for enter confirm
+        tk.Button(self.root, text="Verify Access", command=self.check_pin_admin,
+                  font=("Arial", 14, "bold"), width=15, bg="gold", fg="white", 
+                  cursor="hand2").pack(pady=15)
+        
+        # Buton to return back if he wants
+        tk.Button(self.roo, text="Back to home page", command=self.create_login_screen,
+                  font=("Arial", 10), bg="gold", fg="white", borderwidth=0).pack(pady=5)
         
         
-    def check_pin_admin(self):
-        pass_admin = self.admin_entrey.get()
+    def check_pin_admin(self): # Check if the pin is currecct
+        pin_admin = self.admin_entrey.get()
         
-        if self.bank.manager_login(pass_admin): # Checks if the pin is currect
+        if self.bank.manager_login(pin_admin): # Checks if the pin is currect
             messagebox.showinfo("Manager access passed successfully", f"Welcome, {self.manager_full_name}")
             # self.show
         else:
