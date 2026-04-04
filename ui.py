@@ -58,12 +58,12 @@ class ATM_app: # Creating the class for the app
         if user:
             self.current_user = user
             messagebox.showinfo("Success", message)# Line up that every success entry must be like this
-            self.user_id_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
-            self.user_pin_entry.delete(0, tk.END) 
+            self.account_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
+            self.account_entry.delete(0, tk.END) 
             
             self.user_screen() # Moving to the user screen
         else:
-            messagebox.showerror("Login Failed", message) # Line up thst every fail entry must be like this
+            messagebox.showerror("ERROR: Login Failed", message) # Line up thst every fail entry must be like this
             self.user_pin_entry.delete(0, tk.END)
             
     
@@ -74,7 +74,6 @@ class ATM_app: # Creating the class for the app
 #=======================================================
 #================ Login and menu of manager ============
 #=======================================================
-#TODO start build the manager screen
 
     def admin_screen(self): # Admin screet creation
         self.cleaning_screen()
@@ -122,6 +121,18 @@ class ATM_app: # Creating the class for the app
             messagebox.showerror("Access Denided", long_error_message)
             self.admin_pin_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
         
+        
+        def admin_menu(self): # Creatin the admin menu after the password
+            self.cleaning_screen()
+            tk.Label(self.root, text="Admin Control Panel", font=("Arial", 28, "bold"), 
+                 bg="#0b1e33", fg="gold").pack(pady=40)
+        
+        # כפתורים לדוגמה (נחבר אותם בהמשך)
+        tk.Button(self.root, text="View All Accounts", font=("Arial", 12), width=30, bg="#d4af37").pack(pady=10)
+        tk.Button(self.root, text="Create New Account", font=("Arial", 12), width=30, bg="#d4af37").pack(pady=10)
+        
+        # כפתור יציאה חזרה להתחלה
+        tk.Button(self.root, text="Logout", command=self.create_login_screen, bg="#2d3e50", fg="white").pack(pady=30)
 #!=================================================================
 if __name__ == "__main__": #! This will run our app evertime we run the code
     root = tk.Tk()
