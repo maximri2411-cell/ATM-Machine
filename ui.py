@@ -65,7 +65,8 @@ class ATM_app: # Creating the class for the app
         else:
             messagebox.showerror("ERROR: Login Failed", message) # Line up thst every fail entry must be like this
             self.user_pin_entry.delete(0, tk.END)
-            
+
+#=======================================================            
     
     def user_screen(self): # User screen creation
         self.cleaning_screen()
@@ -101,6 +102,7 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="Back to home page", command=self.create_login_screen,
                   font=("Arial", 10), bg="black", fg="white", borderwidth=0).pack(pady=5)
         
+#=======================================================        
         
     def check_pin_admin(self): # Check if the pin is currecct
         pin_admin = self.admin_pin_entry.get()
@@ -110,7 +112,7 @@ class ATM_app: # Creating the class for the app
             
             self.admin_pin_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
             
-            # self.show
+            self.admin_menu
         else:
             long_error_message = ( # Apperently you can to a function to some long message
                 "Access Denied: Invalid manager password.\n"
@@ -121,22 +123,23 @@ class ATM_app: # Creating the class for the app
             )
             messagebox.showerror("Access Denided", long_error_message)
             self.admin_pin_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
+ 
+#=======================================================        
         
-        
-        def admin_menu(self): # Creatin the admin menu after the password
-            self.cleaning_screen()
-            tk.Label(self.root, text="Admin control menu", font=("Arial", 25, "bold"), 
+    def admin_menu(self): # Creatin the admin menu after the password
+        self.cleaning_screen()
+        tk.Label(self.root, text="Admin control menu", font=("Arial", 25, "bold"), 
                  bg="black", fg="white").pack(pady=40)
         
         # Buttons for the menu
         tk.Button(self.root, text="View all accounts", font=("Arial", 12), width=30, bg="black").pack(pady=10)
         tk.Button(self.root, text="Create new account", font=("Arial", 12), width=30, bg="black").pack(pady=10)
-        
+            
         # Button to exit if he want
         tk.Button(self.root, text="Logout", command=self.create_login_screen, bg="black", fg="white").pack(pady=30)
+            
         
-        
-#!=================================================================
+#!======================================================
 if __name__ == "__main__": #! This will run our app evertime we run the code
     root = tk.Tk()
     app = ATM_app(root)
