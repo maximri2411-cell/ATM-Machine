@@ -163,7 +163,7 @@ class ATM_app: # Creating the class for the app
                  bg="black", fg="white").pack(pady=40)
         
         # Buttons for the menu
-        tk.Button(self.root, text="VIEW ALL ACCOUNTS", font=("Arial", 12), width=30, bg="black", fg="white").pack(pady=10)
+        tk.Button(self.root, text="VIEW ALL ACCOUNTS", command=self.view_accounts, font=("Arial", 12), width=30, bg="black", fg="white").pack(pady=10)
         tk.Button(self.root, text="CREATE NEW ACCOUNT", font=("Arial", 12), width=30, bg="black", fg="white").pack(pady=10)
         tk.Button(self.root, text="CHANGE ACCOUNT STATUS", font=("Arial", 12), width=30, bg="black", fg="white").pack(pady=10)
             
@@ -185,11 +185,11 @@ class ATM_app: # Creating the class for the app
         tree.heading("status", text="Status: ")
         
         for account_id, account in self.bank.Accounts.items(): # Taking all of the info we need to this part from our data.json"
-            tree.insert(" ", tk.END, values=(account_id, account.full_name, f"{account.balance:.2f}", account.status))
+            tree.insert("", tk.END, values=(account_id, account.full_name, f"{account.balance:.2f}", account.status))
             
         tree.pack(pady=20, padx=20, fill="x")
         
-        tk.Button(self.root, text="LOGOUT", command=self.admin_menu, bg="black", fg="white").pack() # Exit button of course
+        tk.Button(self.root, text="Back to menu", command=self.admin_menu, bg="black", fg="white").pack() # Exit button of course
         
         
 #!======================================================
