@@ -75,6 +75,9 @@ class ATM_app: # Creating the class for the app
     def admin_screen(self): # Admin screet creation
         self.cleaning_screen()
         
+        tk.Label(self.root, text="Manager Login", font=("Ariel", 25, "bold"), 
+                 bg="gold", fg="blue").pack(pady=10)
+        
         
     def check_pin_admin(self):
         pass_admin = self.admin_entrey.get()
