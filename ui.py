@@ -112,7 +112,7 @@ class ATM_app: # Creating the class for the app
             
             self.admin_pin_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
             
-            self.admin_menu
+            self.admin_menu()
         else:
             long_error_message = ( # Apperently you can to a function to some long message
                 "Access Denied: Invalid manager password.\n"
@@ -132,8 +132,8 @@ class ATM_app: # Creating the class for the app
                  bg="black", fg="white").pack(pady=40)
         
         # Buttons for the menu
-        tk.Button(self.root, text="View all accounts", font=("Arial", 12), width=30, bg="black").pack(pady=10)
-        tk.Button(self.root, text="Create new account", font=("Arial", 12), width=30, bg="black").pack(pady=10)
+        tk.Button(self.root, text="View all accounts", font=("Arial", 12), width=30, bg="black", fg="white").pack(pady=10)
+        tk.Button(self.root, text="Create new account", font=("Arial", 12), width=30, bg="black", fg="white").pack(pady=10)
             
         # Button to exit if he want
         tk.Button(self.root, text="Logout", command=self.create_login_screen, bg="black", fg="white").pack(pady=30)
