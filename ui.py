@@ -67,11 +67,11 @@ class ATM_app: # Creating the class for the app
     def user_screen(self): # User screen creation
         self.cleaning_screen()
         tk.Label(self.root, text=f"Welcome back,{self.current_user.full_name}", font=("Arial", 20, "bold"), bg="midnight blue", fg="ivory").pack(pady=15)
-        tk.Button(self.root, text="Withdraw", width=25, font=("Arial", 18), bg="#2d3e50", fg="white").pack(pady=20)
-        tk.Button(self.root, text="Deposit", width=25, font=("Arial", 18), bg="#2d3e50", fg="white").pack(pady=20)
-        tk.Button(self.root, text="Balance", width=25, font=("Arial", 18), bg="#2d3e50", fg="white").pack(pady=20)
+        tk.Button(self.root, text="Withdraw", width=25, font=("Arial", 18), bg="gold", fg="midnight blue").pack(pady=20)
+        tk.Button(self.root, text="Deposit", width=25, font=("Arial", 18), bg="gold", fg="midnight blue").pack(pady=20)
+        tk.Button(self.root, text="Balance", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.check_balance_action).pack(pady=20)
         tk.Button(self.root, text="Logout", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=40)
-              
+       
       
 #=======================================================
 #================== Balance page =======================
@@ -79,7 +79,8 @@ class ATM_app: # Creating the class for the app
       
     def check_balance_action(self):
         self.cleaning_screen()
-        tk.Label(self.root, text="YOUR BALANCE:", font=("Arial", 28, "bold"), bg="midnight blue", fg="gold").pack(pady=(40, 10))
+        tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4,command=self.user_screen).place(x=740, y=20)       
+        
         current_balance = self.current_user.balance
         tk.Label(self.root, text=f"₪ {current_balance:,.2f}", font=("Arial", 32, "bold"), bg="midnight blue", fg="white").pack(pady=20)
         tk.Label(self.root, text="Transaction History:", font=("Arial", 14), bg="midnight blue", fg="ivory").pack(pady=(20, 5))
@@ -91,11 +92,10 @@ class ATM_app: # Creating the class for the app
         else:
             for entry in reversed(user_history): 
                 text = f"{entry['date']} | {entry['operation']}: {entry['amount']} NIS | After: {entry['amount_after']}"
-                history_list.insert("end", text)
-                
-        tk.Button(self.root, text="Balance", width=25, font=("Arial", 18), bg="#2d3e50", fg="white", command=self.check_balance_action).pack(pady=20)
-                  
-          
+            history_list.insert("end", text)
+            tk.Button(self.root, text="Back to Menu", width=20, font=("Arial", 12, "bold"), bg="gold", fg="midnight blue", command=self.user_screen).pack(side="bottom", pady=40)
+        tk.Button(self.root, text="Logout", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side="bottom", anchor="s", pady=40)
+           
 
 #=======================================================
 #================ Login and menu of manager ============
@@ -106,23 +106,20 @@ class ATM_app: # Creating the class for the app
         self.cleaning_screen()
         
         # This is our title for the next screen
-        tk.Label(self.root, text="Manager Login", font=("Ariel", 25, "bold"), 
-                 bg="gold", fg="white").pack(pady=10)
-        
-        tk.Label(self.root, text="Enter Admin Password:", font=("Arial", 14), 
-                 bg="gold", fg="white").pack(pady=10)
+        tk.Label(self.root, text="Manager Login", font=("Arial", 36, "bold"), bg="midnight blue", fg="ivory").pack(pady=50)
+        tk.Label(self.root, text="Enter Admin Password:",font=("Arial", 16, "bold"), bg="gold", fg="white"). pack(pady=10)
+      
         
         # Adding * for his password 
-        self.admin_pin_entry = tk.Entry(self.root, show="*", width=25, 
-                                         font=("Arial", 14), bg="gold", fg="white")
+        self.admin_pin_entry = tk.Entry(self.root, show="*", width=25, font=("Arial", 16, "bold"), bg="gold", fg="white").pack(pady=10)
         self.admin_pin_entry.pack(pady=10)
-        
-        
-        
+    
+    
         # The button for enter confirm
         tk.Button(self.root, text="Verify Access", command=self.check_pin_admin,
                   font=("Arial", 14, "bold"), width=15, bg="gold", fg="white", 
                   cursor="hand2").pack(pady=15)
+        
         
         # Buton to return back if he wants
         tk.Button(self.root, text="Back to home page", command=self.create_login_screen,
