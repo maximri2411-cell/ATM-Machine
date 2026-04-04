@@ -97,7 +97,7 @@ class ATM_app: # Creating the class for the app
         else:
             for entry in reversed(user_history): 
                 text = f"{entry['date']} | {entry['operation']}: {entry['amount']} NIS | After: {entry['amount_after']}"
-            history_list.insert("end", text)
+            
             tk.Button(self.root, text="Back to Menu", width=20, font=("Arial", 12, "bold"), bg="gold", fg="midnight blue", command=self.user_screen).pack(side="bottom", pady=40)
         tk.Button(self.root, text="Logout", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side="bottom", anchor="s", pady=40)
            
