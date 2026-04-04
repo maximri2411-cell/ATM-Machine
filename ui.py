@@ -11,7 +11,7 @@ class ATM_app: # Creating the class for the app
         self.root.title("ATM Machine") # The title
         self.root.geometry("800x600") # Size of ther title
         self.root.configure(bg="#0b1e33") # bg color
-        self.bank = load_data # Here we use all the function we created in the other files
+        self.bank = load_data() # Here we use all the function we created in the other files
         self.current_user = None 
         self.create_login_screen()
         
