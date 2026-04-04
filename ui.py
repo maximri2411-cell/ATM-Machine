@@ -100,12 +100,53 @@ class ATM_app: # Creating the class for the app
 #=======================================================
 #================ Login and menu of manager ============
 #=======================================================
+#TODO start build the manager screen
 
-    # Admin screet creation
-    def admin_screen(self):
-        messagebox.showinfo("Admin", "Loading... Please wait")
+    def admin_screen(self): # Admin screet creation
+        self.cleaning_screen()
+        
+        # This is our title for the next screen
+        tk.Label(self.root, text="Manager Login", font=("Ariel", 25, "bold"), 
+                 bg="gold", fg="white").pack(pady=10)
+        
+        tk.Label(self.root, text="Enter Admin Password:", font=("Arial", 14), 
+                 bg="gold", fg="white").pack(pady=10)
+        
+        # Adding * for his password 
+        self.admin_pin_entry = tk.Entry(self.root, show="*", width=25, 
+                                         font=("Arial", 14), bg="gold", fg="white")
+        self.admin_pin_entry.pack(pady=10)
         
         
+        
+        # The button for enter confirm
+        tk.Button(self.root, text="Verify Access", command=self.check_pin_admin,
+                  font=("Arial", 14, "bold"), width=15, bg="gold", fg="white", 
+                  cursor="hand2").pack(pady=15)
+        
+        # Buton to return back if he wants
+        tk.Button(self.root, text="Back to home page", command=self.create_login_screen,
+                  font=("Arial", 10), bg="gold", fg="white", borderwidth=0).pack(pady=5)
+        
+        
+    def check_pin_admin(self): # Check if the pin is currecct
+        pin_admin = self.admin_pin_entry.get()
+        
+        if self.bank.manager_login(pin_admin): # Checks if the pin is currect
+            messagebox.showinfo("Manager access passed successfully", f"Welcome, {self.bank.manager_full_name}")
+            # self.show
+        else:
+            long_error_message = ( # Apperently you can to a function to some long message
+                "Access Denied: Invalid manager password.\n"
+                "Please try again.\n"
+                "In case you forgot the Password," "Please call customer service.\n"
+                "or visit your local bank for help.\n"
+                "Thank you for understanding, goodbye."
+            )
+            messagebox.showerror("Access Denided", long_error_message)
+            self.admin_pin_entry.delete(0, tk.END)
+        
+#!=================================================================
 if __name__ == "__main__": #! This will run our app evertime we run the code
     root = tk.Tk()
     app = ATM_app(root)
