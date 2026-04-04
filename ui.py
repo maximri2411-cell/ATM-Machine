@@ -70,12 +70,27 @@ class ATM_app: # Creating the class for the app
 #=======================================================
 #================ Login and menu of manager ============
 #=======================================================
+#TODO start build the manager screen
 
-    # Admin screet creation
-    def admin_screen(self):
-        messagebox.showinfo("Admin", "Loading... Please wait")
+    def admin_screen(self): # Admin screet creation
+        self.cleaning_screen()
         
         
+    def check_pin_admin(self):
+        pass_admin = self.admin_entrey.get()
+        
+        if self.bank.manager_login(pass_admin): # Checks if the pin is currect
+            messagebox.showinfo("Manager access passed successfully", f"Welcome, {self.manager_full_name}")
+            # self.show
+        else:
+            messagebox.showerror("Access Denied: Invalid manager password.", "Please try again.", "In case you forgot the Password," "Please call customer service or visit your local bank for help.", "Thank you for understanding, goodbye.")
+        
+        
+        
+        
+        
+        
+#!=================================================================
 if __name__ == "__main__": #! This will run our app evertime we run the code
     root = tk.Tk()
     app = ATM_app(root)
