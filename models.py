@@ -40,7 +40,7 @@ class Accounts: # Creating a class of Accounts
         try: # This and except is for allowing the process move forward without crash
             amount = float(amount)
             if amount <= 0: # In case the account is trying to deposit an 0 or below, it will print an error
-                return False, "Error: Deposit amount must be positive."
+                return False, "ERROR: Deposit amount must be positive."
 
             self.balance += amount # if all good, the process will add to his history with the new balance
             self.add_history(f"Deposit", amount)
@@ -58,13 +58,13 @@ class Accounts: # Creating a class of Accounts
                 return False, "ERROR: Withdraw amount must be positive."
             
             if amount > self.balance: # If the owner will try to withdraw amount thats above his balance
-                return False, f"Error: Cannot withdraw above account balance. \nYour balance is {self.balance}."
+                return False, f"ERROR: Cannot withdraw above account balance. \nYour balance is {self.balance}."
             
             self.balance -= amount # if all good, the process will add to his history with the new balance
             self.add_history(f"Withdrawn", amount)
             return True, f"Successfully withdraw with {amount} NIS."
         except ValueError:
-            return False, "Error: Invalid amount entered."
+            return False, "ERROR: Invalid amount entered."
  
 #================================================================================================    
     
@@ -141,7 +141,7 @@ class Bank: # Manage all accounts in our project
             print(f"Account ID is found: {account_search.full_name}")
             return account_search
         else:
-            print("Error: Account ID not found.")
+            print("ERROR: Account ID not found.")
             return None # Just for understanding, it returns an None in the terminal and sying like i havent found somthing
         
 #================================================================================================        
@@ -180,10 +180,9 @@ class Bank: # Manage all accounts in our project
         
     def manager_login(self, password): # Function of the manager
         if password == self.manager_pin:
-            print(f"Manager access passed successfully. \nWelcome {self.manager_full_name}") # We determined in the beginning inside the "Father" 
             return True
         else:
-            print(f"Access Denied: Invalid manager password. \nPlease try again. \nIn case you forgot the Password, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
+            return False
     
 #================================================================================================   
 
@@ -253,7 +252,7 @@ class Bank: # Manage all accounts in our project
             print(f"Success: PIN for {account.full_name} has been updated.")
             return True
         else:
-            print("Error: Could not change PIN. Account have noot found.")
+            print("ERROR: Could not change PIN. Account have noot found.")
             return False
         
 #================================================================================================

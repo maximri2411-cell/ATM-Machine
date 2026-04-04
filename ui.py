@@ -59,10 +59,15 @@ class ATM_app: # Creating the class for the app
         if user:
             self.current_user = user
             messagebox.showinfo("Success", message)# Line up that every success entry must be like this
+            self.account_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
+            self.account_entry.delete(0, tk.END) 
+            
             self.user_screen() # Moving to the user screen
         else:
-            messagebox.showerror("Login Failed", message) # Line up thst every fail entry must be like this
-            
+            messagebox.showerror("ERROR: Login Failed", message) # Line up thst every fail entry must be like this
+            self.user_pin_entry.delete(0, tk.END)
+
+#=======================================================            
     
     def user_screen(self): # User screen creation
         self.cleaning_screen()
@@ -96,11 +101,12 @@ class ATM_app: # Creating the class for the app
             tk.Button(self.root, text="Back to Menu", width=20, font=("Arial", 12, "bold"), bg="gold", fg="midnight blue", command=self.user_screen).pack(side="bottom", pady=40)
         tk.Button(self.root, text="Logout", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side="bottom", anchor="s", pady=40)
            
+        tk.Label(self.root, text=f"Welcome back, \n{self.current_user.full_name}", font=("Ariel", 13)).pack(pady=15)
+        tk.Button(self.root, text="Logout", command=self.create_login_screen, bg="black", fg="white").pack(pady=30)
 
 #=======================================================
 #================ Login and menu of manager ============
 #=======================================================
-#TODO start build the manager screen
 
     def admin_screen(self): # Admin screet creation
         self.cleaning_screen()
@@ -108,7 +114,6 @@ class ATM_app: # Creating the class for the app
         # This is our title for the next screen
         tk.Label(self.root, text="Manager Login", font=("Arial", 36, "bold"), bg="midnight blue", fg="ivory").pack(pady=50)
         tk.Label(self.root, text="Enter Admin Password:",font=("Arial", 16, "bold"), bg="gold", fg="white"). pack(pady=10)
-      
         
         # Adding * for his password 
         self.admin_pin_entry = tk.Entry(self.root, show="*", width=25, font=("Arial", 16, "bold"), bg="gold", fg="white").pack(pady=10)
@@ -117,21 +122,25 @@ class ATM_app: # Creating the class for the app
     
         # The button for enter confirm
         tk.Button(self.root, text="Verify Access", command=self.check_pin_admin,
-                  font=("Arial", 14, "bold"), width=15, bg="gold", fg="white", 
+                  font=("Arial", 14, "bold"), width=15, bg="black", fg="white", 
                   cursor="hand2").pack(pady=15)
         
         
         # Buton to return back if he wants
         tk.Button(self.root, text="Back to home page", command=self.create_login_screen,
-                  font=("Arial", 10), bg="gold", fg="white", borderwidth=0).pack(pady=5)
+                  font=("Arial", 10), bg="black", fg="white", borderwidth=0).pack(pady=5)
         
+#=======================================================        
         
     def check_pin_admin(self): # Check if the pin is currecct
         pin_admin = self.admin_pin_entry.get()
         
         if self.bank.manager_login(pin_admin): # Checks if the pin is currect
             messagebox.showinfo("Manager access passed successfully", f"Welcome, {self.bank.manager_full_name}")
-            # self.show
+            
+            self.admin_pin_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
+            
+            self.admin_menu()
         else:
             long_error_message = ( # Apperently you can to a function to some long message
                 "Access Denied: Invalid manager password.\n"
@@ -141,17 +150,25 @@ class ATM_app: # Creating the class for the app
                 "Thank you for understanding, goodbye."
             )
             messagebox.showerror("Access Denided", long_error_message)
-            self.admin_pin_entry.delete(0, tk.END)
+            self.admin_pin_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
+ 
+#=======================================================        
         
-#!=================================================================
+    def admin_menu(self): # Creatin the admin menu after the password
+        self.cleaning_screen()
+        tk.Label(self.root, text="Admin control menu", font=("Arial", 25, "bold"), 
+                 bg="black", fg="white").pack(pady=40)
+        
+        # Buttons for the menu
+        tk.Button(self.root, text="View all accounts", font=("Arial", 12), width=30, bg="black", fg="white").pack(pady=10)
+        tk.Button(self.root, text="Create new account", font=("Arial", 12), width=30, bg="black", fg="white").pack(pady=10)
+            
+        # Button to exit if he want
+        tk.Button(self.root, text="Logout", command=self.create_login_screen, bg="black", fg="white").pack(pady=30)
+            
+        
+#!======================================================
 if __name__ == "__main__": #! This will run our app evertime we run the code
     root = tk.Tk()
     app = ATM_app(root)
     root.mainloop() 
-    
-    
-    
-    
-    
-    
-    
