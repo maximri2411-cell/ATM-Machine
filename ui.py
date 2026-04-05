@@ -75,7 +75,7 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="WITHDRAW", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.withdraw_action).pack(pady=20)
         tk.Button(self.root, text="DEPOSIT", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.deposite_action).pack(pady=20)
         tk.Button(self.root, text="BALANCE", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.check_balance_action).pack(pady=20)
-        tk.Button(self.root, text="Trancfer", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", ).pack(pady=20)
+        tk.Button(self.root, text="Transfer", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.transfer_action).pack(pady=20)
         tk.Button(self.root, text="Change PIN", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", ).pack(pady=20)
         tk.Button(self.root, text="History", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", ).pack(pady=20)
         tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)
@@ -179,7 +179,52 @@ class ATM_app: # Creating the class for the app
         except ValueError:
             messagebox.showerror("ERROR", "Enrter a vilid number")
                
+#========================================================
+#================== Transfer page =======================
+#========================================================                  
                
+    def transfer_action(self):
+        self.cleaning_screen()
+        tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4, command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne")
+        tk.Label(self.root, text=f"{self.current_user.full_name}\nTRANSFERING TO...", font=("Arial", 24, "bold"), bg="midnight blue", fg="ivory").pack(pady=20)
+        
+        current_balance = self.current_user.balance
+        tk.Label(self.root, text=f"Current Balance: ₪ {current_balance:,.2f}", font=("Arial", 18), bg="midnight blue", fg="gold").pack(pady=10)
+        tk.Label(self.root, text="HOW MUCH WOULD YOU LIKE TO TRANSFER:", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10, 10))
+        self.withdraw_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
+        self.withdraw_entry.pack(pady=10, ipady=8)
+        tk.Label(self.root, text="Enter ID account you want do transfer:", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10, 10))
+        self.withdraw_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
+        self.withdraw_entry.pack(pady=10, ipady=8)
+        tk.Label(self.root, text="Enter your PIN to accept the transfer:", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10, 10))
+        self.withdraw_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
+        self.withdraw_entry.pack(pady=10, ipady=8)
+        tk.Button(self.root, text="ACCEPT THE TRANSFER", width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=self.execute_withdraw).pack(pady=20)
+        tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)              
+    
+    def execute_transfer(self):
+        pass
+        try:
+            amount_str = self.withdraw_entry.get()
+            if not amount_str:
+                return
+            amount = float(amount_str)
+            if amount <= 0:
+                messagebox.showerror("Error", "Please enter a positive amount.")
+                return
+            current_balance = self.current_user.balance
+            if amount > current_balance:
+                messagebox.showerror("Withdrawal Denied", 
+                    f"The maximum amount you can withdraw is ₪{current_balance:,.2f}")
+                return
+            self.current_user.withdraw(amount)
+            
+            save_data(self.bank) # Saving in the data.json
+            
+            messagebox.showinfo("Success", f"₪{amount:,.2f} withdrawn successfully!")
+            self.withdraw_action() 
+        except ValueError:
+            messagebox.showerror("Error", "Invalid input! Please enter numbers only.")           
 #=======================================================
 #================ Login and menu of manager ============
 #=======================================================

@@ -4,7 +4,7 @@
             "account_id": "321321",
             "full_name": "Grisha Borisov",
             "pin": "1234",
-            "balance": 159437.25,
+            "balance": 159203.25,
             "status": "Active",
             "history": [
                 {
@@ -75,6 +75,27 @@
                     "amount": 50000.0,
                     "date": "05/04/2026 20:16",
                     "amount_after": 159437.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 1000.0,
+                    "date": "05/04/2026 20:31",
+                    "amount_after": 158437.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Deposit",
+                    "amount": 2000.0,
+                    "date": "05/04/2026 20:31",
+                    "amount_after": 160437.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 1234.0,
+                    "date": "05/04/2026 20:40",
+                    "amount_after": 159203.25,
                     "info": "None"
                 }
             ]
