@@ -254,12 +254,31 @@ class ATM_app: # Creating the class for the app
         def create_account(self): # Function to create a new account
             self.cleaning_screen() # Remember to clean the window..
             
-            tk.Label(self.root, text="Create new account", font=("Arial", 18, "bold"), bg="black", fg="white").pack(pady=30) # 
+            tk.Label(self.root, text="Create new account", font=("Arial", 18, "bold"), bg="black", fg="white").pack(pady=30) 
             
-            tk.Label(self.root, text="Owner full name: ", font=("Arial", 14), bg="black", fg="white").pack() # Late tje user pick an name fot his account
+            # Late tje user pick an name fot his account
+            tk.Label(self.root, text="Owner full name: ", font=("Arial", 14), bg="black", fg="white").pack()
             name_pick = tk.Entry(self.root, font=("Arial, 14"), justify="center")
             name_pick.pack(pady=10)
             
+            # Late the user pick pin fot his account
+            tk.Label(self.root, text="Select PIN (4 digits): ", show="*", font=("Arial", 14), bg="black", fg="white").pack() 
+            pin_pick = tk.Entry(self.root, font=("Arial, 14"), justify="center")
+            pin_pick.pack(pady=10)
+            
+            def save_account():
+                name = name_pick.get()
+                pin = pin_pick.get()
+                
+                if name and pin:
+                    new_id = self.bank.create_account(name, pin) # Calling for the function in models
+                    save_data(self.bank)
+                    messagebox.showinfo("Account successefully created", f"Account created account with {name}, \nAccount ID {new_id}")
+                else:
+                    messagebox.showerror("ERROR", "Fill in all the requairds fileds")
+                    
+            tk.Button(self.root, text="Confirm createing", command=save_account, bg="gold", fg="black", font=("Arial", 12,)).pack(pady=20)
+            tk.Button(self.root, text="Cancel creating", command=self.admin_menu, bg="black", fg="white").pack()
                    
 #!======================================================
 if __name__ == "__main__": #! This will run our app evertime we run the code
