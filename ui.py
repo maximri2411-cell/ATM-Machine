@@ -26,7 +26,7 @@ class ATM_app: # Creating the class for the app
         self.cleaning_screen()
         
         # Simple window just to see if its work with some feature like the type of language
-        tk.Label(self.root, text="WELCOME TO GOGO-GAGA ATM", font=("Arial", 36, "bold"), bg="midnight blue", fg="ivory").pack(pady=50)
+        tk.Label(self.root, text="WELCOME TO COCOBONGO ATM", font=("Arial", 36, "bold"), bg="midnight blue", fg="ivory").pack(pady=50)
         
         # Adding fild to enter his ID number
         tk.Label(self.root, text="Account ID: ",font=("Arial", 16, "bold"), bg="midnight blue", fg="ivory").pack()
@@ -71,9 +71,9 @@ class ATM_app: # Creating the class for the app
     
     def user_screen(self): # User screen creation
         self.cleaning_screen()
-        tk.Label(self.root, text=f"Welcome back {self.current_user.full_name}", font=("Arial", 20, "bold"), bg="midnight blue", fg="ivory").pack(pady=15)
-        tk.Button(self.root, text="WITHDRAW", width=25, font=("Arial", 18), bg="gold", fg="midnight blue").pack(pady=20)
-        tk.Button(self.root, text="DEPOSIT", width=25, font=("Arial", 18), bg="gold", fg="midnight blue").pack(pady=20)
+        tk.Label(self.root, text=f"Welcome back {self.current_user.full_name}", font=("Arial", 28, "bold"), bg="midnight blue", fg="ivory").pack(pady=50)
+        tk.Button(self.root, text="WITHDRAW", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.withdraw_action).pack(pady=20)
+        tk.Button(self.root, text="DEPOSIT", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.deposite_action).pack(pady=20)
         tk.Button(self.root, text="BALANCE", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.check_balance_action).pack(pady=20)
         tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=40)
        
@@ -84,28 +84,57 @@ class ATM_app: # Creating the class for the app
       
     def check_balance_action(self):
         self.cleaning_screen()
-        tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4,command=self.user_screen).place(x=740, y=20)       
-        
+        tk.Label(self.root, text=f"{self.current_user.full_name} Your Balance:", font=("Arial", 28, "bold"), bg="midnight blue", fg="ivory").pack(pady=40)
+        tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4,command=self.user_screen).place(x=740, y=20)   
+        tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side="bottom", anchor="s", pady=40)
+            
         current_balance = self.current_user.balance
-        tk.Label(self.root, text=f"₪ {current_balance:,.2f}", font=("Arial", 32, "bold"), bg="midnight blue", fg="white").pack(pady=20)
-        tk.Label(self.root, text="Transaction History: ", font=("Arial", 14), bg="midnight blue", fg="ivory").pack(pady=(20, 5))
+        tk.Label(self.root, text=f"₪ {current_balance:,.2f}", font=("Arial", 32, "bold"), bg="midnight blue", fg="white").pack(pady=10)
+        tk.Label(self.root, text="Transaction History: ", font=("Arial", 20), bg="midnight blue", fg="ivory").pack(pady=(10, 5))
                  
         self.history_list = tk.Listbox(self.root, width=70, height=10, font=("Arial", 10), bg="slate gray", fg="white", borderwidth=0, highlightthickness=1, highlightbackground="#4a5a71", justify="center")
         self.history_list.pack(pady=10)  
-        
         user_history = self.current_user.see_history()
         if not user_history:
             self.history_list.insert("end", "No operations yet")
         else:
             for entry in reversed(user_history): 
                 text = f"{entry['date']} | {entry['operation']}: {entry['amount']} NIS | After: {entry['amount_after']}"
-                self.history_list.insert("end", text)
-            
-        tk.Button(self.root, text="Back to Menu", width=20, font=("Arial", 12, "bold"), bg="gold", fg="midnight blue", command=self.user_screen).pack(side="bottom", pady=40)
-        tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side="bottom", anchor="s", pady=40)
-           
-        tk.Label(self.root, text=f"Welcome back {self.current_user.full_name}", font=("Ariel", 13)).pack(pady=15)
-        tk.Button(self.root, text="LOGOUT", command=self.create_login_screen, bg="black", fg="white").pack(pady=30)
+                self.history_list.insert("end", text)       
+
+#========================================================
+#================== Withdraw page =======================
+#========================================================             
+    
+    def withdraw_action(self):
+        self.cleaning_screen()
+        tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4, command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne")
+        tk.Label(self.root, text=f"{self.current_user.full_name}\nWITHDRAW", font=("Arial", 24, "bold"), bg="midnight blue", fg="ivory").pack(pady=20)
+        
+        current_balance = self.current_user.balance
+        tk.Label(self.root, text=f"Current Balance: ₪ {current_balance:,.2f}", font=("Arial", 18), bg="midnight blue", fg="gold").pack(pady=10)
+        tk.Label(self.root, text="HOW MUCH WOULD YOU LIKE TO WITHDRAW:", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(30, 10))
+        self.withdraw_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
+        self.withdraw_entry.pack(pady=10, ipady=8)
+        tk.Button(self.root, text="ACCEPT THE DRAW", width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=self.execute_withdraw).pack(pady=20)
+        tk.Button(self.root, text="Logout", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side="bottom", pady=20)
+
+#========================================================
+#================== Deposite page =======================
+#========================================================             
+    def deposite_action(self):
+        self.cleaning_screen()
+        tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4, command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne")
+        tk.Label(self.root, text=f"{self.current_user.full_name}\nDEPOSITE", font=("Arial", 24, "bold"), bg="midnight blue", fg="ivory").pack(pady=20)
+        
+        current_balance = self.current_user.balance
+        tk.Label(self.root, text=f"Current Balance: ₪ {current_balance:,.2f}", font=("Arial", 18), bg="midnight blue", fg="gold").pack(pady=10)
+        tk.Label(self.root, text="HOW MUCH WOULD YOU LIKE TO DEPOSITE:", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(30, 10))
+        self.withdraw_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
+        self.withdraw_entry.pack(pady=10, ipady=8)
+        tk.Button(self.root, text="Logout", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side="bottom", pady=20)
+        
+        def 
 
 #=======================================================
 #================ Login and menu of manager ============
