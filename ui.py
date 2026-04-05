@@ -116,9 +116,11 @@ class ATM_app: # Creating the class for the app
         tk.Label(self.root, text="HOW MUCH WOULD YOU LIKE TO WITHDRAW:", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(30, 10))
         self.withdraw_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
         self.withdraw_entry.pack(pady=10, ipady=8)
-      #  tk.Button(self.root, text="ACCEPT THE DRAW", width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=self.execute_withdraw).pack(pady=20)
+        tk.Button(self.root, text="ACCEPT THE DRAW", width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=self.execute_withdraw).pack(pady=20)
         tk.Button(self.root, text="Logout", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side="bottom", pady=20)
-
+    def execute_withdraw(self):
+        pass
+    
 #========================================================
 #================== Deposite page =======================
 #========================================================             
