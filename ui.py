@@ -183,48 +183,84 @@ class ATM_app: # Creating the class for the app
 #================== Transfer page ======================= # TODO need to fix the amount bug of withdraw 
 #========================================================                  
                
-    def transfer_action(self):
+    def transfer_action(self): # Creation of the transfer between accounts
         self.cleaning_screen()
-        tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4, command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne")
+        tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4, command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne") # Go back button
         tk.Label(self.root, text=f"{self.current_user.full_name}\nTRANSFERING TO...", font=("Arial", 24, "bold"), bg="midnight blue", fg="ivory").pack(pady=20)
         
         current_balance = self.current_user.balance
         tk.Label(self.root, text=f"Current Balance: ₪ {current_balance:,.2f}", font=("Arial", 18), bg="midnight blue", fg="gold").pack(pady=10)
-        tk.Label(self.root, text="HOW MUCH WOULD YOU LIKE TO TRANSFER:", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10, 10))
+        
+        # Amount fild
+        tk.Label(self.root, text="HOW MUCH WOULD YOU LIKE TO TRANSFER?", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10, 10))
         self.withdraw_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
         self.withdraw_entry.pack(pady=10, ipady=8)
+        
+        # ID target 
         tk.Label(self.root, text="Enter ID account you want do transfer:", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10, 10))
         self.withdraw_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
         self.withdraw_entry.pack(pady=10, ipady=8)
+        
+        # Confirm transfer with PIN again
         tk.Label(self.root, text="Enter your PIN to accept the transfer:", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10, 10))
         self.withdraw_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
         self.withdraw_entry.pack(pady=10, ipady=8)
-        tk.Button(self.root, text="ACCEPT THE TRANSFER", width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=self.execute_withdraw).pack(pady=20)
+        
+        # Last buttons
+        tk.Button(self.root, text="CONFIRM TRANSFER", width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=self.execute_withdraw).pack(pady=20)
         tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)              
     
-    def execute_transfer(self):
-        pass
+    
+    def execute_transfer(self): # Conacting the transfer to the models and data and of course saving it
         try:
-            amount_str = self.withdraw_entry.get()
-            if not amount_str:
-                return
-            amount = float(amount_str)
-            if amount <= 0:
-                messagebox.showerror("Error", "Please enter a positive amount.")
-                return
-            current_balance = self.current_user.balance
-            if amount > current_balance:
-                messagebox.showerror("Withdrawal Denied", 
-                    f"The maximum amount you can withdraw is ₪{current_balance:,.2f}")
-                return
-            self.current_user.withdraw(amount)
+            amount = float(self.transfer_amount.get())
+            target_id = self.transfer_target.get()     # Saving the input for the next part of the function
+            pin_confirm = self.transfet_confirm.get()
             
-            save_data(self.bank) # Saving in the data.json
+            # Checking his balance 
+            if amount <=0 or amount > self.current_user.balance:
+                messagebox.showerror("ERROR", "Invalid amount or not enough funds.")
+                return
             
-            messagebox.showinfo("Success", f"₪{amount:,.2f} withdrawn successfully!")
-            self.withdraw_action() 
+            # We want to check if the target is even exist
+            if target_id in self.bank.Accounts:
+                target_account = self.bank.Accounts[target_id]
+                
+                self.current_user.withdraw(amount) # Taking from the sender
+                target_account.deposit(amount)     # The receiver gets the amount
+                
+                save_data(self.bank) # Saving in json
+                
+                messagebox.showinfo("Success", f"₪ {amount:,.2f} transferred to {target_account.full_name}")
+                self.user_screen() # Return te menu after finish
+            else:
+                messagebox.showerror("ERROR", "Target account no found, Please check if the ID is right.")
+                
         except ValueError:
-            messagebox.showerror("Error", "Invalid input! Please enter numbers only.") 
+            messagebox.showerror("ERROR", "Fill in all the required details.")
+                                 
+            # Verifying the PIN
+            if pin_confirm != self.current_user.pin:
+                messagebox.showerror("ERROR", "Incorrect PIN, Please try again.")
+                return
+            
+                
+                #! Old version 
+        #     messagebox.showerror("Error", "Please enter a positive amount.") 
+        #         return
+        #     current_balance = self.current_user.balance
+        #     if amount > current_balance:
+        #         messagebox.showerror("Withdrawal Denied", 
+        #             f"The maximum amount you can withdraw is ₪{current_balance:,.2f}")
+        #         return
+        #     self.current_user.withdraw(amount)
+            
+        #     save_data(self.bank) # Saving in the data.json
+            
+        #     messagebox.showinfo("Success", f"₪{amount:,.2f} withdrawn successfully!")
+        #     self.withdraw_action() 
+        # except ValueError:
+        #     messagebox.showerror("Error", "Invalid input! Please enter numbers only.") 
                       
 #=======================================================
 #================ Login and menu of manager ============ #! Finished do not touch
@@ -377,7 +413,7 @@ class ATM_app: # Creating the class for the app
                 messagebox.showinfo("Account successefully created", f"Account created account by name {name}, \nAccount ID {new_id} with {amount}")
                 self.admin_menu()
             else:
-                messagebox.showerror("ERROR", "Fill in all the requairds fileds")
+                messagebox.showerror("ERROR", "Fill in all the required details.")
                 self.admin_menu()
         
         # Buttons to use to end the proccess
