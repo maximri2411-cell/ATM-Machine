@@ -150,17 +150,12 @@ class ATM_app: # Creating the class for the app
         tk.Label(self.root, text="HOW MUCH WOULD YOU LIKE TO DEPOSITE:", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(30, 10))
         self.withdraw_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
         self.withdraw_entry.pack(pady=10, ipady=8)
-<<<<<<< HEAD
+
         tk.Button(self.root, text="ACCEPT THE DEPOSITE", width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=self.execute_deposite).pack(pady=20)
         tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=40)
    
-    def execute_deposite(self):
-        pass    
-        
-=======
-        tk.Button(self.root, text="Logout", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side="bottom", pady=20)
-    
->>>>>>> 71ff35e0104d62293735037c7225ee0ca2e1e0b6
+        def execute_deposite(self):
+            pass    
 
 #=======================================================
 #================ Login and menu of manager ============
