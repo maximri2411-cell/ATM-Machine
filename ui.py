@@ -78,7 +78,8 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="Trancfer", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", ).pack(pady=20)
         tk.Button(self.root, text="Change PIN", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", ).pack(pady=20)
         tk.Button(self.root, text="History", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", ).pack(pady=20)
-        tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", ).pack(side= "bottom", anchor="s" , pady=40)
+        tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=40)
+        
        
       
 #=======================================================
@@ -89,8 +90,7 @@ class ATM_app: # Creating the class for the app
         self.cleaning_screen()
         tk.Label(self.root, text=f"{self.current_user.full_name} Your Balance:", font=("Arial", 28, "bold"), bg="midnight blue", fg="ivory").pack(pady=40)
         tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4,command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne")   
-        tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=40)
-            
+        tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=40)    
         current_balance = self.current_user.balance
         tk.Label(self.root, text=f"₪ {current_balance:,.2f}", font=("Arial", 32, "bold"), bg="midnight blue", fg="white").pack(pady=10)
         tk.Label(self.root, text="Transaction History: ", font=("Arial", 20), bg="midnight blue", fg="ivory").pack(pady=(10, 5))
@@ -130,8 +130,11 @@ class ATM_app: # Creating the class for the app
             
             amount = float(amount_str)
             self.current_user.withdraw(amount)
+            
+            save_data(self.bank) # Saving in the data.json
+            
             messagebox.showinfo("Success", f"₪{amount:,.2f} withdrawn successfully!")
-            self.withdraw_action()       
+            self.withdraw_action() 
         except ValueError:
             messagebox.showerror("Error", "Invalid input! Please enter numbers only.")
         
@@ -154,9 +157,22 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="ACCEPT THE DEPOSITE", width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=self.execute_deposite).pack(pady=20)
         tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=40)
    
-        def execute_deposite(self):
-            pass    
-
+    def execute_deposite(self):
+        try:
+            amount_user = self.withdraw_entry.get()
+            if not amount_user: return
+            
+            amount = float(amount_user)
+            self.current_user.deposit(amount) # Calling it to make the action
+            
+            save_data(self.bank) # Saving data to data.json
+            
+            messagebox.showinfo("Success", f"₪{amount_user}")
+            self.user_screen() # Back to main menu
+        except ValueError:
+            messagebox.showerror("ERROR", "Enrter a vilid number")
+               
+               
 #=======================================================
 #================ Login and menu of manager ============
 #=======================================================
