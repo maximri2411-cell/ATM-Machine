@@ -88,12 +88,12 @@ class ATM_app: # Creating the class for the app
       
     def check_balance_action(self):
         self.cleaning_screen()
-        tk.Label(self.root, text=f"{self.current_user.full_name} Your Balance:", font=("Arial", 28, "bold"), bg="midnight blue", fg="ivory").pack(pady=40)
+        tk.Label(self.root, text="Your Balance:", font=("Arial", 28, "bold"), bg="midnight blue", fg="ivory").pack(pady=40)
         tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4,command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne")   
         tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)    
         current_balance = self.current_user.balance
         tk.Label(self.root, text=f"₪ {current_balance:,.2f}", font=("Arial", 32, "bold"), bg="midnight blue", fg="white").pack(pady=10)
-        tk.Label(self.root, text="Transaction History", font=("Arial", 20), bg="midnight blue", fg="ivory").pack(pady=(10, 5))
+        tk.Label(self.root, text="Transaction History:", font=("Arial", 20), bg="midnight blue", fg="ivory").pack(pady=(10, 5))
                  
         self.history_list = tk.Listbox(self.root, width=70, height=10, font=("Arial", 10, "bold"), bg="slate gray", fg="white", borderwidth=0, highlightthickness=1, highlightbackground="#4a5a71", justify="center")
         self.history_list.pack(pady=10)  
@@ -112,11 +112,10 @@ class ATM_app: # Creating the class for the app
     def withdraw_action(self):
         self.cleaning_screen()
         tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4, command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne")
-        tk.Label(self.root, text=f"{self.current_user.full_name}\nWITHDRAW", font=("Arial", 24, "bold"), bg="midnight blue", fg="ivory").pack(pady=20)
-        
+        tk.Label(self.root, text="WITHDRAW", font=("Arial", 24, "bold"), bg="midnight blue", fg="ivory").pack(pady=20)
         current_balance = self.current_user.balance
         tk.Label(self.root, text=f"Current Balance: ₪ {current_balance:,.2f}", font=("Arial", 18), bg="midnight blue", fg="gold").pack(pady=10)
-        tk.Label(self.root, text="ransfer amount", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(30, 10))
+        tk.Label(self.root, text="Amount to withdraw", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(30, 10))
         self.withdraw_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
         self.withdraw_entry.pack(pady=10, ipady=8)
         tk.Button(self.root, text="Confirm action", width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=self.execute_withdraw).pack(pady=20)
@@ -154,8 +153,7 @@ class ATM_app: # Creating the class for the app
     def deposite_action(self):
         self.cleaning_screen()
         tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4, command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne")
-        tk.Label(self.root, text=f"{self.current_user.full_name}\nDEPOSITE", font=("Arial", 24, "bold"), bg="midnight blue", fg="ivory").pack(pady=20)
-        
+        tk.Label(self.root, text="DEPOSITE", font=("Arial", 24, "bold"), bg="midnight blue", fg="ivory").pack(pady=20)
         current_balance = self.current_user.balance
         tk.Label(self.root, text=f"Current balance: ₪ {current_balance:,.2f}", font=("Arial", 18), bg="midnight blue", fg="gold").pack(pady=10)
         tk.Label(self.root, text="Amount to deposit", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(30, 10))
@@ -186,7 +184,7 @@ class ATM_app: # Creating the class for the app
     def transfer_action(self): # Creation of the transfer between accounts
         self.cleaning_screen()
         tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4, command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne") # Go back button
-        tk.Label(self.root, text=f"{self.current_user.full_name} \nTRANSFERING TO...", font=("Arial", 24, "bold"), bg="midnight blue", fg="ivory").pack(pady=20)
+        tk.Label(self.root, text="TRANSFER BETWEEN ACCOUNTS", font=("Arial", 24, "bold"), bg="midnight blue", fg="ivory").pack(pady=20)
         
         current_balance = self.current_user.balance
         tk.Label(self.root, text=f"Current Balance: ₪ {current_balance:,.2f}", font=("Arial", 18), bg="midnight blue", fg="gold").pack(pady=10)
@@ -197,12 +195,12 @@ class ATM_app: # Creating the class for the app
         self.amount_entry.pack(pady=10, ipady=8)
         
         # ID target 
-        tk.Label(self.root, text="Enter account ID for transfer", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10, 10))
+        tk.Label(self.root, text="Enter account ID to transfer", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10, 10))
         self.target_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
         self.target_entry.pack(pady=10, ipady=8)
         
         # Confirm transfer with PIN again
-        tk.Label(self.root, text="Enter PIN to confirm process", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10, 10))
+        tk.Label(self.root, text="PIN for additional verification", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10, 10))
         self.pin_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
         self.pin_entry.pack(pady=10, ipady=8)
         
@@ -284,7 +282,7 @@ class ATM_app: # Creating the class for the app
         self.cleaning_screen()
         
         # This is our title for the next screen
-        tk.Label(self.root, text="Admin Login", font=("Arial", 36, "bold"), bg="midnight blue", fg="ivory").pack(pady=50)
+        tk.Label(self.root, text="ADMIN LOGIN", font=("Arial", 36, "bold"), bg="midnight blue", fg="ivory").pack(pady=50)
         tk.Label(self.root, text="Enter Admin Password:",font=("Arial", 16, "bold"), bg="gold", fg="white"). pack(pady=10)
         
         # Adding * for his password 
@@ -348,10 +346,10 @@ class ATM_app: # Creating the class for the app
         tree = ttk.Treeview(self.root, columns=columns, show="headings", height=15)
         
         # Creating som titles for our tree 
-        tree.heading("id", text="Account ID: ")
-        tree.heading("name", text="User name: ")
-        tree.heading("balance", text="Balanse: ")
-        tree.heading("status", text="Status: ")
+        tree.heading("id", text="Account ID")
+        tree.heading("name", text="User name")
+        tree.heading("balance", text="Balanse")
+        tree.heading("status", text="Status")
         
         for account_id, account in self.bank.Accounts.items(): # Taking all of the info we need to this part from our data.json"
             tree.insert("", tk.END, values=(account_id, account.full_name, f"{account.balance:.2f}", account.status))
@@ -367,9 +365,9 @@ class ATM_app: # Creating the class for the app
     def change_status(self): # Creating the function to change the account status by the admin
         self.cleaning_screen()
         
-        tk.Label(self.root, text="Account activation/blocking", font=("Arial", 18, "bold"), bg="black", fg="white").pack(pady=10)
+        tk.Label(self.root, text="ACCOUNT ACTIVATION/BLOCKING", font=("Arial", 18, "bold"), bg="black", fg="white").pack(pady=10)
         
-        tk.Label(self.root, text="Account ID for status change", bg="black", fg="white").pack()
+        tk.Label(self.root, text="Account ID to change status", bg="black", fg="white").pack()
         
         self.entry_id = tk.Entry(self.root, font=("Arial", 14), justify="center")
         self.entry_id.pack(pady=10)
@@ -387,10 +385,10 @@ class ATM_app: # Creating the class for the app
                 messagebox.showerror("ERROR", message) # In case it didnt work
         
         # Button to accept change
-        tk.Button(self.root, text="Confirmation of change of account status", command=operation_change, bg="black", fg="white", font=("Arial", 12,)).pack(pady=15)
+        tk.Button(self.root, text="Confirm action", command=operation_change, bg="black", fg="white", font=("Arial", 12,)).pack(pady=15)
         
         # Button to cancel
-        tk.Button(self.root, text="Canceling an account status change", command=self.admin_menu, bg="black", fg="white", font=("Arial", 12,)).pack(pady=15)
+        tk.Button(self.root, text="Cancel action", command=self.admin_menu, bg="black", fg="white", font=("Arial", 12,)).pack(pady=15)
         
 #========================================================
 #=================== New account ======================== #! Finished do not touch
@@ -399,7 +397,7 @@ class ATM_app: # Creating the class for the app
     def create_new_account(self): # Function to create a new account
         self.cleaning_screen() # Remember to clean the window..
             
-        tk.Label(self.root, text="Create new account", font=("Arial", 18, "bold"), bg="black", fg="white").pack(pady=30) 
+        tk.Label(self.root, text="CREATE NEW ACCOUNT", font=("Arial", 18, "bold"), bg="black", fg="white").pack(pady=30) 
             
         # Late tje user pick an name fot his account
         tk.Label(self.root, text="Owner full name", font=("Arial", 14), bg="black", fg="white").pack()
