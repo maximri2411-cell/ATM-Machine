@@ -5,7 +5,7 @@ from tkinter import messagebox, ttk
 from storage import load_data, save_data #! Do not delete it, important for our function to use
 
 # =======================================================
-#================ opening screen of the app =============
+#================ opening screen of the app ============= 
 #========================================================
 
 class ATM_app: # Creating the class for the app
@@ -47,7 +47,7 @@ class ATM_app: # Creating the class for the app
 
 
 #=======================================================
-#================== Login and menu of user =============
+#================== Login and menu of user ============= #TODO Upgrade the beuty
 #=======================================================
 
     def normal_login(self): # Taking data from GUI fild
@@ -67,7 +67,7 @@ class ATM_app: # Creating the class for the app
             messagebox.showerror("ERROR: Login Failed", message) # Line up thst every fail entry must be like this
             self.pin_entry.delete(0, tk.END)
 
-#=======================================================            
+#=======================================================           
     
     def user_screen(self): # User screen creation
         self.cleaning_screen()
@@ -83,8 +83,8 @@ class ATM_app: # Creating the class for the app
        
       
 #=======================================================
-#================== Balance page =======================
-#======================================================= 
+#================== Balance page ======================= #! Finished do not touch
+#======================================================= #TODO Add some comments next to the code to understand what is goin on  
       
     def check_balance_action(self):
         self.cleaning_screen()
@@ -106,8 +106,8 @@ class ATM_app: # Creating the class for the app
                 self.history_list.insert("end", text)       
 
 #========================================================
-#================== Withdraw page =======================
-#========================================================             
+#================== Withdraw page ======================= #! Finished do not touch
+#======================================================== #TODO Add some comments next to the code to understand what is goin on            
     
     def withdraw_action(self):
         self.cleaning_screen()
@@ -148,8 +148,8 @@ class ATM_app: # Creating the class for the app
         
     
 #========================================================
-#================== Deposite page =======================
-#========================================================    
+#================== Deposite page ======================= #! Finished do not touch
+#======================================================== #TODO Add some comments next to the code to understand what is goin on  
          
     def deposite_action(self):
         self.cleaning_screen()
@@ -180,7 +180,7 @@ class ATM_app: # Creating the class for the app
             messagebox.showerror("ERROR", "Enrter a vilid number")
                
 #========================================================
-#================== Transfer page =======================
+#================== Transfer page ======================= # TODO need to fix the amount bug of withdraw 
 #========================================================                  
                
     def transfer_action(self):
@@ -224,9 +224,10 @@ class ATM_app: # Creating the class for the app
             messagebox.showinfo("Success", f"₪{amount:,.2f} withdrawn successfully!")
             self.withdraw_action() 
         except ValueError:
-            messagebox.showerror("Error", "Invalid input! Please enter numbers only.")           
+            messagebox.showerror("Error", "Invalid input! Please enter numbers only.") 
+                      
 #=======================================================
-#================ Login and menu of manager ============
+#================ Login and menu of manager ============ #! Finished do not touch
 #=======================================================
 
     def admin_screen(self): # Admin screet creation
@@ -249,7 +250,7 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="Back to home page", command=self.create_login_screen,
                   font=("Arial", 10), bg="black", fg="white", borderwidth=0).pack(pady=5)
         
-#=======================================================        
+#======================================================= #! Finished do not touch       
         
     def check_pin_admin(self): # Check if the pin is currecct
         pin_admin = self.admin_pin_entry.get()
@@ -271,7 +272,7 @@ class ATM_app: # Creating the class for the app
             messagebox.showerror("Access Denided", long_error_message)
             self.admin_pin_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
  
-#=======================================================        
+#======================================================= #! Finished do not touch       
         
     def admin_menu(self): # Creatin the admin menu after the password
         self.cleaning_screen()
@@ -287,8 +288,9 @@ class ATM_app: # Creating the class for the app
         # Button to exit if he want
         tk.Button(self.root, text="LOGOUT", command=self.create_login_screen, bg="black", fg="white").pack(pady=30)
             
-#=======================================================    
-
+#========================================================
+#================== View accounts ======================= #! Finished do not touch
+#========================================================  
     def view_accounts(self):
         self.cleaning_screen() # Very important, cleaning the window
             
@@ -308,7 +310,9 @@ class ATM_app: # Creating the class for the app
         
         tk.Button(self.root, text="Back to menu", command=self.admin_menu, bg="black", fg="white").pack(pady=10) # Exit button of course
         
-#=======================================================  
+#========================================================
+#================== Change status ======================= #! Finished do not touch
+#========================================================    
 
     def change_status(self): # Creating the function to change the account status by the admin
         self.cleaning_screen()
@@ -338,7 +342,9 @@ class ATM_app: # Creating the class for the app
         # Button to cancel
         tk.Button(self.root, text="Cancel status", command=self.admin_menu, bg="black", fg="white", font=("Arial", 12,)).pack(pady=15)
         
- #=======================================================  
+#========================================================
+#=================== New account ======================== #! Finished do not touch
+#========================================================   
  
     def create_new_account(self): # Function to create a new account
         self.cleaning_screen() # Remember to clean the window..
@@ -378,7 +384,10 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="Confirm createing", command=save_account, bg="gold", fg="black", font=("Arial", 12,)).pack(pady=20)
         tk.Button(self.root, text="Cancel creating", command=self.admin_menu, bg="black", fg="white").pack(pady=10)
                    
-#!======================================================
+
+
+
+#!==========================================================================
 if __name__ == "__main__": #! This will run our app evertime we run the code
     root = tk.Tk()
     app = ATM_app(root)
