@@ -164,7 +164,7 @@ class ATM_app: # Creating the class for the app
         # Buttons for the menu
         tk.Button(self.root, text="VIEW ALL ACCOUNTS", command=self.view_accounts, font=("Arial", 12), width=30, bg="black", fg="white").pack(pady=10)
         tk.Button(self.root, text="CREATE NEW ACCOUNT", font=("Arial", 12), width=30, bg="black", fg="white").pack(pady=10)
-        tk.Button(self.root, text="CHANGE ACCOUNT STATUS", font=("Arial", 12), width=30, bg="black", fg="white").pack(pady=10)
+        tk.Button(self.root, text="CHANGE ACCOUNT STATUS", command=self.change_status, font=("Arial", 12), width=30, bg="black", fg="white").pack(pady=10)
             
         # Button to exit if he want
         tk.Button(self.root, text="LOGOUT", command=self.create_login_screen, bg="black", fg="white").pack(pady=30)
@@ -188,7 +188,8 @@ class ATM_app: # Creating the class for the app
             
         tree.pack(pady=20, padx=20, fill="x")
         
-        tk.Button(self.root, text="Back to menu", command=self.admin_menu, bg="black", fg="white").pack() # Exit button of course
+        tk.Button(self.root, text="Back to menu", command=self.admin_menu, bg="black", fg="white")
+        self.entry.pack(10) # Exit button of course
         
 #=======================================================    
 
@@ -199,7 +200,8 @@ class ATM_app: # Creating the class for the app
         
         tk.Label(self.root, text="Enter ID account you want to change status: ", bg="black", fg="white").pack()
         
-        self.entry = tk.Entry(self.root, font=("Arial", 14), justify="center").pack(pady=10)
+        self.entry = tk.Entry(self.root, font=("Arial", 14), justify="center")
+        self.entry.pack(pady=10)
     
         def operation_change():
             account_id = self.entry.get()
