@@ -133,8 +133,7 @@ class ATM_app: # Creating the class for the app
         self.withdraw_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
         self.withdraw_entry.pack(pady=10, ipady=8)
         tk.Button(self.root, text="Logout", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side="bottom", pady=20)
-        
-        def 
+    
 
 #=======================================================
 #================ Login and menu of manager ============
@@ -220,7 +219,7 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="Back to menu", command=self.admin_menu, bg="black", fg="white")
         self.entry.pack(10) # Exit button of course
         
-#=======================================================    
+
 
     def change_status(self): # Creating the function to change the account status by the admin
         self.cleaning_screen()
@@ -229,8 +228,8 @@ class ATM_app: # Creating the class for the app
         
         tk.Label(self.root, text="Enter ID account you want to change status: ", bg="black", fg="white").pack()
         
-        self.entry = tk.Entry(self.root, font=("Arial", 14), justify="center")
-        self.entry.pack(pady=10)
+        self.entry_id = tk.Entry(self.root, font=("Arial", 14), justify="center")
+        self.entry_id.pack(pady=10)
     
         def operation_change():
             account_id = self.entry.get()
@@ -250,7 +249,18 @@ class ATM_app: # Creating the class for the app
         # Button to cancel
         tk.Button(self.root, text="Cancel status", command=self.admin_menu, bg="black", fg="white", font=("Arial", 12,)).pack(pady=15)
         
-        
+ #=======================================================  
+ 
+        def create_account(self): # Function to create a new account
+            self.cleaning_screen() # Remember to clean the window..
+            
+            tk.Label(self.root, text="Create new account", font=("Arial", 18, "bold"), bg="black", fg="white").pack(pady=30) # 
+            
+            tk.Label(self.root, text="Owner full name: ", font=("Arial", 14), bg="black", fg="white").pack() # Late tje user pick an name fot his account
+            name_pick = tk.Entry(self.root, font=("Arial, 14"), justify="center")
+            name_pick.pack(pady=10)
+            
+                   
 #!======================================================
 if __name__ == "__main__": #! This will run our app evertime we run the code
     root = tk.Tk()
