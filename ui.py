@@ -231,7 +231,7 @@ class ATM_app: # Creating the class for the app
         self.entry_id.pack(pady=10)
     
         def operation_change():
-            account_id = self.entry.get()
+            account_id = self.entry_id.get()
             
             success, message = self.bank.change_status(account_id) # Connacting the function in models
             
@@ -256,26 +256,35 @@ class ATM_app: # Creating the class for the app
         tk.Label(self.root, text="Create new account", font=("Arial", 18, "bold"), bg="black", fg="white").pack(pady=30) 
             
         # Late tje user pick an name fot his account
-        tk.Label(self.root, text="Owner full name: ", font=("Arial", 14), bg="black", fg="white").pack()
+        tk.Label(self.root, text="Owner full name", font=("Arial", 14), bg="black", fg="white").pack()
         name_pick = tk.Entry(self.root, font=("Arial, 14"), justify="center")
         name_pick.pack(pady=10)
             
         # Late the user pick pin fot his account
-        tk.Label(self.root, text="Select PIN (4 digits): ", font=("Arial", 14), bg="black", fg="white").pack() 
+        tk.Label(self.root, text="Select PIN (4 digits)", font=("Arial", 14), bg="black", fg="white").pack() 
         pin_pick = tk.Entry(self.root, font=("Arial, 14"), justify="center", show="*")
         pin_pick.pack(pady=10)
+        
+        # Put some starting amount
+        tk.Label(self.root, text="First deposit", font=("Arial", 14), bg="black", fg="white").pack() 
+        amount_pick = tk.Entry(self.root, font=("Arial, 14"), justify="center")
+        amount_pick.pack(pady=10)
             
-        def save_account():
+        def save_account(): # Saving the new account in data.json
             name = name_pick.get()
             pin = pin_pick.get()
+            amount = amount_pick.get()
                 
-            if name and pin:
-                new_id = self.bank.create_account(name, pin) # Calling for the function in models
+            if name and pin and amount:
+                new_id = self.bank.create_account(name, pin, float(amount)) # Calling for the function in models
                 save_data(self.bank)
-                messagebox.showinfo("Account successefully created", f"Account created account with {name}, \nAccount ID {new_id}")
+                messagebox.showinfo("Account successefully created", f"Account created account by name {name}, \nAccount ID {new_id} with {amount}")
+                self.admin_menu()
             else:
                 messagebox.showerror("ERROR", "Fill in all the requairds fileds")
-                    
+                self.admin_menu()
+        
+        # Buttons to use to end the proccess
         tk.Button(self.root, text="Confirm createing", command=save_account, bg="gold", fg="black", font=("Arial", 12,)).pack(pady=20)
         tk.Button(self.root, text="Cancel creating", command=self.admin_menu, bg="black", fg="white").pack(pady=10)
                    
