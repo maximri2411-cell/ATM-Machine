@@ -198,17 +198,18 @@ class ATM_app: # Creating the class for the app
         tk.Label(self.root, text="Active - Block account", font=("Arial", 18, "bold"), bg="black", fg="white").pack(pady=10)
         
         tk.Label(self.root, text="Enter ID account you want to change status: ", bg="black", fg="white").pack()
-        id_entry = tk.Entry(self.root, font=("Arial", 14), justify="center").pack(pady=10)
+        
+        self.entry = tk.Entry(self.root, font=("Arial", 14), justify="center").pack(pady=10)
     
         def operation_change():
-            account_id = id_entry()
+            account_id = self.entry.get()
             
             success, message = self.bank.change_status(account_id) # Connacting the function in models
             
             if success:
-                save_data(self.bank)
+                save_data(self.bank) # Saving in json the operation
                 messagebox.showinfo("Status changed", message) # In case it worked
-                self.admin_menu()
+                self.admin_menu() # Back to menu
             else:
                 messagebox.showerror("ERROR", message) # In case it didnt work
         
@@ -216,7 +217,7 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="Change status", command=operation_change, bg="black", fg="white", font=("Arial", 12,)).pack(pady=15)
         
         # Button to cancel
-        tk.Button(self.root, text="Cancel status", command=operation_change, bg="black", fg="white", font=("Arial", 12,)).pack(pady=15)
+        tk.Button(self.root, text="Cancel status", command=self.admin_menu, bg="black", fg="white", font=("Arial", 12,)).pack(pady=15)
         
         
 #!======================================================
