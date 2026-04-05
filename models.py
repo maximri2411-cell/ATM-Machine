@@ -118,13 +118,13 @@ class Bank: # Manage all accounts in our project
 
 #================================================================================================
 
-    def create_account(self, full_name, pin): # Function to create new account 
+    def create_account(self, full_name, pin, amount): # Function to create new account 
         account_id = str(random.randint(100000, 999999))
     
         while account_id in self.Accounts:
             account_id = str(random.randint(100000, 999999))
         
-        new_account = Accounts(account_id, full_name, pin, 0.0, "Active", []) # Creating a user exactly according to the characteristics we created in part 2
+        new_account = Accounts(account_id, full_name, pin, amount, "Active", []) # Creating a user exactly according to the characteristics we created in part 2
         
         self.Accounts[account_id] = new_account # saving the new account in the dictionary of the bank
         

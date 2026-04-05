@@ -150,12 +150,17 @@ class ATM_app: # Creating the class for the app
         tk.Label(self.root, text="HOW MUCH WOULD YOU LIKE TO DEPOSITE:", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(30, 10))
         self.withdraw_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
         self.withdraw_entry.pack(pady=10, ipady=8)
+<<<<<<< HEAD
         tk.Button(self.root, text="ACCEPT THE DEPOSITE", width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=self.execute_deposite).pack(pady=20)
         tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=40)
    
     def execute_deposite(self):
         pass    
         
+=======
+        tk.Button(self.root, text="Logout", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side="bottom", pady=20)
+    
+>>>>>>> 71ff35e0104d62293735037c7225ee0ca2e1e0b6
 
 #=======================================================
 #================ Login and menu of manager ============
@@ -213,7 +218,7 @@ class ATM_app: # Creating the class for the app
         
         # Buttons for the menu
         tk.Button(self.root, text="VIEW ALL ACCOUNTS", command=self.view_accounts, font=("Arial", 12), width=30, bg="black", fg="white").pack(pady=10)
-        tk.Button(self.root, text="CREATE NEW ACCOUNT", font=("Arial", 12), width=30, bg="black", fg="white").pack(pady=10)
+        tk.Button(self.root, text="CREATE NEW ACCOUNT", command=self.create_new_account, font=("Arial", 12), width=30, bg="black", fg="white").pack(pady=10)
         tk.Button(self.root, text="CHANGE ACCOUNT STATUS", command=self.change_status, font=("Arial", 12), width=30, bg="black", fg="white").pack(pady=10)
             
         # Button to exit if he want
@@ -238,10 +243,9 @@ class ATM_app: # Creating the class for the app
             
         tree.pack(pady=20, padx=20, fill="x")
         
-        tk.Button(self.root, text="Back to menu", command=self.admin_menu, bg="black", fg="white")
-        self.entry.pack(10) # Exit button of course
+        tk.Button(self.root, text="Back to menu", command=self.admin_menu, bg="black", fg="white").pack(pady=10) # Exit button of course
         
-#=======================================================    
+#=======================================================  
 
     def change_status(self): # Creating the function to change the account status by the admin
         self.cleaning_screen()
@@ -250,11 +254,11 @@ class ATM_app: # Creating the class for the app
         
         tk.Label(self.root, text="Enter ID account you want to change status: ", bg="black", fg="white").pack()
         
-        self.entry = tk.Entry(self.root, font=("Arial", 14), justify="center")
-        self.entry.pack(pady=10)
+        self.entry_id = tk.Entry(self.root, font=("Arial", 14), justify="center")
+        self.entry_id.pack(pady=10)
     
         def operation_change():
-            account_id = self.entry.get()
+            account_id = self.entry_id.get()
             
             success, message = self.bank.change_status(account_id) # Connacting the function in models
             
@@ -271,7 +275,46 @@ class ATM_app: # Creating the class for the app
         # Button to cancel
         tk.Button(self.root, text="Cancel status", command=self.admin_menu, bg="black", fg="white", font=("Arial", 12,)).pack(pady=15)
         
+ #=======================================================  
+ 
+    def create_new_account(self): # Function to create a new account
+        self.cleaning_screen() # Remember to clean the window..
+            
+        tk.Label(self.root, text="Create new account", font=("Arial", 18, "bold"), bg="black", fg="white").pack(pady=30) 
+            
+        # Late tje user pick an name fot his account
+        tk.Label(self.root, text="Owner full name", font=("Arial", 14), bg="black", fg="white").pack()
+        name_pick = tk.Entry(self.root, font=("Arial, 14"), justify="center")
+        name_pick.pack(pady=10)
+            
+        # Late the user pick pin fot his account
+        tk.Label(self.root, text="Select PIN (4 digits)", font=("Arial", 14), bg="black", fg="white").pack() 
+        pin_pick = tk.Entry(self.root, font=("Arial, 14"), justify="center", show="*")
+        pin_pick.pack(pady=10)
         
+        # Put some starting amount
+        tk.Label(self.root, text="First deposit", font=("Arial", 14), bg="black", fg="white").pack() 
+        amount_pick = tk.Entry(self.root, font=("Arial, 14"), justify="center")
+        amount_pick.pack(pady=10)
+            
+        def save_account(): # Saving the new account in data.json
+            name = name_pick.get()
+            pin = pin_pick.get()
+            amount = amount_pick.get()
+                
+            if name and pin and amount:
+                new_id = self.bank.create_account(name, pin, float(amount)) # Calling for the function in models
+                save_data(self.bank)
+                messagebox.showinfo("Account successefully created", f"Account created account by name {name}, \nAccount ID {new_id} with {amount}")
+                self.admin_menu()
+            else:
+                messagebox.showerror("ERROR", "Fill in all the requairds fileds")
+                self.admin_menu()
+        
+        # Buttons to use to end the proccess
+        tk.Button(self.root, text="Confirm createing", command=save_account, bg="gold", fg="black", font=("Arial", 12,)).pack(pady=20)
+        tk.Button(self.root, text="Cancel creating", command=self.admin_menu, bg="black", fg="white").pack(pady=10)
+                   
 #!======================================================
 if __name__ == "__main__": #! This will run our app evertime we run the code
     root = tk.Tk()

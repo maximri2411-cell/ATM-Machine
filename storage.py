@@ -51,26 +51,3 @@ def save_data(bank):
     # json_dump(last_json, open('data.json', 'w'), indent=4) #! Old use that we took for example from google
     # The w is for write, over write the file to new one, like > in linux
     # indent is for beuty
-
-
-
-
-
-
-
-
-
-
-
-
-
-##! Do not touch
-##! Tony example
-# def all_clients(filename="data.json"):
-#     #read the data.json and store client data in data var 
-#     with open(filename, "r") as file:
-#         data = json.load(file)
-#         return data
-    
-# all_data[key] -> value
-# all_data[key][key] - > value 
