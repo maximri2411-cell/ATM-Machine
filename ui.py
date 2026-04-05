@@ -122,12 +122,10 @@ class ATM_app: # Creating the class for the app
         self.admin_pin_entry = tk.Entry(self.root, show="*", width=25, font=("Arial", 16, "bold"), bg="gold", fg="white")
         self.admin_pin_entry.pack(pady=10)
     
-    
         # The button for enter confirm
         tk.Button(self.root, text="Verify Access", command=self.check_pin_admin,
                   font=("Arial", 14, "bold"), width=15, bg="black", fg="white", 
                   cursor="hand2").pack(pady=15)
-        
         
         # Buton to return back if he wants
         tk.Button(self.root, text="Back to home page", command=self.create_login_screen,
@@ -159,8 +157,9 @@ class ATM_app: # Creating the class for the app
         
     def admin_menu(self): # Creatin the admin menu after the password
         self.cleaning_screen()
-        tk.Label(self.root, text="ADMIN CONTROL MENU", font=("Arial", 25, "bold"), 
-                 bg="black", fg="white").pack(pady=40)
+        
+        # Label on toop od the screen
+        tk.Label(self.root, text="ADMIN CONTROL MENU", font=("Arial", 25, "bold"), bg="black", fg="white").pack(pady=40)
         
         # Buttons for the menu
         tk.Button(self.root, text="VIEW ALL ACCOUNTS", command=self.view_accounts, font=("Arial", 12), width=30, bg="black", fg="white").pack(pady=10)
@@ -190,6 +189,34 @@ class ATM_app: # Creating the class for the app
         tree.pack(pady=20, padx=20, fill="x")
         
         tk.Button(self.root, text="Back to menu", command=self.admin_menu, bg="black", fg="white").pack() # Exit button of course
+        
+#=======================================================    
+
+    def change_status(self): # Creating the function to change the account status by the admin
+        self.cleaning_screen()
+        
+        tk.Label(self.root, text="Active - Block account", font=("Arial", 18, "bold"), bg="black", fg="white").pack(pady=10)
+        
+        tk.Label(self.root, text="Enter ID account you want to change status: ", bg="black", fg="white").pack()
+        id_entry = tk.Entry(self.root, font=("Arial", 14), justify="center").pack(pady=10)
+    
+        def operation_change():
+            account_id = id_entry()
+            
+            success, message = self.bank.change_status(account_id) # Connacting the function in models
+            
+            if success:
+                save_data(self.bank)
+                messagebox.showinfo("Status changed", message) # In case it worked
+                self.admin_menu()
+            else:
+                messagebox.showerror("ERROR", message) # In case it didnt work
+        
+        # Button to accept change
+        tk.Button(self.root, text="Change status", command=operation_change, bg="black", fg="white", font=("Arial", 12,)).pack(pady=15)
+        
+        # Button to cancel
+        tk.Button(self.root, text="Cancel status", command=operation_change, bg="black", fg="white", font=("Arial", 12,)).pack(pady=15)
         
         
 #!======================================================
