@@ -3,7 +3,6 @@ import random
 import json
 
 
-
 #===================================
 #============= Accounts ============
 #===================================
@@ -94,6 +93,7 @@ class Accounts: # Creating a class of Accounts
         return self.history
         
 #================================================================================================ 
+
     def j_dict(self): # Creating a simple function-dictionary for json to understand
         return {
             "account_id": self.account_id,
@@ -103,7 +103,6 @@ class Accounts: # Creating a class of Accounts
             "status": self.status,
             "history": self.history 
         }
-        
         
         
 #===================================

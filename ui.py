@@ -138,8 +138,11 @@ class ATM_app: # Creating the class for the app
                     f"The maximum amount you can withdraw is ₪{current_balance:,.2f}")
                 return
             self.current_user.withdraw(amount)
+            
+            save_data(self.bank) # Saving in the data.json
+            
             messagebox.showinfo("Success", f"₪{amount:,.2f} withdrawn successfully!")
-            self.withdraw_action()       
+            self.withdraw_action() 
         except ValueError:
             messagebox.showerror("Error", "Invalid input! Please enter numbers only.")
         
@@ -158,10 +161,25 @@ class ATM_app: # Creating the class for the app
         tk.Label(self.root, text="HOW MUCH WOULD YOU LIKE TO DEPOSITE:", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(30, 10))
         self.withdraw_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
         self.withdraw_entry.pack(pady=10, ipady=8)
-        tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)
-        
-        
-
+        tk.Button(self.root, text="ACCEPT THE DEPOSITE", width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=self.execute_deposite).pack(pady=20)
+        tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=40)
+   
+    def execute_deposite(self):
+        try:
+            amount_user = self.withdraw_entry.get()
+            if not amount_user: return
+            
+            amount = float(amount_user)
+            self.current_user.deposit(amount) # Calling it to make the action
+            
+            save_data(self.bank) # Saving data to data.json
+            
+            messagebox.showinfo("Success", f"₪{amount_user}")
+            self.user_screen() # Back to main menu
+        except ValueError:
+            messagebox.showerror("ERROR", "Enrter a vilid number")
+               
+               
 #=======================================================
 #================ Login and menu of manager ============
 #=======================================================
