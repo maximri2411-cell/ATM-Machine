@@ -70,12 +70,6 @@ class Accounts: # Creating a class of Accounts
     def check_balance(self): # In case the owner wats to check his balane 
         print(f"Account Balance: {self.balance}")
 
-#================================================================================================       
-        
-    def account_deatails(self): # In case the owner wants to make sure his details right
-        print("   Account Deatails   ")
-        print(f"Account ID: {self.account_id} \nOnwer: {self.full_name} ֿ\nPIN: {self.pin}.")
-
 #================================================================================================   
         
     def pin_change(self, new_pin):
