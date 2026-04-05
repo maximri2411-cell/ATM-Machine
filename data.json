@@ -144,7 +144,7 @@
             "account_id": "615243",
             "full_name": "King Kong",
             "pin": "8762",
-            "balance": 2341.7,
+            "balance": 2641.7,
             "status": "Active",
             "history": [
                 {
@@ -153,6 +153,13 @@
                     "date": "02/04/2026 20:56",
                     "amount_after": 2341.7,
                     "info": "New PIN set."
+                },
+                {
+                    "operation": "Deposit",
+                    "amount": 300.0,
+                    "date": "06/04/2026 00:22",
+                    "amount_after": 2641.7,
+                    "info": "None"
                 }
             ]
         },
@@ -190,7 +197,7 @@
             "account_id": "372357",
             "full_name": "Jon Jones",
             "pin": "3456",
-            "balance": 2144.0,
+            "balance": 10744.0,
             "status": "Active",
             "history": [
                 {
@@ -205,6 +212,20 @@
                     "amount": 3456.0,
                     "date": "05/04/2026 22:35",
                     "amount_after": 2144.0,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 300.0,
+                    "date": "06/04/2026 00:22",
+                    "amount_after": 1844.0,
+                    "info": "None"
+                },
+                {
+                    "operation": "Deposit",
+                    "amount": 8900.0,
+                    "date": "06/04/2026 00:22",
+                    "amount_after": 10744.0,
                     "info": "None"
                 }
             ]

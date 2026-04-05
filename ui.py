@@ -193,29 +193,31 @@ class ATM_app: # Creating the class for the app
         
         # Amount fild
         tk.Label(self.root, text="HOW MUCH WOULD YOU LIKE TO TRANSFER?", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10, 10))
-        self.withdraw_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
-        self.withdraw_entry.pack(pady=10, ipady=8)
+        self.amount_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
+        self.amount_entry.pack(pady=10, ipady=8)
         
         # ID target 
         tk.Label(self.root, text="Enter ID account you want do transfer:", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10, 10))
-        self.withdraw_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
-        self.withdraw_entry.pack(pady=10, ipady=8)
+        self.target_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
+        self.target_entry.pack(pady=10, ipady=8)
         
         # Confirm transfer with PIN again
         tk.Label(self.root, text="Enter your PIN to accept the transfer:", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10, 10))
-        self.withdraw_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
-        self.withdraw_entry.pack(pady=10, ipady=8)
+        self.pin_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
+        self.pin_entry.pack(pady=10, ipady=8)
         
         # Last buttons
-        tk.Button(self.root, text="CONFIRM TRANSFER", width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=self.execute_withdraw).pack(pady=20)
+        tk.Button(self.root, text="CONFIRM TRANSFER", width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=self.execute_transfer).pack(pady=20)
         tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)              
     
     
     def execute_transfer(self): # Conacting the transfer to the models and data and of course saving it
         try:
-            amount = float(self.transfer_amount.get())
-            target_id = self.transfer_target.get()     # Saving the input for the next part of the function
-            pin_confirm = self.transfet_confirm.get()
+            amount = self.amount_entry.get()
+            target_id = self.target_entry.get()     # Saving the input for the next part of the function
+            pin_confirm = self.pin_entry.get()
+            
+            amount = float(amount) # Beacuse all of the balance is float
             
             # Checking his balance 
             if amount <=0 or amount > self.current_user.balance:
