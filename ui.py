@@ -37,8 +37,8 @@ class ATM_app: # Creating the class for the app
 
         # Adding the pin fild
         tk.Label(self.root, text="Enter PIN", font=("Arial", 16, "bold"), bg="midnight blue", fg="ivory").pack()
-        self.pin_entry = tk.Entry(self.root, show="*", width=25, font=("Arial",16), justify="center", bg="slate gray",fg="white",insertbackground="white", borderwidth=0, highlightthickness=1, highlightbackground="#4a5a71")
-        self.pin_entry.pack(pady=10, ipady=8)
+        self.log_pin_entry = tk.Entry(self.root, show="*", width=25, font=("Arial",16), justify="center", bg="slate gray",fg="white",insertbackground="white", borderwidth=0, highlightthickness=1, highlightbackground="#4a5a71")
+        self.log_pin_entry.pack(pady=10, ipady=8)
         
         # Normal user login button
         tk.Button(self.root, text="LOGIN", command=self.normal_login,font=("Arial", 16 , "bold"), width=23, bg="gold", fg="midnight blue", activebackground="#b8962e", borderwidth=0, cursor="hand2" ,  ).pack(pady=(25, 10))
@@ -54,20 +54,20 @@ class ATM_app: # Creating the class for the app
 #=======================================================
 
     def normal_login(self): # Taking data from GUI fild
-        accout_id = self.account_entry.get()
-        pin = self.pin_entry.get()
-        user, message = self.bank.login_account(accout_id, pin)
+        account_id = self.account_entry.get()
+        pin = self.log_pin_entry.get()
+        user, message = self.bank.login_account(account_id, pin)
         
         if user:
             self.current_user = user
             messagebox.showinfo("Success", message)# Line up that every success entry must be like this
             self.account_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
-            self.pin_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
+            self.log_pin_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
             
             self.user_screen() # Moving to the user screen
         else:
             messagebox.showerror("ERROR", message) # Line up thst every fail entry must be like this
-            self.pin_entry.delete(0, tk.END)
+            self.log_pin_entry.delete(0, tk.END)
 
 #=======================================================           
     
@@ -177,7 +177,7 @@ class ATM_app: # Creating the class for the app
             self.current_user.deposit(amount) # Calling it to make the action
             save_data(self.bank) # Saving data to data.json
             self.balance_label.config(text=f"₪ {self.current_user.balance:,.2f}") # Of course only last 2 digit after .
-            messagebox.showinfo("Success", f"₪ {amount:,.2f} deposit successfully, Thank you and goodbye")
+            messagebox.showinfo("Success", f"₪ {amount:,.2f} deposited successfully, Thank you and goodbye")
             
             self.user_screen() # Back to main menu
         except ValueError:
@@ -207,8 +207,8 @@ class ATM_app: # Creating the class for the app
         
         # Confirm transfer with PIN again
         tk.Label(self.root, text="PIN for additional verification", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10))
-        self.pin_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
-        self.pin_entry.pack(pady=10, ipady=8)
+        self.tran_pin_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
+        self.tran_pin_entry.pack(pady=10, ipady=8)
         
         # Last buttons
         tk.Button(self.root, text="CONFIRM TRANSFER", width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=self.execute_transfer).pack(pady=20)
@@ -218,7 +218,7 @@ class ATM_app: # Creating the class for the app
         try:
             amount = self.amount_entry.get()
             target_id = self.target_entry.get() # Saving the input for the next part of the function
-            pin_confirm = self.pin_entry.get()
+            pin_confirm = self.tran_pin_entry.get()
             
             if not amount or not target_id or not pin_confirm:
                 messagebox.showerror("ERROR", "Fill in all the required details.")
