@@ -26,7 +26,6 @@ class ATM_app: # Creating the class for the app
         if messagebox.askyesno("EXIT", "Are you sure you want to exit the app?"):
             self.root.destroy()
         
-        
     def create_login_screen(self):
         self.cleaning_screen()
         
@@ -50,8 +49,7 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="Admin Access", command=self.admin_screen,font=("Arial", 16, "bold"), width=23, bg="#2d3e50", fg="white", activebackground="#b8962e", borderwidth=0, cursor="hand2"  ).pack(pady=15)
 
          # Normal user login button
-        tk.Button(self.root, text="EXIT", command=self.exit_app,font=("Arial", 22 , "bold"), width=15, bg="gold", fg="midnight blue", activebackground="#b8962e", borderwidth=0, cursor="hand2" ,  ).pack(side= "bottom", anchor="s" , pady=20)
-#                                                                                             
+        tk.Button(self.root, text="EXIT", command=self.exit_app,font=("Arial", 22 , "bold"), width=15, bg="gold", fg="midnight blue", activebackground="#b8962e", borderwidth=0, cursor="hand2" ,  ).pack(side= "bottom", anchor="s" , pady=20)                                                                         
 
 #=======================================================
 #================== Login and menu of user ============= #TODO Upgrade the beuty
@@ -533,9 +531,6 @@ class ATM_app: # Creating the class for the app
         # Buttons to use to end the proccess
         tk.Button(self.root, text="Confirmation of account creation", command=save_account, bg="gold", fg="black", font=("Arial", 12,)).pack(pady=20)
         tk.Button(self.root, text="Cancellation of account creation", command=self.admin_menu, bg="black", fg="white").pack(pady=10)
-                   
-
-
 
 #!==========================================================================
 if __name__ == "__main__": #! This will run our app evertime we run the code
