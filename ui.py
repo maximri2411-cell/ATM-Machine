@@ -176,10 +176,10 @@ class ATM_app: # Creating the class for the app
             self.current_user.deposit(amount) # Calling it to make the action
             save_data(self.bank) # Saving data to data.json
             self.balance_label.config(text=f"₪ {self.current_user.balance:,.2f}") # Of course only last 2 digit after .
-            messagebox.showinfo("Success", f"₪ {amount:,.2f} deposited successfully, Thank you and goodbye")
+            messagebox.showinfo("Success", f"₪ {amount:,.2f} deposited successfully")
             self.user_screen() # Back to main menu
         except ValueError:
-            messagebox.showerror("ERROR", "Invalid amount or insufficient balance.")
+            messagebox.showerror("ERROR", "Invalid amount or insufficient balance")
                
 #========================================================
 #================== Transfer page ======================= #! Finished do not touch
@@ -219,23 +219,23 @@ class ATM_app: # Creating the class for the app
             pin_confirm = self.tran_pin_entry.get()
             
             if not amount or not target_id or not pin_confirm:
-                messagebox.showerror("ERROR", "Fill in all the required details.")
+                messagebox.showerror("ERROR", "Fill in all the required details")
             
             amount = float(amount) # Beacuse all of the balance is float
             
             # Checking his balance 
             if amount <=0 or amount > self.current_user.balance:
-                messagebox.showerror("ERROR", "Invalid amount or insufficient balance.")
+                messagebox.showerror("ERROR", "Invalid amount or insufficient balance")
                 return
             
             # Verifying the PIN
             if pin_confirm != self.current_user.pin:
-                messagebox.showerror("ERROR", "Incorrect PIN, Please try again.")
+                messagebox.showerror("ERROR", "Incorrect PIN, Please try again")
                 return
             
             # Checking if we put the same ID as the sender in this process    
             if target_id == self.current_user.account_id:
-                messagebox.showerror("ERROR", "You cannot transfer money to yourself.")
+                messagebox.showerror("ERROR", "You cannot transfer money to yourself")
                 return
             
             # We want to check if the target is even exist
@@ -244,7 +244,7 @@ class ATM_app: # Creating the class for the app
                 
                  # Checking if the account is blocked
                 if target_account.status == "Blocked":
-                    messagebox.showerror("ERROR", "The account is blocked, transfer cannot be made.")
+                    messagebox.showerror("ERROR", "The account is blocked, transfer cannot be made")
                     return
                     
                 self.current_user.withdraw(amount) # Taking from the sender
@@ -257,7 +257,7 @@ class ATM_app: # Creating the class for the app
                 messagebox.showerror("ERROR", "The account to which the transfer is intended is not found., Please check if the ID is right.")
                 
         except ValueError:
-            messagebox.showerror("ERROR", "Fill in all the required details.")
+            messagebox.showerror("ERROR", "Fill in all the required details")
         
 #========================================================
 #==================== Change PIN ======================== 
@@ -289,23 +289,34 @@ class ATM_app: # Creating the class for the app
             new_pin = new_pin_enter.get()
             acc_pin = acc_pin_enter.get()
             
-            if old_pin != self.current_user.pin: # Check if the old pin is currect
+            def clear_fields(): # We want to clear the the buttons if the password is incoract
+                old_pin_enter.delete(0, tk.END)
+                new_pin_enter.delete(0, tk.END)
+                acc_pin_enter.delete(0, tk.END)
+
+            if not old_pin or not new_pin or not acc_pin:
+                messagebox.showerror("ERROR", "Fill in the required details.")
+                return # כאן לא חייב לנקות, שהמשתמש פשוט ישלים
+
+            if old_pin != self.current_user.pin: # checking if the old pin is right
                 messagebox.showerror("ERROR", "Your PIN is incorrect")
+                clear_fields() # The cleaner
                 return
 
-            if new_pin == old_pin: # Check if the new pin not like the old one
+            if new_pin == old_pin: # Check if the new is like the old
                 messagebox.showerror("ERROR", "New PIN cant be like the currect PIN")
+                clear_fields()
                 return
 
-            if new_pin != acc_pin: # In case the user writh 2 diffrent new pin 
+            if new_pin != acc_pin: # Check if the verifying pin is like the new
                 messagebox.showerror("ERROR", "New PINs do not match")
+                clear_fields()
                 return
             
-            if len(new_pin) == 4 and new_pin.isdigit():
-                self.current_user.pin = new_pin # Update the new
+            if len(new_pin) == 4 and new_pin.isdigit(): # Check if the pin is 4 digit number
+                self.current_user.pin = new_pin
                 
-                # Saving in the pormat we created in models
-                self.current_user.add_history( 
+                self.current_user.add_history( # What is goin to be in the history
                     operation="PIN Change",
                     info="Security update"
                 )
@@ -314,6 +325,7 @@ class ATM_app: # Creating the class for the app
                 pin_change.destroy() # Destroy the old pin 
             else:
                 messagebox.showerror("ERROR", "PIN must be 4 digits") # In case he dosent put what we asked   
+                clear_fields()
                 
         tk.Button(pin_change, text="Confirm action",width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=save_new_pin).pack(pady=20)
         tk.Button(pin_change,  text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=lambda: [pin_change.destroy(), self.create_login_screen()]).pack(side= "bottom", anchor="s" , pady=20)
@@ -445,16 +457,19 @@ class ATM_app: # Creating the class for the app
 
     def change_status(self): # Creating the function to change the account status by the admin
         self.cleaning_screen()
+        self.root.configure(bg="midnight blue")
         
         tk.Label(self.root, text="ACCOUNT ACTIVATION/BLOCKING", font=("Arial", 18, "bold"), bg="black", fg="white").pack(pady=10)
-        
-        tk.Label(self.root, text="Account ID to change status", bg="black", fg="white").pack()
+        tk.Label(self.root, text="Enter account ID to change status", bg="black", fg="white").pack()
         
         self.entry_id = tk.Entry(self.root, font=("Arial", 14), justify="center")
         self.entry_id.pack(pady=10)
     
         def operation_change():
             account_id = self.entry_id.get()
+            if not account_id:
+                messagebox.showwarning("ERROR", "Please enter an account ID")
+                return
             
             success, message = self.bank.change_status(account_id) # Connacting the function in models
             
@@ -464,12 +479,13 @@ class ATM_app: # Creating the class for the app
                 self.admin_menu() # Back to menu
             else:
                 messagebox.showerror("ERROR", message) # In case it didnt work
+                self.entry_id.delete(0, tk.END) # Rember that it cleans our window if there is an error
         
         # Button to accept change
-        tk.Button(self.root, text="Confirm action", command=operation_change, bg="black", fg="white", font=("Arial", 12,)).pack(pady=15)
+        tk.Button(self.root, text="Confirm action", command=operation_change, bg="grey", fg="white", font=("Arial", 12,)).pack(pady=15)
         
         # Button to cancel
-        tk.Button(self.root, text="Cancel action", command=self.admin_menu, bg="black", fg="white", font=("Arial", 12,)).pack(pady=15)
+        tk.Button(self.root, text="Cancel action", command=self.admin_menu, bg="grey", fg="white", font=("Arial", 12,)).pack(pady=15)
         
 #========================================================
 #=================== New account ======================== #! Finished do not touch

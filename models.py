@@ -208,26 +208,6 @@ class Bank: # Manage all accounts in our project
             return True, f"Transfer of {amount} NIS to {the_receiver.full_name} has completed. \nThank you. goodbye." 
             
         return False, msg # In case everthing has fall it will print an error
-    
-        #! Old version
-        # if the_sender is None: # We want to check first if they even exist in order to countinue forward to sendng the money
-        #     print(f"Error: The Sender account does not exist. \nPlease try again. \nIn case you forgot the ID, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
-        #     return False
-        
-        # if the_receiver is None:
-        #     print(f"Error: The Receiver account does not exist \nPlease try again, Make sure you put the right ID. \nIn case you having a problem, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
-        #     return False
-        
-        # amount_transfer = float(amount) # Creating the value of the amount for the next part
-        
-        # if amount_transfer <= 0: # In case the sender trys to put an 0 or low 
-        #     print("Error: Amount must be positive.")
-        #     return False
-        
-        # if the_sender.balance < amount_transfer: # Now we are goin to check if the sender has enough amount to even send the money
-        #     print(f"Transfer Failed: The {the_sender.full_name} is lack of NIS.")
-        #     print(f"Current Balance in your account: {the_sender.balance} | Transfer request: {amount_transfer}")
-        #     return False
             
 #================================================================================================
     
@@ -255,18 +235,15 @@ class Bank: # Manage all accounts in our project
         account = self.find_account(accound_id)
         
         if not account:
-            return False
+            return False, "Account ID not found"
         
         if account.status == "Active":
             account.status = "Blocked" # This part is for to change ths status # Pay attention that in pyrhon in order to change status for eample, you need to put only 1 = not ==
         else:
             account.status = "Active"
             
-        account.add_history(
-            operation="Status Change",
-            info=f"Account status change to {account.status} by Admin"
-        )    
-        return True
+        account.add_history(operation="Status Change", info=f"Account status change to {account.status} by Admin") 
+        return True, f"Account {accound_id} is now {account.status}"
     
 #================================================================================================
 
