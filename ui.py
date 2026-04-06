@@ -77,7 +77,7 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="BALANCE", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.check_balance_action).pack(pady=20)
         tk.Button(self.root, text="TRANSFER", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.transfer_action).pack(pady=20)
         tk.Button(self.root, text="CHANGE PIN", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", ).pack(pady=20)
-        tk.Button(self.root, text="HISTORY", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", ).pack(pady=20)
+        tk.Button(self.root, text="HISTORY", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.full_history).pack(pady=20)
         tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)
         
        
@@ -291,7 +291,20 @@ class ATM_app: # Creating the class for the app
         
         #TODO scrollbsr thing
         Scrollbar = tk.Scrollbar(history_frame)
-        Scrollbar.pack(side="right", fill="y") # Puting it to the right
+        Scrollbar.pack(side="right", fill="y") 
+        
+        listbox = tk.Listbox(history_frame, width=50, font=("Arial", 10), yscrollcommand=Scrollbar.set) # Should connect between listbox and scrollbar with yscrollcommand
+        listbox.pack(side="left", fill="both", expand=True)
+        
+        #TODO still try to figure out what is this
+        Scrollbar.config(command=listbox.yview)
+        
+        account_history = self.current_user.see_history()
+        if not account_history:
+            listbox.insert("end", "No history recorded in the account")
+        else:
+            for enter in reversed(account_history):
+                text = f"{enter["Date"]}, {enter["Operation"]}, {enter["Amount"]} ₪"
         
         
                       
