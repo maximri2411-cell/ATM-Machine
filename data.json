@@ -180,8 +180,8 @@
         "653421": {
             "account_id": "653421",
             "full_name": "Daniel Levi",
-            "pin": "4332",
-            "balance": 1400.0,
+            "pin": "0001",
+            "balance": 700.0,
             "status": "Active",
             "history": [
                 {
@@ -204,16 +204,66 @@
                     "date": "06/04/2026 19:44",
                     "amount_after": 1400.0,
                     "info": "None"
+                },
+                {
+                    "operation": "Deposit",
+                    "amount": 600.0,
+                    "date": "06/04/2026 22:20",
+                    "amount_after": 2000.0,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 600.0,
+                    "date": "06/04/2026 22:23",
+                    "amount_after": 1400.0,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 600.0,
+                    "date": "06/04/2026 22:25",
+                    "amount_after": 800.0,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 100.0,
+                    "date": "06/04/2026 22:32",
+                    "amount_after": 700.0,
+                    "info": "None"
+                },
+                {
+                    "operation": "PIN Change",
+                    "amount": 0.0,
+                    "date": "06/04/2026 22:33",
+                    "amount_after": 700.0,
+                    "info": "Security update"
                 }
             ]
         },
         "132456": {
             "account_id": "132456",
             "full_name": "Moshe Tzadik",
-            "pin": "7979",
+            "pin": "9090",
             "balance": 15010.9,
-            "status": "Blocked",
-            "history": []
+            "status": "Active",
+            "history": [
+                {
+                    "operation": "PIN Change",
+                    "amount": 0.0,
+                    "date": "06/04/2026 23:51",
+                    "amount_after": 15010.9,
+                    "info": "Security update"
+                },
+                {
+                    "operation": "PIN Change",
+                    "amount": 0.0,
+                    "date": "06/04/2026 23:53",
+                    "amount_after": 15010.9,
+                    "info": "Security update"
+                }
+            ]
         },
         "314265": {
             "account_id": "314265",
@@ -250,7 +300,7 @@
             "account_id": "615243",
             "full_name": "King Kong",
             "pin": "8762",
-            "balance": 2641.7,
+            "balance": 2741.7,
             "status": "Active",
             "history": [
                 {
@@ -265,6 +315,13 @@
                     "amount": 300.0,
                     "date": "06/04/2026 00:22",
                     "amount_after": 2641.7,
+                    "info": "None"
+                },
+                {
+                    "operation": "Deposit",
+                    "amount": 100.0,
+                    "date": "06/04/2026 22:32",
+                    "amount_after": 2741.7,
                     "info": "None"
                 }
             ]
@@ -335,6 +392,28 @@
                     "info": "None"
                 }
             ]
+        },
+        "742885": {
+            "account_id": "742885",
+            "full_name": "Mike Tyson",
+            "pin": "3012",
+            "balance": 5700.0,
+            "status": "Active",
+            "history": [
+                {
+                    "operation": "PIN Change",
+                    "date": "07/04/2026 00:05",
+                    "info": "Security update"
+                }
+            ]
+        },
+        "936741": {
+            "account_id": "936741",
+            "full_name": "Tonton Saor",
+            "pin": "wefsdf",
+            "balance": 0.0,
+            "status": "Active",
+            "history": []
         }
     }
 }

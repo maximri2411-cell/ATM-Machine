@@ -93,7 +93,7 @@ class ATM_app: # Creating the class for the app
         button_frame.pack(fill="both", expand=True)
         buttons = [
             ("WITHDRAW", self.withdraw_action),
-            ("DEPOSIT", self.deposite_action),
+            ("DEPOSIT", self.deposit_action),
             ("TRANSFER", self.transfer_action),
             ("CHANGE PIN", self.change_pin),
             ("HISTORY", self.full_history)
@@ -137,8 +137,7 @@ class ATM_app: # Creating the class for the app
             self.current_user.withdraw(amount) # Doin the operation
             save_data(self.bank) # Saving in the data.json
             self.balance_label.config(text=f"₪ {self.current_user.balance:,.2f}")
-            messagebox.showinfo("Success", f"₪ {amount:,.2f} withdrawn successfully, Thank you and goodbye") # Final message
-            
+            messagebox.showinfo("Success", f"₪ {amount:,.2f} withdrawn successfully") # Final message
             self.user_screen()
         except ValueError:
             messagebox.showerror("ERROR", "Invalid input, Please enter diginumbers only.")
@@ -178,7 +177,6 @@ class ATM_app: # Creating the class for the app
             save_data(self.bank) # Saving data to data.json
             self.balance_label.config(text=f"₪ {self.current_user.balance:,.2f}") # Of course only last 2 digit after .
             messagebox.showinfo("Success", f"₪ {amount:,.2f} deposited successfully, Thank you and goodbye")
-            
             self.user_screen() # Back to main menu
         except ValueError:
             messagebox.showerror("ERROR", "Invalid amount or insufficient balance.")
@@ -274,15 +272,15 @@ class ATM_app: # Creating the class for the app
         tk.Button(pin_change, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4, command=pin_change.destroy).place(relx=0.95, rely=0.05, anchor="ne") # Go back button
         tk.Label(pin_change, text=" CHANGE PIN", font=("Arial", 24, "bold"), bg="midnight blue", fg="ivory").pack(pady=20) #page title
 
-        tk.Label(pin_change, text="ENTER PIN:",font=("Arial", 16, "bold"), bg="midnight blue", fg="ivory").pack(pady=(10, 5))
+        tk.Label(pin_change, text="Enter PIN:",font=("Arial", 16, "bold"), bg="midnight blue", fg="ivory").pack(pady=(10, 5))
         old_pin_enter = tk.Entry(pin_change, show="*", width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0, highlightthickness=1, highlightbackground="#4a5a71") 
         old_pin_enter.pack(pady=10, ipady=8)
        
-        tk.Label(pin_change, text="New PIN: (4 digits)",font=("Arial", 16, "bold"), bg="midnight blue", fg="ivory").pack(pady=(10, 5))
+        tk.Label(pin_change, text="New PIN (4 digits)",font=("Arial", 16, "bold"), bg="midnight blue", fg="ivory").pack(pady=(10, 5))
         new_pin_enter = tk.Entry(pin_change, show="*", width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0, highlightthickness=1, highlightbackground="#4a5a71") 
         new_pin_enter.pack(pady=10, ipady=8)
        
-        tk.Label(pin_change, text="ACCEPT NEW PIN",font=("Arial", 16, "bold"), bg="midnight blue", fg="ivory").pack(pady=(10, 5))
+        tk.Label(pin_change, text="Verify new password",font=("Arial", 16, "bold"), bg="midnight blue", fg="ivory").pack(pady=(10, 5))
         acc_pin_enter = tk.Entry(pin_change, show="*", width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0, highlightthickness=1, highlightbackground="#4a5a71") 
         acc_pin_enter.pack(pady=10, ipady=8)
         
@@ -309,7 +307,6 @@ class ATM_app: # Creating the class for the app
                 # Saving in the pormat we created in models
                 self.current_user.add_history( 
                     operation="PIN Change",
-                    amount=0,
                     info="Security update"
                 )
                 save_data(self.bank) # Save to json
@@ -318,7 +315,7 @@ class ATM_app: # Creating the class for the app
             else:
                 messagebox.showerror("ERROR", "PIN must be 4 digits") # In case he dosent put what we asked   
                 
-        tk.Button(pin_change, text="ACCEPT CHANGE",width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=save_new_pin).pack(pady=20)
+        tk.Button(pin_change, text="Confirm action",width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=save_new_pin).pack(pady=20)
         tk.Button(pin_change,  text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=lambda: [pin_change.destroy(), self.create_login_screen()]).pack(side= "bottom", anchor="s" , pady=20)
         # The lambda is for delete the old pin and close the window
                           

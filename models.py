@@ -20,19 +20,22 @@ class Accounts: # Creating a class of Accounts
 
 #================================================================================================    
         
-    def add_history(self, operation, amount, info="None"): # Insted of adding evertime by yourself the process, have build an function that doin it for me 
+    def add_history(self, operation, amount=None, info=""): # Insted of adding evertime by yourself the process, have build an function that doin it for me 
         from datetime import datetime
         date = datetime.now().strftime("%d/%m/%Y %H:%M")
         
-        new_entry = {
+        # This will be our manual format for history after oparation
+        new_entry = { 
             "operation": operation,
-            "amount": float(amount),
             "date": date,
-            "amount_after": round(float(self.balance), 2), # To make sure it will print the updated amount and only 2 in the end
             "info": info
         }
-        self.history.append(new_entry) # Add the dictionary to the list
+        if amount is not None: # This will be in sitoation when the amount is not None
+            new_entry["amount"] = float(amount)
+            new_entry["amount_after"] = self.balance
     
+        self.history.append(new_entry) # Add the dictionary to the list
+        
 #================================================================================================
       
     def deposit(self, amount):
@@ -97,8 +100,7 @@ class Accounts: # Creating a class of Accounts
             "status": self.status,
             "history": self.history 
         }
-        
-        
+
 #===================================
 #=============== Bank ==============
 #===================================
@@ -148,10 +150,10 @@ class Bank: # Manage all accounts in our project
             return None, "ERROR: Account was not found."
         
         if account.status == "Blocked":
-            return None, f"ERROR: Your Account is blocked. \nIn case you having a problem, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye."
+            return None, f"ERROR"
         
         if str(account.pin) != str(pin):
-            return None, f"ERROR: Wrong PIN. \nMake sure you put the right ID. \nIn case you having a problem, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye."
+            return None, f"ERROR"
         
         return account, f"Login to the account has successed. welcome {account.full_name}"
     
@@ -207,7 +209,6 @@ class Bank: # Manage all accounts in our project
             
         return False, msg # In case everthing has fall it will print an error
     
-    
         #! Old version
         # if the_sender is None: # We want to check first if they even exist in order to countinue forward to sendng the money
         #     print(f"Error: The Sender account does not exist. \nPlease try again. \nIn case you forgot the ID, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
@@ -254,14 +255,18 @@ class Bank: # Manage all accounts in our project
         account = self.find_account(accound_id)
         
         if not account:
-            return False, f"Account ID not found. \nPlease try again."
+            return False
         
         if account.status == "Active":
             account.status = "Blocked" # This part is for to change ths status # Pay attention that in pyrhon in order to change status for eample, you need to put only 1 = not ==
         else:
             account.status = "Active"
             
-        return True, f"New status of the account {accound_id} is: {account.status}. Thank you and goodbye."
+        account.add_history(
+            operation="Status Change",
+            info=f"Account status change to {account.status} by Admin"
+        )    
+        return True
     
 #================================================================================================
 
