@@ -26,7 +26,6 @@ class ATM_app: # Creating the class for the app
         if messagebox.askyesno("EXIT", "Are you sure you want to exit the app?"):
             self.root.destroy()
         
-        
     def create_login_screen(self):
         self.cleaning_screen()
         
@@ -50,8 +49,7 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="Admin Access", command=self.admin_screen,font=("Arial", 16, "bold"), width=23, bg="#2d3e50", fg="white", activebackground="#b8962e", borderwidth=0, cursor="hand2"  ).pack(pady=15)
 
          # Normal user login button
-        tk.Button(self.root, text="EXIT", command=self.exit_app,font=("Arial", 22 , "bold"), width=15, bg="gold", fg="midnight blue", activebackground="#b8962e", borderwidth=0, cursor="hand2" ,  ).pack(side= "bottom", anchor="s" , pady=20)
-#                                                                                             
+        tk.Button(self.root, text="EXIT", command=self.exit_app,font=("Arial", 22 , "bold"), width=15, bg="gold", fg="midnight blue", activebackground="#b8962e", borderwidth=0, cursor="hand2" ,  ).pack(side= "bottom", anchor="s" , pady=20)                                                                         
 
 #=======================================================
 #================== Login and menu of user ============= #TODO Upgrade the beuty
@@ -87,24 +85,39 @@ class ATM_app: # Creating the class for the app
         tk.Label(top_frame, text=f"Account owner: {self.current_user.full_name}", font=("Arial", 15), bg="midnight blue", fg="white").pack()
         
         # ID 
-        tk.Label(top_frame, text=f"Account ID: {self.current_user.id}", font=("Arial", 14), bg="midnight blue", fg="gold").pack()
+        tk.Label(top_frame, text=f"Account ID: {self.current_user.account_id}", font=("Arial", 14), bg="midnight blue", fg="gold").pack()
         
         # This will show the current balance after an operation, making it a value
-        self.balance_label = tk.Label(self.root, text=f"₪ {self.current_user.balance:,.2f}", fonr=("Arial", 28, "bold"), bg="midnight blue", fg="white")
+        self.balance_label = tk.Label(self.root, text=f"₪ {self.current_user.balance:,.2f}", font=("Arial", 28, "bold"), bg="midnight blue", fg="white")
         self.balance_label.pack(pady=10)
         
         # Down label frame
         button_frame = tk.Frame(self.root, bg="midnight blue")
         button_frame.pack(fill="both", expand=True)
         
-        # All of the buttons in the menu of user
-        tk.Button(self.root, text="WITHDRAW", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.withdraw_action).pack(pady=20)
-        tk.Button(self.root, text="DEPOSIT", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.deposite_action).pack(pady=20)
-        tk.Button(self.root, text="BALANCE", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.check_balance_action).pack(pady=20)
-        tk.Button(self.root, text="TRANSFER", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.transfer_action).pack(pady=20)
-        tk.Button(self.root, text="CHANGE PIN", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.change_pin).pack(pady=20)
-        tk.Button(self.root, text="HISTORY", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.full_history).pack(pady=20)
-        tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)
+        buttons = [
+            ("WITHDRAW", self.withdraw_action),
+            ("DEPOSIT", self.deposite_action),
+            ("BALANCE", self.check_balance_action),
+            ("TRANSFER", self.transfer_action),
+            ("CHANGE PIN", self.change_pin),
+            ("HISTORY", self.full_history)
+        ]
+        
+        for text, cmd in buttons:
+            tk.Button(button_frame, text=text, width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=cmd).pack(pady=10)
+            
+        tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side="bottom", pady=20)
+        
+        #! Old version befure buttons
+        # # All of the buttons in the menu of user
+        # tk.Button(self.root, text="WITHDRAW", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.withdraw_action).pack(pady=20)
+        # tk.Button(self.root, text="DEPOSIT", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.deposite_action).pack(pady=20)
+        # tk.Button(self.root, text="BALANCE", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.check_balance_action).pack(pady=20)
+        # tk.Button(self.root, text="TRANSFER", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.transfer_action).pack(pady=20)
+        # tk.Button(self.root, text="CHANGE PIN", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.change_pin).pack(pady=20)
+        # tk.Button(self.root, text="HISTORY", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.full_history).pack(pady=20)
+        # tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)
         
 #=======================================================
 #================== Balance page ======================= #! Finished do not touch
@@ -181,9 +194,10 @@ class ATM_app: # Creating the class for the app
         current_balance = self.current_user.balance
         tk.Label(self.root, text=f"Current balance: ₪ {current_balance:,.2f}", font=("Arial", 18), bg="midnight blue", fg="gold").pack(pady=10)
         tk.Label(self.root, text="Amount to deposit", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(30, 10))
-        self.withdraw_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
-        self.withdraw_entry.pack(pady=10, ipady=8)
-        tk.Button(self.root, text="CONFIRM ACTION", width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=self.execute_deposite).pack(pady=20)
+
+        self.deposit_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
+        self.deposit_entry.pack(pady=10, ipady=8)
+        tk.Button(self.root, text="Confirm action", width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=self.execute_deposite).pack(pady=20)
         tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)
    
     def execute_deposite(self):
@@ -538,9 +552,6 @@ class ATM_app: # Creating the class for the app
         # Buttons to use to end the proccess
         tk.Button(self.root, text="Confirmation of account creation", command=save_account, bg="gold", fg="black", font=("Arial", 12,)).pack(pady=20)
         tk.Button(self.root, text="Cancellation of account creation", command=self.admin_menu, bg="black", fg="white").pack(pady=10)
-                   
-
-
 
 #!==========================================================================
 if __name__ == "__main__": #! This will run our app evertime we run the code
