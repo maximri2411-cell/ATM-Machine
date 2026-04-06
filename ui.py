@@ -23,8 +23,8 @@ class ATM_app: # Creating the class for the app
             widget.destroy()
             
     def exit_app(self): # Jusr an exit button in the opening screen
-        if messagebox.askyesno("EXIT", "Are you sure you want to exit the app?")
-        self.root.destroy()
+        if messagebox.askyesno("EXIT", "Are you sure you want to exit the app?"):
+            self.root.destroy()
         
         
     def create_login_screen(self):
@@ -81,7 +81,7 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="DEPOSIT", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.deposite_action).pack(pady=20)
         tk.Button(self.root, text="BALANCE", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.check_balance_action).pack(pady=20)
         tk.Button(self.root, text="TRANSFER", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.transfer_action).pack(pady=20)
-        tk.Button(self.root, text="CHANGE PIN", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", ).pack(pady=20)
+        tk.Button(self.root, text="CHANGE PIN", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.change_pin).pack(pady=20)
         tk.Button(self.root, text="HISTORY", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.full_history).pack(pady=20)
         tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)
         
@@ -323,9 +323,17 @@ class ATM_app: # Creating the class for the app
         
         def save_new_pin(): # Saving in the json
             new_pin = new_pin_enter.get()
-            if len(new_pin) == 4 and new_pin_enter():
-                self.current_user.pin = new_pin
-                save_data(self.bank)
+            if len(new_pin) == 4 and new_pin_enter:
+                self.current_user.pin = new_pin # Update the new
+                
+                # Saving in the pormat we created in models
+                self.current_user.add_history( 
+                    operation="PIN Change",
+                    amount=0,
+                    info="Security update"
+                )
+                
+                save_data(self.bank) # Save to json
                 messagebox.showinfo("Success", "PIN changed successfully")
                 pin_change.destroy() # Destroy the old pin 
             else:
