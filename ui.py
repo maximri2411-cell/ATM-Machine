@@ -304,11 +304,9 @@ class ATM_app: # Creating the class for the app
             listbox.insert("end", "No history recorded in the account")
         else:
             for enter in reversed(account_history):
-                text = f"{enter['date']}: {enter['operation']}, ₪ {enter['amount']} {enter['amount_after']} {enter['info']}"
+                text = f"{enter['date']} | {enter['operation']} | ₪ {enter['amount']} | {enter['amount_after']} | {enter['info']}"
                 listbox.insert("end", text)
         
-        
-                      
 #=======================================================
 #================ Login and menu of manager ============ #! Finished do not touch
 #=======================================================
