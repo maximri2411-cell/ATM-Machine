@@ -166,7 +166,7 @@ class ATM_app: # Creating the class for the app
         tk.Label(self.root, text="Amount to deposit", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(30, 10))
         self.withdraw_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
         self.withdraw_entry.pack(pady=10, ipady=8)
-        tk.Button(self.root, text="Confirm action", width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=self.execute_deposite).pack(pady=20)
+        tk.Button(self.root, text="CONFIRM ACTION", width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=self.execute_deposite).pack(pady=20)
         tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)
    
     def execute_deposite(self):
@@ -197,17 +197,17 @@ class ATM_app: # Creating the class for the app
         tk.Label(self.root, text=f"Current Balance: ₪ {current_balance:,.2f}", font=("Arial", 18), bg="midnight blue", fg="gold").pack(pady=10)
         
         # Amount fild
-        tk.Label(self.root, text="Transfer amount", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10, 10))
+        tk.Label(self.root, text="Transfer amount", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10))
         self.amount_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
         self.amount_entry.pack(pady=10, ipady=8)
         
         # ID target 
-        tk.Label(self.root, text="Enter account ID to transfer", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10, 10))
+        tk.Label(self.root, text="Enter account ID to transfer", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10))
         self.target_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
         self.target_entry.pack(pady=10, ipady=8)
         
         # Confirm transfer with PIN again
-        tk.Label(self.root, text="PIN for additional verification", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10, 10))
+        tk.Label(self.root, text="PIN for additional verification", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10))
         self.pin_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
         self.pin_entry.pack(pady=10, ipady=8)
         
@@ -281,6 +281,53 @@ class ATM_app: # Creating the class for the app
         # except ValueError:
         #     messagebox.showerror("Error", "Invalid input! Please enter numbers only.") 
         
+        
+#========================================================
+#==================== Change PIN ======================== 
+#========================================================
+    def change_pin(self): # New pin
+        pin_change = tk.Toplevel(self.root) # Trying again the toplevel thing
+        pin_change.title("Change")
+        pin_change.geometry("1000x800")
+        pin_change.configure(bg="midnight blue")
+        
+        tk.Button(pin_change, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4, command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne") # Go back button
+        tk.Label(pin_change, text=" CHANGE PIN", font=("Arial", 24, "bold"), bg="midnight blue", fg="ivory").pack(pady=20) #page title
+
+        tk.Label(pin_change, text="ENTER PIN:",font=("Arial", 16, "bold"), bg="midnight blue", fg="ivory").pack(pady=(10, 5))
+        new_pin_enter = tk.Entry(pin_change, show="*", width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0, highlightthickness=1, highlightbackground="#4a5a71") 
+        new_pin_enter.pack(pady=10, ipady=8)
+       
+        tk.Label(pin_change, text="New PIN: (4 digits)",font=("Arial", 16, "bold"), bg="midnight blue", fg="ivory").pack(pady=(10, 5))
+        new_pin_enter = tk.Entry(pin_change, show="*", width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0, highlightthickness=1, highlightbackground="#4a5a71") 
+        new_pin_enter.pack(pady=10, ipady=8)
+       
+        tk.Label(pin_change, text="ACCEPT NEW PIN",font=("Arial", 16, "bold"), bg="midnight blue", fg="ivory").pack(pady=(10, 5))
+        new_pin_enter = tk.Entry(pin_change, show="*", width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0, highlightthickness=1, highlightbackground="#4a5a71") 
+        new_pin_enter.pack(pady=10, ipady=8)
+       
+        
+        def save_new_pin(): # Saving in the json
+            new_pin = new_pin_enter.get()
+            if len(new_pin) == 4 and new_pin.isdigit():
+                self.current_user.pin = new_pin # Update the new
+                
+                # Saving in the pormat we created in models
+                self.current_user.add_history( 
+                    operation="PIN Change",
+                    amount=0,
+                    info="Security update"
+                )
+                
+                save_data(self.bank) # Save to json
+                messagebox.showinfo("Success", "PIN changed successfully")
+                pin_change.destroy() # Destroy the old pin 
+            else:
+                messagebox.showerror("ERROR", "PIN must be 4 digits") # In case he dosent put what we asked   
+        tk.Button(pin_change, text="ACCEPT CHANGE",width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=save_new_pin).pack(pady=20)
+        tk.Button(pin_change,  text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)
+                          
+       
 #========================================================
 #================== History view ======================== 
 #========================================================
@@ -289,7 +336,9 @@ class ATM_app: # Creating the class for the app
         
         history_top = tk.Toplevel(self.root) # Creating the fluting window
         history_top.title("Transaction history")
-        history_top.geometry("500x400")
+        history_top.geometry("1000x800")
+        history_top.configure(bg="midnight blue")
+        
         
         history_frame = tk.Frame(history_top)
         history_frame.pack(pady=20, padx=20, fill="both", expand=True) # Putting the window inside the origin screen
@@ -307,42 +356,13 @@ class ATM_app: # Creating the class for the app
             listbox.insert("end", "No history recorded in the account")
         else:
             for enter in reversed(account_history):
-                text = f"{enter['date']} | {enter['operation']} | ₪ {enter['amount']} | {enter['amount_after']} | {enter['info']}" # We took all of the operation things from models
+                text = f"{enter['date']} | {enter['operation']} | ₪ {enter['amount']} | {enter['amount_after']} | {enter['info'] }",   # We took all of the operation things from models
+                   
+                
                 #! It seems that putting "" inside f string its not accepteble
                 listbox.insert("end", text) # Putting the line to the end of the list
                 
-#========================================================
-#==================== Change PIN ======================== 
-#========================================================
-    def change_pin(self): # New pin
-        pin_change = tk.Toplevel(self.root) # Trying again the toplevel thing
-        pin_change.title("Change")
-        pin_change.geometry("500x400")
-        
-        tk.Label(pin_change, text="New PIN (4 digits)", bg="midnight blue", fg="white").pack(pady=10)
-        new_pin_enter = tk.Entry(pin_change, show="*", justify="center")
-        new_pin_enter.pack(pady=5)
-        
-        def save_new_pin(): # Saving in the json
-            new_pin = new_pin_enter.get()
-            if len(new_pin) == 4 and new_pin_enter:
-                self.current_user.pin = new_pin # Update the new
-                
-                # Saving in the pormat we created in models
-                self.current_user.add_history( 
-                    operation="PIN Change",
-                    amount=0,
-                    info="Security update"
-                )
-                
-                save_data(self.bank) # Save to json
-                messagebox.showinfo("Success", "PIN changed successfully")
-                pin_change.destroy() # Destroy the old pin 
-            else:
-                messagebox.showerror("ERROR", "PIN must be 4 digits") # In case he dosent put what we asked
-                
-        tk.Button(pin_change, text="Update", command=save_new_pin, bg="midnight blue").pack(pady=20)
-                
+
 #=======================================================
 #================ Login and menu of manager ============ #! Finished do not touch
 #=======================================================
