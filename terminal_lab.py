@@ -195,3 +195,8 @@ from storage import load_data, save_data
         #     print(f"Transfer Failed: The {the_sender.full_name} is lack of NIS.")
         #     print(f"Current Balance in your account: {the_sender.balance} | Transfer request: {amount_transfer}")
         #     return False
+        
+        #! Old use that we took for example from google
+         # json_dump(last_json, open('data.json', 'w'), indent=4)
+    # The w is for write, over write the file to new one, like > in linux
+    # indent is for beuty
