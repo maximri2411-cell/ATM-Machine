@@ -1,7 +1,7 @@
 from models import Accounts, Bank
 from storage import load_data, save_data
 
-# Maxims lab for accounts and bank
+#TODO lab for accounts and bank
 
 #! deposit test
 # test_bank = load_data()
@@ -33,6 +33,7 @@ from storage import load_data, save_data
 # save_data(test_bank)
 # print("saved in json")
 
+
 # #! PIN Change
 # test_bank = load_data()
 # account_for_test = test_bank.find_account("615243") # Taking King for example
@@ -46,9 +47,7 @@ from storage import load_data, save_data
 # print("PIN have been changed")
 
 
-
 #! combined test lab for my models and data
-
 # def test_bank_system():
 #     print("Test")
     
@@ -68,6 +67,7 @@ from storage import load_data, save_data
 #     print("Finish")
 
 # test_bank_system()
+
 
 # #! block and active account test 
 # def test_manager_skills():
@@ -105,4 +105,58 @@ from storage import load_data, save_data
 #     print(history)
     
 # manager_test_history()
+
     
+        #! Old version befure buttons
+        # # All of the buttons in the menu of user
+        # tk.Button(self.root, text="WITHDRAW", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.withdraw_action).pack(pady=20)
+        # tk.Button(self.root, text="DEPOSIT", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.deposite_action).pack(pady=20)
+        # tk.Button(self.root, text="BALANCE", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.check_balance_action).pack(pady=20)
+        # tk.Button(self.root, text="TRANSFER", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.transfer_action).pack(pady=20)
+        # tk.Button(self.root, text="CHANGE PIN", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.change_pin).pack(pady=20)
+        # tk.Button(self.root, text="HISTORY", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.full_history).pack(pady=20)
+        # tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)
+        
+#=======================================================
+#================== Balance page =======================
+#======================================================= 
+
+
+        #! We dont use that 
+    # def check_balance_action(self):
+    #     self.cleaning_screen()
+    #     tk.Label(self.root, text="Your Balance:", font=("Arial", 28, "bold"), bg="midnight blue", fg="ivory").pack(pady=40)
+    #     tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4,command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne")   
+    #     tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)    
+    #     current_balance = self.current_user.balance
+    #     tk.Label(self.root, text=f"₪ {current_balance:,.2f}", font=("Arial", 32, "bold"), bg="midnight blue", fg="white").pack(pady=10)
+    #     tk.Label(self.root, text="Transaction History:", font=("Arial", 20), bg="midnight blue", fg="ivory").pack(pady=(10, 5))
+                 
+    #     self.history_list = tk.Listbox(self.root, width=70, height=10, font=("Arial", 10, "bold"), bg="slate gray", fg="white", borderwidth=0, highlightthickness=1, highlightbackground="#4a5a71", justify="center")
+    #     self.history_list.pack(pady=10)  
+    #     user_history = self.current_user.see_history()
+    #     if not user_history:
+    #         self.history_list.insert("end", "No operations yet")
+    #     else:
+    #         for entry in reversed(user_history[-10:]): 
+    #             text = f"{entry['date']} | {entry['operation']}: {entry['amount']} NIS | After: {entry['amount_after']}"
+    #             self.history_list.insert("end", text)  
+         
+               
+                #! Old version 
+        #     messagebox.showerror("Error", "Please enter a positive amount.") 
+        #         return
+        #     current_balance = self.current_user.balance
+        #     if amount > current_balance:
+        #         messagebox.showerror("Withdrawal Denied", 
+        #             f"The maximum amount you can withdraw is ₪{current_balance:,.2f}")
+        #         return
+        #     self.current_user.withdraw(amount)
+            
+        #     save_data(self.bank) # Saving in the data.json
+            
+        #     messagebox.showinfo("Success", f"₪{amount:,.2f} withdrawn successfully!")
+        #     self.withdraw_action() 
+        # except ValueError:
+        #     messagebox.showerror("Error", "Invalid input! Please enter numbers only.") 
+        

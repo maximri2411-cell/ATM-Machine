@@ -181,9 +181,31 @@
             "account_id": "653421",
             "full_name": "Daniel Levi",
             "pin": "4332",
-            "balance": 0.0,
+            "balance": 1400.0,
             "status": "Active",
-            "history": []
+            "history": [
+                {
+                    "operation": "Deposit",
+                    "amount": 700.0,
+                    "date": "06/04/2026 19:36",
+                    "amount_after": 700.0,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 200.0,
+                    "date": "06/04/2026 19:36",
+                    "amount_after": 500.0,
+                    "info": "None"
+                },
+                {
+                    "operation": "Deposit",
+                    "amount": 900.0,
+                    "date": "06/04/2026 19:44",
+                    "amount_after": 1400.0,
+                    "info": "None"
+                }
+            ]
         },
         "132456": {
             "account_id": "132456",
@@ -205,7 +227,7 @@
             "account_id": "556612",
             "full_name": "Dana Rosso",
             "pin": "1123",
-            "balance": 143222.3,
+            "balance": 133222.3,
             "status": "Active",
             "history": [
                 {
@@ -213,6 +235,13 @@
                     "amount": 1000.0,
                     "date": "02/04/2026 20:34",
                     "amount_after": 143222.3,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 10000.0,
+                    "date": "06/04/2026 20:03",
+                    "amount_after": 133222.3,
                     "info": "None"
                 }
             ]
