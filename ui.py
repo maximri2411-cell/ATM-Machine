@@ -1,7 +1,7 @@
 #===================================
 # All of features we need to make our app great
 import tkinter as tk
-from tkinter import messagebox, ttk
+from tkinter import messagebox, ttk, Scrollbar
 from storage import load_data, save_data #! Do not delete it, important for our function to use
 
 # =======================================================
@@ -235,15 +235,15 @@ class ATM_app: # Creating the class for the app
                 messagebox.showerror("ERROR", "You cannot transfer money to yourself.")
                 return
             
-            # Checking if the account is blocked
-            if target_account.status == "Blocked":
-                messagebox.showerror("ERROR", "The account is blocked, transfer cannot be made.")
-                return
-            
             # We want to check if the target is even exist
             if target_id in self.bank.Accounts:
                 target_account = self.bank.Accounts[target_id]
                 
+                 # Checking if the account is blocked
+                if target_account.status == "Blocked":
+                    messagebox.showerror("ERROR", "The account is blocked, transfer cannot be made.")
+                    return
+                    
                 self.current_user.withdraw(amount) # Taking from the sender
                 target_account.deposit(amount)     # The receiver gets the amount
                 
@@ -273,6 +273,27 @@ class ATM_app: # Creating the class for the app
         #     self.withdraw_action() 
         # except ValueError:
         #     messagebox.showerror("Error", "Invalid input! Please enter numbers only.") 
+        
+#========================================================
+#================== History view ======================== 
+#========================================================
+
+    def full_history(self): # Creating the watch history for user
+        
+        #TODO Trying the toplevel thing
+        history_top = tk.Toplevel(self.root)
+        history_top.title("Transaction history")
+        history_top.geometry("500x400")
+        
+        #TODO frame thing
+        history_frame = tk.Frame(history_top)
+        history_frame.pack(pady=20, padx=20, fill="both", expand=True)
+        
+        #TODO scrollbsr thing
+        Scrollbar = tk.Scrollbar(history_frame)
+        Scrollbar.pack(side="right", fill="y") # Puting it to the right
+        
+        
                       
 #=======================================================
 #================ Login and menu of manager ============ #! Finished do not touch
