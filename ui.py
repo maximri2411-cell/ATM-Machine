@@ -378,7 +378,7 @@ class ATM_app: # Creating the class for the app
         Scrollbar = tk.Scrollbar(history_frame)
         Scrollbar.pack(side="right", fill="y") # Attach the ruler to the right side of the box and stretch it to the entire height
         
-        listbox = tk.Listbox(history_frame, width=50, font=("Arial", 10), yscrollcommand=Scrollbar.set) # Should connect between listbox and scrollbar with yscrollcommand
+        listbox = tk.Listbox(history_frame, width=30, font=("Arial", 10), yscrollcommand=Scrollbar.set) # Should connect between listbox and scrollbar with yscrollcommand
         listbox.pack(side="left", fill="both", expand=True) # Snaps the list to the left side, lets it fill all the remaining space (fill="both") and allows it to grow if we enlarge the window (expand=True).
         
         Scrollbar.config(command=listbox.yview) 
@@ -388,13 +388,12 @@ class ATM_app: # Creating the class for the app
             listbox.insert("end", "No history recorded in the account")
         else:
             for enter in reversed(account_history):
-                text = f"{enter['date']} | {enter['operation']} | ₪ {enter['amount']} | {enter['amount_after']} | {enter['info'] }",   # We took all of the operation things from models
+                text = f"{enter['date']} | {enter['operation']} | ₪ {enter['amount']} | {enter['amount_after']} | {enter['info'] }" # We took all of the operation things from models
                    
                 
                 #! It seems that putting "" inside f string its not accepteble
                 listbox.insert("end", text) # Putting the line to the end of the list
                 
-
 #=======================================================
 #================ Login and menu of manager ============ #! Finished do not touch
 #=======================================================
