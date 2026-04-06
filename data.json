@@ -413,7 +413,18 @@
             "pin": "1222",
             "balance": 0.0,
             "status": "Active",
-            "history": []
+            "history": [
+                {
+                    "operation": "Status Change",
+                    "date": "07/04/2026 00:49",
+                    "info": "Account status change to Blocked by Admin"
+                },
+                {
+                    "operation": "Status Change",
+                    "date": "07/04/2026 00:49",
+                    "info": "Account status change to Active by Admin"
+                }
+            ]
         }
     }
 }

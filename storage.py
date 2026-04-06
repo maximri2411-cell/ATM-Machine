@@ -1,5 +1,6 @@
 # For use to run he file with functions and dict on other files
-import json                
+import json              
+import  
 from models import Bank, Accounts
 
 def load_data():
@@ -23,7 +24,7 @@ def load_data():
         new_account = Accounts( #! Creating new account, do not change, its base on what we created in data.json
             info["account_id"],
             info["full_name"],
-            info["pin"],        # It like taking the new account and puting all of the info we found in json
+            info["pin"],        # It taking the new account and puting all of the info we found in json
             info["balance"],
             info["status"],
             info["history"]
