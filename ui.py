@@ -21,12 +21,17 @@ class ATM_app: # Creating the class for the app
     def cleaning_screen(self): # Its important to clean the text after the user use or press the button
         for widget in self.root.winfo_children():
             widget.destroy()
+            
+    def exit_app(self): # Jusr an exit button in the opening screen
+        if messagebox.askyesno("EXIT", "Are you sure you want to exit the app?")
+        self.root.destroy()
+        
         
     def create_login_screen(self):
         self.cleaning_screen()
         
         # Simple window just to see if its work with some feature like the type of language
-        tk.Label(self.root, text="WELCOME TO GTA ATM", font=("Arial", 36, "bold"), bg="midnight blue", fg="ivory").pack(pady=50)
+        tk.Label(self.root, text="GTA ATM", font=("Arial", 36, "bold"), bg="midnight blue", fg="ivory").pack(pady=50)
         
         # Adding fild to enter his ID number
         tk.Label(self.root, text="Account ID",font=("Arial", 16, "bold"), bg="midnight blue", fg="ivory").pack()
@@ -277,36 +282,57 @@ class ATM_app: # Creating the class for the app
 #========================================================
 #================== History view ======================== 
 #========================================================
-
+###### I used google translet to explain, sorry
     def full_history(self): # Creating the watch history for user
         
-        #TODO Trying the toplevel thing
-        history_top = tk.Toplevel(self.root)
+        history_top = tk.Toplevel(self.root) # Creating the fluting window
         history_top.title("Transaction history")
         history_top.geometry("500x400")
         
-        #TODO frame thing
         history_frame = tk.Frame(history_top)
-        history_frame.pack(pady=20, padx=20, fill="both", expand=True)
+        history_frame.pack(pady=20, padx=20, fill="both", expand=True) # Putting the window inside the origin screen
         
-        #TODO scrollbsr thing
         Scrollbar = tk.Scrollbar(history_frame)
-        Scrollbar.pack(side="right", fill="y") 
+        Scrollbar.pack(side="right", fill="y") # Attach the ruler to the right side of the box and stretch it to the entire height
         
         listbox = tk.Listbox(history_frame, width=50, font=("Arial", 10), yscrollcommand=Scrollbar.set) # Should connect between listbox and scrollbar with yscrollcommand
-        listbox.pack(side="left", fill="both", expand=True)
+        listbox.pack(side="left", fill="both", expand=True) # Snaps the list to the left side, lets it fill all the remaining space (fill="both") and allows it to grow if we enlarge the window (expand=True).
         
-        #TODO still try to figure out what is this
-        Scrollbar.config(command=listbox.yview)
+        Scrollbar.config(command=listbox.yview) 
         
         account_history = self.current_user.see_history()
         if not account_history:
             listbox.insert("end", "No history recorded in the account")
         else:
             for enter in reversed(account_history):
-                text = f"{enter['date']} | {enter['operation']} | ₪ {enter['amount']} | {enter['amount_after']} | {enter['info']}"
-                listbox.insert("end", text)
+                text = f"{enter['date']} | {enter['operation']} | ₪ {enter['amount']} | {enter['amount_after']} | {enter['info']}" # We took all of the operation things from models
+                #! It seems that putting "" inside f string its not accepteble
+                listbox.insert("end", text) # Putting the line to the end of the list
+                
+#========================================================
+#==================== Change PIN ======================== 
+#========================================================
+    def change_pin(self): # New pin
+        pin_change = tk.Toplevel(self.root) # Trying again the toplevel thing
+        pin_change.title("Change")
+        pin_change.geometry("500x400")
         
+        tk.Label(pin_change, text="New PIN (4 digits)", bg="midnight blue", fg="white").pack(pady=10)
+        new_pin_enter = tk.Entry(pin_change, show="*", justify="center")
+        new_pin_enter.pack(pady=5)
+        
+        def save_new_pin(): # Saving in the json
+            new_pin = new_pin_enter.get()
+            if len(new_pin) == 4 and new_pin_enter():
+                self.current_user.pin = new_pin
+                save_data(self.bank)
+                messagebox.showinfo("Success", "PIN changed successfully")
+                pin_change.destroy() # Destroy the old pin 
+            else:
+                messagebox.showerror("ERROR", "PIN must be 4 digits") # In case he dosent put what we asked
+                
+        tk.Button(pin_change, text="Update", command=save_new_pin, bg="midnight blue").pack(pady=20)
+                
 #=======================================================
 #================ Login and menu of manager ============ #! Finished do not touch
 #=======================================================
