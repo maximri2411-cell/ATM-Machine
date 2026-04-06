@@ -4,7 +4,7 @@
             "account_id": "321321",
             "full_name": "Grisha Borisov",
             "pin": "2222",
-            "balance": 158203.25,
+            "balance": 157203.25,
             "status": "Active",
             "history": [
                 {
@@ -111,6 +111,69 @@
                     "date": "06/04/2026 14:43",
                     "amount_after": 158203.25,
                     "info": "None"
+                },
+                {
+                    "operation": "PIN Change",
+                    "amount": 0.0,
+                    "date": "06/04/2026 15:29",
+                    "amount_after": 158203.25,
+                    "info": "Security update"
+                },
+                {
+                    "operation": "PIN Change",
+                    "amount": 0.0,
+                    "date": "06/04/2026 15:29",
+                    "amount_after": 158203.25,
+                    "info": "Security update"
+                },
+                {
+                    "operation": "PIN Change",
+                    "amount": 0.0,
+                    "date": "06/04/2026 17:07",
+                    "amount_after": 158203.25,
+                    "info": "Security update"
+                },
+                {
+                    "operation": "PIN Change",
+                    "amount": 0.0,
+                    "date": "06/04/2026 17:07",
+                    "amount_after": 158203.25,
+                    "info": "Security update"
+                },
+                {
+                    "operation": "PIN Change",
+                    "amount": 0.0,
+                    "date": "06/04/2026 17:31",
+                    "amount_after": 158203.25,
+                    "info": "Security update"
+                },
+                {
+                    "operation": "PIN Change",
+                    "amount": 0.0,
+                    "date": "06/04/2026 17:32",
+                    "amount_after": 158203.25,
+                    "info": "Security update"
+                },
+                {
+                    "operation": "PIN Change",
+                    "amount": 0.0,
+                    "date": "06/04/2026 18:03",
+                    "amount_after": 158203.25,
+                    "info": "Security update"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 1000.0,
+                    "date": "06/04/2026 18:04",
+                    "amount_after": 157203.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "PIN Change",
+                    "amount": 0.0,
+                    "date": "06/04/2026 18:13",
+                    "amount_after": 157203.25,
+                    "info": "Security update"
                 }
             ]
         },
