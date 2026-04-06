@@ -78,7 +78,26 @@ class ATM_app: # Creating the class for the app
     
     def user_screen(self): # User screen creation
         self.cleaning_screen()
-        tk.Label(self.root, text=f"Welcome back {self.current_user.full_name}", font=("Arial", 28, "bold"), bg="midnight blue", fg="ivory").pack(pady=50)
+        
+        # On top of the screen it will show the deatails about the user how loged in
+        top_frame = tk.Frame(self.root, bg="midnight blue", pady=30)
+        top_frame.pack(fill="x")
+        
+        # User owner account name
+        tk.Label(top_frame), text=f"Account owner: {self.current_user.full_name}", font=("Arial", 15), bg="midnight blue", fg="white".pack()
+        
+        # ID 
+        tk.Label(top_frame, text=f"Account ID: {self.current_user.id}", font=("Arial", 14), bg="midnight blue", fg="gold").pack()
+        
+        # This will show the current balance after an operation, making it a value
+        self.balance_label = tk.Label(self.root, text=f"₪ {self.current_user.balance:,.2f}", fonr=("Arial", 28, "bold"), bg="midnight blue", fg="white")
+        self.balance_label.pack(pady=10)
+        
+        # Down label frame
+        button_frame = tk.Frame(self.root, bg="midnight blue")
+        button_frame.pack(fill="both", expand=True)
+        
+        # All of the buttons in the menu of user
         tk.Button(self.root, text="WITHDRAW", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.withdraw_action).pack(pady=20)
         tk.Button(self.root, text="DEPOSIT", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.deposite_action).pack(pady=20)
         tk.Button(self.root, text="BALANCE", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.check_balance_action).pack(pady=20)
@@ -87,8 +106,6 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="HISTORY", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.full_history).pack(pady=20)
         tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)
         
-       
-      
 #=======================================================
 #================== Balance page ======================= #! Finished do not touch
 #======================================================= #TODO Add some comments next to the code to understand what is goin on  
@@ -141,18 +158,18 @@ class ATM_app: # Creating the class for the app
             current_balance = self.current_user.balance
             if amount > current_balance:
                 messagebox.showerror("Withdrawal denied", 
-                    f"Maximum amount to withdraw:  ₪ {current_balance:,.2f}")
+                    f"Maximum amount to withdraw: ₪ {current_balance:,.2f}")
                 return
-            self.current_user.withdraw(amount)
             
+            self.current_user.withdraw(amount)
             save_data(self.bank) # Saving in the data.json
+            self.balance_label.config(text=f"₪ {self.current_user.balance:,.2f}")
             
             messagebox.showinfo("Success", f"₪ {amount:,.2f} withdrawn successfully.")
-            self.withdraw_action() 
+            self.withdraw_entry.delete(0, tk.END)
         except ValueError:
             messagebox.showerror("ERROR", "Invalid input, Please enter diginumbers only.")
-        
-    
+
 #========================================================
 #================== Deposite page ======================= #! Finished do not touch
 #======================================================== #TODO Add some comments next to the code to understand what is goin on  
@@ -171,16 +188,17 @@ class ATM_app: # Creating the class for the app
    
     def execute_deposite(self):
         try:
-            amount_user = self.withdraw_entry.get()
+            amount_user = self.deposit_entry.get()
             if not amount_user: return
             
             amount = float(amount_user)
             self.current_user.deposit(amount) # Calling it to make the action
             
             save_data(self.bank) # Saving data to data.json
+            self.balance_label.config(text=f"₪ {self.current_user.balance:,.2f}")
             
             messagebox.showinfo("Success", f"₪{amount_user}")
-            self.user_screen() # Back to main menu
+            self.deposite_entry.delete(0, tk.END) # Back to main menu
         except ValueError:
             messagebox.showerror("ERROR", "Invalid amount or insufficient balance.")
                
