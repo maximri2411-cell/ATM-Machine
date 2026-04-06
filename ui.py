@@ -79,6 +79,9 @@ class ATM_app: # Creating the class for the app
     def user_screen(self): # User screen creation
         self.cleaning_screen()
         tk.Label(self.root, text=f"Welcome back {self.current_user.full_name}", font=("Arial", 28, "bold"), bg="midnight blue", fg="ivory").pack(pady=50)
+        self.balance_label = tk.Label(self.root, text=f"₪ {self.current_user.balance:,.2f}", fonr=("Arial", 28, "bold"), bg="midnight blue", fg="white")
+        self.balance_label.pack(pady=10)
+        
         tk.Button(self.root, text="WITHDRAW", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.withdraw_action).pack(pady=20)
         tk.Button(self.root, text="DEPOSIT", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.deposite_action).pack(pady=20)
         tk.Button(self.root, text="BALANCE", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.check_balance_action).pack(pady=20)
@@ -141,18 +144,18 @@ class ATM_app: # Creating the class for the app
             current_balance = self.current_user.balance
             if amount > current_balance:
                 messagebox.showerror("Withdrawal denied", 
-                    f"Maximum amount to withdraw:  ₪ {current_balance:,.2f}")
+                    f"Maximum amount to withdraw: ₪ {current_balance:,.2f}")
                 return
-            self.current_user.withdraw(amount)
             
+            self.current_user.withdraw(amount)
             save_data(self.bank) # Saving in the data.json
+            self.balance_label.config(text=f"₪ {self.current_user.balance:,.2f}")
             
             messagebox.showinfo("Success", f"₪ {amount:,.2f} withdrawn successfully.")
-            self.withdraw_action() 
+            self.withdraw_entry.delete(0, tk.END)
         except ValueError:
             messagebox.showerror("ERROR", "Invalid input, Please enter diginumbers only.")
-        
-    
+
 #========================================================
 #================== Deposite page ======================= #! Finished do not touch
 #======================================================== #TODO Add some comments next to the code to understand what is goin on  
