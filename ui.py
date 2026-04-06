@@ -62,7 +62,7 @@ class ATM_app: # Creating the class for the app
             self.current_user = user
             messagebox.showinfo("Success", message)# Line up that every success entry must be like this
             self.account_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
-            self.account_entry.delete(0, tk.END) 
+            self.pin_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
             
             self.user_screen() # Moving to the user screen
         else:
@@ -137,7 +137,7 @@ class ATM_app: # Creating the class for the app
             self.current_user.withdraw(amount) # Doin the operation
             save_data(self.bank) # Saving in the data.json
             self.balance_label.config(text=f"₪ {self.current_user.balance:,.2f}")
-            messagebox.showinfo("Success", f"₪ {amount:,.2f} withdrawn successfully.") # Final message
+            messagebox.showinfo("Success", f"₪ {amount:,.2f} withdrawn successfully, Thank you and goodbye") # Final message
             
             self.user_screen()
         except ValueError:
@@ -177,7 +177,7 @@ class ATM_app: # Creating the class for the app
             self.current_user.deposit(amount) # Calling it to make the action
             save_data(self.bank) # Saving data to data.json
             self.balance_label.config(text=f"₪ {self.current_user.balance:,.2f}") # Of course only last 2 digit after .
-            messagebox.showinfo("Success", f"₪{amount_user:,.2f}")
+            messagebox.showinfo("Success", f"₪ {amount:,.2f} deposit successfully, Thank you and goodbye")
             
             self.user_screen() # Back to main menu
         except ValueError:
@@ -271,7 +271,7 @@ class ATM_app: # Creating the class for the app
         pin_change.geometry("1000x800")
         pin_change.configure(bg="midnight blue")
         
-        tk.Button(pin_change, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4, command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne") # Go back button
+        tk.Button(pin_change, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4, command=pin_change.destroy).place(relx=0.95, rely=0.05, anchor="ne") # Go back button
         tk.Label(pin_change, text=" CHANGE PIN", font=("Arial", 24, "bold"), bg="midnight blue", fg="ivory").pack(pady=20) #page title
 
         tk.Label(pin_change, text="ENTER PIN:",font=("Arial", 16, "bold"), bg="midnight blue", fg="ivory").pack(pady=(10, 5))
@@ -287,9 +287,9 @@ class ATM_app: # Creating the class for the app
         acc_pin_enter.pack(pady=10, ipady=8)
         
         def save_new_pin(): # Saving in the json
-            old_pin = self.old_pin_enter.get()
-            new_pin = self.new_pin_enter.get()
-            acc_pin = self.acc_pin_enter.get()
+            old_pin = old_pin_enter.get()
+            new_pin = new_pin_enter.get()
+            acc_pin = acc_pin_enter.get()
             
             if old_pin != self.current_user.pin: # Check if the old pin is currect
                 messagebox.showerror("ERROR", "Your PIN is incorrect")
