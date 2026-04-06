@@ -319,7 +319,8 @@ class ATM_app: # Creating the class for the app
                 messagebox.showerror("ERROR", "PIN must be 4 digits") # In case he dosent put what we asked   
                 
         tk.Button(pin_change, text="ACCEPT CHANGE",width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=save_new_pin).pack(pady=20)
-        tk.Button(pin_change,  text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)
+        tk.Button(pin_change,  text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=lambda: [pin_change.destroy(), self.create_login_screen()]).pack(side= "bottom", anchor="s" , pady=20)
+        # The lambda is for delete the old pin and close the window
                           
 #========================================================
 #================== History view ======================== 
