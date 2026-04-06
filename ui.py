@@ -87,7 +87,7 @@ class ATM_app: # Creating the class for the app
         tk.Label(top_frame, text=f"Account owner: {self.current_user.full_name}", font=("Arial", 15), bg="midnight blue", fg="white").pack()
         
         # ID 
-        tk.Label(top_frame, text=f"Account ID: {self.current_user.id}", font=("Arial", 14), bg="midnight blue", fg="gold").pack()
+        tk.Label(top_frame, text=f"Account ID: {self.current_user.account_id}", font=("Arial", 14), bg="midnight blue", fg="gold").pack()
         
         # This will show the current balance after an operation, making it a value
         self.balance_label = tk.Label(self.root, text=f"₪ {self.current_user.balance:,.2f}", font=("Arial", 28, "bold"), bg="midnight blue", fg="white")
@@ -107,9 +107,10 @@ class ATM_app: # Creating the class for the app
         ]
         
         for text, cmd in buttons:
-            tk.Button(button_frame, text=text, font=("Arial", 18), bg="gold", fg="midnight blue", command=cmd).pack(pady=10)
+            tk.Button(button_frame, text=text, width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=cmd).pack(pady=10)
             
-            
+        tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side="bottom", pady=20)
+        
         #! Old version befure buttons
         # # All of the buttons in the menu of user
         # tk.Button(self.root, text="WITHDRAW", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.withdraw_action).pack(pady=20)
