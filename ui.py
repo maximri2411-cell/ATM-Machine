@@ -48,8 +48,10 @@ class ATM_app: # Creating the class for the app
     
         # Admin login button
         tk.Button(self.root, text="Admin Access", command=self.admin_screen,font=("Arial", 16, "bold"), width=23, bg="#2d3e50", fg="white", activebackground="#b8962e", borderwidth=0, cursor="hand2"  ).pack(pady=15)
-  
 
+         # Normal user login button
+        tk.Button(self.root, text="EXIT", command=self.exit_app,font=("Arial", 22 , "bold"), width=15, bg="gold", fg="midnight blue", activebackground="#b8962e", borderwidth=0, cursor="hand2" ,  ).pack(side= "bottom", anchor="s" , pady=20)
+#                                                                                             
 
 #=======================================================
 #================== Login and menu of user ============= #TODO Upgrade the beuty
