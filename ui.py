@@ -84,7 +84,7 @@ class ATM_app: # Creating the class for the app
         top_frame.pack(fill="x")
         
         # User owner account name
-        tk.Label(top_frame), text=f"Account owner: {self.current_user.full_name}", font=("Arial", 15), bg="midnight blue", fg="white".pack()
+        tk.Label(top_frame, text=f"Account owner: {self.current_user.full_name}", font=("Arial", 15), bg="midnight blue", fg="white").pack()
         
         # ID 
         tk.Label(top_frame, text=f"Account ID: {self.current_user.id}", font=("Arial", 14), bg="midnight blue", fg="gold").pack()
