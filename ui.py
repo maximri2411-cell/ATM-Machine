@@ -83,16 +83,19 @@ class ATM_app: # Creating the class for the app
         top_frame = tk.Frame(self.root, bg="midnight blue", pady=30)
         top_frame.pack(fill="x")
         
-        #user owner account name
+        # User owner account name
         tk.Label(top_frame), text=f"Account owner: {self.current_user.full_name}", font=("Arial", 15), bg="midnight blue", fg="white".pack()
         
+        # ID 
+        tk.Label(top_frame, text=f"Account ID: {self.current_user.id}", font=("Arial", 14), bg="midnight blue", fg="gold").pack()
         
         # This will show the current balance after an operation, making it a value
         self.balance_label = tk.Label(self.root, text=f"₪ {self.current_user.balance:,.2f}", fonr=("Arial", 28, "bold"), bg="midnight blue", fg="white")
         self.balance_label.pack(pady=10)
         
-        # ID 
-        tk.Label(top_frame, text=f"Account ID: {self.current_user.id}", font=("Arial", 14), bg="midnight blue", fg="gold").pack()
+        # Down label frame
+        button_frame = tk.Frame(self.root, bg="midnight blue")
+        button_frame.pack(fill="both", expand=True)
         
         # All of the buttons in the menu of user
         tk.Button(self.root, text="WITHDRAW", width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=self.withdraw_action).pack(pady=20)
