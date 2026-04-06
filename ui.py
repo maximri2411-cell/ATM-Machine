@@ -56,7 +56,6 @@ class ATM_app: # Creating the class for the app
     def normal_login(self): # Taking data from GUI fild
         accout_id = self.account_entry.get()
         pin = self.pin_entry.get()
-        
         user, message = self.bank.login_account(accout_id, pin)
         
         if user:
@@ -92,7 +91,6 @@ class ATM_app: # Creating the class for the app
         # Down label frame
         button_frame = tk.Frame(self.root, bg="midnight blue")
         button_frame.pack(fill="both", expand=True)
-        
         buttons = [
             ("WITHDRAW", self.withdraw_action),
             ("DEPOSIT", self.deposite_action),
@@ -100,7 +98,6 @@ class ATM_app: # Creating the class for the app
             ("CHANGE PIN", self.change_pin),
             ("HISTORY", self.full_history)
         ]
-        
         for text, cmd in buttons:
             tk.Button(button_frame, text=text, width=25, font=("Arial", 18), bg="gold", fg="midnight blue", command=cmd).pack(pady=10)
             
@@ -128,40 +125,42 @@ class ATM_app: # Creating the class for the app
             if not amount_str:
                 return
             amount = float(amount_str)
+            
             if amount <= 0:
                 messagebox.showerror("ERROR", "Enter a positive or existing balance amount.")
                 return
             current_balance = self.current_user.balance
             if amount > current_balance:
-                messagebox.showerror("Withdrawal denied", 
-                    f"Maximum amount to withdraw: ₪ {current_balance:,.2f}")
+                messagebox.showerror("Withdrawal denied", f"Maximum amount to withdraw: ₪ {current_balance:,.2f}")
                 return
             
-            self.current_user.withdraw(amount)
-            
+            self.current_user.withdraw(amount) # Doin the operation
             save_data(self.bank) # Saving in the data.json
-            
-            messagebox.showinfo("Success", f"₪ {amount:,.2f} withdrawn successfully.")
+            self.balance_label.config(text=f"₪ {self.current_user.balance:,.2f}")
+            messagebox.showinfo("Success", f"₪ {amount:,.2f} withdrawn successfully.") # Final message
             
             self.user_screen()
         except ValueError:
             messagebox.showerror("ERROR", "Invalid input, Please enter diginumbers only.")
 
 #========================================================
-#================== Deposite page ======================= #! Finished do not touch
-#======================================================== #TODO Add some comments next to the code to understand what is goin on  
+#================== Deposite page ======================= 
+#======================================================== 
          
     def deposit_action(self):
         self.cleaning_screen()
+        
         tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4, command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne")
         tk.Label(self.root, text="DEPOSITE", font=("Arial", 24, "bold"), bg="midnight blue", fg="ivory").pack(pady=20)
         current_balance = self.current_user.balance
+        
         tk.Label(self.root, text=f"Current balance: ₪ {current_balance:,.2f}", font=("Arial", 18), bg="midnight blue", fg="gold").pack(pady=10)
         tk.Label(self.root, text="Amount to deposit", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(30, 10))
 
         self.deposit_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
         self.deposit_entry.pack(pady=10, ipady=8)
-        tk.Button(self.root, text="Confirm action", width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=self.execute_deposite).pack(pady=20)
+        
+        tk.Button(self.root, text="Confirm action", width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=self.execute_deposit).pack(pady=20)
         tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)
    
     def execute_deposit(self):
@@ -170,11 +169,14 @@ class ATM_app: # Creating the class for the app
             if not amount_user:
                 return
             
-            amount = float(amount_user)
+            amount = float(amount_user) # In case the user gonna enter - number
+            if amount <= 0:
+                messagebox.showerror("ERROR", "Enter an positive amount")
+                return
+                
             self.current_user.deposit(amount) # Calling it to make the action
-            
             save_data(self.bank) # Saving data to data.json
-        
+            self.balance_label.config(text=f"₪ {self.current_user.balance:,.2f}") # Of course only last 2 digit after .
             messagebox.showinfo("Success", f"₪{amount_user:,.2f}")
             
             self.user_screen() # Back to main menu
@@ -211,7 +213,6 @@ class ATM_app: # Creating the class for the app
         # Last buttons
         tk.Button(self.root, text="CONFIRM TRANSFER", width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=self.execute_transfer).pack(pady=20)
         tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)              
-    
     
     def execute_transfer(self): # Conacting the transfer to the models and data and of course saving it
         try:
@@ -252,7 +253,6 @@ class ATM_app: # Creating the class for the app
                 target_account.deposit(amount)     # The receiver gets the amount
                 
                 save_data(self.bank) # Saving in json
-                
                 messagebox.showinfo("Success", f"₪ {amount:,.2f} transferred to {target_account.full_name}")
                 self.user_screen() # Return te menu after finish
             else:
@@ -264,6 +264,7 @@ class ATM_app: # Creating the class for the app
 #========================================================
 #==================== Change PIN ======================== 
 #========================================================
+
     def change_pin(self): # New pin
         pin_change = tk.Toplevel(self.root) # Trying again the toplevel thing
         pin_change.title("Change")
@@ -284,7 +285,6 @@ class ATM_app: # Creating the class for the app
         tk.Label(pin_change, text="ACCEPT NEW PIN",font=("Arial", 16, "bold"), bg="midnight blue", fg="ivory").pack(pady=(10, 5))
         acc_pin_enter = tk.Entry(pin_change, show="*", width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0, highlightthickness=1, highlightbackground="#4a5a71") 
         acc_pin_enter.pack(pady=10, ipady=8)
-       
         
         def save_new_pin(): # Saving in the json
             old_pin = self.old_pin_enter.get()
@@ -303,30 +303,28 @@ class ATM_app: # Creating the class for the app
                 messagebox.showerror("ERROR", "New PINs do not match")
                 return
             
-            # new_pin = new_pin_enter.get()
-            # if len(new_pin) == 4 and new_pin.isdigit():
-            #     self.current_user.pin = new_pin # Update the new
+            if len(new_pin) == 4 and new_pin.isdigit():
+                self.current_user.pin = new_pin # Update the new
                 
-            #     # Saving in the pormat we created in models
-            #     self.current_user.add_history( 
-            #         operation="PIN Change",
-            #         amount=0,
-            #         info="Security update"
-            #     )
-                
-            #     save_data(self.bank) # Save to json
-            #     messagebox.showinfo("Success", "PIN changed successfully")
-            #     pin_change.destroy() # Destroy the old pin 
-            # else:
-            #     messagebox.showerror("ERROR", "PIN must be 4 digits") # In case he dosent put what we asked   
+                # Saving in the pormat we created in models
+                self.current_user.add_history( 
+                    operation="PIN Change",
+                    amount=0,
+                    info="Security update"
+                )
+                save_data(self.bank) # Save to json
+                messagebox.showinfo("Success", "PIN changed successfully")
+                pin_change.destroy() # Destroy the old pin 
+            else:
+                messagebox.showerror("ERROR", "PIN must be 4 digits") # In case he dosent put what we asked   
                 
         tk.Button(pin_change, text="ACCEPT CHANGE",width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=save_new_pin).pack(pady=20)
         tk.Button(pin_change,  text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)
                           
-       
 #========================================================
 #================== History view ======================== 
 #========================================================
+
 ###### I used google translet to explain, sorry
     def full_history(self): # Creating the watch history for user
         
@@ -334,7 +332,6 @@ class ATM_app: # Creating the class for the app
         history_top.title("Transaction history")
         history_top.geometry("1000x800")
         history_top.configure(bg="midnight blue")
-        
         
         history_frame = tk.Frame(history_top)
         history_frame.pack(pady=20, padx=20, fill="both", expand=True) # Putting the window inside the origin screen
