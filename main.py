@@ -1,5 +1,13 @@
-from storage import load_data
+import tkinter as tk
+from ui import ATM_app
 
-
-def main():
-    bank = load_data() # Our engine of all the data and classes we created
+def main(): 
+    
+    root = tk.Tk() # Creating the main or origin window of root
+    
+    app = ATM_app(root) # Starting the app
+    
+    root.mainloop() # Main loop
+    
+if __name__ == "__main__":
+    main()

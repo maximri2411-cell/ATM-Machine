@@ -369,18 +369,90 @@
         "653421": {
             "account_id": "653421",
             "full_name": "Daniel Levi",
-            "pin": "4332",
-            "balance": 0.0,
+            "pin": "0001",
+            "balance": 700.0,
             "status": "Active",
-            "history": []
+            "history": [
+                {
+                    "operation": "Deposit",
+                    "amount": 700.0,
+                    "date": "06/04/2026 19:36",
+                    "amount_after": 700.0,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 200.0,
+                    "date": "06/04/2026 19:36",
+                    "amount_after": 500.0,
+                    "info": "None"
+                },
+                {
+                    "operation": "Deposit",
+                    "amount": 900.0,
+                    "date": "06/04/2026 19:44",
+                    "amount_after": 1400.0,
+                    "info": "None"
+                },
+                {
+                    "operation": "Deposit",
+                    "amount": 600.0,
+                    "date": "06/04/2026 22:20",
+                    "amount_after": 2000.0,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 600.0,
+                    "date": "06/04/2026 22:23",
+                    "amount_after": 1400.0,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 600.0,
+                    "date": "06/04/2026 22:25",
+                    "amount_after": 800.0,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 100.0,
+                    "date": "06/04/2026 22:32",
+                    "amount_after": 700.0,
+                    "info": "None"
+                },
+                {
+                    "operation": "PIN Change",
+                    "amount": 0.0,
+                    "date": "06/04/2026 22:33",
+                    "amount_after": 700.0,
+                    "info": "Security update"
+                }
+            ]
         },
         "132456": {
             "account_id": "132456",
             "full_name": "Moshe Tzadik",
-            "pin": "7979",
+            "pin": "9090",
             "balance": 15010.9,
-            "status": "Blocked",
-            "history": []
+            "status": "Active",
+            "history": [
+                {
+                    "operation": "PIN Change",
+                    "amount": 0.0,
+                    "date": "06/04/2026 23:51",
+                    "amount_after": 15010.9,
+                    "info": "Security update"
+                },
+                {
+                    "operation": "PIN Change",
+                    "amount": 0.0,
+                    "date": "06/04/2026 23:53",
+                    "amount_after": 15010.9,
+                    "info": "Security update"
+                }
+            ]
         },
         "314265": {
             "account_id": "314265",
@@ -394,7 +466,7 @@
             "account_id": "556612",
             "full_name": "Dana Rosso",
             "pin": "1123",
-            "balance": 143222.3,
+            "balance": 133222.3,
             "status": "Active",
             "history": [
                 {
@@ -403,6 +475,13 @@
                     "date": "02/04/2026 20:34",
                     "amount_after": 143222.3,
                     "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 10000.0,
+                    "date": "06/04/2026 20:03",
+                    "amount_after": 133222.3,
+                    "info": "None"
                 }
             ]
         },
@@ -410,7 +489,7 @@
             "account_id": "615243",
             "full_name": "King Kong",
             "pin": "8762",
-            "balance": 2641.7,
+            "balance": 2741.7,
             "status": "Active",
             "history": [
                 {
@@ -425,6 +504,13 @@
                     "amount": 300.0,
                     "date": "06/04/2026 00:22",
                     "amount_after": 2641.7,
+                    "info": "None"
+                },
+                {
+                    "operation": "Deposit",
+                    "amount": 100.0,
+                    "date": "06/04/2026 22:32",
+                    "amount_after": 2741.7,
                     "info": "None"
                 }
             ]
@@ -493,6 +579,74 @@
                     "date": "06/04/2026 00:22",
                     "amount_after": 10744.0,
                     "info": "None"
+                }
+            ]
+        },
+        "742885": {
+            "account_id": "742885",
+            "full_name": "Mike Tyson",
+            "pin": "3012",
+            "balance": 7500.0,
+            "status": "Active",
+            "history": [
+                {
+                    "operation": "PIN Change",
+                    "date": "07/04/2026 00:05",
+                    "info": "Security update"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "date": "07/04/2026 12:38",
+                    "info": "",
+                    "amount": 700.0,
+                    "amount_after": 5000.0
+                },
+                {
+                    "operation": "Withdrawn",
+                    "date": "07/04/2026 12:40",
+                    "info": "",
+                    "amount": 1000.0,
+                    "amount_after": 4000.0
+                },
+                {
+                    "operation": "Withdrawn",
+                    "date": "07/04/2026 12:41",
+                    "info": "",
+                    "amount": 500.0,
+                    "amount_after": 3500.0
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 12:41",
+                    "info": "",
+                    "amount": 3000.0,
+                    "amount_after": 6500.0
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 12:43",
+                    "info": "",
+                    "amount": 1000.0,
+                    "amount_after": 7500.0
+                }
+            ]
+        },
+        "936741": {
+            "account_id": "936741",
+            "full_name": "Tonton Saor",
+            "pin": "1222",
+            "balance": 0.0,
+            "status": "Active",
+            "history": [
+                {
+                    "operation": "Status Change",
+                    "date": "07/04/2026 00:49",
+                    "info": "Account status change to Blocked by Admin"
+                },
+                {
+                    "operation": "Status Change",
+                    "date": "07/04/2026 00:49",
+                    "info": "Account status change to Active by Admin"
                 }
             ]
         }
