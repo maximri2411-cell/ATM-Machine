@@ -125,11 +125,11 @@ class ATM_app: # Creating the class for the app
       
     def check_balance_action(self):
         self.cleaning_screen()
-        tk.Label(self.root, text="Your Balance:", font=("Arial", 28, "bold"), bg="midnight blue", fg="ivory").pack(pady=40)
-        tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4,command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne")   
+        tk.Label(self.root, text="Your Balance:", font=("Arial", 28, "bold"), bg="midnight blue", fg="ivory").pack(pady=40) # title
+        tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4,command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne")   # Go back button
         tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)    
         current_balance = self.current_user.balance
-        tk.Label(self.root, text=f"₪ {current_balance:,.2f}", font=("Arial", 32, "bold"), bg="midnight blue", fg="white").pack(pady=10)
+        tk.Label(self.root, text=f"₪ {current_balance:,.2f}", font=("Arial", 32, "bold"), bg="midnight blue", fg="white").pack(pady=10) # show your courent balance
         tk.Label(self.root, text="Transaction History:", font=("Arial", 20), bg="midnight blue", fg="ivory").pack(pady=(10, 5))
                  
         self.history_list = tk.Listbox(self.root, width=70, height=10, font=("Arial", 10, "bold"), bg="slate gray", fg="white", borderwidth=0, highlightthickness=1, highlightbackground="#4a5a71", justify="center")
@@ -151,9 +151,9 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4, command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne")
         tk.Label(self.root, text="WITHDRAW", font=("Arial", 24, "bold"), bg="midnight blue", fg="ivory").pack(pady=20)
         current_balance = self.current_user.balance
-        tk.Label(self.root, text=f"Current Balance: ₪ {current_balance:,.2f}", font=("Arial", 18), bg="midnight blue", fg="gold").pack(pady=10)
+        tk.Label(self.root, text=f"Current Balance: ₪ {current_balance:,.2f}", font=("Arial", 18), bg="midnight blue", fg="gold").pack(pady=10) # show your courent balance
         tk.Label(self.root, text="Amount to withdraw", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(30, 10))
-        self.withdraw_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
+        self.withdraw_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0) # fild
         self.withdraw_entry.pack(pady=10, ipady=8)
         tk.Button(self.root, text="Confirm action", width=20, font=("Arial", 16, "bold"), bg="gold", fg="midnight blue", command=self.execute_withdraw).pack(pady=20)
         tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)
@@ -189,7 +189,7 @@ class ATM_app: # Creating the class for the app
          
     def deposite_action(self):
         self.cleaning_screen()
-        tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4, command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne")
+        tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4, command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne") #
         tk.Label(self.root, text="DEPOSITE", font=("Arial", 24, "bold"), bg="midnight blue", fg="ivory").pack(pady=20)
         current_balance = self.current_user.balance
         tk.Label(self.root, text=f"Current balance: ₪ {current_balance:,.2f}", font=("Arial", 18), bg="midnight blue", fg="gold").pack(pady=10)
@@ -240,7 +240,7 @@ class ATM_app: # Creating the class for the app
         
         # Confirm transfer with PIN again
         tk.Label(self.root, text="PIN for additional verification", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10))
-        self.pin_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
+        self.pin_entry = tk.Entry(self.root, show="*",  width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
         self.pin_entry.pack(pady=10, ipady=8)
         
         # Last buttons

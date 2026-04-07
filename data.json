@@ -4,7 +4,7 @@
             "account_id": "321321",
             "full_name": "Grisha Borisov",
             "pin": "2222",
-            "balance": 157203.25,
+            "balance": 160000.25,
             "status": "Active",
             "history": [
                 {
@@ -174,6 +174,195 @@
                     "date": "06/04/2026 18:13",
                     "amount_after": 157203.25,
                     "info": "Security update"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 100.0,
+                    "date": "06/04/2026 19:35",
+                    "amount_after": 157103.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 100.0,
+                    "date": "06/04/2026 19:35",
+                    "amount_after": 157003.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 100.0,
+                    "date": "06/04/2026 19:35",
+                    "amount_after": 156903.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 100.0,
+                    "date": "06/04/2026 19:35",
+                    "amount_after": 156803.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 100.0,
+                    "date": "06/04/2026 19:36",
+                    "amount_after": 156703.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Deposit",
+                    "amount": 100.0,
+                    "date": "06/04/2026 19:36",
+                    "amount_after": 156803.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Deposit",
+                    "amount": 100.0,
+                    "date": "06/04/2026 19:36",
+                    "amount_after": 156903.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Deposit",
+                    "amount": 100.0,
+                    "date": "06/04/2026 19:36",
+                    "amount_after": 157003.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 100.0,
+                    "date": "06/04/2026 19:38",
+                    "amount_after": 156903.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 100.0,
+                    "date": "06/04/2026 19:38",
+                    "amount_after": 156803.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 100.0,
+                    "date": "06/04/2026 19:38",
+                    "amount_after": 156703.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 100.0,
+                    "date": "06/04/2026 19:38",
+                    "amount_after": 156603.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 100.0,
+                    "date": "06/04/2026 19:38",
+                    "amount_after": 156503.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 100.0,
+                    "date": "06/04/2026 19:38",
+                    "amount_after": 156403.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 100.0,
+                    "date": "06/04/2026 19:38",
+                    "amount_after": 156303.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Deposit",
+                    "amount": 100.0,
+                    "date": "06/04/2026 19:38",
+                    "amount_after": 156403.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Deposit",
+                    "amount": 100.0,
+                    "date": "06/04/2026 19:39",
+                    "amount_after": 156503.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Deposit",
+                    "amount": 100.0,
+                    "date": "06/04/2026 19:39",
+                    "amount_after": 156603.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Deposit",
+                    "amount": 100.0,
+                    "date": "06/04/2026 19:39",
+                    "amount_after": 156703.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Deposit",
+                    "amount": 100.0,
+                    "date": "06/04/2026 19:39",
+                    "amount_after": 156803.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Deposit",
+                    "amount": 100.0,
+                    "date": "06/04/2026 19:39",
+                    "amount_after": 156903.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 100.0,
+                    "date": "06/04/2026 19:40",
+                    "amount_after": 156803.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 100.0,
+                    "date": "06/04/2026 19:41",
+                    "amount_after": 156703.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Deposit",
+                    "amount": 100.0,
+                    "date": "06/04/2026 19:41",
+                    "amount_after": 156803.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 1000.0,
+                    "date": "06/04/2026 19:42",
+                    "amount_after": 155803.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Deposit",
+                    "amount": 5000.0,
+                    "date": "06/04/2026 19:43",
+                    "amount_after": 160803.25,
+                    "info": "None"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "amount": 803.0,
+                    "date": "06/04/2026 19:43",
+                    "amount_after": 160000.25,
+                    "info": "None"
                 }
             ]
         },
