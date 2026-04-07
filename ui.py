@@ -366,8 +366,8 @@ class ATM_app: # Creating the class for the app
                 listbox.insert("end", " " * 15 + "No history recorded") # If it is a new account it will print this
             else:
                 for enter in reversed(account_history): # Format if there is a history for that account
-                    date = enter.get("Date", "---")
-                    oper = enter.get("Operation", "---")
+                    date = enter.get("date", "---")
+                    oper = enter.get("operation", "---")
                     amount = f"₪ {enter['amount']:,.0f}" if "amount" in enter else "---"
                     after = f"₪ {enter['amount_after']:,.0f}" if "amount_after" in enter else "---"
                     
