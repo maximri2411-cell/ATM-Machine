@@ -21,9 +21,6 @@ class ATM_app: # Creating the class for the app
         self.current_user = None 
         self.create_login_screen()
         
-        
-        tk.Button(self.root, text="MENU", bg="#ffd700", fg="#0a192f", activebackground="#b8962e", font=("Arial", 14, "bold")).pack()
-        
     def cleaning_screen(self): # Its important to clean the text after the user use or press the button
         for widget in self.root.winfo_children():
             widget.destroy()
@@ -52,7 +49,7 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="LOGIN", command=self.normal_login,font=("Arial", 16 , "bold"), width=23, bg="gold", fg="#0a192f", activebackground="#b8962e", borderwidth=0, cursor="hand2" ,  ).pack(pady=(25, 10))
     
         # Admin login button
-        tk.Button(self.root, text="Admin Access", command=self.admin_screen,font=("Arial", 16, "bold"), width=23, bg="#2d3e50", fg="white", activebackground="#b8962e", borderwidth=0, cursor="hand2"  ).pack(pady=15)
+        tk.Button(self.root, text="Admin Access", command=self.admin_screen,font=("Arial", 16, "bold"), width=23, bg="#2d3e50", fg="black", activebackground="#b8962e", borderwidth=0, cursor="hand2"  ).pack(pady=15)
 
          # Normal user login button
         tk.Button(self.root, text="EXIT", command=self.exit_app,font=("Arial", 22 , "bold"), width=15, bg="gold", fg="#0a192f", activebackground="#b8962e", borderwidth=0, cursor="hand2" ,  ).pack(side= "bottom", anchor="s" , pady=20)                                                                         
@@ -290,9 +287,13 @@ class ATM_app: # Creating the class for the app
             if target_account.status == "Blocked": # Checking if the account is blocked
                 messagebox.showerror("ERROR", "The account is blocked, transfer cannot be made")
                 return
-                    
-            self.current_user.withdraw(amount, info=f"Sent to {target_account.full_name}") # Taking from the sender
-            target_account.deposit(amount, info=f"Received from {self.current_user.full_name}")    # The receiver gets the amount
+            
+            sender_msg = f"Sent to {target_account.full_name}"
+            self.current_user.withdraw(amount, info=sender_msg, operation="Transfer out") # Taking from the sender
+            
+            receiver_msg = f"Received from {self.current_user.full_name}"
+            target_account.deposit(amount, info=receiver_msg, operation="Transfer in") # The receiver gets the amount
+            
             save_data(self.bank) # Saving in json
             messagebox.showinfo("Success", f"₪ {amount:,.2f} transferred to {target_account.full_name}")
             self.user_screen() # Return te menu after finish
@@ -540,6 +541,7 @@ class ATM_app: # Creating the class for the app
         
         # Button to cancel
         tk.Button(self.root, text="Cancel action", command=self.admin_menu, bg="grey", fg="white", font=("Arial", 12,)).pack(pady=15)
+        
         
 #========================================================
 #=================== New account ======================== #! Finished do not touch

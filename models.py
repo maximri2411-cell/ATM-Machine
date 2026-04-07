@@ -38,21 +38,21 @@ class Accounts: # Creating a class of Accounts
         
 #================================================================================================
       
-    def deposit(self, amount, info="Deposit"):
+    def deposit(self, amount, info="Deposit", operation="Deposit"):
         try: # This and except is for allowing the process move forward without crash
             amount = float(amount)
             if amount <= 0: # In case the account is trying to deposit an 0 or below, it will print an error
                 return False, "ERROR: Deposit amount must be positive."
 
             self.balance += amount # if all good, the process will add to his history with the new balance
-            self.add_history(operation="Deposit", amount=amount, amount_after=self.balance, info=info)
+            self.add_history(operation=operation, amount=amount, amount_after=self.balance, info=info)
             return True, f"Successful deposit with {amount} NIS."
         except ValueError: 
             return False, "Error: Invalid amount entered."
  
 #================================================================================================       
         
-    def withdraw(self, amount, info="Deposit"):
+    def withdraw(self, amount, info="Withdraw", operation="Withdraw"):
         amount = float(amount)
         try:
             if amount <= 0: # In case the account is trying to withdraw an 0 or below, it will print an error
@@ -62,7 +62,7 @@ class Accounts: # Creating a class of Accounts
                 return False, f"ERROR: Cannot withdraw above account balance. \nYour balance is {self.balance}."
             
             self.balance -= amount # if all good, the process will add to his history with the new balance
-            self.add_history(operation="Withdraw", amount=amount, amount_after=self.balance, info=info)
+            self.add_history(operation=operation, amount=amount, amount_after=self.balance, info=info)
             return True, f"Successfully withdraw with {amount} NIS."
         except ValueError:
             return False, "ERROR: Invalid amount entered."
