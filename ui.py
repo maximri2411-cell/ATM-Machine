@@ -53,7 +53,7 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="EXIT", command=self.exit_app,font=("Arial", 22 , "bold"), width=15, bg="gold", fg="#0a192f", activebackground="#b8962e", borderwidth=0, cursor="hand2" ,  ).pack(side= "bottom", anchor="s" , pady=20)                                                                         
 
 #=======================================================
-#================== Login and menu of user ============= #TODO Upgrade the beuty
+#================== Login and menu of user ============= #! Finished do not touch
 #=======================================================
 
     def normal_login(self): # Taking data from GUI fild
@@ -107,7 +107,7 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="#0a192f", command=self.create_login_screen).pack(side="bottom", pady=20)
 
 #========================================================
-#================== Withdraw page ======================= 
+#================== Withdraw page ======================= #! Finished do not touch
 #========================================================         
     
     def withdraw_action(self):
@@ -145,7 +145,7 @@ class ATM_app: # Creating the class for the app
             messagebox.showerror("ERROR", "Invalid input, Please enter diginumbers only")
 
 #========================================================
-#================== Deposite page ======================= 
+#================== Deposite page ======================= #! Finished do not touch
 #======================================================== 
          
     def deposit_action(self):
@@ -276,7 +276,7 @@ class ATM_app: # Creating the class for the app
             clear_fields()
         
 #========================================================
-#==================== Change PIN ======================== 
+#==================== Change PIN ======================== #! Finished do not touch
 #========================================================
 
     def change_pin(self): # New pin
@@ -348,7 +348,7 @@ class ATM_app: # Creating the class for the app
         # The lambda is for delete the old pin and close the window
                           
 #========================================================
-#================== History view ======================== 
+#================== History view ======================== #! Finished do not touch
 #========================================================
 
 ###### I used google translet to explain, sorry
