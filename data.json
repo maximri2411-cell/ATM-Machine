@@ -22,8 +22,8 @@
         "950428": {
             "account_id": "950428",
             "full_name": "Jon Jones",
-            "pin": "edee29f882543b956620b26d0ee0e7e950399b1c4222f5de05e06425b4c995e9",
-            "balance": 35000.0,
+            "pin": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+            "balance": 42020.0,
             "status": "Active",
             "history": [
                 {
@@ -49,6 +49,107 @@
                     "operation": "PIN Change",
                     "date": "07/04/2026 22:26",
                     "info": "Security update"
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 23:42",
+                    "info": "Deposit",
+                    "amount": 100.0,
+                    "amount_after": 35100.0
+                },
+                {
+                    "operation": "Withdraw",
+                    "date": "07/04/2026 23:42",
+                    "info": "Withdraw",
+                    "amount": 700.0,
+                    "amount_after": 34400.0
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 23:42",
+                    "info": "Deposit",
+                    "amount": 670.0,
+                    "amount_after": 35070.0
+                },
+                {
+                    "operation": "Withdraw",
+                    "date": "07/04/2026 23:42",
+                    "info": "Withdraw",
+                    "amount": 6540.0,
+                    "amount_after": 28530.0
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 23:43",
+                    "info": "Deposit",
+                    "amount": 440.0,
+                    "amount_after": 28970.0
+                },
+                {
+                    "operation": "PIN Change",
+                    "date": "07/04/2026 23:43",
+                    "info": "Security update"
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 23:43",
+                    "info": "Deposit",
+                    "amount": 7000.0,
+                    "amount_after": 35970.0
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 23:43",
+                    "info": "Deposit",
+                    "amount": 7000.0,
+                    "amount_after": 42970.0
+                },
+                {
+                    "operation": "Withdraw",
+                    "date": "07/04/2026 23:43",
+                    "info": "Withdraw",
+                    "amount": 10000.0,
+                    "amount_after": 32970.0
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 23:43",
+                    "info": "Deposit",
+                    "amount": 400.0,
+                    "amount_after": 33370.0
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 23:58",
+                    "info": "Deposit",
+                    "amount": 9000.0,
+                    "amount_after": 42370.0
+                },
+                {
+                    "operation": "Withdraw",
+                    "date": "07/04/2026 23:58",
+                    "info": "Withdraw",
+                    "amount": 750.0,
+                    "amount_after": 41620.0
+                },
+                {
+                    "operation": "PIN Change",
+                    "date": "07/04/2026 23:58",
+                    "info": "Security update"
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 23:58",
+                    "info": "Deposit",
+                    "amount": 700.0,
+                    "amount_after": 42320.0
+                },
+                {
+                    "operation": "Withdraw",
+                    "date": "07/04/2026 23:58",
+                    "info": "Withdraw",
+                    "amount": 300.0,
+                    "amount_after": 42020.0
                 }
             ]
         },
