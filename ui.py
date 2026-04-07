@@ -293,7 +293,7 @@ class ATM_app: # Creating the class for the app
                 acc_pin_enter.delete(0, tk.END)
 
             if not old_pin or not new_pin or not acc_pin:
-                messagebox.showerror("ERROR", "Fill in the required details.")
+                messagebox.showerror("ERROR", "Fill in the required details")
                 return # כאן לא חייב לנקות, שהמשתמש פשוט ישלים
 
             if old_pin != self.current_user.pin: # checking if the old pin is right
@@ -503,40 +503,40 @@ class ATM_app: # Creating the class for the app
     def create_new_account(self): # Function to create a new account
         self.cleaning_screen() # Remember to clean the window..
             
-        tk.Label(self.root, text="CREATE NEW ACCOUNT", font=("Arial", 18, "bold"), bg="black", fg="white").pack(pady=30) 
+        tk.Label(self.root, text="CREATE NEW ACCOUNT", font=("Arial", 18, "bold"), bg="midnight blue", fg="gold").pack(pady=20) 
             
         # Late tje user pick an name fot his account
-        tk.Label(self.root, text="Owner full name", font=("Arial", 14), bg="black", fg="white").pack()
-        name_pick = tk.Entry(self.root, font=("Arial, 14"), justify="center")
+        tk.Label(self.root, text="Owner full name", font=("Arial", 12), bg="midnight blue", fg="gold").pack()
+        name_pick = tk.Entry(self.root, font=("Arial", 14), justify="center")
         name_pick.pack(pady=10)
             
         # Late the user pick pin fot his account
-        tk.Label(self.root, text="Select PIN (4 digits)", font=("Arial", 14), bg="black", fg="white").pack() 
-        pin_pick = tk.Entry(self.root, font=("Arial, 14"), justify="center", show="*")
+        tk.Label(self.root, text="Select PIN (4 digits)", font=("Arial", 12), bg="midnight blue", fg="gold").pack() 
+        pin_pick = tk.Entry(self.root, font=("Arial", 14), justify="center", show="*")
         pin_pick.pack(pady=10)
-        
-        # Put some starting amount
-        tk.Label(self.root, text="Starting amount", font=("Arial", 14), bg="black", fg="white").pack() 
-        amount_pick = tk.Entry(self.root, font=("Arial, 14"), justify="center")
-        amount_pick.pack(pady=10)
             
         def save_account(): # Saving the new account in data.json
             name = name_pick.get()
             pin = pin_pick.get()
-            amount = amount_pick.get()
                 
-            if name and pin and amount:
-                new_id = self.bank.create_account(name, pin, float(amount)) # Calling for the function in models
-                save_data(self.bank)
-                messagebox.showinfo("Account successefully created", f"Account created by the name: {name}, \nAccount ID {new_id} with {amount}")
-                self.admin_menu()
-            else:
-                messagebox.showerror("ERROR", "Fill in all the required details.")
-                self.admin_menu()
+            if not name or not pin: # Created a checko if not the name or pin was writh in the windows
+                messagebox.showerror("Fill in all the required details")
+                return
+
+            if not pin.isdigit() or len(pin) != 4: # Just to be ready if the pin is incoract
+                messagebox.showerror("ERROR", "PIN must be 4 digits")
+                pin_pick.delete(0, 'end') 
+                return
+            
+            new_id = self.bank.create_account(name, pin, 0.0) # Amount with 0 on the start
+            save_data(self.bank)
+            
+            messagebox.showinfo("Success", f"Account created successfully with the name: {name} \nAccount ID: {new_id} \nBalance: ₪ 0.00")
+            self.admin_menu()
         
         # Buttons to use to end the proccess
-        tk.Button(self.root, text="Confirmation of account creation", command=save_account, bg="gold", fg="black", font=("Arial", 12,)).pack(pady=20)
-        tk.Button(self.root, text="Cancellation of account creation", command=self.admin_menu, bg="black", fg="white").pack(pady=10)
+        tk.Button(self.root, text="CONFIRM", command=save_account, bg="midnight blue", fg="white", font=("Arial", 14,)).pack(pady=20)
+        tk.Button(self.root, text="CANCEL", command=self.admin_menu, bg="midnight blue", fg="white").pack(pady=10)
 
 #!==========================================================================
 if __name__ == "__main__": #! This will run our app evertime we run the code

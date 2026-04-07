@@ -221,3 +221,13 @@ from storage import load_data, save_data
         #         print(f"Error: Incorerect PIN. \nPlease try again. \nIn case you forgot the PIN, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
         #         return None
         # return None
+        
+        
+        
+                #! old version of create an account
+        #         new_id = self.bank.create_account(name, pin, float(amount)) # Calling for the function in models
+        #         save_data(self.bank)
+        #         messagebox.showinfo("Account successefully created", f"Account created by the name: {name}, \nAccount ID {new_id} with {amount}")
+        #         self.admin_menu()
+        #     else:
+        #         messagebox.showerror("ERROR", "Fill in all the required details.")
