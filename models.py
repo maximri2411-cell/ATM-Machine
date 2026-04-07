@@ -9,16 +9,15 @@ import hashlib
 
 class Accounts: # Creating a class of Accounts
 
-    def __init__(self, account_id, full_name, pin, balance, status , history):
+    def __init__(self, account_id, full_name, pin, balance, status , failed_loging, history):
         self.account_id = str(account_id) #! In dict, everthing in a string 
         self.full_name = full_name
         self.pin = str(pin) #! the reason we save as str is so if an account wil have an 0075 pin for example, it will save exactly as it isin int it will be 75 
         self.balance = float(balance) #! Line alignment that the money in the accounts will be a float
         self.status = status
+        self.failed_loging = int(failed_loging)
         self.history = history
-        self.is_admin = False
-        self.failed_loging = int(self.failed_loging)
-
+        
 #================================================================================================    
         
     def add_history(self, operation, amount=None, info="None", amount_after=None): # Insted of adding evertime by yourself the process, have build an function that doin it for me 
