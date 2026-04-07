@@ -463,7 +463,8 @@ class ATM_app: # Creating the class for the app
         self.cleaning_screen()
         
         # Label on toop od the screen
-        tk.Label(self.root, text="ADMIN CONTROL MENU", font=("Arial", 25, "bold"), bg="#0a192f", fg="white").pack(pady=40)
+        tk.Label(self.root, text="ADMIN CONTROL MENU", font=("Arial", 36, "bold"), justify="center", bg="#0a192f", fg="white").pack(pady=50)
+         
         
         # Buttons for the menu
         tk.Button(self.root, text="VIEW ALL ACCOUNTS", command=self.view_accounts, font=("Arial", 12), width=30, bg="ivory", fg="white").pack(pady=10)
@@ -479,7 +480,8 @@ class ATM_app: # Creating the class for the app
     def view_accounts(self):
         self.cleaning_screen() # Very important, cleaning the window
         
-        tk.Button(self.root,text="REFRESH", font=("Arial", 12, "bold"), command=self.view_accounts, bg="gold", fg="midnight blue", width=25).pack(pady=10)
+        tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="#0a192f", width=4, command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne")
+        tk.Button(self.root,text="REFRESH", font=("Arial", 14, "bold"), command=self.view_accounts, bg="gold", fg="midnight blue", width=25).pack(pady=10)
         
         columns = ("id", "name", "balance", "status") # Creating a table 
         tree = ttk.Treeview(self.root, columns=columns, show="headings", height=15)
