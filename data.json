@@ -637,6 +637,14 @@
                     "info": "Account status change to Active by Admin"
                 }
             ]
+        },
+        "950428": {
+            "account_id": "950428",
+            "full_name": "alex alex",
+            "pin": "888df25ae35772424a560c7152a1de794440e0ea5cfee62828333a456a506e05",
+            "balance": 0.0,
+            "status": "Active",
+            "history": []
         }
     }
 }

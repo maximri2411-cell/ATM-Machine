@@ -7,6 +7,9 @@ import hashlib
 # =======================================================
 #================ opening screen of the app ============= 
 #========================================================
+
+def hash_pin(pin):
+    return hashlib.sha256(pin.encode()).hexdigest()
 class ATM_app: # Creating the class for the app
     def __init__(self, root):
         self.root = root
@@ -60,8 +63,8 @@ class ATM_app: # Creating the class for the app
     def normal_login(self): # Taking data from GUI fild
         account_id = self.account_entry.get()
         pin = self.log_pin_entry.get()
-        hashed_input = hash_pin(pin_input)
-        user, message = self.bank.login_account(account_id, pin)
+        hashed_input = hash_pin(pin)
+        user, message = self.bank.login_account(account_id, hashed_input)
         
         if user:
             self.current_user = user
@@ -557,8 +560,8 @@ class ATM_app: # Creating the class for the app
                 messagebox.showerror("ERROR", "PIN must be 4 digits")
                 pin_pick.delete(0, 'end') 
                 return
-            hashed_pin = hashed_pin(pin_pick.get())
-            new_id = self.bank.create_account(name, hashed_pin, 0.0) # Amount with 0 on the start
+            final_pin = hash_pin(pin_pick.get())
+            new_id = self.bank.create_account(name, final_pin, 0.0) # Amount with 0 on the start
             save_data(self.bank)
             
             messagebox.showinfo("Success", f"Account created successfully with the name: {name} \nAccount ID: {new_id} \nBalance: ₪ 0.00")
@@ -569,7 +572,7 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="CANCEL", command=self.admin_menu, bg="#0a192f", fg="white", font=("Arial", 12)).pack(pady=10)
 
 #!==========================================================================
-    if __name__ == "__main__": #! This will run our app evertime we run the code
-        root = tk.Tk()
-        app = ATM_app(root)
-        root.mainloop()
+if __name__ == "__main__": #! This will run our app evertime we run the code
+    root = tk.Tk()
+    app = ATM_app(root)
+    root.mainloop()
