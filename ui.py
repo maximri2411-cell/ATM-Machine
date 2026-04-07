@@ -361,11 +361,16 @@ class ATM_app: # Creating the class for the app
             listbox.insert("end", " " * 15 + "No history recorded in the account")
         else:
             for enter in reversed(account_history):
-                amount = f"₪ {enter['amount']}" if 'amount' in enter else " " # Putting it inside a value to make it easy on me
-                amount_after = f"₪ {enter['amount_after']}" if 'amount_after' in enter else " "
-            
-                text = f"{enter['date']} | {enter['operation']} | {amount} | {amount_after} | {enter['info'] }" # We took all of the operation things from models
-                
+                date = enter["date"]
+                op = enter["operation"]
+                if "amount" in enter:
+                    amount =  f"₪ {enter['amount']:,.0f}"
+                else:
+                    amount = "---"
+                if "amount_after" in enter:
+                    after = f"₪{enter['amount_after']:,.0f}"
+                else:
+                    after = "---"
                 #! It seems that putting "" inside f string its not accepteble
                 listbox.insert("end", text) # Putting the line to the end of the list
                 

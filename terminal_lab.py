@@ -200,3 +200,10 @@ from storage import load_data, save_data
          # json_dump(last_json, open('data.json', 'w'), indent=4)
     # The w is for write, over write the file to new one, like > in linux
     # indent is for beuty
+    
+    
+        #! the old list box
+        # amount = f"₪ {enter['amount']}" if 'amount' in enter else " " # Putting it inside a value to make it easy on me
+        #         amount_after = f"₪ {enter['amount_after']}" if 'amount_after' in enter else " "
+        #  text = f"{enter['date']} | {enter['operation']} | {amount} | {amount_after} | {enter['info'] }" # We took all of the operation things from models
+                
