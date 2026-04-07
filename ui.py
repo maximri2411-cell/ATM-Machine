@@ -433,22 +433,16 @@ class ATM_app: # Creating the class for the app
         tk.Label(self.root, text="ADMIN LOGIN", font=("Arial", 36, "bold"), justify="center", bg="#0a192f", fg="white").pack(pady=50)
         tk.Label(self.root, text="Enter Admin Password:",font=("Arial", 16, "bold"), justify="center", bg="#0a192f", fg="ivory").pack()
         
-        
-        
         # Adding * for his password 
         self.admin_pin_entry = tk.Entry(self.root, show="*", width=25, font=("Arial",16), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0, highlightthickness=1, highlightbackground="#4a5a71" )
         self.admin_pin_entry.pack(pady=10, ipady=8)
         
-        
-    
         # The button for enter confirm
         tk.Button(self.root, text="Verify Access", command=self.check_pin_admin, font=("Arial", 16, "bold"), width=23, bg="gold", fg="#0a192f", activebackground="#b8962e", borderwidth=0, cursor="hand2").pack(pady=(25, 10))
-        
         
         # Buton to return back if he wants
         tk.Button(self.root, text="Home Page", command=self.create_login_screen, font=("Arial", 22 , "bold"), width=15, bg="gold", fg="#0a192f", activebackground="#b8962e", borderwidth=0, cursor="hand2").pack(side= "bottom", anchor="s" , pady=20)
                                                                    
-        
 #=======================================================     
         
     def check_pin_admin(self): # Check if the pin is currecct
@@ -479,10 +473,15 @@ class ATM_app: # Creating the class for the app
         # Label on toop od the screen
         tk.Label(self.root, text="ADMIN CONTROL MENU", font=("Arial", 25, "bold"), bg="#0a192f", fg="white").pack(pady=40)
         
-        # Buttons for the menu
-        tk.Button(self.root, text="VIEW ALL ACCOUNTS", command=self.view_accounts, font=("Arial", 12), width=30, bg="ivory", fg="white").pack(pady=10)
-        tk.Button(self.root, text="CREATE NEW ACCOUNT", command=self.create_new_account, font=("Arial", 12), width=30, bg="ivory", fg="white").pack(pady=10)
-        tk.Button(self.root, text="CHANGE ACCOUNT STATUS", command=self.change_status, font=("Arial", 12), width=30, bg="ivory", fg="white").pack(pady=10)
+        button_frame = tk.Frame(self.root, bg="#0a192f")
+        button_frame.pack(fill="both", expand=True)
+        buttons = [
+            ("VIEW ALL ACCOUNTS", self.view_accounts),
+            ("CREATE NEW ACCOUNT", self.create_new_account),
+            ("CHANGE ACCOUNT STATUS", self.change_status),
+        ]
+        for text, cmd in buttons:
+            tk.Button(button_frame, text=text, width=25, font=("Arial", 18), bg="gold", fg="#0a192f", command=cmd).pack(pady=10)
             
         # Button to exit if he want
         tk.Button(self.root, text="LOGOUT", command=self.create_login_screen, bg="ivory", fg="white").pack(pady=30)
