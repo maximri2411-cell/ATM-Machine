@@ -457,8 +457,11 @@ class ATM_app: # Creating the class for the app
             tree.insert("", tk.END, values=(account_id, account.full_name, f"{account.balance:.2f}", account.status))
             
         tree.pack(pady=20, padx=20, fill="x")
+        tk.Button(self.root, text="Back to menu", command=self.admin_menu, bg="midnight blue", fg="gold").pack(pady=10) # Exit button of course
         
-        tk.Button(self.root, text="Back to menu", command=self.admin_menu, bg="black", fg="white").pack(pady=10) # Exit button of course
+        # Refresh in case he createt new user
+        tk.Button(self.root, text="REFRESH", font=("Arial", 12), command=self.view_accounts, bg="midnight blue", fg="gold", width=20).pack(pady=5)
+        tk.Button(self.root, text="Back to Menu", command=self.admin_menu, bg="black", fg="white", width=20).pack(pady=5)
         
 #========================================================
 #================== Change status ======================= #! Finished do not touch
