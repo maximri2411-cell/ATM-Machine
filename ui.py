@@ -385,8 +385,10 @@ class ATM_app: # Creating the class for the app
         history_top.geometry("1000x800")
         history_top.configure(bg="#0a192f")
         
+        
         tk.Label(history_top, text="ACCOUNT HISTORY ", font=("Arial", 30, "bold"), bg="#0a192f", fg="gold").pack(pady=(25, 10))
-        tk.Button(history_top, text="REFRESH", font=("Arial", 12, "bold"), bg="gold", fg="#0a192f", command=lambda: update_list()).pack(pady=5)
+        tk.Button(history_top, text="REFRESH", width=15, font=("Arial", 22, "bold"), bg="gold", fg="#0a192f", command=lambda: update_list()).pack(side= "bottom", anchor="s" , pady=20)
+       
     
         history_frame = tk.Frame(history_top, bg="gold", bd=2)
         history_frame.pack(pady=15, padx=30, fill="both", expand=True) # Putting the window inside the origin screen
@@ -420,7 +422,7 @@ class ATM_app: # Creating the class for the app
                     listbox.insert("end", "-" * 75) # I think its seperate the lines
                     
         update_list()
-        tk.Button(history_top, text="CLOSE", width=15, font=("Arial", 15, "bold"), bg="gold", fg="#0a192f", command=history_top.destroy).pack(pady=20)
+        
                                                                                                                     #^ It will delete the old label
 #=======================================================
 #================ Login and menu of manager ============ 
