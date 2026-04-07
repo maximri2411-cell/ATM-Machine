@@ -21,7 +21,6 @@ class ATM_app: # Creating the class for the app
         self.create_login_screen()
         
         
-        tk.Button(self.root, text="MENU", bg="#ffd700", fg="#0a192f", activebackground="#b8962e", font=("Arial", 14, "bold")).pack()
         
     def cleaning_screen(self): # Its important to clean the text after the user use or press the button
         for widget in self.root.winfo_children():
@@ -418,20 +417,23 @@ class ATM_app: # Creating the class for the app
         
         # This is our title for the next screen
         tk.Label(self.root, text="ADMIN LOGIN", font=("Arial", 36, "bold"), justify="center", bg="#0a192f", fg="white").pack(pady=50)
-        tk.Label(self.root, text="Enter Admin Password:",font=("Arial", 16, "bold"), justify="center", bg="#0a192f", fg="white"). pack(pady=10)
+        tk.Label(self.root, text="Enter Admin Password:",font=("Arial", 16, "bold"), justify="center", bg="#0a192f", fg="ivory").pack()
+        
+        
         
         # Adding * for his password 
-        self.admin_pin_entry = tk.Entry(self.root, show="*", width=25, font=("Arial", 16, "bold"), bg="#0a192f", fg="white")
-        self.admin_pin_entry.pack(pady=10)
+        self.admin_pin_entry = tk.Entry(self.root, show="*", width=25, font=("Arial",16), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0, highlightthickness=1, highlightbackground="#4a5a71" )
+        self.admin_pin_entry.pack(pady=10, ipady=8)
+        
+        
     
         # The button for enter confirm
-        tk.Button(self.root, text="Verify Access", command=self.check_pin_admin,
-                  font=("Arial", 14, "bold"), width=15, bg="ivory", fg="white", 
-                  cursor="hand2").pack(pady=15)
+        tk.Button(self.root, text="Verify Access", command=self.check_pin_admin, font=("Arial", 16, "bold"), width=23, bg="gold", fg="#0a192f", activebackground="#b8962e", borderwidth=0, cursor="hand2").pack(pady=(25, 10))
+        
         
         # Buton to return back if he wants
-        tk.Button(self.root, text="Back to home page", command=self.create_login_screen,
-                  font=("Arial", 10), bg="ivory", fg="white", borderwidth=0).pack(pady=5)
+        tk.Button(self.root, text="Home Page", command=self.create_login_screen, font=("Arial", 22 , "bold"), width=15, bg="gold", fg="#0a192f", activebackground="#b8962e", borderwidth=0, cursor="hand2").pack(side= "bottom", anchor="s" , pady=20)
+                                                                   
         
 #======================================================= #! Finished do not touch       
         
