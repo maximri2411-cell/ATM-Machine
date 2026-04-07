@@ -60,7 +60,7 @@ class ATM_app: # Creating the class for the app
         
         if user:
             self.current_user = user
-            messagebox.showinfo("Success", message)# Line up that every success entry must be like this
+            messagebox.showinfo("Success", message)# Line up that every success entry must be like this, the message is from models
             self.account_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
             self.log_pin_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
             
@@ -139,7 +139,7 @@ class ATM_app: # Creating the class for the app
             messagebox.showinfo("Success", f"₪ {amount:,.2f} withdrawn successfully") # Final message
             self.user_screen() # Back to the menu
         except ValueError:
-            messagebox.showerror("ERROR", "Invalid input, Please enter diginumbers only.")
+            messagebox.showerror("ERROR", "Invalid input, Please enter diginumbers only")
 
 #========================================================
 #================== Deposite page ======================= 
@@ -187,7 +187,6 @@ class ATM_app: # Creating the class for the app
         self.cleaning_screen()
         tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4, command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne") # Go back button
         tk.Label(self.root, text="TRANSFER BETWEEN ACCOUNTS", font=("Arial", 24, "bold"), bg="midnight blue", fg="ivory").pack(pady=20)
-        
         current_balance = self.current_user.balance
         tk.Label(self.root, text=f"Current Balance: ₪ {current_balance:,.2f}", font=("Arial", 18), bg="midnight blue", fg="gold").pack(pady=10)
         
@@ -197,13 +196,13 @@ class ATM_app: # Creating the class for the app
         self.amount_entry.pack(pady=10, ipady=8)
         
         # ID target 
-        tk.Label(self.root, text="Enter account ID to transfer", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10))
+        tk.Label(self.root, text="Account ID to transfer", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10))
         self.target_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
         self.target_entry.pack(pady=10, ipady=8)
         
         # Confirm transfer with PIN again
         tk.Label(self.root, text="PIN for additional verification", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10))
-        self.tran_pin_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
+        self.tran_pin_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0, show="*")
         self.tran_pin_entry.pack(pady=10, ipady=8)
         
         # Last buttons
@@ -211,51 +210,67 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)              
     
     def execute_transfer(self): # Conacting the transfer to the models and data and of course saving it
+        def clear_fields():
+            self.amount_entry.delete(0, tk.END)
+            self.target_entry.delete(0, tk.END)
+            self.tran_pin_entry.delete(0, tk.END)
         try:
-            amount = self.amount_entry.get()
-            target_id = self.target_entry.get() # Saving the input for the next part of the function
+            amount_input = self.amount_entry.get()
+            target_id = self.target_entry.get()     # Saving the input for the next part of the function
             pin_confirm = self.tran_pin_entry.get()
             
-            if not amount or not target_id or not pin_confirm:
+            if not amount or not target_id or not pin_confirm: # Check if all the fileds are full
                 messagebox.showerror("ERROR", "Fill in all the required details")
-            
-            amount = float(amount) # Beacuse all of the balance is float
-            
-            # Checking his balance 
-            if amount <=0 or amount > self.current_user.balance:
-                messagebox.showerror("ERROR", "Invalid amount or insufficient balance")
                 return
             
-            # Verifying the PIN
-            if pin_confirm != self.current_user.pin:
-                messagebox.showerror("ERROR", "Incorrect PIN, Please try again")
-                return
-            
-            # Checking if we put the same ID as the sender in this process    
-            if target_id == self.current_user.account_id:
-                messagebox.showerror("ERROR", "You cannot transfer money to yourself")
-                return
-            
-            # We want to check if the target is even exist
-            if target_id in self.bank.Accounts:
-                target_account = self.bank.Accounts[target_id]
-                
-                 # Checking if the account is blocked
-                if target_account.status == "Blocked":
-                    messagebox.showerror("ERROR", "The account is blocked, transfer cannot be made")
+            try:
+                amount = float(amount_input)
+                if amount <= 0: # Check if the user entered 0 or below
+                    messagebox.showerror("ERROR", "Enter a positive amount")
+                    clear_fields()
                     return
+            except ValueError:
+                messagebox.showerror("ERROR", "Enter digits only")
+                clear_fields()
+                return
+            
+            if not pin_confirm.isdigit(): # Check if the pin contains words
+                messagebox.showerror("ERROR", "PIN need to contain digits only")
+                self.tran_pin_entry.delete(0, tk.END)
+                return
+            
+            if pin_confirm != self.current_user.pin: # Check if the pin is right
+                messagebox.showerror("ERROR", "Incorrect PIN, cannot continue the process")
+                self.tran_pin_entry.delete(0, tk.END)
+                return
+            
+            if amount > self.current_user.balance: # Checking his balance
+                messagebox.showerror("ERROR", "Invalid amount or insufficient balance")
+                return  
+            
+            if target_id == self.current_user.account_id: # Checking if we put the same ID as the sender in this process 
+                messagebox.showerror("ERROR", "You cannot transfer money to yourself")
+                clear_fields()
+                return
+            
+            if target_id not in self.bank.Accounts: # ID of the target if its even exist
+                messagebox.showerror("ERROR", "Account ID not found")
+                clear_fields
+                return
+            target_account = self.bank.Accounts[target_id]
+                
+            if target_account.status == "Blocked": # Checking if the account is blocked
+                messagebox.showerror("ERROR", "The account is blocked, transfer cannot be made")
+                return
                     
-                self.current_user.withdraw(amount) # Taking from the sender
-                target_account.deposit(amount)     # The receiver gets the amount
-                
-                save_data(self.bank) # Saving in json
-                messagebox.showinfo("Success", f"₪ {amount:,.2f} transferred to {target_account.full_name}")
-                self.user_screen() # Return te menu after finish
-            else:
-                messagebox.showerror("ERROR", "The account to which the transfer is intended is not found., Please check if the ID is right.")
-                
-        except ValueError:
-            messagebox.showerror("ERROR", "Fill in all the required details")
+            self.current_user.withdraw(amount) # Taking from the sender
+            target_account.deposit(amount)     # The receiver gets the amount
+            save_data(self.bank) # Saving in json
+            messagebox.showinfo("Success", f"₪ {amount:,.2f} transferred to {target_account.full_name}")
+            self.user_screen() # Return te menu after finish
+        except Exception as e:
+            messagebox.showerror("System Error", "An unexpected error occurred. Please try again.")
+            clear_fields()
         
 #========================================================
 #==================== Change PIN ======================== 
@@ -293,7 +308,7 @@ class ATM_app: # Creating the class for the app
                 acc_pin_enter.delete(0, tk.END)
 
             if not old_pin or not new_pin or not acc_pin:
-                messagebox.showerror("ERROR", "Fill in the required details.")
+                messagebox.showerror("ERROR", "Fill in the required details")
                 return # כאן לא חייב לנקות, שהמשתמש פשוט ישלים
 
             if old_pin != self.current_user.pin: # checking if the old pin is right
@@ -342,38 +357,40 @@ class ATM_app: # Creating the class for the app
         history_top.configure(bg="midnight blue")
         
         tk.Label(history_top, text="ACCOUNT HISTORY ", font=("Arial", 30, "bold"), bg="midnight blue", fg="gold").pack(pady=(25, 10))
-        history_frame = tk.Frame(history_top, bg="gold")
+        tk.Button(history_top, text="REFRESH", font=("Arial", 12, "bold"), bg="gold", fg="midnight blue", command=lambda: update_list()).pack(pady=5)
+    
+        history_frame = tk.Frame(history_top, bg="gold", bd=2)
         history_frame.pack(pady=15, padx=30, fill="both", expand=True) # Putting the window inside the origin screen
          #! Roller
         Scrollbar = tk.Scrollbar(history_frame)
         Scrollbar.pack(side="right", fill="y") # Attach the ruler to the right side of the box and stretch it to the entire height
         
-        listbox = tk.Listbox(history_frame, width=30, font=("Arial", 14, "bold"), bg="white", fg="black", selectbackground="gold", selectforeground="midnight blue", borderwidth=0, highlightthickness=0, yscrollcommand=Scrollbar.set) # Should connect between listbox and scrollbar with yscrollcommand
+        listbox = tk.Listbox(history_frame, width=30, font=("Courier New", 14, "bold"), bg="midnight blue", fg="white", selectbackground="gold", selectforeground="midnight blue", borderwidth=0, highlightthickness=0, yscrollcommand=Scrollbar.set) # Should connect between listbox and scrollbar with yscrollcommand
         listbox.pack(side="left", fill="both", expand=True) # Snaps the list to the left side, lets it fill all the remaining space (fill="both") and allows it to grow if we enlarge the window (expand=True).
         Scrollbar.config(command=listbox.yview) 
         
-        account_history = self.current_user.see_history()
-        
         #! It seems that putting "" inside f string its not accepteble
-        if not account_history:
-            listbox.insert("end", " " * 15 + "No history recorded in the account")
-        else:
-            for enter in reversed(account_history):
-                date = enter["date"]
-                oper = enter["operation"]
-                if "amount" in enter:
-                    amount =  f"₪ {enter['amount']:,.0f}"
-                else:
-                    amount = "---"
-                if "amount_after" in enter:
-                    after = f"₪{enter['amount_after']:,.0f}"
-                else:
-                    after = "---"
-                
-                line = f"{date:<22} | {oper:<15} | {amount:<12} | {after}" # The format we wish it will be
-                listbox.insert("end", line) # Putting the line to the end of the list
-                listbox.insert("end", "-" * 75) # I think its seperate the lines
-                
+        def update_list(): # This creating our beuty table
+            listbox.delete(0, tk.END) # Clean
+            header = f"{'Date':<22} | {'Operation':<15} | {'Amount':<12} | {'Balance'}" # The format on top
+            listbox.insert("end", header) 
+            listbox.insert("end", "=" * 75)
+            account_history = self.current_user.see_history()
+            
+            if not account_history:
+                listbox.insert("end", " " * 15 + "No history recorded") # If it is a new account it will print this
+            else:
+                for enter in reversed(account_history): # Format if there is a history for that account
+                    date = enter.get("date", "---")
+                    oper = enter.get("operation", "---")
+                    amount = f"₪ {enter['amount']:,.0f}" if "amount" in enter else "---"
+                    after = f"₪ {enter['amount_after']:,.0f}" if "amount_after" in enter else "---"
+                    
+                    line = f"{date:<22} | {oper:<15} | {amount:<12} | {after}"
+                    listbox.insert("end", line) # Putting the line to the end of the list
+                    listbox.insert("end", "-" * 75) # I think its seperate the lines
+                    
+        update_list()
         tk.Button(history_top, text="CLOSE", width=15, font=("Arial", 15, "bold"), bg="gold", fg="midnight blue", command=history_top.destroy).pack(pady=20)
                                                                                                                     #^ It will delete the old label
 #=======================================================
@@ -384,21 +401,21 @@ class ATM_app: # Creating the class for the app
         self.cleaning_screen()
         
         # This is our title for the next screen
-        tk.Label(self.root, text="ADMIN LOGIN", font=("Arial", 36, "bold"), justify="center", bg="midnight blue", fg="ivory").pack(pady=50)
-        tk.Label(self.root, text="Enter Admin Password:",font=("Arial", 16, "bold"), justify="center", bg="gold", fg="white"). pack(pady=10)
+        tk.Label(self.root, text="ADMIN LOGIN", font=("Arial", 36, "bold"), justify="center", bg="midnight blue", fg="white").pack(pady=50)
+        tk.Label(self.root, text="Enter Admin Password:",font=("Arial", 16, "bold"), justify="center", bg="midnight blue", fg="white"). pack(pady=10)
         
         # Adding * for his password 
-        self.admin_pin_entry = tk.Entry(self.root, show="*", width=25, font=("Arial", 16, "bold"), bg="gold", fg="white")
+        self.admin_pin_entry = tk.Entry(self.root, show="*", width=25, font=("Arial", 16, "bold"), bg="midnight blue", fg="white")
         self.admin_pin_entry.pack(pady=10)
     
         # The button for enter confirm
         tk.Button(self.root, text="Verify Access", command=self.check_pin_admin,
-                  font=("Arial", 14, "bold"), width=15, bg="black", fg="white", 
+                  font=("Arial", 14, "bold"), width=15, bg="ivory", fg="white", 
                   cursor="hand2").pack(pady=15)
         
         # Buton to return back if he wants
         tk.Button(self.root, text="Back to home page", command=self.create_login_screen,
-                  font=("Arial", 10), bg="black", fg="white", borderwidth=0).pack(pady=5)
+                  font=("Arial", 10), bg="ivory", fg="white", borderwidth=0).pack(pady=5)
         
 #======================================================= #! Finished do not touch       
         
@@ -428,22 +445,21 @@ class ATM_app: # Creating the class for the app
         self.cleaning_screen()
         
         # Label on toop od the screen
-        tk.Label(self.root, text="ADMIN CONTROL MENU", font=("Arial", 25, "bold"), bg="black", fg="white").pack(pady=40)
+        tk.Label(self.root, text="ADMIN CONTROL MENU", font=("Arial", 25, "bold"), bg="midnight blue", fg="white").pack(pady=40)
         
         # Buttons for the menu
-        tk.Button(self.root, text="VIEW ALL ACCOUNTS", command=self.view_accounts, font=("Arial", 12), width=30, bg="black", fg="white").pack(pady=10)
-        tk.Button(self.root, text="CREATE NEW ACCOUNT", command=self.create_new_account, font=("Arial", 12), width=30, bg="black", fg="white").pack(pady=10)
-        tk.Button(self.root, text="CHANGE ACCOUNT STATUS", command=self.change_status, font=("Arial", 12), width=30, bg="black", fg="white").pack(pady=10)
+        tk.Button(self.root, text="VIEW ALL ACCOUNTS", command=self.view_accounts, font=("Arial", 12), width=30, bg="ivory", fg="white").pack(pady=10)
+        tk.Button(self.root, text="CREATE NEW ACCOUNT", command=self.create_new_account, font=("Arial", 12), width=30, bg="ivory", fg="white").pack(pady=10)
+        tk.Button(self.root, text="CHANGE ACCOUNT STATUS", command=self.change_status, font=("Arial", 12), width=30, bg="ivory", fg="white").pack(pady=10)
             
         # Button to exit if he want
-        tk.Button(self.root, text="LOGOUT", command=self.create_login_screen, bg="black", fg="white").pack(pady=30)
+        tk.Button(self.root, text="LOGOUT", command=self.create_login_screen, bg="ivory", fg="white").pack(pady=30)
             
 #========================================================
 #================== View accounts ======================= #! Finished do not touch
 #========================================================  
     def view_accounts(self):
         self.cleaning_screen() # Very important, cleaning the window
-            
         columns = ("id", "name", "balance", "status") # Creating a table 
         tree = ttk.Treeview(self.root, columns=columns, show="headings", height=15)
         
@@ -457,8 +473,7 @@ class ATM_app: # Creating the class for the app
             tree.insert("", tk.END, values=(account_id, account.full_name, f"{account.balance:.2f}", account.status))
             
         tree.pack(pady=20, padx=20, fill="x")
-        
-        tk.Button(self.root, text="Back to menu", command=self.admin_menu, bg="black", fg="white").pack(pady=10) # Exit button of course
+        tk.Button(self.root, text="Back to menu", command=self.admin_menu, bg="midnight blue", fg="gold").pack(pady=10) # Exit button of course
         
 #========================================================
 #================== Change status ======================= #! Finished do not touch
@@ -503,40 +518,40 @@ class ATM_app: # Creating the class for the app
     def create_new_account(self): # Function to create a new account
         self.cleaning_screen() # Remember to clean the window..
             
-        tk.Label(self.root, text="CREATE NEW ACCOUNT", font=("Arial", 18, "bold"), bg="black", fg="white").pack(pady=30) 
+        tk.Label(self.root, text="CREATE NEW ACCOUNT", font=("Arial", 18, "bold"), bg="midnight blue", fg="gold").pack(pady=20) 
             
         # Late tje user pick an name fot his account
-        tk.Label(self.root, text="Owner full name", font=("Arial", 14), bg="black", fg="white").pack()
-        name_pick = tk.Entry(self.root, font=("Arial, 14"), justify="center")
+        tk.Label(self.root, text="Owner full name", font=("Arial", 12), bg="midnight blue", fg="gold").pack()
+        name_pick = tk.Entry(self.root, font=("Arial", 14), justify="center")
         name_pick.pack(pady=10)
             
         # Late the user pick pin fot his account
-        tk.Label(self.root, text="Select PIN (4 digits)", font=("Arial", 14), bg="black", fg="white").pack() 
-        pin_pick = tk.Entry(self.root, font=("Arial, 14"), justify="center", show="*")
+        tk.Label(self.root, text="Select PIN (4 digits)", font=("Arial", 12), bg="midnight blue", fg="gold").pack() 
+        pin_pick = tk.Entry(self.root, font=("Arial", 14), justify="center", show="*")
         pin_pick.pack(pady=10)
-        
-        # Put some starting amount
-        tk.Label(self.root, text="Starting amount", font=("Arial", 14), bg="black", fg="white").pack() 
-        amount_pick = tk.Entry(self.root, font=("Arial, 14"), justify="center")
-        amount_pick.pack(pady=10)
             
         def save_account(): # Saving the new account in data.json
             name = name_pick.get()
             pin = pin_pick.get()
-            amount = amount_pick.get()
                 
-            if name and pin and amount:
-                new_id = self.bank.create_account(name, pin, float(amount)) # Calling for the function in models
-                save_data(self.bank)
-                messagebox.showinfo("Account successefully created", f"Account created by the name: {name}, \nAccount ID {new_id} with {amount}")
-                self.admin_menu()
-            else:
-                messagebox.showerror("ERROR", "Fill in all the required details.")
-                self.admin_menu()
+            if not name or not pin: # Created a checko if not the name or pin was writh in the windows
+                messagebox.showerror("Missing data", "Fill in all the required details")
+                return
+
+            if not pin.isdigit() or len(pin) != 4: # Just to be ready if the pin is incoract
+                messagebox.showerror("ERROR", "PIN must be 4 digits")
+                pin_pick.delete(0, 'end') 
+                return
+            
+            new_id = self.bank.create_account(name, pin, 0.0) # Amount with 0 on the start
+            save_data(self.bank)
+            
+            messagebox.showinfo("Success", f"Account created successfully with the name: {name} \nAccount ID: {new_id} \nBalance: ₪ 0.00")
+            self.admin_menu()
         
         # Buttons to use to end the proccess
-        tk.Button(self.root, text="Confirmation of account creation", command=save_account, bg="gold", fg="black", font=("Arial", 12,)).pack(pady=20)
-        tk.Button(self.root, text="Cancellation of account creation", command=self.admin_menu, bg="black", fg="white").pack(pady=10)
+        tk.Button(self.root, text="CONFIRM", command=save_account, bg="midnight blue", fg="white", font=("Arial", 14,)).pack(pady=20)
+        tk.Button(self.root, text="CANCEL", command=self.admin_menu, bg="midnight blue", fg="white", font=("Arial", 12)).pack(pady=10)
 
 #!==========================================================================
 if __name__ == "__main__": #! This will run our app evertime we run the code

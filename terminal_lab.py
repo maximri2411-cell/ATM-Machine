@@ -207,3 +207,46 @@ from storage import load_data, save_data
         #         amount_after = f"₪ {enter['amount_after']}" if 'amount_after' in enter else " "
         #  text = f"{enter['date']} | {enter['operation']} | {amount} | {amount_after} | {enter['info'] }" # We took all of the operation things from models
                 
+                
+        #! Old version of status users
+        # if account.status == "Blocked":
+        #     print(f"Error: Account {account_id} is BLOCKED. \nPlease call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
+        #     return None
+            
+        # if account:
+        #     if str(account.pin) == str(pin):
+        #         print((f"Login successful. \nWelcome {account.full_name}."))
+        #         return account
+        #     else:
+        #         print(f"Error: Incorerect PIN. \nPlease try again. \nIn case you forgot the PIN, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
+        #         return None
+        # return None
+        
+        
+        
+        #! Old version of create an account
+        #         new_id = self.bank.create_account(name, pin, float(amount)) # Calling for the function in models
+        #         save_data(self.bank)
+        #         messagebox.showinfo("Account successefully created", f"Account created by the name: {name}, \nAccount ID {new_id} with {amount}")
+        #         self.admin_menu()
+        #     else:
+        #         messagebox.showerror("ERROR", "Fill in all the required details.")
+        
+        
+        
+        #! Old version pf history
+        #   if not account_history:
+        #     listbox.insert("end", " " * 15 + "No history recorded in the account")
+        # else:
+        #     for enter in reversed(account_history):
+        #         date = enter["date"]
+        #         oper = enter["operation"]
+        #         if "amount" in enter:
+        #             amount =  f"₪ {enter['amount']:,.0f}"
+        #         else:
+        #             amount = "---"
+        #         if "amount_after" in enter:
+        #             after = f"₪{enter['amount_after']:,.0f}"
+        #         else:
+        #             after = "---"
+                
