@@ -139,7 +139,7 @@ class ATM_app: # Creating the class for the app
             messagebox.showinfo("Success", f"₪ {amount:,.2f} withdrawn successfully") # Final message
             self.user_screen() # Back to the menu
         except ValueError:
-            messagebox.showerror("ERROR", "Invalid input, Please enter diginumbers only.")
+            messagebox.showerror("ERROR", "Invalid input, Please enter diginumbers only")
 
 #========================================================
 #================== Deposite page ======================= 
@@ -187,7 +187,6 @@ class ATM_app: # Creating the class for the app
         self.cleaning_screen()
         tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="midnight blue", width=4, command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne") # Go back button
         tk.Label(self.root, text="TRANSFER BETWEEN ACCOUNTS", font=("Arial", 24, "bold"), bg="midnight blue", fg="ivory").pack(pady=20)
-        
         current_balance = self.current_user.balance
         tk.Label(self.root, text=f"Current Balance: ₪ {current_balance:,.2f}", font=("Arial", 18), bg="midnight blue", fg="gold").pack(pady=10)
         
@@ -197,13 +196,13 @@ class ATM_app: # Creating the class for the app
         self.amount_entry.pack(pady=10, ipady=8)
         
         # ID target 
-        tk.Label(self.root, text="Enter account ID to transfer", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10))
+        tk.Label(self.root, text="Account ID to transfer", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10))
         self.target_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
         self.target_entry.pack(pady=10, ipady=8)
         
         # Confirm transfer with PIN again
         tk.Label(self.root, text="PIN for additional verification", font=("Arial", 14, "bold"), bg="midnight blue", fg="white").pack(pady=(10))
-        self.tran_pin_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
+        self.tran_pin_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0, show="*")
         self.tran_pin_entry.pack(pady=10, ipady=8)
         
         # Last buttons
@@ -211,51 +210,67 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="midnight blue", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)              
     
     def execute_transfer(self): # Conacting the transfer to the models and data and of course saving it
+        def clear_fields():
+            self.amount_entry.delete(0, tk.END)
+            self.target_entry.delete(0, tk.END)
+            self.tran_pin_entry.delete(0, tk.END)
         try:
-            amount = self.amount_entry.get()
-            target_id = self.target_entry.get() # Saving the input for the next part of the function
+            amount_input = self.amount_entry.get()
+            target_id = self.target_entry.get()     # Saving the input for the next part of the function
             pin_confirm = self.tran_pin_entry.get()
             
-            if not amount or not target_id or not pin_confirm:
+            if not amount or not target_id or not pin_confirm: # Check if all the fileds are full
                 messagebox.showerror("ERROR", "Fill in all the required details")
-            
-            amount = float(amount) # Beacuse all of the balance is float
-            
-            # Checking his balance 
-            if amount <=0 or amount > self.current_user.balance:
-                messagebox.showerror("ERROR", "Invalid amount or insufficient balance")
                 return
             
-            # Verifying the PIN
-            if pin_confirm != self.current_user.pin:
-                messagebox.showerror("ERROR", "Incorrect PIN, Please try again")
-                return
-            
-            # Checking if we put the same ID as the sender in this process    
-            if target_id == self.current_user.account_id:
-                messagebox.showerror("ERROR", "You cannot transfer money to yourself")
-                return
-            
-            # We want to check if the target is even exist
-            if target_id in self.bank.Accounts:
-                target_account = self.bank.Accounts[target_id]
-                
-                 # Checking if the account is blocked
-                if target_account.status == "Blocked":
-                    messagebox.showerror("ERROR", "The account is blocked, transfer cannot be made")
+            try:
+                amount = float(amount_input)
+                if amount <= 0: # Check if the user entered 0 or below
+                    messagebox.showerror("ERROR", "Enter a positive amount")
+                    clear_fields()
                     return
+            except ValueError:
+                messagebox.showerror("ERROR", "Enter digits only")
+                clear_fields()
+                return
+            
+            if not pin_confirm.isdigit(): # Check if the pin contains words
+                messagebox.showerror("ERROR", "PIN need to contain digits only")
+                self.tran_pin_entry.delete(0, tk.END)
+                return
+            
+            if pin_confirm != self.current_user.pin: # Check if the pin is right
+                messagebox.showerror("ERROR", "Incorrect PIN, cannot continue the process")
+                self.tran_pin_entry.delete(0, tk.END)
+                return
+            
+            if amount > self.current_user.balance: # Checking his balance
+                messagebox.showerror("ERROR", "Invalid amount or insufficient balance")
+                return  
+            
+            if target_id == self.current_user.account_id: # Checking if we put the same ID as the sender in this process 
+                messagebox.showerror("ERROR", "You cannot transfer money to yourself")
+                clear_fields()
+                return
+            
+            if target_id not in self.bank.Accounts: # ID of the target if its even exist
+                messagebox.showerror("ERROR", "Account ID not found")
+                clear_fields
+                return
+            target_account = self.bank.Accounts[target_id]
+                
+            if target_account.status == "Blocked": # Checking if the account is blocked
+                messagebox.showerror("ERROR", "The account is blocked, transfer cannot be made")
+                return
                     
-                self.current_user.withdraw(amount) # Taking from the sender
-                target_account.deposit(amount)     # The receiver gets the amount
-                
-                save_data(self.bank) # Saving in json
-                messagebox.showinfo("Success", f"₪ {amount:,.2f} transferred to {target_account.full_name}")
-                self.user_screen() # Return te menu after finish
-            else:
-                messagebox.showerror("ERROR", "The account to which the transfer is intended is not found., Please check if the ID is right.")
-                
-        except ValueError:
-            messagebox.showerror("ERROR", "Fill in all the required details")
+            self.current_user.withdraw(amount) # Taking from the sender
+            target_account.deposit(amount)     # The receiver gets the amount
+            save_data(self.bank) # Saving in json
+            messagebox.showinfo("Success", f"₪ {amount:,.2f} transferred to {target_account.full_name}")
+            self.user_screen() # Return te menu after finish
+        except Exception as e:
+            messagebox.showerror("System Error", "An unexpected error occurred. Please try again.")
+            clear_fields()
         
 #========================================================
 #==================== Change PIN ======================== 
