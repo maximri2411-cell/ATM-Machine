@@ -252,6 +252,11 @@ class ATM_app: # Creating the class for the app
                     messagebox.showerror("ERROR", "Enter a positive amount")
                     clear_fields()
                     return
+                max_transfer = 75000
+                if amount > max_transfer:
+                    messagebox.showerror("ERROR", f"Maximum transfer allowed is ₪ {max_transfer:,.0f}")
+                    self.amount_entry.delete(0, tk.END)
+                    return
             except ValueError:
                 messagebox.showerror("ERROR", "Enter digits only")
                 clear_fields()
