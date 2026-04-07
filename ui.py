@@ -564,7 +564,7 @@ class ATM_app: # Creating the class for the app
             
         def save_account(): # Saving the new account in data.json
             name = name_pick.get()
-            pin = pin_pick.get()
+            pin = pin_pick.get() # PIN is public
                 
             if not name or not pin: # Created a checko if not the name or pin was writh in the windows
                 messagebox.showerror("Missing data", "Fill in all the required details")
@@ -574,11 +574,19 @@ class ATM_app: # Creating the class for the app
                 messagebox.showerror("ERROR", "PIN must be 4 digits")
                 pin_pick.delete(0, 'end') 
                 return
-            final_pin = hash_pin(pin_pick.get())
+            final_pin = hash_pin(pin)
             new_id = self.bank.create_account(name, final_pin, 0.0) # Amount with 0 on the start
             save_data(self.bank)
             
-            messagebox.showinfo("Success", f"Account created successfully with the name: {name} \nAccount ID: {new_id} \nBalance: ₪ 0.00")
+            success_msg = (
+                f"Account Created Successfully:"
+                f"Owner: {name}\n"
+                f"Account ID: {new_id}\n"
+                f"Starting Balance: ₪ 0.00\n"
+                f"PIN: {pin} (Secured)"
+                "Please note to yourself the details"
+            )
+            messagebox.showinfo("Success", success_msg)
             self.admin_menu()
         
         # Buttons to use to end the proccess
