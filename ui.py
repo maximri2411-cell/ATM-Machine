@@ -49,7 +49,7 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="LOGIN", command=self.normal_login,font=("Arial", 16 , "bold"), width=23, bg="gold", fg="#0a192f", activebackground="#b8962e", borderwidth=0, cursor="hand2" ,  ).pack(pady=(25, 10))
     
         # Admin login button
-        tk.Button(self.root, text="Admin Access", command=self.admin_screen,font=("Arial", 16, "bold"), width=23, bg="#2d3e50", fg="black", activebackground="#b8962e", borderwidth=0, cursor="hand2"  ).pack(pady=15)
+        tk.Button(self.root, text="Admin Access", command=self.admin_screen,font=("Arial", 16, "bold"), width=23, bg="#2d3e50", fg="white", activebackground="#b8962e", borderwidth=0, cursor="hand2"  ).pack(pady=15)
 
          # Normal user login button
         tk.Button(self.root, text="EXIT", command=self.exit_app,font=("Arial", 22 , "bold"), width=15, bg="gold", fg="#0a192f", activebackground="#b8962e", borderwidth=0, cursor="hand2" ,  ).pack(side= "bottom", anchor="s" , pady=20)                                                                         
@@ -485,16 +485,16 @@ class ATM_app: # Creating the class for the app
             tk.Button(button_frame, text=text, width=25, font=("Arial", 18), bg="gold", fg="#0a192f", command=cmd).pack(pady=10)
             
         # Button to exit if he want
-        tk.Button(self.root, text="LOGOUT", command=self.create_login_screen, bg="ivory", fg="white").pack(pady=30)
-            
+        tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="#0a192f", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)
+        
 #========================================================
 #================== View accounts ======================= 
 #========================================================  
     def view_accounts(self):
         self.cleaning_screen() # Very important, cleaning the window
         
-        tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="#0a192f", width=4, command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne")
-        tk.Button(self.root,text="REFRESH", font=("Arial", 14, "bold"), command=self.view_accounts, bg="gold", fg="midnight blue", width=25).pack(pady=10)
+        
+        tk.Button(self.root,text="REFRESH", font=("Arial", 14, "bold"),width=25, command=self.view_accounts, bg="gold", fg="#0a192f", ).pack(side= "bottom", anchor="s" , pady=20) 
         
         columns = ("id", "name", "balance", "status") # Creating a table 
         tree = ttk.Treeview(self.root, columns=columns, show="headings", height=15)
@@ -508,7 +508,7 @@ class ATM_app: # Creating the class for the app
         for account_id, account in self.bank.Accounts.items(): # Taking all of the info we need to this part from our data.json"
             tree.insert("", tk.END, values=(account_id, account.full_name, f"{account.balance:.2f}", account.status))  
         tree.pack(pady=20, padx=20, fill="x")
-        tk.Button(self.root, text="Back to menu", command=self.admin_menu, bg="#0a192f", fg="gold").pack(pady=10) # Exit button of course
+        tk.Button(self.root, text="Back to menu", font=("Arial", 14, "bold"), width=25, command=self.admin_menu, bg="#0a192f", fg="gold").pack(pady=10) # Exit button of course
         
 #========================================================
 #================== Change status ======================= 
