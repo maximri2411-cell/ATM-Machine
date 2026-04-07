@@ -356,13 +356,13 @@ class ATM_app: # Creating the class for the app
         
         account_history = self.current_user.see_history()
         
-        
+        #! It seems that putting "" inside f string its not accepteble
         if not account_history:
             listbox.insert("end", " " * 15 + "No history recorded in the account")
         else:
             for enter in reversed(account_history):
                 date = enter["date"]
-                op = enter["operation"]
+                oper = enter["operation"]
                 if "amount" in enter:
                     amount =  f"₪ {enter['amount']:,.0f}"
                 else:
@@ -371,9 +371,13 @@ class ATM_app: # Creating the class for the app
                     after = f"₪{enter['amount_after']:,.0f}"
                 else:
                     after = "---"
-                #! It seems that putting "" inside f string its not accepteble
-                listbox.insert("end", text) # Putting the line to the end of the list
                 
+                line = f"{date:<22} | {oper:<15} | {amount:<12} | {after}" # The format we wish it will be
+                listbox.insert("end", line) # Putting the line to the end of the list
+                listbox.insert("end", "-" * 75) # I think its seperate the lines
+                
+        tk.Button(history_top), text="CLOSE", width=15, font=("Arial", 15, "bold"), bg="gold", fg="midnight blue")
+        
 #=======================================================
 #================ Login and menu of manager ============ #! Finished do not touch
 #=======================================================
