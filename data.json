@@ -214,6 +214,20 @@
                     "info": "",
                     "amount": 1000.0,
                     "amount_after": 156203.25
+                },
+                {
+                    "operation": "Withdrawn",
+                    "date": "07/04/2026 15:33",
+                    "info": "",
+                    "amount": 150000.0,
+                    "amount_after": 6203.25
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 15:33",
+                    "info": "",
+                    "amount": 150000.0,
+                    "amount_after": 156203.25
                 }
             ]
         },
@@ -334,7 +348,7 @@
             "account_id": "556612",
             "full_name": "Dana Rosso",
             "pin": "1123",
-            "balance": 135222.3,
+            "balance": 135322.3,
             "status": "Active",
             "history": [
                 {
@@ -364,6 +378,13 @@
                     "info": "",
                     "amount": 1000.0,
                     "amount_after": 135222.3
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 15:30",
+                    "info": "",
+                    "amount": 100.0,
+                    "amount_after": 135322.3
                 }
             ]
         },

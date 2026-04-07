@@ -520,7 +520,7 @@ class ATM_app: # Creating the class for the app
             pin = pin_pick.get()
                 
             if not name or not pin: # Created a checko if not the name or pin was writh in the windows
-                messagebox.showerror("Fill in all the required details")
+                messagebox.showerror("Missing data", "Fill in all the required details")
                 return
 
             if not pin.isdigit() or len(pin) != 4: # Just to be ready if the pin is incoract
@@ -536,7 +536,7 @@ class ATM_app: # Creating the class for the app
         
         # Buttons to use to end the proccess
         tk.Button(self.root, text="CONFIRM", command=save_account, bg="midnight blue", fg="white", font=("Arial", 14,)).pack(pady=20)
-        tk.Button(self.root, text="CANCEL", command=self.admin_menu, bg="midnight blue", fg="white").pack(pady=10)
+        tk.Button(self.root, text="CANCEL", command=self.admin_menu, bg="midnight blue", fg="white", font=("Arial", 12)).pack(pady=10)
 
 #!==========================================================================
 if __name__ == "__main__": #! This will run our app evertime we run the code
