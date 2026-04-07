@@ -126,19 +126,18 @@ class ATM_app: # Creating the class for the app
                 return
             amount = float(amount_str)
             
-            if amount <= 0:
+            if amount <= 0: # Check if the amount is positive
                 messagebox.showerror("ERROR", "Enter a positive or existing balance amount.")
                 return
             current_balance = self.current_user.balance
-            if amount > current_balance:
+            if amount > current_balance: # Check amount of the account
                 messagebox.showerror("Withdrawal denied", f"Maximum amount to withdraw: ₪ {current_balance:,.2f}")
                 return
             
             self.current_user.withdraw(amount) # Doin the operation
             save_data(self.bank) # Saving in the data.json
-            self.balance_label.config(text=f"₪ {self.current_user.balance:,.2f}")
             messagebox.showinfo("Success", f"₪ {amount:,.2f} withdrawn successfully") # Final message
-            self.user_screen()
+            self.user_screen() # Back to the menu
         except ValueError:
             messagebox.showerror("ERROR", "Invalid input, Please enter diginumbers only.")
 
@@ -170,12 +169,11 @@ class ATM_app: # Creating the class for the app
             
             amount = float(amount_user) # In case the user gonna enter - number
             if amount <= 0:
-                messagebox.showerror("ERROR", "Enter an positive amount")
+                messagebox.showerror("ERROR", "Enter a positive amount")
                 return
-                
+            
             self.current_user.deposit(amount) # Calling it to make the action
             save_data(self.bank) # Saving data to data.json
-            self.balance_label.config(text=f"₪ {self.current_user.balance:,.2f}") # Of course only last 2 digit after .
             messagebox.showinfo("Success", f"₪ {amount:,.2f} deposited successfully")
             self.user_screen() # Back to main menu
         except ValueError:

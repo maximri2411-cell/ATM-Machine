@@ -397,13 +397,48 @@
             "account_id": "742885",
             "full_name": "Mike Tyson",
             "pin": "3012",
-            "balance": 5700.0,
+            "balance": 7500.0,
             "status": "Active",
             "history": [
                 {
                     "operation": "PIN Change",
                     "date": "07/04/2026 00:05",
                     "info": "Security update"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "date": "07/04/2026 12:38",
+                    "info": "",
+                    "amount": 700.0,
+                    "amount_after": 5000.0
+                },
+                {
+                    "operation": "Withdrawn",
+                    "date": "07/04/2026 12:40",
+                    "info": "",
+                    "amount": 1000.0,
+                    "amount_after": 4000.0
+                },
+                {
+                    "operation": "Withdrawn",
+                    "date": "07/04/2026 12:41",
+                    "info": "",
+                    "amount": 500.0,
+                    "amount_after": 3500.0
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 12:41",
+                    "info": "",
+                    "amount": 3000.0,
+                    "amount_after": 6500.0
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 12:43",
+                    "info": "",
+                    "amount": 1000.0,
+                    "amount_after": 7500.0
                 }
             ]
         },

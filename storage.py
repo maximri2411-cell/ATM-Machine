@@ -50,7 +50,7 @@ def load_data():
 def save_data(bank): 
     data_to_save = {} # This is creating an empty dictionary to translet to json the python objects
     
-    for account_id, account_js in bank.Account.items():
+    for account_id, account_js in bank.Accounts.items():
         account_js = bank.Accounts[account_id] # Withdrawing accounts from current list
         data_to_save[account_id] = account_js.j_dict() # Taking account and trsnslet from python to json
 
