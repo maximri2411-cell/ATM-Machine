@@ -54,7 +54,6 @@ class Accounts: # Creating a class of Accounts
         
     def withdraw(self, amount):
         amount = float(amount)
-        
         try:
             if amount <= 0: # In case the account is trying to withdraw an 0 or below, it will print an error
                 return False, "ERROR: Withdraw amount must be positive."
