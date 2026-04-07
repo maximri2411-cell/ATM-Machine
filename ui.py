@@ -7,9 +7,10 @@ import hashlib
 # =======================================================
 #================ opening screen of the app ============= 
 #========================================================
-
-def hash_pin(pin):
+#! Its very important to not touch it
+def hash_pin(pin): # The hash thing
     return hashlib.sha256(pin.encode()).hexdigest()
+#!====================================
 class ATM_app: # Creating the class for the app
     def __init__(self, root):
         self.root = root
@@ -185,7 +186,7 @@ class ATM_app: # Creating the class for the app
                 messagebox.showerror("ERROR", "Enter a positive amount")
                 return
             if amount > max_deposit:
-                messagebox.showerror("ERROR", f"Maximum deposit allowed: ₪ {MAX_DEPOSIT:,.0f}")
+                messagebox.showerror("ERROR", f"Maximum deposit allowed: ₪ {max_deposit:,.0f}")
                 return
             
             self.current_user.deposit(amount) # Calling it to make the action
@@ -239,6 +240,12 @@ class ATM_app: # Creating the class for the app
                 messagebox.showerror("ERROR", "Fill in all the required details")
                 return
             
+            hashed_confirm = hash_pin(pin_confirm) #The hash thing
+            if hashed_confirm != self.current_user.pin:
+                messagebox.showerror("ERROR", "Incorrect PIN, cannot continue the process")
+                self.tran_pin_entry.delete(0, tk.END)
+                return
+                
             try:
                 amount = float(amount_input)
                 if amount <= 0: # Check if the user entered 0 or below
@@ -327,7 +334,7 @@ class ATM_app: # Creating the class for the app
                 messagebox.showerror("ERROR", "Fill in the required details")
                 return # כאן לא חייב לנקות, שהמשתמש פשוט ישלים
 
-            if old_pin != self.current_user.pin: # checking if the old pin is right
+            if hash_pin(old_pin) != self.current_user.pin: # checking if the old pin is right with hash
                 messagebox.showerror("ERROR", "Your PIN is incorrect")
                 clear_fields() # The cleaner
                 return
@@ -343,7 +350,7 @@ class ATM_app: # Creating the class for the app
                 return
             
             if len(new_pin) == 4 and new_pin.isdigit(): # Check if the pin is 4 digit number
-                self.current_user.pin = new_pin
+                self.current_user.pin = hash_pin(new_pin) # Save as hash
                 
                 self.current_user.add_history( # What is goin to be in the history
                     operation="PIN Change",

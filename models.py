@@ -20,7 +20,7 @@ class Accounts: # Creating a class of Accounts
 
 #================================================================================================    
         
-    def add_history(self, operation, amount=None, info=""): # Insted of adding evertime by yourself the process, have build an function that doin it for me 
+    def add_history(self, operation, amount=None, info="None", amount_after=None): # Insted of adding evertime by yourself the process, have build an function that doin it for me 
         from datetime import datetime
         date = datetime.now().strftime("%d/%m/%Y %H:%M")
         
@@ -32,7 +32,7 @@ class Accounts: # Creating a class of Accounts
         }
         if amount is not None: # This will be in sitoation when the amount is not None
             new_entry["amount"] = float(amount)
-            new_entry["amount_after"] = self.balance
+            new_entry["amount_after"] = self.balance if amount_after is not None else self.balance
     
         self.history.append(new_entry) # Add the dictionary to the list
         
