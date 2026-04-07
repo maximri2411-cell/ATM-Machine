@@ -60,7 +60,7 @@ class ATM_app: # Creating the class for the app
         
         if user:
             self.current_user = user
-            messagebox.showinfo("Success", message)# Line up that every success entry must be like this
+            messagebox.showinfo("Success", message)# Line up that every success entry must be like this, the message is from models
             self.account_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
             self.log_pin_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
             

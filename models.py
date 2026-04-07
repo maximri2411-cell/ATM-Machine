@@ -147,29 +147,15 @@ class Bank: # Manage all accounts in our project
         # Building a tree of checks to make sure it wont break here.
         
         if not account:
-            return None, "ERROR: Account was not found."
+            return None, f"ERROR: Account ID was not found. \nTry again. \nIn case of a problem, contact customer service or visit the nearest branch. \nthank you fot understanding."
         
         if account.status == "Blocked":
-            return None, f"ERROR"
+            return None, f"ERROR: \nYour account is blocked, \ncontact customer service or visit the nearest branch. \nthank you fot understanding."
         
         if str(account.pin) != str(pin):
-            return None, f"ERROR"
+            return None, f"ERROR: The account PIN is incorrect. \nTry again. \nIn case of a problem, contact customer service or visit the nearest branch. \nthank you fot understanding."
         
-        return account, f"Login to the account has successed. welcome {account.full_name}"
-    
-        #! Old version
-        # if account.status == "Blocked":
-        #     print(f"Error: Account {account_id} is BLOCKED. \nPlease call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
-        #     return None
-            
-        # if account:
-        #     if str(account.pin) == str(pin):
-        #         print((f"Login successful. \nWelcome {account.full_name}."))
-        #         return account
-        #     else:
-        #         print(f"Error: Incorerect PIN. \nPlease try again. \nIn case you forgot the PIN, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
-        #         return None
-        # return None 
+        return account, f"Login to the account has successed. \nWelcome {account.full_name}"
         
 #================================================================================================ 
         

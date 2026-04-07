@@ -207,3 +207,17 @@ from storage import load_data, save_data
         #         amount_after = f"₪ {enter['amount_after']}" if 'amount_after' in enter else " "
         #  text = f"{enter['date']} | {enter['operation']} | {amount} | {amount_after} | {enter['info'] }" # We took all of the operation things from models
                 
+                
+        #! Old version of status users
+        # if account.status == "Blocked":
+        #     print(f"Error: Account {account_id} is BLOCKED. \nPlease call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
+        #     return None
+            
+        # if account:
+        #     if str(account.pin) == str(pin):
+        #         print((f"Login successful. \nWelcome {account.full_name}."))
+        #         return account
+        #     else:
+        #         print(f"Error: Incorerect PIN. \nPlease try again. \nIn case you forgot the PIN, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
+        #         return None
+        # return None

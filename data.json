@@ -3,8 +3,8 @@
         "321321": {
             "account_id": "321321",
             "full_name": "Grisha Borisov",
-            "pin": "2222",
-            "balance": 157203.25,
+            "pin": "1111",
+            "balance": 156203.25,
             "status": "Active",
             "history": [
                 {
@@ -174,6 +174,46 @@
                     "date": "06/04/2026 18:13",
                     "amount_after": 157203.25,
                     "info": "Security update"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "date": "07/04/2026 14:13",
+                    "info": "",
+                    "amount": 300.0,
+                    "amount_after": 156903.25
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 14:14",
+                    "info": "",
+                    "amount": 300.0,
+                    "amount_after": 157203.25
+                },
+                {
+                    "operation": "PIN Change",
+                    "date": "07/04/2026 14:14",
+                    "info": "Security update"
+                },
+                {
+                    "operation": "Withdrawn",
+                    "date": "07/04/2026 14:17",
+                    "info": "",
+                    "amount": 1000.0,
+                    "amount_after": 156203.25
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 14:29",
+                    "info": "",
+                    "amount": 1000.0,
+                    "amount_after": 157203.25
+                },
+                {
+                    "operation": "Withdrawn",
+                    "date": "07/04/2026 14:32",
+                    "info": "",
+                    "amount": 1000.0,
+                    "amount_after": 156203.25
                 }
             ]
         },
@@ -181,7 +221,7 @@
             "account_id": "653421",
             "full_name": "Daniel Levi",
             "pin": "0001",
-            "balance": 700.0,
+            "balance": 1700.0,
             "status": "Active",
             "history": [
                 {
@@ -239,6 +279,23 @@
                     "date": "06/04/2026 22:33",
                     "amount_after": 700.0,
                     "info": "Security update"
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 14:17",
+                    "info": "",
+                    "amount": 1000.0,
+                    "amount_after": 1700.0
+                },
+                {
+                    "operation": "Status Change",
+                    "date": "07/04/2026 14:19",
+                    "info": "Account status change to Blocked by Admin"
+                },
+                {
+                    "operation": "Status Change",
+                    "date": "07/04/2026 14:20",
+                    "info": "Account status change to Active by Admin"
                 }
             ]
         },
@@ -277,7 +334,7 @@
             "account_id": "556612",
             "full_name": "Dana Rosso",
             "pin": "1123",
-            "balance": 133222.3,
+            "balance": 135222.3,
             "status": "Active",
             "history": [
                 {
@@ -293,6 +350,20 @@
                     "date": "06/04/2026 20:03",
                     "amount_after": 133222.3,
                     "info": "None"
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 13:58",
+                    "info": "",
+                    "amount": 1000.0,
+                    "amount_after": 134222.3
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 14:32",
+                    "info": "",
+                    "amount": 1000.0,
+                    "amount_after": 135222.3
                 }
             ]
         },
@@ -460,6 +531,38 @@
                     "info": "Account status change to Active by Admin"
                 }
             ]
+        },
+        "739695": {
+            "account_id": "739695",
+            "full_name": "Gogo gaga",
+            "pin": "4567",
+            "balance": 7000.0,
+            "status": "Active",
+            "history": []
+        },
+        "701836": {
+            "account_id": "701836",
+            "full_name": "bobo shbobo",
+            "pin": "adf3",
+            "balance": 1000.0,
+            "status": "Active",
+            "history": []
+        },
+        "178473": {
+            "account_id": "178473",
+            "full_name": "\u05de\u05e9\u05d4 \u05de\u05e9\u05d4",
+            "pin": "33333",
+            "balance": 0.0,
+            "status": "Active",
+            "history": []
+        },
+        "308836": {
+            "account_id": "308836",
+            "full_name": "\u05e9\u05d3\u05d2\u05d3\u05e9\u05d2",
+            "pin": "2222",
+            "balance": -600.0,
+            "status": "Active",
+            "history": []
         }
     }
 }
