@@ -194,7 +194,7 @@ class ATM_app: # Creating the class for the app
             messagebox.showerror("ERROR", "Invalid amount or insufficient balance")
                
 #========================================================
-#================== Transfer page ======================= #! Finished do not touch
+#================== Transfer page ======================= 
 #========================================================                  
                
     def transfer_action(self): # Creation of the transfer between accounts
@@ -302,7 +302,7 @@ class ATM_app: # Creating the class for the app
             clear_fields()
         
 #========================================================
-#==================== Change PIN ======================== #! Finished do not touch
+#==================== Change PIN ======================== 
 #========================================================
 
     def change_pin(self): # New pin
@@ -374,7 +374,7 @@ class ATM_app: # Creating the class for the app
         # The lambda is for delete the old pin and close the window
                           
 #========================================================
-#================== History view ======================== #! Finished do not touch
+#================== History view ======================== 
 #========================================================
 
 ###### I used google translet to explain, sorry
@@ -423,7 +423,7 @@ class ATM_app: # Creating the class for the app
         tk.Button(history_top, text="CLOSE", width=15, font=("Arial", 15, "bold"), bg="gold", fg="#0a192f", command=history_top.destroy).pack(pady=20)
                                                                                                                     #^ It will delete the old label
 #=======================================================
-#================ Login and menu of manager ============ #! Finished do not touch
+#================ Login and menu of manager ============ 
 #=======================================================
 
     def admin_screen(self): # Admin screet creation
@@ -431,22 +431,25 @@ class ATM_app: # Creating the class for the app
         
         # This is our title for the next screen
         tk.Label(self.root, text="ADMIN LOGIN", font=("Arial", 36, "bold"), justify="center", bg="#0a192f", fg="white").pack(pady=50)
-        tk.Label(self.root, text="Enter Admin Password:",font=("Arial", 16, "bold"), justify="center", bg="#0a192f", fg="white"). pack(pady=10)
+        tk.Label(self.root, text="Enter Admin Password:",font=("Arial", 16, "bold"), justify="center", bg="#0a192f", fg="ivory").pack()
+        
+        
         
         # Adding * for his password 
-        self.admin_pin_entry = tk.Entry(self.root, show="*", width=25, font=("Arial", 16, "bold"), bg="#0a192f", fg="white")
-        self.admin_pin_entry.pack(pady=10)
+        self.admin_pin_entry = tk.Entry(self.root, show="*", width=25, font=("Arial",16), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0, highlightthickness=1, highlightbackground="#4a5a71" )
+        self.admin_pin_entry.pack(pady=10, ipady=8)
+        
+        
     
         # The button for enter confirm
-        tk.Button(self.root, text="Verify Access", command=self.check_pin_admin,
-                  font=("Arial", 14, "bold"), width=15, bg="ivory", fg="white", 
-                  cursor="hand2").pack(pady=15)
+        tk.Button(self.root, text="Verify Access", command=self.check_pin_admin, font=("Arial", 16, "bold"), width=23, bg="gold", fg="#0a192f", activebackground="#b8962e", borderwidth=0, cursor="hand2").pack(pady=(25, 10))
+        
         
         # Buton to return back if he wants
-        tk.Button(self.root, text="Back to home page", command=self.create_login_screen,
-                  font=("Arial", 10), bg="ivory", fg="white", borderwidth=0).pack(pady=5)
+        tk.Button(self.root, text="Home Page", command=self.create_login_screen, font=("Arial", 22 , "bold"), width=15, bg="gold", fg="#0a192f", activebackground="#b8962e", borderwidth=0, cursor="hand2").pack(side= "bottom", anchor="s" , pady=20)
+                                                                   
         
-#======================================================= #! Finished do not touch       
+#=======================================================     
         
     def check_pin_admin(self): # Check if the pin is currecct
         pin_admin = self.admin_pin_entry.get()
@@ -468,7 +471,7 @@ class ATM_app: # Creating the class for the app
             messagebox.showerror("Access Denided", long_error_message)
             self.admin_pin_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
  
-#======================================================= #! Finished do not touch       
+#=======================================================       
         
     def admin_menu(self): # Creatin the admin menu after the password
         self.cleaning_screen()
@@ -485,7 +488,7 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="LOGOUT", command=self.create_login_screen, bg="ivory", fg="white").pack(pady=30)
             
 #========================================================
-#================== View accounts ======================= #! Finished do not touch
+#================== View accounts ======================= 
 #========================================================  
     def view_accounts(self):
         self.cleaning_screen() # Very important, cleaning the window
@@ -507,7 +510,7 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="Back to menu", command=self.admin_menu, bg="#0a192f", fg="gold").pack(pady=10) # Exit button of course
         
 #========================================================
-#================== Change status ======================= #! Finished do not touch
+#================== Change status ======================= 
 #========================================================    
 
     def change_status(self): # Creating the function to change the account status by the admin
@@ -544,7 +547,7 @@ class ATM_app: # Creating the class for the app
         
         
 #========================================================
-#=================== New account ======================== #! Finished do not touch
+#=================== New account ======================== 
 #========================================================   
  
     def create_new_account(self): # Function to create a new account
