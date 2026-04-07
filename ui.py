@@ -350,7 +350,7 @@ class ATM_app: # Creating the class for the app
         Scrollbar = tk.Scrollbar(history_frame)
         Scrollbar.pack(side="right", fill="y") # Attach the ruler to the right side of the box and stretch it to the entire height
         
-        listbox = tk.Listbox(history_frame, width=30, font=("Arial", 14, "bold"), bg="black", fg="White", selectbackground="gold", selectforeground="midnight blue", borderwidth=0, highlightthickness=0, yscrollcommand=Scrollbar.set) # Should connect between listbox and scrollbar with yscrollcommand
+        listbox = tk.Listbox(history_frame, width=30, font=("Arial", 14, "bold"), bg="white", fg="black", selectbackground="gold", selectforeground="midnight blue", borderwidth=0, highlightthickness=0, yscrollcommand=Scrollbar.set) # Should connect between listbox and scrollbar with yscrollcommand
         listbox.pack(side="left", fill="both", expand=True) # Snaps the list to the left side, lets it fill all the remaining space (fill="both") and allows it to grow if we enlarge the window (expand=True).
         Scrollbar.config(command=listbox.yview) 
         
@@ -376,8 +376,8 @@ class ATM_app: # Creating the class for the app
                 listbox.insert("end", line) # Putting the line to the end of the list
                 listbox.insert("end", "-" * 75) # I think its seperate the lines
                 
-        tk.Button(history_top), text="CLOSE", width=15, font=("Arial", 15, "bold"), bg="gold", fg="midnight blue")
-        
+        tk.Button(history_top, text="CLOSE", width=15, font=("Arial", 15, "bold"), bg="gold", fg="midnight blue", command=history_top.destroy).pack(pady=20)
+                                                                                                                    #^ It will delete the old label
 #=======================================================
 #================ Login and menu of manager ============ #! Finished do not touch
 #=======================================================
