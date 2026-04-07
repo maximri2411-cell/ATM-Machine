@@ -571,15 +571,15 @@ class ATM_app: # Creating the class for the app
                 pin_pick.delete(0, 'end') 
                 return
             final_pin = hash_pin(pin)
-            new_id = self.bank.create_account(name, final_pin, 0.0) # Amount with 0 on the start
+            new_id = self.bank.create_account(name, final_pin, 0.0, "Active", []) # Amount with 0 on the start
             save_data(self.bank)
             
             success_msg = (
-                f"Account Created Successfully:"
+                f"Account Created Successfully:\n"
                 f"Owner: {name}\n"
                 f"Account ID: {new_id}\n"
                 f"Starting Balance: ₪ 0.00\n"
-                f"PIN: {pin} (Secured)"
+                f"PIN: {pin} (Secured)\n"
                 "Please note to yourself the details"
             )
             messagebox.showinfo("Success", success_msg)

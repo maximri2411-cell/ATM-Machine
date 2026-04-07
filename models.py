@@ -97,8 +97,8 @@ class Accounts: # Creating a class of Accounts
             "pin": self.pin,
             "balance": self.balance,
             "status": self.status,
-            "history": self.history,
-            "faild_loging": self.failed_loging
+            "faild_loging": self.failed_loging,
+            "history": self.history
         }
 
 #===================================
@@ -113,13 +113,16 @@ class Bank: # Manage all accounts in our project
 
 #================================================================================================
 
-    def create_account(self, full_name, pin, amount): # Function to create new account 
+    def create_account(self, full_name, pin, amount, status="Active", history=None): # Function to create new account 
+        if history is None:
+            history = [] 
+            
         account_id = str(random.randint(100000, 999999))
     
         while account_id in self.Accounts:
             account_id = str(random.randint(100000, 999999))
         
-        new_account = Accounts(account_id, full_name, pin, amount, "Active", []) # Creating a user exactly according to the characteristics we created in part 2
+        new_account = Accounts(account_id, full_name, pin, amount, "Active", 0, []) # Creating a user exactly according to the characteristics we created in part 2
         
         self.Accounts[account_id] = new_account # saving the new account in the dictionary of the bank
         
