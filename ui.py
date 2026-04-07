@@ -338,25 +338,27 @@ class ATM_app: # Creating the class for the app
 ###### I used google translet to explain, sorry
     def full_history(self): # Creating the watch history for user
         
-        history_top = tk.Toplevel(self.root) # Creating the fluting window
+        history_top = tk.Toplevel(self.root) # Creating the other window
         history_top.title("Transaction history")
         history_top.geometry("1000x800")
         history_top.configure(bg="midnight blue")
         
-        history_frame = tk.Frame(history_top)
-        history_frame.pack(pady=20, padx=20, fill="both", expand=True) # Putting the window inside the origin screen
-        
+        tk.Label(history_top, text="ACCOUNT HISTORY ", font=("Arial", 30, "bold"), bg="midnight blue", fg="gold").pack(pady=(25, 10))
+        history_frame = tk.Frame(history_top, bg="gold")
+        history_frame.pack(pady=15, padx=30, fill="both", expand=True) # Putting the window inside the origin screen
+         #! Roller
         Scrollbar = tk.Scrollbar(history_frame)
         Scrollbar.pack(side="right", fill="y") # Attach the ruler to the right side of the box and stretch it to the entire height
         
-        listbox = tk.Listbox(history_frame, width=30, font=("Arial", 10), yscrollcommand=Scrollbar.set) # Should connect between listbox and scrollbar with yscrollcommand
+        listbox = tk.Listbox(history_frame, width=30, font=("Arial", 14, "bold"), bg="black", fg="White", selectbackground="gold", selectforeground="midnight blue", borderwidth=0, highlightthickness=0, yscrollcommand=Scrollbar.set) # Should connect between listbox and scrollbar with yscrollcommand
         listbox.pack(side="left", fill="both", expand=True) # Snaps the list to the left side, lets it fill all the remaining space (fill="both") and allows it to grow if we enlarge the window (expand=True).
-        
         Scrollbar.config(command=listbox.yview) 
         
         account_history = self.current_user.see_history()
+        
+        
         if not account_history:
-            listbox.insert("end", "No history recorded in the account")
+            listbox.insert("end", " " * 15 + "No history recorded in the account")
         else:
             for enter in reversed(account_history):
                 amount = f"₪ {enter['amount']}" if 'amount' in enter else " " # Putting it inside a value to make it easy on me
