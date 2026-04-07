@@ -645,6 +645,14 @@
             "balance": 0.0,
             "status": "Active",
             "history": []
+        },
+        "357397": {
+            "account_id": "357397",
+            "full_name": "Grisha Onishuk",
+            "pin": "eb9cf4c533aed16eebdc067ba1ef6a895e5098ec17a7a4aa8855d1cf496e6847",
+            "balance": 0.0,
+            "status": "Active",
+            "history": []
         }
     }
 }
