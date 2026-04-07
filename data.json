@@ -56,9 +56,24 @@
             "account_id": "357397",
             "full_name": "Grisha Onishuk",
             "pin": "eb9cf4c533aed16eebdc067ba1ef6a895e5098ec17a7a4aa8855d1cf496e6847",
-            "balance": 0.0,
+            "balance": 9000.0,
             "status": "Active",
-            "history": []
+            "history": [
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 23:41",
+                    "info": "Deposit",
+                    "amount": 10000.0,
+                    "amount_after": 10000.0
+                },
+                {
+                    "operation": "Withdraw",
+                    "date": "07/04/2026 23:42",
+                    "info": "Withdraw",
+                    "amount": 1000.0,
+                    "amount_after": 9000.0
+                }
+            ]
         }
     }
 }
