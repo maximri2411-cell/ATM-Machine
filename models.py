@@ -54,7 +54,6 @@ class Accounts: # Creating a class of Accounts
         
     def withdraw(self, amount):
         amount = float(amount)
-        
         try:
             if amount <= 0: # In case the account is trying to withdraw an 0 or below, it will print an error
                 return False, "ERROR: Withdraw amount must be positive."
@@ -144,32 +143,18 @@ class Bank: # Manage all accounts in our project
     def login_account(self, account_id, pin): # Function to log a user into the bank
         account = self.find_account(account_id) # Uses the function we created in previos function
         
-        # Building a tree of checks to make sure it wont break here.
+        # Building a tree of checks to make sure it wont break here
         
         if not account:
-            return None, "ERROR: Account was not found."
+            return None, f"ERROR: Account ID was not found. \nTry again. \nIn case of a problem, contact customer service or visit the nearest branch. \nthank you fot understanding."
         
         if account.status == "Blocked":
-            return None, f"ERROR"
+            return None, f"ERROR: \nYour account is blocked, \ncontact customer service or visit the nearest branch. \nthank you fot understanding."
         
         if str(account.pin) != str(pin):
-            return None, f"ERROR"
+            return None, f"ERROR: The account PIN is incorrect. \nTry again. \nIn case of a problem, contact customer service or visit the nearest branch. \nthank you fot understanding."
         
-        return account, f"Login to the account has successed. welcome {account.full_name}"
-    
-        #! Old version
-        # if account.status == "Blocked":
-        #     print(f"Error: Account {account_id} is BLOCKED. \nPlease call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
-        #     return None
-            
-        # if account:
-        #     if str(account.pin) == str(pin):
-        #         print((f"Login successful. \nWelcome {account.full_name}."))
-        #         return account
-        #     else:
-        #         print(f"Error: Incorerect PIN. \nPlease try again. \nIn case you forgot the PIN, Please call customer service or visit your local bank for help. \nThank you for understanding, goodbye.")
-        #         return None
-        # return None 
+        return account, f"Login to the account has successed. \nWelcome {account.full_name}"
         
 #================================================================================================ 
         
@@ -197,11 +182,8 @@ class Bank: # Manage all accounts in our project
         success, msg = the_sender.withdraw(amount)
         
         if success:
-            
             the_receiver.balance += float(amount) # If the withdraw has succesed, the receiver gets it
-            
             the_receiver.add_history("Transfer In", amount, info=f"From {the_sender.full_name}")  # Updating for both in dict way
-            
             the_sender.history[-1]["operation"] = "Transfer - Out" # Updating the user on this transfer and of coure to who
             the_sender.history[-1]["info"] = f"To {the_receiver.full_name}"
             
@@ -262,4 +244,3 @@ class Bank: # Manage all accounts in our project
             return account.history
         else:
             return None 
-            
