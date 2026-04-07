@@ -342,38 +342,40 @@ class ATM_app: # Creating the class for the app
         history_top.configure(bg="midnight blue")
         
         tk.Label(history_top, text="ACCOUNT HISTORY ", font=("Arial", 30, "bold"), bg="midnight blue", fg="gold").pack(pady=(25, 10))
-        history_frame = tk.Frame(history_top, bg="gold")
+        tk.Button(history_top, text="REFRESH", font=("Arial", 12, "bold"), bg="gold", fg="midnight blue", command=lambda: update_list()).pack(pady=5)
+    
+        history_frame = tk.Frame(history_top, bg="gold", bd=2)
         history_frame.pack(pady=15, padx=30, fill="both", expand=True) # Putting the window inside the origin screen
          #! Roller
         Scrollbar = tk.Scrollbar(history_frame)
         Scrollbar.pack(side="right", fill="y") # Attach the ruler to the right side of the box and stretch it to the entire height
         
-        listbox = tk.Listbox(history_frame, width=30, font=("Arial", 14, "bold"), bg="white", fg="black", selectbackground="gold", selectforeground="midnight blue", borderwidth=0, highlightthickness=0, yscrollcommand=Scrollbar.set) # Should connect between listbox and scrollbar with yscrollcommand
+        listbox = tk.Listbox(history_frame, width=30, font=("Courier New", 14, "bold"), bg="midnight blue", fg="white", selectbackground="gold", selectforeground="midnight blue", borderwidth=0, highlightthickness=0, yscrollcommand=Scrollbar.set) # Should connect between listbox and scrollbar with yscrollcommand
         listbox.pack(side="left", fill="both", expand=True) # Snaps the list to the left side, lets it fill all the remaining space (fill="both") and allows it to grow if we enlarge the window (expand=True).
         Scrollbar.config(command=listbox.yview) 
         
-        account_history = self.current_user.see_history()
-        
         #! It seems that putting "" inside f string its not accepteble
-        if not account_history:
-            listbox.insert("end", " " * 15 + "No history recorded in the account")
-        else:
-            for enter in reversed(account_history):
-                date = enter["date"]
-                oper = enter["operation"]
-                if "amount" in enter:
-                    amount =  f"₪ {enter['amount']:,.0f}"
-                else:
-                    amount = "---"
-                if "amount_after" in enter:
-                    after = f"₪{enter['amount_after']:,.0f}"
-                else:
-                    after = "---"
-                
-                line = f"{date:<22} | {oper:<15} | {amount:<12} | {after}" # The format we wish it will be
-                listbox.insert("end", line) # Putting the line to the end of the list
-                listbox.insert("end", "-" * 75) # I think its seperate the lines
-                
+        def update_list(): # This creating our beuty table
+            listbox.delete(0, tk.END) # Clean
+            header = f"{'Date':<22} | {'Operation':<15} | {'Amount':<12} | {'Balance'}" # The format on top
+            listbox.insert("end", header) 
+            listbox.insert("end", "=" * 75)
+            account_history = self.current_user.see_history()
+            
+            if not account_history:
+                listbox.insert("end", " " * 15 + "No history recorded") # If it is a new account it will print this
+            else:
+                for enter in reversed(account_history): # Format if there is a history for that account
+                    date = enter.get("Date", "---")
+                    oper = enter.get("Operation", "---")
+                    amount = f"₪ {enter['amount']:,.0f}" if "amount" in enter else "---"
+                    after = f"₪ {enter['amount_after']:,.0f}" if "amount_after" in enter else "---"
+                    
+                    line = f"{date:<22} | {oper:<15} | {amount:<12} | {after}"
+                    listbox.insert("end", line) # Putting the line to the end of the list
+                    listbox.insert("end", "-" * 75) # I think its seperate the lines
+                    
+        update_list()
         tk.Button(history_top, text="CLOSE", width=15, font=("Arial", 15, "bold"), bg="gold", fg="midnight blue", command=history_top.destroy).pack(pady=20)
                                                                                                                     #^ It will delete the old label
 #=======================================================
@@ -384,21 +386,21 @@ class ATM_app: # Creating the class for the app
         self.cleaning_screen()
         
         # This is our title for the next screen
-        tk.Label(self.root, text="ADMIN LOGIN", font=("Arial", 36, "bold"), justify="center", bg="midnight blue", fg="ivory").pack(pady=50)
-        tk.Label(self.root, text="Enter Admin Password:",font=("Arial", 16, "bold"), justify="center", bg="gold", fg="white"). pack(pady=10)
+        tk.Label(self.root, text="ADMIN LOGIN", font=("Arial", 36, "bold"), justify="center", bg="midnight blue", fg="white").pack(pady=50)
+        tk.Label(self.root, text="Enter Admin Password:",font=("Arial", 16, "bold"), justify="center", bg="midnight blue", fg="white"). pack(pady=10)
         
         # Adding * for his password 
-        self.admin_pin_entry = tk.Entry(self.root, show="*", width=25, font=("Arial", 16, "bold"), bg="gold", fg="white")
+        self.admin_pin_entry = tk.Entry(self.root, show="*", width=25, font=("Arial", 16, "bold"), bg="midnight blue", fg="white")
         self.admin_pin_entry.pack(pady=10)
     
         # The button for enter confirm
         tk.Button(self.root, text="Verify Access", command=self.check_pin_admin,
-                  font=("Arial", 14, "bold"), width=15, bg="black", fg="white", 
+                  font=("Arial", 14, "bold"), width=15, bg="ivory", fg="white", 
                   cursor="hand2").pack(pady=15)
         
         # Buton to return back if he wants
         tk.Button(self.root, text="Back to home page", command=self.create_login_screen,
-                  font=("Arial", 10), bg="black", fg="white", borderwidth=0).pack(pady=5)
+                  font=("Arial", 10), bg="ivory", fg="white", borderwidth=0).pack(pady=5)
         
 #======================================================= #! Finished do not touch       
         
@@ -428,22 +430,21 @@ class ATM_app: # Creating the class for the app
         self.cleaning_screen()
         
         # Label on toop od the screen
-        tk.Label(self.root, text="ADMIN CONTROL MENU", font=("Arial", 25, "bold"), bg="black", fg="white").pack(pady=40)
+        tk.Label(self.root, text="ADMIN CONTROL MENU", font=("Arial", 25, "bold"), bg="midnight blue", fg="white").pack(pady=40)
         
         # Buttons for the menu
-        tk.Button(self.root, text="VIEW ALL ACCOUNTS", command=self.view_accounts, font=("Arial", 12), width=30, bg="black", fg="white").pack(pady=10)
-        tk.Button(self.root, text="CREATE NEW ACCOUNT", command=self.create_new_account, font=("Arial", 12), width=30, bg="black", fg="white").pack(pady=10)
-        tk.Button(self.root, text="CHANGE ACCOUNT STATUS", command=self.change_status, font=("Arial", 12), width=30, bg="black", fg="white").pack(pady=10)
+        tk.Button(self.root, text="VIEW ALL ACCOUNTS", command=self.view_accounts, font=("Arial", 12), width=30, bg="ivory", fg="white").pack(pady=10)
+        tk.Button(self.root, text="CREATE NEW ACCOUNT", command=self.create_new_account, font=("Arial", 12), width=30, bg="ivory", fg="white").pack(pady=10)
+        tk.Button(self.root, text="CHANGE ACCOUNT STATUS", command=self.change_status, font=("Arial", 12), width=30, bg="ivory", fg="white").pack(pady=10)
             
         # Button to exit if he want
-        tk.Button(self.root, text="LOGOUT", command=self.create_login_screen, bg="black", fg="white").pack(pady=30)
+        tk.Button(self.root, text="LOGOUT", command=self.create_login_screen, bg="ivory", fg="white").pack(pady=30)
             
 #========================================================
 #================== View accounts ======================= #! Finished do not touch
 #========================================================  
     def view_accounts(self):
         self.cleaning_screen() # Very important, cleaning the window
-            
         columns = ("id", "name", "balance", "status") # Creating a table 
         tree = ttk.Treeview(self.root, columns=columns, show="headings", height=15)
         
@@ -458,10 +459,6 @@ class ATM_app: # Creating the class for the app
             
         tree.pack(pady=20, padx=20, fill="x")
         tk.Button(self.root, text="Back to menu", command=self.admin_menu, bg="midnight blue", fg="gold").pack(pady=10) # Exit button of course
-        
-        # Refresh in case he createt new user
-        tk.Button(self.root, text="REFRESH", font=("Arial", 12), command=self.view_accounts, bg="midnight blue", fg="gold", width=20).pack(pady=5)
-        tk.Button(self.root, text="Back to Menu", command=self.admin_menu, bg="black", fg="white", width=20).pack(pady=5)
         
 #========================================================
 #================== Change status ======================= #! Finished do not touch

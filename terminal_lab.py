@@ -224,10 +224,29 @@ from storage import load_data, save_data
         
         
         
-                #! old version of create an account
+        #! Old version of create an account
         #         new_id = self.bank.create_account(name, pin, float(amount)) # Calling for the function in models
         #         save_data(self.bank)
         #         messagebox.showinfo("Account successefully created", f"Account created by the name: {name}, \nAccount ID {new_id} with {amount}")
         #         self.admin_menu()
         #     else:
         #         messagebox.showerror("ERROR", "Fill in all the required details.")
+        
+        
+        
+        #! Old version pf history
+        #   if not account_history:
+        #     listbox.insert("end", " " * 15 + "No history recorded in the account")
+        # else:
+        #     for enter in reversed(account_history):
+        #         date = enter["date"]
+        #         oper = enter["operation"]
+        #         if "amount" in enter:
+        #             amount =  f"₪ {enter['amount']:,.0f}"
+        #         else:
+        #             amount = "---"
+        #         if "amount_after" in enter:
+        #             after = f"₪{enter['amount_after']:,.0f}"
+        #         else:
+        #             after = "---"
+                
