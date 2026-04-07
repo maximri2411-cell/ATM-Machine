@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import messagebox, ttk, Scrollbar
 from storage import load_data, save_data #! Do not delete it, important for our function to use
 import hashlib
+import time
 
 # =======================================================
 #================ opening screen of the app ============= 
@@ -55,7 +56,7 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="EXIT", command=self.exit_app,font=("Arial", 22 , "bold"), width=15, bg="gold", fg="#0a192f", activebackground="#b8962e", borderwidth=0, cursor="hand2" ,  ).pack(side= "bottom", anchor="s" , pady=20)                                                                         
 
 #=======================================================
-#================== Login and menu of user ============= #! Finished do not touch
+#================== Login and menu of user ============= 
 #=======================================================
 
     def normal_login(self): # Taking data from GUI fild
@@ -63,13 +64,13 @@ class ATM_app: # Creating the class for the app
         pin = self.log_pin_entry.get()
         hashed_input = hash_pin(pin)
         user, message = self.bank.login_account(account_id, hashed_input)
+        save_data(self.bank)
         
         if user:
             self.current_user = user
             messagebox.showinfo("Success", message)# Line up that every success entry must be like this, the message is from models
             self.account_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
             self.log_pin_entry.delete(0, tk.END) # instead of the user will delete by himself the line, it doin for him
-            
             self.user_screen() # Moving to the user screen
         else:
             messagebox.showerror("ERROR", message) # Line up thst every fail entry must be like this
@@ -94,7 +95,6 @@ class ATM_app: # Creating the class for the app
         self.balance_label = tk.Label(self.root, text=f"₪ {self.current_user.balance:,.2f}", font=("Arial", 28, "bold"), bg="#0a192f", fg="white")
         self.balance_label.pack(pady=10)
         
-
         # Down label fram
         if self.current_user.is_admin:
             tk.Button(button_frame, text="ADMIN PANEL", width=25, font=("Arial", 18, "bold"), bg="dark red", fg="white", command=self.admin_menu).pack(pady=10)
@@ -113,7 +113,7 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="#0a192f", command=self.create_login_screen).pack(side="bottom", pady=20)
 
 #========================================================
-#================== Withdraw page ======================= #! Finished do not touch
+#================== Withdraw page ======================= 
 #========================================================         
     
     def withdraw_action(self):
@@ -264,11 +264,6 @@ class ATM_app: # Creating the class for the app
                 self.tran_pin_entry.delete(0, tk.END)
                 return
             
-            if pin_confirm != self.current_user.pin: # Check if the pin is right
-                messagebox.showerror("ERROR", "Incorrect PIN, cannot continue the process")
-                self.tran_pin_entry.delete(0, tk.END)
-                return
-            
             if amount > self.current_user.balance: # Checking his balance
                 messagebox.showerror("ERROR", "Invalid amount or insufficient balance")
                 return  
@@ -385,11 +380,9 @@ class ATM_app: # Creating the class for the app
         history_top.geometry("1000x800")
         history_top.configure(bg="#0a192f")
         
-        
         tk.Label(history_top, text="ACCOUNT HISTORY ", font=("Arial", 30, "bold"), bg="#0a192f", fg="gold").pack(pady=(25, 10))
         tk.Button(history_top, text="REFRESH", width=15, font=("Arial", 22, "bold"), bg="gold", fg="#0a192f", command=lambda: update_list()).pack(side= "bottom", anchor="s" , pady=20)
        
-    
         history_frame = tk.Frame(history_top, bg="gold", bd=2)
         history_frame.pack(pady=15, padx=30, fill="both", expand=True) # Putting the window inside the origin screen
          #! Roller
@@ -423,7 +416,6 @@ class ATM_app: # Creating the class for the app
                     
         update_list()
         
-                                                                                                                    #^ It will delete the old label
 #=======================================================
 #================ Login and menu of manager ============ 
 #=======================================================
@@ -495,7 +487,6 @@ class ATM_app: # Creating the class for the app
     def view_accounts(self):
         self.cleaning_screen() # Very important, cleaning the window
         
-        
         tk.Button(self.root,text="REFRESH", font=("Arial", 14, "bold"),width=25, command=self.view_accounts, bg="gold", fg="#0a192f", ).pack(side= "bottom", anchor="s" , pady=20) 
         
         columns = ("id", "name", "balance", "status") # Creating a table 
@@ -547,7 +538,6 @@ class ATM_app: # Creating the class for the app
         
         # Button to cancel
         tk.Button(self.root, text="Cancel action", command=self.admin_menu, bg="grey", fg="white", font=("Arial", 12,)).pack(pady=15)
-        
         
 #========================================================
 #=================== New account ======================== 

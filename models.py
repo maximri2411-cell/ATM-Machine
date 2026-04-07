@@ -17,6 +17,7 @@ class Accounts: # Creating a class of Accounts
         self.status = status
         self.history = history
         self.is_admin = False
+        self.failed_loging = int(self.failed_loging)
 
 #================================================================================================    
         
@@ -97,7 +98,8 @@ class Accounts: # Creating a class of Accounts
             "pin": self.pin,
             "balance": self.balance,
             "status": self.status,
-            "history": self.history 
+            "history": self.history,
+            "faild_loging": self.failed_loging
         }
 
 #===================================
@@ -149,12 +151,18 @@ class Bank: # Manage all accounts in our project
             return None, f"ERROR: Account ID was not found. \nTry again. \nIn case of a problem, contact customer service or visit the nearest branch. \nthank you fot understanding."
         
         if account.status == "Blocked":
-            return None, f"ERROR: \nYour account is blocked, \ncontact customer service or visit the nearest branch. \nthank you fot understanding."
+            return None, f"ERROR \nYour account is blocked, \ncontact customer service or visit the nearest branch. \nthank you fot understanding."
         
-        if str(account.pin) != str(pin):
-            return None, f"ERROR: The account PIN is incorrect. \nTry again. \nIn case of a problem, contact customer service or visit the nearest branch. \nthank you fot understanding."
-        
-        return account, f"Login to the account has successed. \nWelcome {account.full_name}"
+        if str(account.pin) == str(pin):
+            account.failed_loging = 0
+            return account, f"Success \nWelcome {account.full_name}"
+        else:
+            account.faild_loging += 1
+            if account.failed_loging >=5:
+                account.status = "Blocked"
+                return None, "ERROR \nYou have reached the limit of login attempts, \Your account is now blocked"
+            remainning = 3 - account.failed_loging
+            return account, f"ERROR \n Incottect PIN \nRemaining attemps {remainning}"
         
 #================================================================================================ 
         
