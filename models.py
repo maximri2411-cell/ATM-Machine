@@ -1,12 +1,11 @@
 # For use to this file
 import random 
 import json
-
+import hashlib
 
 #===================================
 #============= Accounts ============
 #===================================
-
 
 class Accounts: # Creating a class of Accounts
 
@@ -17,6 +16,7 @@ class Accounts: # Creating a class of Accounts
         self.balance = float(balance) #! Line alignment that the money in the accounts will be a float
         self.status = status
         self.history = history
+        self.is_admin = False
 
 #================================================================================================    
         
@@ -38,21 +38,21 @@ class Accounts: # Creating a class of Accounts
         
 #================================================================================================
       
-    def deposit(self, amount):
+    def deposit(self, amount, info="Deposit"):
         try: # This and except is for allowing the process move forward without crash
             amount = float(amount)
             if amount <= 0: # In case the account is trying to deposit an 0 or below, it will print an error
                 return False, "ERROR: Deposit amount must be positive."
 
             self.balance += amount # if all good, the process will add to his history with the new balance
-            self.add_history(f"Deposit", amount)
+            self.add_history(operation="Deposit", amount=amount, amount_after=self.balance, info=info)
             return True, f"Successful deposit with {amount} NIS."
         except ValueError: 
             return False, "Error: Invalid amount entered."
  
 #================================================================================================       
         
-    def withdraw(self, amount):
+    def withdraw(self, amount, info="Deposit"):
         amount = float(amount)
         
         try:
@@ -63,15 +63,15 @@ class Accounts: # Creating a class of Accounts
                 return False, f"ERROR: Cannot withdraw above account balance. \nYour balance is {self.balance}."
             
             self.balance -= amount # if all good, the process will add to his history with the new balance
-            self.add_history(f"Withdrawn", amount)
+            self.add_history(operation="Withdraw", amount=amount, amount_after=self.balance, info=info)
             return True, f"Successfully withdraw with {amount} NIS."
         except ValueError:
             return False, "ERROR: Invalid amount entered."
  
 #================================================================================================    
     
-    def check_balance(self): # In case the owner wats to check his balane 
-        print(f"Account Balance: {self.balance}")
+    def hash_pin(pin): # Hash on the pin
+        return hashlib.sha256(pin.encode()).hexdigest()
 
 #================================================================================================   
         

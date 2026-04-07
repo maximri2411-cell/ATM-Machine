@@ -2,6 +2,7 @@
 import tkinter as tk
 from tkinter import messagebox, ttk, Scrollbar
 from storage import load_data, save_data #! Do not delete it, important for our function to use
+import hashlib
 
 # =======================================================
 #================ opening screen of the app ============= 
@@ -50,12 +51,13 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="EXIT", command=self.exit_app,font=("Arial", 22 , "bold"), width=15, bg="gold", fg="midnight blue", activebackground="#b8962e", borderwidth=0, cursor="hand2" ,  ).pack(side= "bottom", anchor="s" , pady=20)                                                                         
 
 #=======================================================
-#================== Login and menu of user ============= #TODO Upgrade the beuty
+#================== Login and menu of user =============
 #=======================================================
 
     def normal_login(self): # Taking data from GUI fild
         account_id = self.account_entry.get()
         pin = self.log_pin_entry.get()
+        hashed_input = hash_pin(pin_input)
         user, message = self.bank.login_account(account_id, pin)
         
         if user:
@@ -88,7 +90,9 @@ class ATM_app: # Creating the class for the app
         self.balance_label = tk.Label(self.root, text=f"₪ {self.current_user.balance:,.2f}", font=("Arial", 28, "bold"), bg="midnight blue", fg="white")
         self.balance_label.pack(pady=10)
         
-        # Down label frame
+        # Down label fram
+        if self.current_user.is_admin:
+            tk.Button(button_frame, text="ADMIN PANEL", width=25, font=("Arial", 18, "bold"), bg="dark red", fg="white", command=self.admin_menu).pack(pady=10)
         button_frame = tk.Frame(self.root, bg="midnight blue")
         button_frame.pack(fill="both", expand=True)
         buttons = [
@@ -168,8 +172,13 @@ class ATM_app: # Creating the class for the app
                 return
             
             amount = float(amount_user) # In case the user gonna enter - number
+            max_deposit = 50000 # Deposit amount limit
+            
             if amount <= 0:
                 messagebox.showerror("ERROR", "Enter a positive amount")
+                return
+            if amount > max_deposit:
+                messagebox.showerror("ERROR", f"Maximum deposit allowed: ₪ {MAX_DEPOSIT:,.0f}")
                 return
             
             self.current_user.deposit(amount) # Calling it to make the action
@@ -219,7 +228,7 @@ class ATM_app: # Creating the class for the app
             target_id = self.target_entry.get()     # Saving the input for the next part of the function
             pin_confirm = self.tran_pin_entry.get()
             
-            if not amount or not target_id or not pin_confirm: # Check if all the fileds are full
+            if not amount_input or not target_id or not pin_confirm: # Check if all the fileds are full
                 messagebox.showerror("ERROR", "Fill in all the required details")
                 return
             
@@ -263,8 +272,8 @@ class ATM_app: # Creating the class for the app
                 messagebox.showerror("ERROR", "The account is blocked, transfer cannot be made")
                 return
                     
-            self.current_user.withdraw(amount) # Taking from the sender
-            target_account.deposit(amount)     # The receiver gets the amount
+            self.current_user.withdraw(amount, info=f"Sent to {target_account.full_name}") # Taking from the sender
+            target_account.deposit(amount, info=f"Received from {self.current_user.full_name}")    # The receiver gets the amount
             save_data(self.bank) # Saving in json
             messagebox.showinfo("Success", f"₪ {amount:,.2f} transferred to {target_account.full_name}")
             self.user_screen() # Return te menu after finish
@@ -460,19 +469,22 @@ class ATM_app: # Creating the class for the app
 #========================================================  
     def view_accounts(self):
         self.cleaning_screen() # Very important, cleaning the window
+        
+        tk.Button(self.root,text="REFRESH", font=("Arial", 12, "bold"), command=self.view_accounts, bg="gold", fg="midnight blue", width=25).pack(pady=10)
+        
         columns = ("id", "name", "balance", "status") # Creating a table 
         tree = ttk.Treeview(self.root, columns=columns, show="headings", height=15)
         
         # Creating som titles for our tree 
         tree.heading("id", text="Account ID")
         tree.heading("name", text="User name")
-        tree.heading("balance", text="Balanse")
+        tree.heading("balance", text="Balance")
         tree.heading("status", text="Status")
         
         for account_id, account in self.bank.Accounts.items(): # Taking all of the info we need to this part from our data.json"
-            tree.insert("", tk.END, values=(account_id, account.full_name, f"{account.balance:.2f}", account.status))
-            
+            tree.insert("", tk.END, values=(account_id, account.full_name, f"{account.balance:.2f}", account.status))  
         tree.pack(pady=20, padx=20, fill="x")
+        
         tk.Button(self.root, text="Back to menu", command=self.admin_menu, bg="midnight blue", fg="gold").pack(pady=10) # Exit button of course
         
 #========================================================
@@ -542,8 +554,8 @@ class ATM_app: # Creating the class for the app
                 messagebox.showerror("ERROR", "PIN must be 4 digits")
                 pin_pick.delete(0, 'end') 
                 return
-            
-            new_id = self.bank.create_account(name, pin, 0.0) # Amount with 0 on the start
+            hashed_pin = hashed_pin(pin_pick.get())
+            new_id = self.bank.create_account(name, hashed_pin, 0.0) # Amount with 0 on the start
             save_data(self.bank)
             
             messagebox.showinfo("Success", f"Account created successfully with the name: {name} \nAccount ID: {new_id} \nBalance: ₪ 0.00")

@@ -355,7 +355,7 @@
             "account_id": "556612",
             "full_name": "Dana Rosso",
             "pin": "1123",
-            "balance": 135322.3,
+            "balance": 1e+92,
             "status": "Active",
             "history": [
                 {
@@ -392,14 +392,80 @@
                     "info": "",
                     "amount": 100.0,
                     "amount_after": 135322.3
+                },
+                {
+                    "operation": "Withdrawn",
+                    "date": "07/04/2026 20:22",
+                    "info": "",
+                    "amount": 0.03,
+                    "amount_after": 135322.27
+                },
+                {
+                    "operation": "Withdrawn",
+                    "date": "07/04/2026 20:26",
+                    "info": "",
+                    "amount": 135.322,
+                    "amount_after": 135186.948
+                },
+                {
+                    "operation": "Withdrawn",
+                    "date": "07/04/2026 20:27",
+                    "info": "",
+                    "amount": 135186.0,
+                    "amount_after": 0.9480000000039581
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 20:28",
+                    "info": "",
+                    "amount": 1e+92,
+                    "amount_after": 1e+92
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 20:31",
+                    "info": "",
+                    "amount": 1e+63,
+                    "amount_after": 1e+92
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 20:31",
+                    "info": "",
+                    "amount": 1e+49,
+                    "amount_after": 1e+92
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 20:33",
+                    "info": "",
+                    "amount": 800.0,
+                    "amount_after": 1e+92
+                },
+                {
+                    "operation": "Withdrawn",
+                    "date": "07/04/2026 20:35",
+                    "info": "",
+                    "amount": 600.0,
+                    "amount_after": 1e+92
+                },
+                {
+                    "operation": "Status Change",
+                    "date": "07/04/2026 20:44",
+                    "info": "Account status change to Blocked by Admin"
+                },
+                {
+                    "operation": "Status Change",
+                    "date": "07/04/2026 20:44",
+                    "info": "Account status change to Active by Admin"
                 }
             ]
         },
         "615243": {
             "account_id": "615243",
             "full_name": "King Kong",
-            "pin": "8762",
-            "balance": 2741.7,
+            "pin": "4444",
+            "balance": 3341.7,
             "status": "Active",
             "history": [
                 {
@@ -422,6 +488,18 @@
                     "date": "06/04/2026 22:32",
                     "amount_after": 2741.7,
                     "info": "None"
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "07/04/2026 20:35",
+                    "info": "",
+                    "amount": 600.0,
+                    "amount_after": 3341.7
+                },
+                {
+                    "operation": "PIN Change",
+                    "date": "07/04/2026 20:37",
+                    "info": "Security update"
                 }
             ]
         },
@@ -559,38 +637,6 @@
                     "info": "Account status change to Active by Admin"
                 }
             ]
-        },
-        "739695": {
-            "account_id": "739695",
-            "full_name": "Gogo gaga",
-            "pin": "4567",
-            "balance": 7000.0,
-            "status": "Active",
-            "history": []
-        },
-        "701836": {
-            "account_id": "701836",
-            "full_name": "bobo shbobo",
-            "pin": "adf3",
-            "balance": 1000.0,
-            "status": "Active",
-            "history": []
-        },
-        "178473": {
-            "account_id": "178473",
-            "full_name": "\u05de\u05e9\u05d4 \u05de\u05e9\u05d4",
-            "pin": "33333",
-            "balance": 0.0,
-            "status": "Active",
-            "history": []
-        },
-        "308836": {
-            "account_id": "308836",
-            "full_name": "\u05e9\u05d3\u05d2\u05d3\u05e9\u05d2",
-            "pin": "2222",
-            "balance": -600.0,
-            "status": "Active",
-            "history": []
         }
     }
 }
