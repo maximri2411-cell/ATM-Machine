@@ -26,8 +26,8 @@ def load_data():
                         info["pin"],        # It taking the new account and puting all of the info we found in json
                         info["balance"],
                         info["status"],
-                        info.get("failed_loging", 0),
-                        info.get("history", [])
+                        info.get("history", []),
+                        info.get("failed_loging", 0)
                     )
                     bank.Accounts[account_id] = new_account
                 return bank

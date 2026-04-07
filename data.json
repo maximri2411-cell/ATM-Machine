@@ -6,19 +6,8 @@
             "pin": "1222",
             "balance": 0.0,
             "status": "Active",
-            "history": [
-                {
-                    "operation": "Status Change",
-                    "date": "07/04/2026 00:49",
-                    "info": "Account status change to Blocked by Admin"
-                },
-                {
-                    "operation": "Status Change",
-                    "date": "07/04/2026 00:49",
-                    "info": "Account status change to Active by Admin"
-                }
-            ],
-            "faild_loging": 0
+            "history": 0,
+            "failed_loging": 0
         },
         "950428": {
             "account_id": "950428",
@@ -26,141 +15,8 @@
             "pin": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
             "balance": 39020.0,
             "status": "Active",
-            "history": [
-                {
-                    "operation": "Deposit",
-                    "date": "07/04/2026 22:16",
-                    "info": "Deposit",
-                    "amount": 40000.0,
-                    "amount_after": 40000.0
-                },
-                {
-                    "operation": "Withdraw",
-                    "date": "07/04/2026 22:16",
-                    "info": "Deposit",
-                    "amount": 5000.0,
-                    "amount_after": 35000.0
-                },
-                {
-                    "operation": "PIN Change",
-                    "date": "07/04/2026 22:26",
-                    "info": "Security update"
-                },
-                {
-                    "operation": "PIN Change",
-                    "date": "07/04/2026 22:26",
-                    "info": "Security update"
-                },
-                {
-                    "operation": "Deposit",
-                    "date": "07/04/2026 23:42",
-                    "info": "Deposit",
-                    "amount": 100.0,
-                    "amount_after": 35100.0
-                },
-                {
-                    "operation": "Withdraw",
-                    "date": "07/04/2026 23:42",
-                    "info": "Withdraw",
-                    "amount": 700.0,
-                    "amount_after": 34400.0
-                },
-                {
-                    "operation": "Deposit",
-                    "date": "07/04/2026 23:42",
-                    "info": "Deposit",
-                    "amount": 670.0,
-                    "amount_after": 35070.0
-                },
-                {
-                    "operation": "Withdraw",
-                    "date": "07/04/2026 23:42",
-                    "info": "Withdraw",
-                    "amount": 6540.0,
-                    "amount_after": 28530.0
-                },
-                {
-                    "operation": "Deposit",
-                    "date": "07/04/2026 23:43",
-                    "info": "Deposit",
-                    "amount": 440.0,
-                    "amount_after": 28970.0
-                },
-                {
-                    "operation": "PIN Change",
-                    "date": "07/04/2026 23:43",
-                    "info": "Security update"
-                },
-                {
-                    "operation": "Deposit",
-                    "date": "07/04/2026 23:43",
-                    "info": "Deposit",
-                    "amount": 7000.0,
-                    "amount_after": 35970.0
-                },
-                {
-                    "operation": "Deposit",
-                    "date": "07/04/2026 23:43",
-                    "info": "Deposit",
-                    "amount": 7000.0,
-                    "amount_after": 42970.0
-                },
-                {
-                    "operation": "Withdraw",
-                    "date": "07/04/2026 23:43",
-                    "info": "Withdraw",
-                    "amount": 10000.0,
-                    "amount_after": 32970.0
-                },
-                {
-                    "operation": "Deposit",
-                    "date": "07/04/2026 23:43",
-                    "info": "Deposit",
-                    "amount": 400.0,
-                    "amount_after": 33370.0
-                },
-                {
-                    "operation": "Deposit",
-                    "date": "07/04/2026 23:58",
-                    "info": "Deposit",
-                    "amount": 9000.0,
-                    "amount_after": 42370.0
-                },
-                {
-                    "operation": "Withdraw",
-                    "date": "07/04/2026 23:58",
-                    "info": "Withdraw",
-                    "amount": 750.0,
-                    "amount_after": 41620.0
-                },
-                {
-                    "operation": "PIN Change",
-                    "date": "07/04/2026 23:58",
-                    "info": "Security update"
-                },
-                {
-                    "operation": "Deposit",
-                    "date": "07/04/2026 23:58",
-                    "info": "Deposit",
-                    "amount": 700.0,
-                    "amount_after": 42320.0
-                },
-                {
-                    "operation": "Withdraw",
-                    "date": "07/04/2026 23:58",
-                    "info": "Withdraw",
-                    "amount": 300.0,
-                    "amount_after": 42020.0
-                },
-                {
-                    "operation": "Transfer out",
-                    "date": "08/04/2026 00:24",
-                    "info": "Sent to Grisha Onishuk",
-                    "amount": 3000.0,
-                    "amount_after": 39020.0
-                }
-            ],
-            "faild_loging": 0
+            "history": 0,
+            "failed_loging": 0
         },
         "357397": {
             "account_id": "357397",
@@ -168,30 +24,8 @@
             "pin": "eb9cf4c533aed16eebdc067ba1ef6a895e5098ec17a7a4aa8855d1cf496e6847",
             "balance": 12000.0,
             "status": "Active",
-            "history": [
-                {
-                    "operation": "Deposit",
-                    "date": "07/04/2026 23:41",
-                    "info": "Deposit",
-                    "amount": 10000.0,
-                    "amount_after": 10000.0
-                },
-                {
-                    "operation": "Withdraw",
-                    "date": "07/04/2026 23:42",
-                    "info": "Withdraw",
-                    "amount": 1000.0,
-                    "amount_after": 9000.0
-                },
-                {
-                    "operation": "Transfer in",
-                    "date": "08/04/2026 00:24",
-                    "info": "Received from Jon Jones",
-                    "amount": 3000.0,
-                    "amount_after": 12000.0
-                }
-            ],
-            "faild_loging": 0
+            "history": 0,
+            "failed_loging": 0
         },
         "223931": {
             "account_id": "223931",
@@ -199,8 +33,17 @@
             "pin": "0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c",
             "balance": 0.0,
             "status": "Active",
+            "history": 0,
+            "failed_loging": 0
+        },
+        "776578": {
+            "account_id": "776578",
+            "full_name": "Max Maxwell",
+            "pin": "0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c",
+            "balance": 0.0,
+            "status": "Active",
             "history": [],
-            "faild_loging": 0
+            "failed_loging": 0
         }
     }
 }

@@ -15,7 +15,7 @@ class Accounts: # Creating a class of Accounts
         self.pin = str(pin) #! the reason we save as str is so if an account wil have an 0075 pin for example, it will save exactly as it isin int it will be 75 
         self.balance = float(balance) #! Line alignment that the money in the accounts will be a float
         self.status = status
-        self.failed_loging = int(failed_loging)
+        self.failed_loging = 0
         self.history = history
         
 #================================================================================================    
@@ -97,8 +97,8 @@ class Accounts: # Creating a class of Accounts
             "pin": self.pin,
             "balance": self.balance,
             "status": self.status,
-            "faild_loging": self.failed_loging,
-            "history": self.history
+            "history": self.history,
+            "failed_loging": self.failed_loging,
         }
 
 #===================================
@@ -159,12 +159,12 @@ class Bank: # Manage all accounts in our project
             account.failed_loging = 0
             return account, f"Success \nWelcome {account.full_name}"
         else:
-            account.faild_loging += 1
+            account.failed_loging += 1
             if account.failed_loging >=5:
                 account.status = "Blocked"
                 return None, "ERROR \nYou have reached the limit of login attempts, \Your account is now blocked"
-            remainning = 3 - account.failed_loging
-            return account, f"ERROR \n Incottect PIN \nRemaining attemps {remainning}"
+            remainning = 5 - account.failed_loging
+            return None, f"ERROR \n Incottect PIN \nRemaining attemps {remainning}"
         
 #================================================================================================ 
         
