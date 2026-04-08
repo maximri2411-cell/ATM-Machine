@@ -85,7 +85,6 @@ class ATM_app: # Creating the class for the app
         top_frame = tk.Frame(self.root, bg="#0a192f", pady=30)
         top_frame.pack(fill="x")
         
-        
         tk.Label(self.root, text="MAIN MENU", font=("Arial", 30, "bold"), bg="#0a192f", fg="ivory").pack(pady=20)
         # User owner account name
         tk.Label(top_frame, text=f"Account owner: {self.current_user.full_name}", font=("Arial", 15), bg="#0a192f", fg="white").pack()
@@ -98,8 +97,6 @@ class ATM_app: # Creating the class for the app
         self.balance_label.pack(pady=10)
         
         # Down label fram
-        if self.current_user.is_admin:
-            tk.Button(button_frame, text="ADMIN PANEL", width=25, font=("Arial", 18, "bold"), bg="dark red", fg="white", command=self.admin_menu).pack(pady=10)
         button_frame = tk.Frame(self.root, bg="#0a192f")
         button_frame.pack(fill="both", expand=True)
         buttons = [
@@ -490,6 +487,8 @@ class ATM_app: # Creating the class for the app
     def view_accounts(self):
         self.cleaning_screen() # Very important, cleaning the window
        
+        history_top = tk.Frame(self.root, bg="#0a192f")
+        history_top.pack(fill="x")
         tk.Label(history_top, text="ACCOUNT MANAGMENT ", font=("Arial", 30, "bold"), bg="#0a192f", fg="gold").pack(pady=(25, 10))
         tk.Button(self.root,text="REFRESH", font=("Arial", 14, "bold"),width=25, command=self.view_accounts, bg="gold", fg="#0a192f", ).pack(side= "bottom", anchor="s" , pady=20) 
         
