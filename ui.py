@@ -85,6 +85,8 @@ class ATM_app: # Creating the class for the app
         top_frame = tk.Frame(self.root, bg="#0a192f", pady=30)
         top_frame.pack(fill="x")
         
+        
+        tk.Label(self.root, text="MAIN MENU", font=("Arial", 30, "bold"), bg="#0a192f", fg="ivory").pack(pady=20)
         # User owner account name
         tk.Label(top_frame, text=f"Account owner: {self.current_user.full_name}", font=("Arial", 15), bg="#0a192f", fg="white").pack()
         
@@ -119,7 +121,7 @@ class ATM_app: # Creating the class for the app
     def withdraw_action(self):
         self.cleaning_screen()
         tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="#0a192f", width=4, command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne")
-        tk.Label(self.root, text="WITHDRAW", font=("Arial", 24, "bold"), bg="#0a192f", fg="ivory").pack(pady=20)
+        tk.Label(self.root, text="WITHDRAW", font=("Arial", 30, "bold"), bg="#0a192f", fg="ivory").pack(pady=20)
         current_balance = self.current_user.balance
         tk.Label(self.root, text=f"Current Balance: ₪ {current_balance:,.2f}", font=("Arial", 18), bg="#0a192f", fg="gold").pack(pady=10)
         tk.Label(self.root, text="Amount to withdraw", font=("Arial", 14, "bold"), bg="#0a192f", fg="white").pack(pady=(30, 10))
@@ -158,7 +160,7 @@ class ATM_app: # Creating the class for the app
         self.cleaning_screen()
         
         tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="#0a192f", width=4, command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne")
-        tk.Label(self.root, text="DEPOSITE", font=("Arial", 24, "bold"), bg="#0a192f", fg="ivory").pack(pady=20)
+        tk.Label(self.root, text="DEPOSITE", font=("Arial", 30, "bold"), bg="#0a192f", fg="ivory").pack(pady=20)
         current_balance = self.current_user.balance
         
         tk.Label(self.root, text=f"Current balance: ₪ {current_balance:,.2f}", font=("Arial", 18), bg="#0a192f", fg="gold").pack(pady=10)
@@ -200,7 +202,7 @@ class ATM_app: # Creating the class for the app
     def transfer_action(self): # Creation of the transfer between accounts
         self.cleaning_screen()
         tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="#0a192f", width=4, command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne") # Go back button
-        tk.Label(self.root, text="TRANSFER BETWEEN ACCOUNTS", font=("Arial", 24, "bold"), bg="#0a192f", fg="ivory").pack(pady=20)
+        tk.Label(self.root, text="TRANSFER BETWEEN ACCOUNTS", font=("Arial", 30, "bold"), bg="#0a192f", fg="ivory").pack(pady=20)
         current_balance = self.current_user.balance
         tk.Label(self.root, text=f"Current Balance: ₪ {current_balance:,.2f}", font=("Arial", 18), bg="#0a192f", fg="gold").pack(pady=10)
         
@@ -307,7 +309,7 @@ class ATM_app: # Creating the class for the app
         pin_change.configure(bg="#0a192f")
         
         tk.Button(pin_change, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="#0a192f", width=4, command=pin_change.destroy).place(relx=0.95, rely=0.05, anchor="ne") # Go back button
-        tk.Label(pin_change, text=" CHANGE PIN", font=("Arial", 24, "bold"), bg="#0a192f", fg="ivory").pack(pady=20) #page title
+        tk.Label(pin_change, text=" CHANGE PIN", font=("Arial", 30, "bold"), bg="#0a192f", fg="ivory").pack(pady=20) #page title
 
         tk.Label(pin_change, text="Enter PIN:",font=("Arial", 16, "bold"), bg="#0a192f", fg="ivory").pack(pady=(10, 5))
         old_pin_enter = tk.Entry(pin_change, show="*", width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0, highlightthickness=1, highlightbackground="#4a5a71") 
@@ -365,7 +367,7 @@ class ATM_app: # Creating the class for the app
                 clear_fields()
                 
         tk.Button(pin_change, text="Confirm action",width=20, font=("Arial", 16, "bold"), bg="gold", fg="#0a192f", command=save_new_pin).pack(pady=20)
-        tk.Button(pin_change,  text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="#0a192f", command=lambda: [pin_change.destroy(), self.create_login_screen()]).pack(side= "bottom", anchor="s" , pady=20)
+        tk.Button(pin_change, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="#0a192f", command=lambda: [pin_change.destroy(), self.create_login_screen()]).pack(side= "bottom", anchor="s" , pady=20)
         # The lambda is for delete the old pin and close the window
                           
 #========================================================
@@ -481,12 +483,12 @@ class ATM_app: # Creating the class for the app
         # Button to exit if he want
         tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="#0a192f", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)
         
-#========================================================
 #================== View accounts ======================= 
 #========================================================  
     def view_accounts(self):
         self.cleaning_screen() # Very important, cleaning the window
-        
+       
+        tk.Label(history_top, text="ACCOUNT MANAGMENT ", font=("Arial", 30, "bold"), bg="#0a192f", fg="gold").pack(pady=(25, 10))
         tk.Button(self.root,text="REFRESH", font=("Arial", 14, "bold"),width=25, command=self.view_accounts, bg="gold", fg="#0a192f", ).pack(side= "bottom", anchor="s" , pady=20) 
         
         columns = ("id", "name", "balance", "status") # Creating a table 
