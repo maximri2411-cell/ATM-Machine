@@ -133,13 +133,20 @@ class ATM_app: # Creating the class for the app
             if not amount_str:
                 return
             amount = float(amount_str)
+            max_withdraw = 5000
             
             if amount <= 0: # Check if the amount is positive
                 messagebox.showerror("ERROR", "Enter a positive or existing balance amount.")
+                self.withdraw_entry.delete(0, tk.END)
+                return
+            if amount > max_withdraw:
+                messagebox.showerror("ERROR", f"Maximum withdraw amount: ₪ {max_withdraw:,.0f}")
+                self.withdraw_entry.delete(0, tk.END)
                 return
             current_balance = self.current_user.balance
             if amount > current_balance: # Check amount of the account
                 messagebox.showerror("Withdrawal denied", f"Maximum amount to withdraw: ₪ {current_balance:,.2f}")
+                self.withdraw_entry.delete(0, tk.END)
                 return
             
             self.current_user.withdraw(amount) # Doin the operation
@@ -180,9 +187,11 @@ class ATM_app: # Creating the class for the app
             
             if amount <= 0:
                 messagebox.showerror("ERROR", "Enter a positive amount")
+                self.deposit_entry.delete(0, tk.END)
                 return
             if amount > max_deposit:
-                messagebox.showerror("ERROR", f"Maximum deposit allowed: ₪ {max_deposit:,.0f}")
+                messagebox.showerror("ERROR", f"Maximum deposit amount: ₪ {max_deposit:,.0f}")
+                self.deposit_entry.delete(0, tk.END)
                 return
             
             self.current_user.deposit(amount) # Calling it to make the action
