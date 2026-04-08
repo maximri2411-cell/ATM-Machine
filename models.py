@@ -9,14 +9,14 @@ import hashlib
 
 class Accounts: # Creating a class of Accounts
 
-    def __init__(self, account_id, full_name, pin, balance, status , failed_loging, history):
+    def __init__(self, account_id, full_name, pin, balance, status , history, failed_loging=0):
         self.account_id = str(account_id) #! In dict, everthing in a string 
         self.full_name = full_name
         self.pin = str(pin) #! the reason we save as str is so if an account wil have an 0075 pin for example, it will save exactly as it isin int it will be 75 
         self.balance = float(balance) #! Line alignment that the money in the accounts will be a float
         self.status = status
-        self.failed_loging = 0
         self.history = history
+        self.failed_loging = int(failed_loging)
         
 #================================================================================================    
         
@@ -97,8 +97,7 @@ class Accounts: # Creating a class of Accounts
             "pin": self.pin,
             "balance": self.balance,
             "status": self.status,
-            "history": self.history,
-            "failed_loging": self.failed_loging,
+            "history": self.history
         }
 
 #===================================
@@ -122,7 +121,7 @@ class Bank: # Manage all accounts in our project
         while account_id in self.Accounts:
             account_id = str(random.randint(100000, 999999))
         
-        new_account = Accounts(account_id, full_name, pin, amount, "Active", 0, []) # Creating a user exactly according to the characteristics we created in part 2
+        new_account = Accounts(account_id, full_name, pin, amount, "Active", [], 0) # Creating a user exactly according to the characteristics we created in part 2
         
         self.Accounts[account_id] = new_account # saving the new account in the dictionary of the bank
         
@@ -160,9 +159,9 @@ class Bank: # Manage all accounts in our project
             return account, f"Success \nWelcome {account.full_name}"
         else:
             account.failed_loging += 1
-            if account.failed_loging >=5:
+            if account.failed_loging == 5:
                 account.status = "Blocked"
-                return None, "ERROR \nYou have reached the limit of login attempts, \Your account is now blocked"
+                return None, "ERROR \nYou have reached the limit of login attempts, Your account is now blocked"
             remainning = 5 - account.failed_loging
             return None, f"ERROR \n Incottect PIN \nRemaining attemps {remainning}"
         
