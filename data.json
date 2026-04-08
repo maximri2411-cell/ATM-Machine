@@ -3,7 +3,7 @@
         "962633": {
             "account_id": "962633",
             "full_name": "Test One",
-            "pin": "edee29f882543b956620b26d0ee0e7e950399b1c4222f5de05e06425b4c995e9",
+            "pin": "0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c",
             "balance": 32600.0,
             "status": "Active",
             "history": [
@@ -67,6 +67,11 @@
                     "info": "Sent to Test Two",
                     "amount": 200.0,
                     "amount_after": 32600.0
+                },
+                {
+                    "operation": "PIN Change",
+                    "date": "08/04/2026 13:57",
+                    "info": "Security update"
                 }
             ]
         },
@@ -106,6 +111,28 @@
                     "amount_after": 2200.0
                 }
             ]
+        },
+        "568424": {
+            "account_id": "568424",
+            "full_name": "Maxim Dev",
+            "pin": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+            "balance": 0.0,
+            "status": "Blocked",
+            "history": [
+                {
+                    "operation": "Status Change",
+                    "date": "08/04/2026 14:23",
+                    "info": "Account status change to Blocked by Admin"
+                }
+            ]
+        },
+        "485769": {
+            "account_id": "485769",
+            "full_name": "23 23",
+            "pin": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+            "balance": 0.0,
+            "status": "Active",
+            "history": []
         }
     }
 }

@@ -50,7 +50,7 @@ class ATM_app: # Creating the class for the app
         tk.Button(self.root, text="LOGIN", command=self.normal_login,font=("Arial", 16 , "bold"), width=23, bg="gold", fg="#0a192f", activebackground="#b8962e", borderwidth=0, cursor="hand2" ,  ).pack(pady=(25, 10))
     
         # Admin login button
-        tk.Button(self.root, text="Admin Access", command=self.admin_screen,font=("Arial", 16, "bold"), width=23, bg="#2d3e50", fg="white", activebackground="#b8962e", borderwidth=0, cursor="hand2"  ).pack(pady=15)
+        tk.Button(self.root, text="Admin Access", command=self.admin_screen,font=("Arial", 16, "bold"), width=23, bg="#2d3e50", fg="black", activebackground="#b8962e", borderwidth=0, cursor="hand2"  ).pack(pady=15)
 
          # Normal user login button
         tk.Button(self.root, text="EXIT", command=self.exit_app,font=("Arial", 22 , "bold"), width=15, bg="gold", fg="#0a192f", activebackground="#b8962e", borderwidth=0, cursor="hand2" ,  ).pack(side= "bottom", anchor="s" , pady=20)                                                                         
@@ -155,6 +155,7 @@ class ATM_app: # Creating the class for the app
             self.user_screen() # Back to the menu
         except ValueError:
             messagebox.showerror("ERROR", "Invalid input, Please enter diginumbers only")
+            self.withdraw_entry.delete(0, tk.END)
 
 #========================================================
 #================== Deposite page ======================= #! Finished do not touch
@@ -200,6 +201,7 @@ class ATM_app: # Creating the class for the app
             self.user_screen() # Back to main menu
         except ValueError:
             messagebox.showerror("ERROR", "Invalid amount or insufficient balance")
+            self.deposit_entry.delete(0, tk.END)
                
 #========================================================
 #================== Transfer page ======================= 
@@ -410,7 +412,7 @@ class ATM_app: # Creating the class for the app
             listbox.delete(0, tk.END) # Clean
             header = f"{'Date':<22} | {'Operation':<15} | {'Amount':<12} | {'Balance'}" # The format on top
             listbox.insert("end", header) 
-            listbox.insert("end", "=" * 75)
+            listbox.insert("end", "=" * 120)
             account_history = self.current_user.see_history()
             
             if not account_history:
@@ -424,7 +426,7 @@ class ATM_app: # Creating the class for the app
                     
                     line = f"{date:<22} | {oper:<15} | {amount:<12} | {after}"
                     listbox.insert("end", line) # Putting the line to the end of the list
-                    listbox.insert("end", "-" * 75) # I think its seperate the lines
+                    listbox.insert("end", "-" * 120) # I think its seperate the lines
         update_list()
         
 #=======================================================
@@ -492,8 +494,10 @@ class ATM_app: # Creating the class for the app
         # Button to exit if he want
         tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="#0a192f", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)
         
+#========================================================     
 #================== View accounts ======================= 
-#========================================================  
+#======================================================== 
+ 
     def view_accounts(self):
         self.cleaning_screen() # Very important, cleaning the window
        
@@ -515,6 +519,7 @@ class ATM_app: # Creating the class for the app
         tree.pack(pady=20, padx=20, fill="x")
         tk.Button(self.root,text="REFRESH", font=("Arial", 14, "bold"),width=25, command=self.view_accounts, bg="gold", fg="#0a192f", ).pack(pady=10)
         tk.Button(self.root, text="BACK TO MENU",  font=("Arial", 22), bg="gold", fg="#0a192f", width=15, command=self.admin_menu,).pack(side= "bottom", anchor="s" , pady=20) # Exit button of course
+        
 #========================================================
 #================== Change status ======================= 
 #========================================================    
@@ -572,9 +577,13 @@ class ATM_app: # Creating the class for the app
         def save_account(): # Saving the new account in data.json
             name = name_pick.get()
             pin = pin_pick.get() # PIN is public
-                
+                            
             if not name or not pin: # Created a checko if not the name or pin was writh in the windows
                 messagebox.showerror("Missing data", "Fill in all the required details")
+                return
+            if any(char.isdigit() for char in name): # Not allowing to put numbers in the name
+                messagebox.showerror("ERROR", "Name cannot contain numbers!")
+                pin_pick.delete(0, 'end') 
                 return
 
             if not pin.isdigit() or len(pin) != 4: # Just to be ready if the pin is incoract
