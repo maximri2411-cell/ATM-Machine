@@ -106,7 +106,7 @@ class Accounts: # Creating a class of Accounts
 class Bank: # Manage all accounts in our project
     def __init__(self):
         
-        self.manager_full_name = "Cristiano Ronaldo"
+        self.manager_full_name = "Admin"
         self.manager_pin = "admin1234" # Managers password
         self.Accounts = {} # Some kind of dictionary to save all of the accounts
 

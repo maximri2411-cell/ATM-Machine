@@ -411,22 +411,30 @@ class ATM_app: # Creating the class for the app
         def update_list(): # This creating our beuty table
             listbox.delete(0, tk.END) # Clean
             header = f"{'Date':<22} | {'Operation':<15} | {'Amount':<12} | {'Balance'}" # The format on top
-            listbox.insert("end", header) 
+            listbox.insert("end", "") 
+            listbox.insert("end", header)
             listbox.insert("end", "=" * 120)
             account_history = self.current_user.see_history()
             
             if not account_history:
-                listbox.insert("end", " " * 15 + "No history recorded") # If it is a new account it will print this
+                listbox.insert("end", "")
+                listbox.insert("end", " " * 20 + "No history recorded") # If it is a new account it will print this
             else:
-                for enter in reversed(account_history): # Format if there is a history for that account
+                for i, enter in enumerate(reversed(account_history)): # Format if there is a history for that account
                     date = enter.get("date", "---")
                     oper = enter.get("operation", "---")
                     amount = f"₪ {enter['amount']:,.0f}" if "amount" in enter else "---"
                     after = f"₪ {enter['amount_after']:,.0f}" if "amount_after" in enter else "---"
                     
-                    line = f"{date:<22} | {oper:<15} | {amount:<12} | {after}"
+                    line = f"{date:<21} | {oper:<14} | {amount:<11} | {after}"
                     listbox.insert("end", line) # Putting the line to the end of the list
-                    listbox.insert("end", "-" * 120) # I think its seperate the lines
+                    
+                    if i % 2 == 0:
+                        listbox.itemconfig(listbox.size() - 1, bg="SkyBlue3")
+                    else:
+                        listbox.itemconfig(listbox.size() - 1, bg="#0a192f")
+                listbox.insert('end", ""')
+        
         update_list()
         
 #=======================================================

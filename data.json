@@ -4,7 +4,7 @@
             "account_id": "962633",
             "full_name": "Test One",
             "pin": "0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c",
-            "balance": 32600.0,
+            "balance": 62800.0,
             "status": "Active",
             "history": [
                 {
@@ -72,6 +72,27 @@
                     "operation": "PIN Change",
                     "date": "08/04/2026 13:57",
                     "info": "Security update"
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "08/04/2026 15:18",
+                    "info": "Deposit",
+                    "amount": 400.0,
+                    "amount_after": 33000.0
+                },
+                {
+                    "operation": "Withdraw",
+                    "date": "08/04/2026 15:18",
+                    "info": "Withdraw",
+                    "amount": 200.0,
+                    "amount_after": 32800.0
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "08/04/2026 15:18",
+                    "info": "Deposit",
+                    "amount": 30000.0,
+                    "amount_after": 62800.0
                 }
             ]
         },
