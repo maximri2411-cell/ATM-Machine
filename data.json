@@ -1,28 +1,55 @@
 {
     "Accounts": {
-        "936741": {
-            "account_id": "936741",
-            "full_name": "Tonton Saor",
-            "pin": "1222",
-            "balance": 0.0,
+        "962633": {
+            "account_id": "962633",
+            "full_name": "test 1 ",
+            "pin": "edee29f882543b956620b26d0ee0e7e950399b1c4222f5de05e06425b4c995e9",
+            "balance": 34000.0,
             "status": "Active",
-            "history": 0
+            "history": [
+                {
+                    "operation": "Deposit",
+                    "date": "08/04/2026 11:55",
+                    "info": "Deposit",
+                    "amount": 40000.0,
+                    "amount_after": 40000.0
+                },
+                {
+                    "operation": "Withdraw",
+                    "date": "08/04/2026 11:55",
+                    "info": "Withdraw",
+                    "amount": 3000.0,
+                    "amount_after": 37000.0
+                },
+                {
+                    "operation": "PIN Change",
+                    "date": "08/04/2026 11:55",
+                    "info": "Security update"
+                },
+                {
+                    "operation": "Transfer out",
+                    "date": "08/04/2026 11:56",
+                    "info": "Sent to tesrt 2",
+                    "amount": 3000.0,
+                    "amount_after": 34000.0
+                }
+            ]
         },
-        "950428": {
-            "account_id": "950428",
-            "full_name": "Jon Jones",
-            "pin": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
-            "balance": 39020.0,
+        "584284": {
+            "account_id": "584284",
+            "full_name": "tesrt 2",
+            "pin": "0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c",
+            "balance": 3000.0,
             "status": "Active",
-            "history": 0
-        },
-        "357397": {
-            "account_id": "357397",
-            "full_name": "Grisha Onishuk",
-            "pin": "eb9cf4c533aed16eebdc067ba1ef6a895e5098ec17a7a4aa8855d1cf496e6847",
-            "balance": 12000.0,
-            "status": "Active",
-            "history": 0
+            "history": [
+                {
+                    "operation": "Transfer in",
+                    "date": "08/04/2026 11:56",
+                    "info": "Received from test 1 ",
+                    "amount": 3000.0,
+                    "amount_after": 3000.0
+                }
+            ]
         }
     }
 }
