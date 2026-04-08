@@ -23,52 +23,6 @@
             "balance": 12000.0,
             "status": "Active",
             "history": 0
-        },
-        "223931": {
-            "account_id": "223931",
-            "full_name": "Rabit Test",
-            "pin": "0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c",
-            "balance": 0.0,
-            "status": "Active",
-            "history": 0
-        },
-        "776578": {
-            "account_id": "776578",
-            "full_name": "Max Maxwell",
-            "pin": "0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c",
-            "balance": 0.0,
-            "status": "Active",
-            "history": []
-        },
-        "537797": {
-            "account_id": "537797",
-            "full_name": "SHIt SHIIT",
-            "pin": "0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c",
-            "balance": 0.0,
-            "status": "Active",
-            "history": []
-        },
-        "380653": {
-            "account_id": "380653",
-            "full_name": "ggg ggg",
-            "pin": "0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c",
-            "balance": 0.0,
-            "status": "Active",
-            "history": [
-                {
-                    "operation": "Status Change",
-                    "date": "08/04/2026 10:59",
-                    "info": "Account status change to Active by Admin"
-                }
-            ]
-        },
-        "662817": {
-            "account_id": "662817",
-            "full_name": "Max Maxwell",
-            "pin": "0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c",
-            "balance": 0.0,
-            "status": "Active",
-            "history": []
         }
     }
 }
