@@ -34,7 +34,7 @@ class ATM_app: # Creating the class for the app
         self.cleaning_screen()
         
         # Simple window just to see if its work with some feature like the type of language
-        tk.Label(self.root, text="GTA ATM", font=("Arial", 36, "bold"), bg="#0a192f", fg="ivory").pack(pady=50)
+        tk.Label(self.root, text="GRISHA'S ATM", font=("Arial", 36, "bold"), bg="#0a192f", fg="ivory").pack(pady=50)
         
         # Adding fild to enter his ID number
         tk.Label(self.root, text="Account ID",font=("Arial", 16, "bold"), bg="#0a192f", fg="ivory").pack()
