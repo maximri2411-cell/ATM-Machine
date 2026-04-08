@@ -433,7 +433,7 @@ class ATM_app: # Creating the class for the app
                         listbox.itemconfig(listbox.size() - 1, bg="SkyBlue3")
                     else:
                         listbox.itemconfig(listbox.size() - 1, bg="#0a192f")
-                listbox.insert('end", ""')
+                listbox.insert("end", "")
         
         update_list()
         
