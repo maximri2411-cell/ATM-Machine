@@ -308,7 +308,7 @@ class ATM_app: # Creating the class for the app
         pin_change.geometry("1000x800")
         pin_change.configure(bg="#0a192f")
         
-        tk.Button(pin_change, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="#0a192f", width=4, command=pin_change.destroy).place(relx=0.95, rely=0.05, anchor="ne") # Go back button
+        tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="#0a192f", width=4, command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne")
         tk.Label(pin_change, text=" CHANGE PIN", font=("Arial", 30, "bold"), bg="#0a192f", fg="ivory").pack(pady=20) #page title
 
         tk.Label(pin_change, text="Enter PIN:",font=("Arial", 16, "bold"), bg="#0a192f", fg="ivory").pack(pady=(10, 5))
@@ -383,8 +383,10 @@ class ATM_app: # Creating the class for the app
         history_top.configure(bg="#0a192f")
         
         tk.Label(history_top, text="ACCOUNT HISTORY ", font=("Arial", 30, "bold"), bg="#0a192f", fg="gold").pack(pady=(25, 10))
-        tk.Button(history_top, text="REFRESH", width=15, font=("Arial", 22, "bold"), bg="gold", fg="#0a192f", command=lambda: update_list()).pack(side= "bottom", anchor="s" , pady=20)
-       
+        tk.Button(self.root, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="#0a192f", width=4, command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne")
+        tk.Button(history_top, text="REFRESH", width=15, font=("Arial", 22, "bold"), bg="gold", fg="#0a192f", command=lambda: update_list()).pack(side= "bottom", anchor="s" , pady=40)
+        tk.Button(self.root, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="#0a192f", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)
+        
         history_frame = tk.Frame(history_top, bg="gold", bd=2)
         history_frame.pack(pady=15, padx=30, fill="both", expand=True) # Putting the window inside the origin screen
          #! Roller
