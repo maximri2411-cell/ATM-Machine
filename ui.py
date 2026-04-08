@@ -392,8 +392,8 @@ class ATM_app: # Creating the class for the app
         
         tk.Label(history_top, text="ACCOUNT HISTORY ", font=("Arial", 30, "bold"), bg="#0a192f", fg="gold").pack(pady=(25, 10))
         tk.Button(history_top, text="⬅", font=("Arial", 14, "bold"), bg="gold", fg="#0a192f", width=4, command=self.user_screen).place(relx=0.95, rely=0.05, anchor="ne")
-        tk.Button(history_top, text="REFRESH", width=15, font=("Arial", 22, "bold"), bg="gold", fg="#0a192f", command=lambda: update_list()).pack(side= "bottom", anchor="s" , pady=40)
         tk.Button(history_top, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="#0a192f", command=self.create_login_screen).pack(side= "bottom", anchor="s" , pady=20)
+        tk.Button(history_top, text="REFRESH", width=15, font=("Arial", 22, "bold"), bg="gold", fg="#0a192f", command=lambda: update_list()).pack(side= "bottom", anchor="s" , pady=40)
         
         history_frame = tk.Frame(history_top, bg="gold", bd=2)
         history_frame.pack(pady=15, padx=30, fill="both", expand=True) # Putting the window inside the origin screen
@@ -500,7 +500,6 @@ class ATM_app: # Creating the class for the app
         history_top = tk.Frame(self.root, bg="#0a192f")
         history_top.pack(fill="x")
         tk.Label(history_top, text="ACCOUNT MANAGMENT ", font=("Arial", 30, "bold"), bg="#0a192f", fg="gold").pack(pady=(25, 10))
-        tk.Button(self.root,text="REFRESH", font=("Arial", 14, "bold"),width=25, command=self.view_accounts, bg="gold", fg="#0a192f", ).pack(side= "bottom", anchor="s" , pady=20) 
         
         columns = ("id", "name", "balance", "status") # Creating a table 
         tree = ttk.Treeview(self.root, columns=columns, show="headings", height=15)
@@ -514,8 +513,8 @@ class ATM_app: # Creating the class for the app
         for account_id, account in self.bank.Accounts.items(): # Taking all of the info we need to this part from our data.json"
             tree.insert("", tk.END, values=(account_id, account.full_name, f"{account.balance:.2f}", account.status))  
         tree.pack(pady=20, padx=20, fill="x")
-        tk.Button(self.root, text="Back to menu", font=("Arial", 14, "bold"), width=25, command=self.admin_menu, bg="#0a192f", fg="gold").pack(pady=10) # Exit button of course
-        
+        tk.Button(self.root,text="REFRESH", font=("Arial", 14, "bold"),width=25, command=self.view_accounts, bg="gold", fg="#0a192f", ).pack(pady=10)
+        tk.Button(self.root, text="BACK TO MENU",  font=("Arial", 22), bg="gold", fg="#0a192f", width=15, command=self.admin_menu,).pack(side= "bottom", anchor="s" , pady=20) # Exit button of course
 #========================================================
 #================== Change status ======================= 
 #========================================================    
@@ -524,11 +523,11 @@ class ATM_app: # Creating the class for the app
         self.cleaning_screen()
         self.root.configure(bg="#0a192f")
         
-        tk.Label(self.root, text="ACCOUNT ACTIVATION/BLOCKING", font=("Arial", 18, "bold"), bg="black", fg="white").pack(pady=10)
-        tk.Label(self.root, text="Enter account ID to change status", bg="black", fg="white").pack()
+        tk.Label(self.root, text="ACCOUNT ACTIVATION/BLOCKING", font=("Arial", 30, "bold"), bg="#0a192f", fg="ivory").pack(pady=20) #page title
+        tk.Label(self.root, text="Enter account ID to change status", font=("Arial", 14, "bold"), bg="#0a192f", fg="white").pack(pady=(30, 10))
         
-        self.entry_id = tk.Entry(self.root, font=("Arial", 14), justify="center")
-        self.entry_id.pack(pady=10)
+        self.entry_id = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
+        self.entry_id.pack(pady=10, ipady=8)
     
         def operation_change():
             account_id = self.entry_id.get()
@@ -547,11 +546,10 @@ class ATM_app: # Creating the class for the app
                 self.entry_id.delete(0, tk.END) # Rember that it cleans our window if there is an error
         
         # Button to accept change
-        tk.Button(self.root, text="Confirm action", command=operation_change, bg="grey", fg="white", font=("Arial", 12,)).pack(pady=15)
+        tk.Button(self.root, text="Confirm action", command=operation_change,width=20, font=("Arial", 16, "bold"), bg="gold", fg="#0a192f").pack(pady=20)
         
         # Button to cancel
-        tk.Button(self.root, text="Cancel action", command=self.admin_menu, bg="grey", fg="white", font=("Arial", 12,)).pack(pady=15)
-        
+        tk.Button(self.root, text="BACK TO MENU",  font=("Arial", 22), bg="gold", fg="#0a192f", width=15, command=self.admin_menu,).pack(side= "bottom", anchor="s" , pady=20) # Exit button of course
 #========================================================
 #=================== New account ======================== 
 #========================================================   
@@ -559,17 +557,17 @@ class ATM_app: # Creating the class for the app
     def create_new_account(self): # Function to create a new account
         self.cleaning_screen() # Remember to clean the window..
             
-        tk.Label(self.root, text="CREATE NEW ACCOUNT", font=("Arial", 18, "bold"), bg="#0a192f", fg="gold").pack(pady=20) 
+        tk.Label(self.root, text="CREATE NEW ACCOUNT", font=("Arial", 30, "bold"), bg="#0a192f", fg="ivory").pack(pady=20) #page title
             
         # Late tje user pick an name fot his account
-        tk.Label(self.root, text="Owner full name", font=("Arial", 12), bg="#0a192f", fg="gold").pack()
-        name_pick = tk.Entry(self.root, font=("Arial", 14), justify="center")
-        name_pick.pack(pady=10)
+        tk.Label(self.root, text="Owner full name",font=("Arial", 14, "bold"), bg="#0a192f", fg="white").pack(pady=(30, 10))
+        name_pick = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
+        name_pick.pack(pady=10, ipady=8)
             
         # Late the user pick pin fot his account
-        tk.Label(self.root, text="Select PIN (4 digits)", font=("Arial", 12), bg="#0a192f", fg="gold").pack() 
-        pin_pick = tk.Entry(self.root, font=("Arial", 14), justify="center", show="*")
-        pin_pick.pack(pady=10)
+        tk.Label(self.root, text="Select PIN (4 digits)",font=("Arial", 14, "bold"), bg="#0a192f", fg="white").pack(pady=(30, 10))
+        pin_pick = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", insertbackground="white", borderwidth=0)
+        pin_pick.pack(pady=10, ipady=8)
             
         def save_account(): # Saving the new account in data.json
             name = name_pick.get()
@@ -599,9 +597,8 @@ class ATM_app: # Creating the class for the app
             self.admin_menu()
         
         # Buttons to use to end the proccess
-        tk.Button(self.root, text="CONFIRM", command=save_account, bg="#0a192f", fg="white", font=("Arial", 14,)).pack(pady=20)
-        tk.Button(self.root, text="CANCEL", command=self.admin_menu, bg="#0a192f", fg="white", font=("Arial", 12)).pack(pady=10)
-
+        tk.Button(self.root, text="CONFIRM", command=save_account, width=20, font=("Arial", 16, "bold"), bg="gold", fg="#0a192f").pack(pady=20)
+        tk.Button(self.root, text="BACK TO MENU",  font=("Arial", 22), bg="gold", fg="#0a192f", width=15, command=self.admin_menu,).pack(side= "bottom", anchor="s" , pady=20) # Exit button of course
 #!==========================================================================
 if __name__ == "__main__": #! This will run our app evertime we run the code
     root = tk.Tk()
