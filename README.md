@@ -1,19 +1,29 @@
-Welcome to our Passover "ATM" Project !
+🏦 Passover ATM Project
+Welcome to our Passover ATM Simulation! This project was developed as a teamwork challenge during the holiday, combining logic, data management, and a sleek GUI.
 
-Here you are goin to see all of our proccess during the holiday, 
-teamwork and a lot fun !
+👥 The Team
+Alex (Alexdv25)
+Maxim (maximri2411-cell)
 
-Fill Free to explore and if you have some tips.. don't be shy to contact us !
+🚀 Overview
+This application simulates a real-life ATM experience. Users can manage their bank accounts, perform transactions, and view their history, while an administrative layer allows for system-wide account management.
 
-The Couple of the project:
-1. Alex - Alexdv25
-2. Maxim - maximri2411-cell
+📂 Project Structure
+main.py – Entry Point: The heart of the app. Run this file to launch the application.
+models.py – Business Logic: Defines the Bank and Accounts classes, including PIN hashing and transaction logic.
+ui.py – User Interface: A full GUI built with tkinter, featuring custom themes and responsive layouts.
+storage.py – Data Management: Handles persistent storage using JSON to ensure your data stays safe even after closing the app.
+terminal_lab.py – Development labs used for testing new features and logic before integration.
 
-Pay attention to the details:
-* maim.py - Entry Point: Responsible for initializing and launching the application window.
-* models.py - Business Logic: Contains the 'Bank' and 'Account' classes.
-* ui.py - User Interface: Handles all 'tkinter' widgets, layouts, and GUI elements.
-* storage.py - Data Management: Handles reading from and writing data to the JSON storage.
-* reauirements.txt - Just a few versions you need to have in order the project will run clean.
-* maxim_lab.py - Maxim lab and tests during his missions.
-* alex_lab.py - Maxim lab and tests during his missions.
+✨ Key Features
+Secure Login: PIN-based authentication with SHA-256 hashing.
+Transactions: Withdraw, Deposit, and Transfer funds between accounts.
+Live History: A detailed, scrollable transaction log for every account.
+Admin Panel: Special access for managing users and system status.
+Data Persistence: All actions are saved in real-time to a JSON database.
+
+🛠 Installation & Running
+Make sure you have Python 3.x installed.
+Install dependencies: pip install -r requirements.txt
+Run the app: python main.py
+Tip: Feel free to explore the code, and if you have any feedback, don't be shy to contact us! Happy Passover!
