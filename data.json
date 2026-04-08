@@ -4,7 +4,7 @@
             "account_id": "962633",
             "full_name": "Test One",
             "pin": "edee29f882543b956620b26d0ee0e7e950399b1c4222f5de05e06425b4c995e9",
-            "balance": 34000.0,
+            "balance": 32600.0,
             "status": "Active",
             "history": [
                 {
@@ -32,6 +32,41 @@
                     "info": "Sent to tesrt 2",
                     "amount": 3000.0,
                     "amount_after": 34000.0
+                },
+                {
+                    "operation": "Withdraw",
+                    "date": "08/04/2026 12:13",
+                    "info": "Withdraw",
+                    "amount": 2500.0,
+                    "amount_after": 31500.0
+                },
+                {
+                    "operation": "Deposit",
+                    "date": "08/04/2026 12:14",
+                    "info": "Deposit",
+                    "amount": 300.0,
+                    "amount_after": 31800.0
+                },
+                {
+                    "operation": "Transfer out",
+                    "date": "08/04/2026 12:14",
+                    "info": "Sent to Test Two",
+                    "amount": 3000.0,
+                    "amount_after": 28800.0
+                },
+                {
+                    "operation": "Transfer in",
+                    "date": "08/04/2026 12:42",
+                    "info": "Received from Test Two",
+                    "amount": 4000.0,
+                    "amount_after": 32800.0
+                },
+                {
+                    "operation": "Transfer out",
+                    "date": "08/04/2026 12:44",
+                    "info": "Sent to Test Two",
+                    "amount": 200.0,
+                    "amount_after": 32600.0
                 }
             ]
         },
@@ -39,7 +74,7 @@
             "account_id": "584284",
             "full_name": "Test Two",
             "pin": "0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c",
-            "balance": 3000.0,
+            "balance": 2200.0,
             "status": "Active",
             "history": [
                 {
@@ -48,6 +83,27 @@
                     "info": "Received from test 1 ",
                     "amount": 3000.0,
                     "amount_after": 3000.0
+                },
+                {
+                    "operation": "Transfer in",
+                    "date": "08/04/2026 12:14",
+                    "info": "Received from Test One",
+                    "amount": 3000.0,
+                    "amount_after": 6000.0
+                },
+                {
+                    "operation": "Transfer out",
+                    "date": "08/04/2026 12:42",
+                    "info": "Sent to Test One",
+                    "amount": 4000.0,
+                    "amount_after": 2000.0
+                },
+                {
+                    "operation": "Transfer in",
+                    "date": "08/04/2026 12:44",
+                    "info": "Received from Test One",
+                    "amount": 200.0,
+                    "amount_after": 2200.0
                 }
             ]
         }

@@ -243,12 +243,13 @@ class ATM_app: # Creating the class for the app
             
             if not amount_input or not target_id or not pin_confirm: # Check if all the fileds are full
                 messagebox.showerror("ERROR", "Fill in all the required details")
+                clear_fields()
                 return
             
             hashed_confirm = hash_pin(pin_confirm) #The hash thing
             if hashed_confirm != self.current_user.pin:
                 messagebox.showerror("ERROR", "Incorrect PIN, cannot continue the process")
-                self.tran_pin_entry.delete(0, tk.END)
+                clear_fields()
                 return
                 
             try:
@@ -269,11 +270,12 @@ class ATM_app: # Creating the class for the app
             
             if not pin_confirm.isdigit(): # Check if the pin contains words
                 messagebox.showerror("ERROR", "PIN need to contain digits only")
-                self.tran_pin_entry.delete(0, tk.END)
+                clear_fields()
                 return
             
             if amount > self.current_user.balance: # Checking his balance
                 messagebox.showerror("ERROR", "Invalid amount or insufficient balance")
+                clear_fields()
                 return  
             
             if target_id == self.current_user.account_id: # Checking if we put the same ID as the sender in this process 
@@ -283,12 +285,13 @@ class ATM_app: # Creating the class for the app
             
             if target_id not in self.bank.Accounts: # ID of the target if its even exist
                 messagebox.showerror("ERROR", "Account ID not found")
-                clear_fields
+                clear_fields()
                 return
             target_account = self.bank.Accounts[target_id]
                 
             if target_account.status == "Blocked": # Checking if the account is blocked
                 messagebox.showerror("ERROR", "The account is blocked, transfer cannot be made")
+                clear_fields()
                 return
             
             sender_msg = f"Sent to {target_account.full_name}"
@@ -332,31 +335,32 @@ class ATM_app: # Creating the class for the app
             old_pin = old_pin_enter.get()
             new_pin = new_pin_enter.get()
             acc_pin = acc_pin_enter.get()
-            
+                        
             def clear_fields(): # We want to clear the the buttons if the password is incoract
                 old_pin_enter.delete(0, tk.END)
                 new_pin_enter.delete(0, tk.END)
                 acc_pin_enter.delete(0, tk.END)
 
             if not old_pin or not new_pin or not acc_pin:
+                clear_fields()
                 messagebox.showerror("ERROR", "Fill in the required details")
-                return # כאן לא חייב לנקות, שהמשתמש פשוט ישלים
-
+                return 
+            
             if hash_pin(old_pin) != self.current_user.pin: # checking if the old pin is right with hash
-                messagebox.showerror("ERROR", "Your PIN is incorrect")
                 clear_fields() # The cleaner
-                return
-
-            if new_pin == old_pin: # Check if the new is like the old
-                messagebox.showerror("ERROR", "New PIN cant be like the currect PIN")
-                clear_fields()
-                return
-
-            if new_pin != acc_pin: # Check if the verifying pin is like the new
-                messagebox.showerror("ERROR", "New PINs do not match")
-                clear_fields()
+                messagebox.showerror("ERROR", "Your PIN is incorrect")
                 return
             
+            if new_pin == old_pin: # Check if the new is like the old
+                clear_fields() # The cleaner
+                messagebox.showerror("ERROR", "New PIN cant be like the currect PIN")
+                return
+            
+            if new_pin != acc_pin: # Check if the verifying pin is like the new
+                clear_fields() # The cleaner
+                messagebox.showerror("ERROR", "New PINs do not match")
+                return
+        
             if len(new_pin) == 4 and new_pin.isdigit(): # Check if the pin is 4 digit number
                 self.current_user.pin = hash_pin(new_pin) # Save as hash
                 
@@ -368,9 +372,9 @@ class ATM_app: # Creating the class for the app
                 messagebox.showinfo("Success", "PIN changed successfully")
                 pin_change.destroy() # Destroy the old pin 
             else:
-                messagebox.showerror("ERROR", "PIN must be 4 digits") # In case he dosent put what we asked   
                 clear_fields()
-                
+                messagebox.showerror("ERROR", "PIN must be 4 digits") # In case he dosent put what we asked     
+                              
         tk.Button(pin_change, text="Confirm action",width=20, font=("Arial", 16, "bold"), bg="gold", fg="#0a192f", command=save_new_pin).pack(pady=20)
         tk.Button(pin_change, text="LOGOUT", width=15, font=("Arial", 22), bg="gold", fg="#0a192f", command=lambda: [pin_change.destroy(), self.create_login_screen()]).pack(side= "bottom", anchor="s" , pady=20)
         # The lambda is for delete the old pin and close the window
