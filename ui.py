@@ -495,6 +495,7 @@ class ATM_app: # Creating the class for the app
             ("VIEW ALL ACCOUNTS", self.view_accounts),
             ("CREATE NEW ACCOUNT", self.create_new_account),
             ("CHANGE ACCOUNT STATUS", self.change_status),
+            ("RESET ACCOUNT PIN", self.admin_change_user_pin),
         ]
         for text, cmd in buttons:
             tk.Button(button_frame, text=text, width=25, font=("Arial", 18), bg="gold", fg="#0a192f", command=cmd).pack(pady=10)
@@ -616,6 +617,48 @@ class ATM_app: # Creating the class for the app
         # Buttons to use to end the proccess
         tk.Button(self.root, text="CONFIRM", command=save_account, width=20, font=("Arial", 16, "bold"), bg="gold", fg="#0a192f").pack(pady=20)
         tk.Button(self.root, text="BACK TO MENU",  font=("Arial", 22), bg="gold", fg="#0a192f", width=15, command=self.admin_menu,).pack(side= "bottom", anchor="s" , pady=20) # Exit button of course
+        
+#========================================================
+#=================== Restart PIN ======================== 
+#========================================================   
+        
+    def admin_change_user_pin(self):
+        self.cleaning_screen()
+        
+        tk.Label(self.root, text="ADMIN: CHANGE USER PIN", font=("Arial", 30, "bold"), bg="#0a192f", fg="gold").pack(pady=20)
+        
+        tk.Label(self.root, text="Enter User Account ID", font=("Arial", 14, "bold"), bg="#0a192f", fg="white").pack(pady=(20, 5))
+        target_id_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white")
+        target_id_entry.pack(pady=10, ipady=5)
+        
+        tk.Label(self.root, text="Enter New 4-Digit PIN", font=("Arial", 14, "bold"), bg="#0a192f", fg="white").pack(pady=(20, 5))
+        new_pin_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", show="*")
+        new_pin_entry.pack(pady=10, ipady=5)
+
+        def execute_admin_pin_change():
+            target_id = target_id_entry.get()
+            new_pin = new_pin_entry.get()
+            
+            if target_id not in self.bank.Accounts:
+                messagebox.showerror("ERROR", "Account ID not found")
+                return
+            
+            if not new_pin.isdigit() or len(new_pin) != 4:
+                messagebox.showerror("ERROR", "PIN must be 4 digits")
+                return
+            
+            target_account = self.bank.Accounts[target_id]
+            target_account.pin = hash_pin(new_pin) 
+            
+            target_account.add_history(operation="PIN Reset", info="Changed by Admin")
+            
+            save_data(self.bank) 
+            messagebox.showinfo("Success", f"PIN for account {target_id} has been updated.")
+            self.admin_menu()
+
+        tk.Button(self.root, text="CONFIRM CHANGE", command=execute_admin_pin_change, width=20, font=("Arial", 16, "bold"), bg="gold", fg="#0a192f").pack(pady=20)
+        tk.Button(self.root, text="BACK TO MENU", font=("Arial", 22), bg="gold", fg="#0a192f", width=15, command=self.admin_menu).pack(side="bottom", pady=20)
+        
 #!==========================================================================
 if __name__ == "__main__": #! This will run our app evertime we run the code
     root = tk.Tk()
