@@ -129,10 +129,16 @@
         "485769": {
             "account_id": "485769",
             "full_name": "23 23",
-            "pin": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+            "pin": "d7697570462f7562b83e81258de0f1e41832e98072e44c36ec8efec46786e24e",
             "balance": 0.0,
             "status": "Active",
-            "history": []
+            "history": [
+                {
+                    "operation": "PIN Reset",
+                    "date": "09/04/2026 11:45",
+                    "info": "Changed by Admin"
+                }
+            ]
         }
     }
 }
