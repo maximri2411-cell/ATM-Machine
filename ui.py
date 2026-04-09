@@ -622,7 +622,7 @@ class ATM_app: # Creating the class for the app
 #=================== Restart PIN ======================== 
 #========================================================   
         
-    def admin_change_user_pin(self):
+    def admin_change_user_pin(self): # In case the user forget the pin
         self.cleaning_screen()
         
         tk.Label(self.root, text="ADMIN: CHANGE USER PIN", font=("Arial", 30, "bold"), bg="#0a192f", fg="gold").pack(pady=20)
@@ -635,22 +635,22 @@ class ATM_app: # Creating the class for the app
         new_pin_entry = tk.Entry(self.root, width=20, font=("Arial", 18), justify="center", bg="slate gray", fg="white", show="*")
         new_pin_entry.pack(pady=10, ipady=5)
 
-        def execute_admin_pin_change():
+        def execute_admin_pin_change(): # The execute function
             target_id = target_id_entry.get()
             new_pin = new_pin_entry.get()
             
-            if target_id not in self.bank.Accounts:
+            if target_id not in self.bank.Accounts: # In case we dont find id
                 messagebox.showerror("ERROR", "Account ID not found")
                 return
             
-            if not new_pin.isdigit() or len(new_pin) != 4:
+            if not new_pin.isdigit() or len(new_pin) != 4: # $ digits only 
                 messagebox.showerror("ERROR", "PIN must be 4 digits")
                 return
             
-            target_account = self.bank.Accounts[target_id]
-            target_account.pin = hash_pin(new_pin) 
+            target_account = self.bank.Accounts[target_id] # SAve
+            target_account.pin = hash_pin(new_pin)  # Hash of course
             
-            target_account.add_history(operation="PIN Reset", info="Changed by Admin")
+            target_account.add_history(operation="PIN Reset", info="Changed by Admin") # Format to save in data
             
             save_data(self.bank) 
             messagebox.showinfo("Success", f"PIN for account {target_id} has been updated.")
