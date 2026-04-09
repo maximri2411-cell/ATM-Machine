@@ -144,12 +144,11 @@ class Bank: # Manage all accounts in our project
 #================================================================================================        
         
     def login_account(self, account_id, pin): # Function to log a user into the bank
-        account = self.find_account(account_id) # Uses the function we created in previos function
+        account = self.find_account(account_id) # Uses the function we created in previos function ^^^
         
         # Building a tree of checks to make sure it wont break here
-        
         if not account:
-            return None, f"ERROR: Account ID was not found. \nTry again. \nIn case of a problem, contact customer service or visit the nearest branch. \nthank you fot understanding."
+            return None, f"ERROR \nAccount ID was not found. \nTry again. \nIn case of a problem, contact customer service or visit the nearest branch. \nthank you fot understanding."
         
         if account.status == "Blocked":
             return None, f"ERROR \nYour account is blocked, \ncontact customer service or visit the nearest branch. \nthank you fot understanding."
@@ -161,9 +160,9 @@ class Bank: # Manage all accounts in our project
             account.failed_loging += 1
             if account.failed_loging == 3:
                 account.status = "Blocked"
-                return None, "ERROR \nYou have reached the limit of login attempts, Your account is now blocked"
+                return None, f"ERROR \nYou have reached the limit of login attempts, Your account is now blocked"
             remainning = 3 - account.failed_loging
-            return None, f"ERROR \n Incorrect PIN \nRemaining attemps {remainning}"
+            return None, f"ERROR \nIncorrect PIN \nRemaining attemps {remainning}"
         
 #================================================================================================ 
         
