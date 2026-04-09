@@ -159,11 +159,11 @@ class Bank: # Manage all accounts in our project
             return account, f"Success \nWelcome {account.full_name}"
         else:
             account.failed_loging += 1
-            if account.failed_loging == 5:
+            if account.failed_loging == 3:
                 account.status = "Blocked"
                 return None, "ERROR \nYou have reached the limit of login attempts, Your account is now blocked"
-            remainning = 5 - account.failed_loging
-            return None, f"ERROR \n Incottect PIN \nRemaining attemps {remainning}"
+            remainning = 3 - account.failed_loging
+            return None, f"ERROR \n Incorrect PIN \nRemaining attemps {remainning}"
         
 #================================================================================================ 
         
